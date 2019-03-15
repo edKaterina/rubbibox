@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Мастер</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+      <ion-img [src]="note.img[0]" *ngIf="note.img"></ion-img>
+    <ion-card-header>
+        
+      <ion-card-subtitle>{{note.category}}</ion-card-subtitle>
+      <ion-card-title text-wrap>{{note.fio}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content text-wrap>
+      {{note.description}}
+    </ion-card-content>
+
+    <ion-row>
+        <ion-col>
+            <ion-button expand="block" fill="outline" href="tel:{{ note.phone }}">Позвонить</ion-button>
+        </ion-col>
+        <ion-col>
+            <ion-button expand="block" fill="outline" [routerLink]="['/chat', note.user]">Написать</ion-button>
+        </ion-col>
+      </ion-row>
+
+  </ion-card>
+</ion-content>

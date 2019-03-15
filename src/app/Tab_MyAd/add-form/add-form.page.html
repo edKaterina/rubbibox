@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Новое объявление</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item>
+    <ion-label position="stacked">Категория</ion-label>
+    <ion-select [(ngModel)]="note.category" okText="ОК" cancelText="Отмена" placeholder="выберите из списка">
+      <ion-select-option *ngFor="let category of categoryList" [value]="category">{{category}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Описание</ion-label>
+    <ion-textarea rows="6" [(ngModel)]="note.job" placeholder="Опишите подробно задачу, где, куда и что."></ion-textarea>
+  </ion-item>
+
+  <ion-button color="primary" expand="block" (click)="addNote(note)">Отправить</ion-button>
+</ion-content>

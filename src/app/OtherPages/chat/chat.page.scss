@@ -1,0 +1,48 @@
+    .scroll-content {
+      display: flex;
+    }
+    .gridMessages {
+      margin-top: auto;
+      margin-bottom: 0;
+    }
+    .user_name {
+      color: #afafaf;
+    }
+    .message {
+      padding: 10px !important;
+      transition: all 250ms ease-in-out !important;
+      border-radius: 20px !important;
+      margin-bottom: 4px !important;
+      margin-left: 4px !important;
+      margin-right: 4px !important;
+      margin-top: 4px !important;
+      background-color: #e5f6fe;
+    }
+    .my_message {
+      color: #000 !important;
+    }
+    .other_message {
+      color: #000 !important;
+    }
+    .time {
+      color: #afafaf;
+      font-size: small;
+      text-align: left;
+    }
+    .mytime {
+      color: #afafaf;
+      font-size: small;
+      text-align: right;
+    }
+    .message_row {
+      background-color: #fff;
+    }
+
+    .footerToolbar {
+        --padding-start: 8px;
+        --padding-end: 8px;
+    }
+
+    .dateGroup {
+      text-align: center;
+    }

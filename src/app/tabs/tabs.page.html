@@ -1,0 +1,27 @@
+<ion-tabs>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="myAd">
+      <ion-icon name="star"></ion-icon>
+      <ion-label>Мои</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="allAd">
+      <ion-icon name="list-box"></ion-icon>
+      <ion-label>Все</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="people">
+      <ion-icon name="people"></ion-icon>
+      <ion-label>Мастера</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="setting">
+      <ion-icon name="settings"></ion-icon>
+      <ion-label>Настройки</ion-label>
+      <ion-badge color="danger">{{ getBadge() }}</ion-badge>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+
+</ion-tabs>

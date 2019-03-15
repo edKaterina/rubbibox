@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Все объявления</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button [routerLink]="['/tabs/allAd/subscription']">
+    <ion-icon name="switch"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<ion-content>
+  <ion-list>
+    <ion-item text-wrap [routerLink]="['/tabs/allAd/subscription']" *ngIf="noteList3.length==0">
+      <ion-label text-wrap padding>
+        <h2>Список объявлений пуст, нажмите чтобы проверить категории в разделе "Подписки".</h2>
+      </ion-label>
+    </ion-item>
+
+    <ion-item text-wrap *ngFor="let note of noteList3" [routerLink]="['/detail', note.key]">
+      <ion-label text-wrap>
+        <ion-text color="medium">
+          <p>{{note.dateCreate | date:'HH:m d.MM.y'}}</p>
+        </ion-text>
+        <h2>{{note.job}}</h2>
+        <ion-text color="medium">
+          <p>{{note.category}}</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

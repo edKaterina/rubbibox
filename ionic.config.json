@@ -1,0 +1,8 @@
+{
+  "name": "RTPlatform",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "587eb07e"
+}

@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Подробнее</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+
+        <ion-item text-wrap>
+            <ion-label text-wrap>
+                <ion-text color="medium">
+                    <p>{{note.dateCreate | date:'HH:m d.MM.y'}}</p>
+                </ion-text>
+                <h2>{{note.job}}</h2>
+                <ion-text color="medium">
+                    <p>{{note.category}}</p>
+                </ion-text>
+            </ion-label>
+        </ion-item>
+        
+        <rtp-responses-list [id]="id"></rtp-responses-list>
+    </ion-list>    
+</ion-content>

@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Настройки</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+
+    <ion-item [routerLink]="['/tabs/setting/subscription']">
+      <ion-label text-wrap>
+        <h2>Подписки</h2>
+        <ion-text color="medium">
+          <p>Категории объявлений, которые выводятся в разделе "Все".</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item [routerLink]="['/tabs/setting/peopleedit']">
+      <ion-label text-wrap>
+        <h2>Стать мастером</h2>
+        <ion-text color="medium">
+          <p>Заполняйте информацию о себе чтобы появится в разделе "Мастера".</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item [routerLink]="['/tabs/setting/notifications']">
+      <ion-label text-wrap>
+        <h2>Персональные уведомления</h2>
+        <ion-text color="medium">
+          <p>История предложений и диалогов.</p>
+        </ion-text>
+      </ion-label>      
+      <ion-badge slot="end" color="danger">{{ getBadge() }}</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-label text-wrap>
+        <h2>RTPlatform 1.0.6 Beta</h2>
+        <ion-text color="medium">
+          <p>Мобильное приложение позволяющее быстро и без посредников связывать мастеров и клиентов.</p>
+          <br>
+          <p><strong>Для мастеров</strong></p>
+          <p>Заполни профиль в разделе "Стать мастером" и ваш профиль станет доступен в разеделе "Мастера" из которого
+            клиент сможет вам позвонить или написать в мессенджере. В подписках отметьте нужные категории и получайте
+            уведомления о новых объявлениях.</p>
+          <br>
+          <p><strong>Для клиентов</strong></p>
+          <p>Раздел "Мастера" позволит быстро написать или позвонить нужному мастеру, а в разеделе "Мои" создавайте объявление о поиске и вам позвонят или напишут замотивированные мастера с предложением.</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+</ion-content>
