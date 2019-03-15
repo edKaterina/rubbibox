@@ -72,11 +72,11 @@ idUser - идентификатор пользователя
 <rtp-form-upload count=1 [(files)]="note.img"></rtp-form-upload>
 
 Пример интеграции:
-    <ion-item>
-      <ion-label position="stacked">Фото
-        <rtp-form-upload count=1 [(files)]="note.img"></rtp-form-upload>
-      </ion-label>
-    </ion-item>
+<ion-item>
+  <ion-label position="stacked">Фото
+    <rtp-form-upload count=1 [(files)]="note.img"></rtp-form-upload>
+  </ion-label>
+</ion-item>
 
 Параметры:
 count - количество допустимых фотографий
