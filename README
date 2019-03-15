@@ -1,4 +1,13 @@
-RTPlatform
+RTPlatform 1.x
+
+Для сборки проекта необходимо внести индивидуальные параметры в config.xml, заменить иконку приложения в соответствующих папках resources/android и resources/ios.
+
+Файлы настроек для работы с Push-уведомлениями из Firebase
+resources/android/google-services.json
+resources/ios/GoogleService-Info.plist
+
+Файлы настроек для работы с базой данных из Firebase
+src/firebase.credentials.ts
 
 Структура проекта
 [/serverPush/functions]
