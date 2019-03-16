@@ -4,7 +4,7 @@ import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { AdModel } from '../../model/ad-model';
 import { Router } from '@angular/router';
-import { CategoryService } from 'src/app/services/category.service';
+import { CategoryService } from './../../services/category.service';
 
 @Component({
   selector: 'app-add-form',

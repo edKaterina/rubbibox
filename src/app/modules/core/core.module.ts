@@ -1,11 +1,11 @@
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormUploadComponent } from 'src/app/components/form-upload/form-upload.component';
-import { SortNotifyPipe } from 'src/app/pipe/sort-notify.pipe';
+import { FormUploadComponent } from './../../components/form-upload/form-upload.component';
+import { SortNotifyPipe } from './../../pipe/sort-notify.pipe';
 import { FormsModule } from '@angular/forms';
-import { ResponsesListComponent } from 'src/app/components/responses-list/responses-list.component';
-import { UserDetailComponent } from 'src/app/components/user-detail/user-detail.component';
+import { ResponsesListComponent } from './../../components/responses-list/responses-list.component';
+import { UserDetailComponent } from './../../components/user-detail/user-detail.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
