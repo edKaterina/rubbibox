@@ -23,15 +23,14 @@ export class AuthService {
 
   // авторизация пользователя
   // возвращает в промис логин пользователя
-  async auth() {
-    return await firebase.auth().signInAnonymously().then(authData => {
-      this.saveLogin(authData.user.uid);
-      return authData.user.uid;
-    });
+  async auth(): Promise<string> {
+    const authData = await firebase.auth().signInAnonymously();
+    this.saveLogin(authData.user.uid);
+    return authData.user.uid;
   }
 
   // Сохраненный логин авторизованного пользователя
-  getLogin() {
+  getLogin(): string {
     return this.login;
   }
 

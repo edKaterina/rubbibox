@@ -20,7 +20,7 @@ export class PeopleListPage implements OnInit {
   ngOnInit() {
     this.peopleList = this.masterService.getPeopleList().snapshotChanges().pipe(
       map(actions => actions.map(a => {
-        const data = a.payload.val() as peopleModel;
+        const data = a.payload.val();
         const id = a.payload.key;
         data.key = id;
         return { id, ...data };

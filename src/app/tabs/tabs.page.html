@@ -19,7 +19,7 @@
     <ion-tab-button tab="setting">
       <ion-icon name="settings"></ion-icon>
       <ion-label>Настройки</ion-label>
-      <ion-badge color="danger">{{ getBadge() }}</ion-badge>
+      <ion-badge color="danger" *ngIf="countBadge>0" >{{ countBadge }}</ion-badge>
     </ion-tab-button>
 
   </ion-tab-bar>

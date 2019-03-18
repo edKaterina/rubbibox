@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { CoreService } from './core.service';
 import { CategoryService } from './category.service';
 import { PushObject, Push, PushOptions } from '@ionic-native/push/ngx';
@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { Storage } from '@ionic/storage';
+import { Subject, BehaviorSubject, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class NotificationService {
 
   private pushObject: PushObject;
   private settingCategory: any = [];
-  private countBadge = '';
+  private countBadge: Subject<string>;
 
 
   constructor(
@@ -35,6 +36,13 @@ export class NotificationService {
   ) {
     this.storage.get('settingCategory').then(value => {
       this.settingCategory = value;
+    });
+
+    this.countBadge = new ReplaySubject(1);
+    this.countBadge.subscribe(count => {
+      if (this.pushObject) {
+        this.pushObject.setApplicationIconBadgeNumber(parseInt(count, 10));
+      }
     });
   }
 
@@ -122,24 +130,16 @@ export class NotificationService {
     notify.user = this.authService.getLogin();
     notify.active = true;
     notify.isRead = false;
-    return this.db.object(NotificationService.typeNotifications + '/' + userID + '/' + category + '_' + notify.user).update(notify);
+    this.db.object(NotificationService.typeNotifications + '/' + userID + '/' + category + '_' + notify.user).update(notify);
   }
 
   // Список уведомлений авторизованного пользователя
-  getNotify() {
+  getNotify(): AngularFireList<NotifyModel> {
     return this.db.list(NotificationService.typeNotifications + '/' + this.authService.getLogin());
   }
 
-  // Количество непрочитанных уведомлений
-  getBadge() {
-    if (this.pushObject) {
-      this.pushObject.setApplicationIconBadgeNumber(parseInt(this.countBadge, 10));
-    }
-
-    if (this.countBadge === '0') {
-      return '';
-    }
-
+  // Подписка на количество непрочитанных уведомлений
+  getBadge(): Subject<string> {
     return this.countBadge;
   }
 
@@ -195,13 +195,13 @@ export class NotificationService {
       );
       notifyListNoRead.subscribe(value => {
         console.log('Количество непрочитанных уведомлений: ' + value.length);
-        this.countBadge = value.length.toString();
+        this.countBadge.next(value.length.toString());
       });
     });
   }
 
   // транлитерация
-  transliterate(word: any) {
+  transliterate(word: any):any {
     let answer = '';
     const a = {};
 

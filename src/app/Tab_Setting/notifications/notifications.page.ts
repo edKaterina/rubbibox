@@ -33,13 +33,8 @@ export class NotificationsPage {
         .snapshotChanges().pipe(
           map(actions => actions.map(a => {
             const id = a.payload.key;
-            const data = a.payload.val() as NotifyModel;
+            const data = a.payload.val();
             data.key = id;
-
-            // if (!data.isRead) {
-            //   this.db.setMarkRead(data.key);
-            // }
-
             return { id, ...data };
           }))
         );

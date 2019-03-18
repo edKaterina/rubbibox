@@ -32,7 +32,7 @@
           <p>История предложений и диалогов.</p>
         </ion-text>
       </ion-label>      
-      <ion-badge slot="end" color="danger">{{ getBadge() }}</ion-badge>
+      <ion-badge slot="end" color="danger" *ngIf="countBadge>0" >{{ countBadge }}</ion-badge>
     </ion-item>
 
     <ion-item>

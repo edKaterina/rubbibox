@@ -61,7 +61,7 @@ export class ChatPage {
             this.messageList = this.chatService.getMessages(this.chatID).snapshotChanges().pipe(
                 map(actions => actions.map(a => {
                     const id = a.payload.key;
-                    const data = a.payload.val() as MessageModel;
+                    const data = a.payload.val();
                     data.key = id;
 
                     this.notivicationService.setMarkRead('messages_' + this.userTo);

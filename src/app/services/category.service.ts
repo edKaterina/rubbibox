@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { CategoryModel } from '../model/category-model';
 import { map } from 'rxjs/operators';
 import { Storage } from '@ionic/storage';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class CategoryService {
   ) { }
 
   // Список категорий включенных в подписке
-  getOnCategory() {
+  // возвращает массив промисов со значением включенно категории
+  getOnCategory(): Observable<Promise<string[]>> {
     return this.getCategoryList().valueChanges().pipe(map(actions => {
       const arrayResult = [];
       const arrayCategory = [];
@@ -38,7 +40,7 @@ export class CategoryService {
   }
 
   // Список категорий
-  getCategoryList() {
+  getCategoryList(): AngularFireList<CategoryModel> {
     return this.db.list(CategoryService.typeCategories);
   }
 }

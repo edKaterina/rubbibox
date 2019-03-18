@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { AdService } from './../../services/ad.service';
 import { AuthService } from './../../services/auth.service';
 import { Component } from '@angular/core';
@@ -13,6 +14,7 @@ export class DetailPage {
 
     id: string;
     note: AdModel = new AdModel;
+    subscriptionDetail: Subscription;
 
     constructor(
         private activateRoute: ActivatedRoute,
@@ -21,10 +23,14 @@ export class DetailPage {
     ) {
         this.id = activateRoute.snapshot.params['id'];
         this.authService.auth().then(value => {
-            this.adService.getAdDetail(this.id).snapshotChanges().subscribe(value => {
-                this.note = value.payload.val() as AdModel;
+            this.subscriptionDetail = this.adService.getAdDetail(this.id).snapshotChanges().subscribe(value => {
+                this.note = value.payload.val();
                 this.note.key = value.key;
             });
         });
+    }
+
+    ionViewDidLeave(){
+        this.subscriptionDetail.unsubscribe();
     }
 }

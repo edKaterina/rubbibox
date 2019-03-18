@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 import { peopleModel } from '../model/people-model';
 import { AuthService } from './auth.service';
 
@@ -15,7 +15,7 @@ export class MasterService {
   ) { }
 
   // Добавить мастера
-  addPeople(note: peopleModel) {
+  addPeople(note: peopleModel): Promise<any> {
     note.dateCreate = new Date().toISOString();
     note.user = this.authService.getLogin();
 
@@ -23,12 +23,12 @@ export class MasterService {
   }
 
   // Список мастеров
-  getPeopleList() {
+  getPeopleList(): AngularFireList<peopleModel> {
     return this.db.list(MasterService.typeMasters);
   }
 
   // информацияо мастере
-  getPeopleDetail(id: string) {
+  getPeopleDetail(id: string): AngularFireObject<peopleModel> {
     return this.db.object(MasterService.typeMasters + '/' + id);
   }
 }

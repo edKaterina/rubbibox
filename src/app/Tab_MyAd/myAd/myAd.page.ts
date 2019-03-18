@@ -28,7 +28,7 @@ export class MyAdPage implements OnInit {
                 .snapshotChanges().pipe(
                     map(actions => actions.map(a => {
                         const id = a.payload.key;
-                        const data = a.payload.val() as AdModel;
+                        const data = a.payload.val();
                         data.key = id;
                         return { id, ...data };
                     }))

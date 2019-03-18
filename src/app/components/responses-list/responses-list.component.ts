@@ -53,7 +53,7 @@ export class ResponsesListComponent implements OnDestroy, OnInit {
   ngOnInit() {
     this.authService.auth().then(login => {
       this.adService.getAdDetail(this.id).valueChanges().subscribe(value => {
-        const adDetail = value as AdModel;
+        const adDetail = value;
         this.userAd = adDetail.user;
         if (adDetail.user === login) {
           this.isMyAd = true;
@@ -91,7 +91,7 @@ export class ResponsesListComponent implements OnDestroy, OnInit {
     this.subscription.unsubscribe();
   }
 
-  addResponse(idAd) {
+  addResponse(idAd: string) {
     if (!this.isExistProfileMaster) {
       if (!this.notePeople.fio) {
         this.coreService.presentToast('Не заполнено Ф.И.О.');
@@ -108,7 +108,7 @@ export class ResponsesListComponent implements OnDestroy, OnInit {
     }
 
     this.masterService.addPeople(this.notePeople);
-    this.responseService.addResponse(idAd, this.newResponse).then(value => {
+    this.responseService.addResponse(idAd, this.newResponse).then(function () {
       const notify = new NotifyModel;
       notify.subject = 'Новое предложение';
       notify.text = this.newResponse.response;

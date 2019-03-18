@@ -1,7 +1,8 @@
 import { AuthService } from './../../services/auth.service';
 import { MessageModel } from './../../model/message-model';
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class ChatService {
     private authService: AuthService
   ) { }
 
-  getChatID(to: string) {
+  // индентификатор диалога между двумя пользователями
+  getChatID(to: string): string {
     const chatUser = [];
     chatUser.push(to);
     chatUser.push(this.authService.getLogin());
@@ -32,13 +34,15 @@ export class ChatService {
     return chatUser[0] + '_' + chatUser[1];
   }
 
+  // Отправка сообщения в диалог
   sendMessage(chatID: string, message: MessageModel) {
     message.user = this.authService.getLogin();
     message.dateCreate = new Date().toISOString();
-    return this.db.list(ChatService.typeDialogs + '/' + chatID + '/messages').push(message);
+    this.db.list(ChatService.typeDialogs + '/' + chatID + '/messages').push(message);
   }
 
-  getMessages(chat) {
+  // Список сообщений в диалоге
+  getMessages(chat:string):AngularFireList<MessageModel> {
     return this.db.list(ChatService.typeDialogs + '/' + chat + '/messages');
   }
 }

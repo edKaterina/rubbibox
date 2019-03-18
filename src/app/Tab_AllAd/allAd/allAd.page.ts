@@ -46,12 +46,12 @@ export class AllAdPage implements OnInit {
                 if (isChangeSetting) {
                     this.noteList3 = [];
                     this.settingCategory.forEach(element => {
-                        const list: Observable<AdModel[]> = this.adService.getAdList(element as string)
+                        const list = this.adService.getAdList(element as string)
                             .snapshotChanges().pipe(map(actions => {
                                 let category = element; // на случай если не будет элементов в катгории
 
                                 if (actions[0]) {
-                                    const data = actions[0].payload.val() as AdModel;
+                                    const data = actions[0].payload.val();
                                     category = data.category;
                                 }
 
@@ -60,7 +60,7 @@ export class AllAdPage implements OnInit {
                                 });
 
                                 return actions.map(a => {
-                                    const data2 = a.payload.val() as AdModel;
+                                    const data2 = a.payload.val();
                                     const id = a.payload.key;
                                     data2.key = id;
                                     this.noteList3.push({ id, ...data2 });

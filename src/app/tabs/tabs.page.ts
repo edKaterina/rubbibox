@@ -9,14 +9,15 @@ import { NotificationService } from '../services/notification.service';
 })
 export class TabsPage {
 
+  private countBadge: string;
+
   constructor(
     private authService: AuthService,
     private notivicationService: NotificationService
   ) {
     this.notivicationService.initNotify();
-  }
-
-  getBadge() {
-    return this.notivicationService.getBadge();
+    this.notivicationService.getBadge().subscribe(count => {
+      this.countBadge = count;
+    })
   }
 }
