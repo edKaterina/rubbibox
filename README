@@ -1,6 +1,22 @@
 RTPlatform 1.x
 
-Для сборки проекта необходимо внести индивидуальные параметры в config.xml, заменить иконку приложения в соответствующих папках resources/android и resources/ios.
+[Установка]
+В Firebase (https://firebase.google.com) активировать "Realtime Database"
+и импортировать из файла JSON первичную структуру базу данных с категориями услуг
+из файла install/exportDB.json. В "Правила" внести настройки из install/rulesDB.json.
+Довнести в базу данных необходимые катгории по шаблону "Тестовая категория".
+
+В Firebase активировать "Authentication" и включить способ входа "Анонимный вход".
+
+В Firebase активировать "Functions". Перейти в консоли в папку serverPush/functions.
+Установим утилиту управления npm -g install firebase-tools
+авторизуемся firebase login
+инициализируем сервис Function и нужный нам проект firebase init functions
+и загрузим функции на сервер firebase deploy --only functions
+
+[Сборка]
+Для сборки проекта необходимо внести индивидуальные параметры в config.xml,
+заменить иконку приложения в соответствующих папках resources/android и resources/ios.
 
 Файлы настроек для работы с Push-уведомлениями из Firebase
 resources/android/google-services.json
@@ -9,7 +25,20 @@ resources/ios/GoogleService-Info.plist
 Файлы настроек для работы с базой данных из Firebase
 src/firebase.credentials.ts
 
-Структура проекта
+[Загрузка мобильной версии]
+готовим сборку мобильного сайта командой ionic cordova prepare browser --confirm --no-interactive --prod
+перейдем в папку platforms/browser
+инициализируем файл настроек firebase init, выбрав сервис "Hosting"
+"public directory?"
+www
+"Configure as a single-page app" 
+y
+Overwrite?
+n
+загружаем на сервер firebase deploy
+подключаем в Firebase свой домен
+
+[Структура проекта]
 [/serverPush/functions]
 ├── serverPush
 │   └── functions
@@ -59,7 +88,7 @@ src/firebase.credentials.ts
 │   └── upload-file.service (функции загрузки файла)
 └── tabs (контроллер вкладок ion-tabs)
 
-=== Компоненты ===
+[Компоненты]
 
 == Ф.И.О. пользователя ==
 Использование: 

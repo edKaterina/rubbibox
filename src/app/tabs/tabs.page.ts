@@ -9,7 +9,7 @@ import { NotificationService } from '../services/notification.service';
 })
 export class TabsPage {
 
-  private countBadge: string;
+  public countBadge: number;
 
   constructor(
     private authService: AuthService,
@@ -18,6 +18,6 @@ export class TabsPage {
     this.notivicationService.initNotify();
     this.notivicationService.getBadge().subscribe(count => {
       this.countBadge = count;
-    })
+    });
   }
 }

@@ -8,13 +8,13 @@ import { NotificationService } from 'src/app/services/notification.service';
 })
 export class SettingPage {
 
-  private countBadge: string;
+  public countBadge: number;
 
   constructor(
     private notivicationService: NotificationService
   ) {
     this.notivicationService.getBadge().subscribe(count => {
       this.countBadge = count;
-    })
+    });
   }
 }

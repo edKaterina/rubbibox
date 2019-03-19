@@ -22,7 +22,7 @@ export class NotificationService {
 
   private pushObject: PushObject;
   private settingCategory: any = [];
-  private countBadge: Subject<string>;
+  private countBadge: Subject<number>;
 
 
   constructor(
@@ -41,7 +41,7 @@ export class NotificationService {
     this.countBadge = new ReplaySubject(1);
     this.countBadge.subscribe(count => {
       if (this.pushObject) {
-        this.pushObject.setApplicationIconBadgeNumber(parseInt(count, 10));
+        this.pushObject.setApplicationIconBadgeNumber(count);
       }
     });
   }
@@ -139,7 +139,7 @@ export class NotificationService {
   }
 
   // Подписка на количество непрочитанных уведомлений
-  getBadge(): Subject<string> {
+  getBadge(): Subject<number> {
     return this.countBadge;
   }
 
@@ -195,7 +195,7 @@ export class NotificationService {
       );
       notifyListNoRead.subscribe(value => {
         console.log('Количество непрочитанных уведомлений: ' + value.length);
-        this.countBadge.next(value.length.toString());
+        this.countBadge.next(value.length);
       });
     });
   }
