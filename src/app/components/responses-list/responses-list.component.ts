@@ -46,7 +46,7 @@ export class ResponsesListComponent implements OnDestroy, OnInit {
     private adService: AdService,
     private responseService: ResponseService,
     private masterService: MasterService,
-    private notivicationService: NotificationService
+    private notificationService: NotificationService
   ) {
   }
 
@@ -78,7 +78,7 @@ export class ResponsesListComponent implements OnDestroy, OnInit {
               }
 
               console.log(this.activateRoute.snapshot.url);
-              this.notivicationService.setMarkRead('Ad_' + this.id + '_' + value1.user);
+              this.notificationService.setMarkRead('Ad_' + this.id + '_' + value1.user);
             });
             this.isLoadResponse = true;
           });
@@ -108,13 +108,13 @@ export class ResponsesListComponent implements OnDestroy, OnInit {
     }
 
     this.masterService.addPeople(this.notePeople);
-    this.responseService.addResponse(idAd, this.newResponse).then(function () {
+    this.responseService.addResponse(idAd, this.newResponse).then(value => {
       const notify = new NotifyModel;
       notify.subject = 'Новое предложение';
       notify.text = this.newResponse.response;
       notify.url = '/detail/' + idAd;
 
-      this.notivicationService.updateNotify('Ad_' + this.id, this.userAd, notify);
+      this.notificationService.updateNotify('Ad_' + this.id, this.userAd, notify);
       console.log('Отправил');
       this.newResponse.response = '';
     });

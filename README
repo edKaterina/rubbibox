@@ -8,7 +8,7 @@ RTPlatform 1.x
 
 В Firebase активировать "Authentication" и включить способ входа "Анонимный вход".
 
-В Firebase активировать "Functions". Перейти в консоли в папку serverPush/functions.
+В Firebase активировать "Functions". Перейти в консоли в папку serverPush.
 Установим утилиту управления npm -g install firebase-tools
 авторизуемся firebase login
 инициализируем сервис Function и нужный нам проект firebase init functions
