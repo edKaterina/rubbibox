@@ -22,7 +22,6 @@ import { Push } from '@ionic-native/push/ngx';
   imports: [
     BrowserModule,
     IonicModule.forRoot({
-      mode: 'ios',
       backButtonText: ''
     }),
     AppRoutingModule,

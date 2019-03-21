@@ -1,3 +1,4 @@
+import { Platform } from '@ionic/angular';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { peopleModel } from '../../model/people-model';
@@ -19,7 +20,8 @@ export class PeopleEditPage implements OnInit {
     private router: Router,
     private authService: AuthService,
     private categoryService: CategoryService,
-    private masterService: MasterService
+    private masterService: MasterService,
+    public platform: Platform
   ) {
     this.authService.auth().then(value => {
 

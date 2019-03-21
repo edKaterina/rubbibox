@@ -16,7 +16,7 @@
       </ion-select>
     </ion-item>
 
-    <ion-item>
+    <ion-item *ngIf="!platform.is('android')">
       <ion-label position="stacked">Фото
         <rtp-form-upload count=1 [(files)]="note.img"></rtp-form-upload>
       </ion-label>
