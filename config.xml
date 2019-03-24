@@ -103,4 +103,6 @@
     <plugin name="cordova-support-google-services" spec="1.2.0" />
     <engine name="android" spec="~7.1.4" />
     <engine name="ios" spec="~4.5.5" />
+    <plugin name="cordova-plugin-camera" spec="~4.0.3" />
+    <plugin name="ru-xsfera-photoviewer" spec="https://bitbucket.org/xsfera/photoviewer.git" />
 </widget>

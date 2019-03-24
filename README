@@ -1,6 +1,7 @@
-RTPlatform 1.x
+# RTPlatform 1.x
 
-[Установка]
+## Установка
+
 В Firebase (https://firebase.google.com) активировать "Realtime Database"
 и импортировать из файла JSON первичную структуру базу данных с категориями услуг
 из файла install/exportDB.json. В "Правила" внести настройки из install/rulesDB.json.
@@ -14,7 +15,13 @@ RTPlatform 1.x
 инициализируем сервис Function и нужный нам проект firebase init functions
 и загрузим функции на сервер firebase deploy --only functions
 
-[Сборка]
+## Сборка
+
+Для восстановления зависимостей воспользуйтесь командой
+```bash
+npm i
+```
+
 Для сборки проекта необходимо внести индивидуальные параметры в config.xml,
 заменить иконку приложения в соответствующих папках resources/android и resources/ios.
 
@@ -25,20 +32,30 @@ resources/ios/GoogleService-Info.plist
 Файлы настроек для работы с базой данных из Firebase
 src/firebase.credentials.ts
 
-[Загрузка мобильной версии]
+## Загрузка мобильной версии
+
 готовим сборку мобильного сайта командой ionic cordova prepare browser --confirm --no-interactive --prod
 перейдем в папку platforms/browser
 инициализируем файл настроек firebase init, выбрав сервис "Hosting"
+
 "public directory?"
+
 www
-"Configure as a single-page app" 
+
+"Configure as a single-page app"
+
 y
+
 Overwrite?
+
 n
+
 загружаем на сервер firebase deploy
+
 подключаем в Firebase свой домен
 
-[Структура проекта]
+## Структура проекта
+```html
 [/serverPush/functions]
 ├── serverPush
 │   └── functions
@@ -87,34 +104,43 @@ n
 │   ├── response (предложения/отклики)
 │   └── upload-file.service (функции загрузки файла)
 └── tabs (контроллер вкладок ion-tabs)
+```
 
-[Компоненты]
+## Компоненты
 
-== Ф.И.О. пользователя ==
-Использование: 
+### Ф.И.О. пользователя
+Использование:
+``` 
 <rtp-user-detail [idUser]="response.user"></rtp-user-detail>
+```
 
 Параметры:
 idUser - идентификатор пользователя
 
-== Загрузка фотографий ==
+### Загрузка фотографий
 Использование:
+```html 
 <rtp-form-upload count=1 [(files)]="note.img"></rtp-form-upload>
+```
 
 Пример интеграции:
+``` 
 <ion-item>
   <ion-label position="stacked">Фото
     <rtp-form-upload count=1 [(files)]="note.img"></rtp-form-upload>
   </ion-label>
 </ion-item>
+```
 
 Параметры:
 count - количество допустимых фотографий
 files - массив ссылок на фотографии
 
-== Предложения (отклики) на объявление ==
+### Предложения (отклики) на объявление
 Использование: 
+``` 
 <rtp-responses-list [id]="id"></rtp-responses-list>
+```
 
 Параметры:
 id - идентификатор объявления

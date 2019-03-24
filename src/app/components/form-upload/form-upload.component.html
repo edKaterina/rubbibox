@@ -1,12 +1,15 @@
-<input class="file_upload" #file type="file" (change)="selectFile($event)">
 <ion-row align-items-center>
-  <ion-col align-self-start *ngFor="let file of getFiles()" size="auto" (click)="removeFile(file)">
-    <img height="60px" [src]="file">
+  <ion-col align-self-start *ngFor="let file of photoFiles" size="auto" (click)="removeFile(file)">
+    <img height="60px" width="60px" [src]="file">
   </ion-col>
-
-  <ion-col align-self-center size="auto" (click)="focus($event, file)" padding *ngIf="isLoadImage()">
-        <ion-icon name="cloud-download" size="large" color="primary"></ion-icon>
-    </ion-col>  
-  <ion-col align-self-end>    
+  
+  <ion-col align-self-center size="auto" *ngIf="isLoadingImage">
+    <img class="loading" height="60px" width="60px" src="assets/loading.gif">    
+  </ion-col>
+  
+  <ion-col align-self-center size="auto" (click)="choiceSourceImage()" padding *ngIf="isAllowDownload">
+    <ion-icon height="60px" width="60px" name="cloud-download" size="large" color="primary"></ion-icon>
+  </ion-col>
+  <ion-col align-self-end>
   </ion-col>
 </ion-row>

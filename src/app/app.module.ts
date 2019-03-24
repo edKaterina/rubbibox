@@ -16,6 +16,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { IonicStorageModule } from '@ionic/storage';
 import { Push } from '@ionic-native/push/ngx';
 
+import { Camera } from '@ionic-native/camera/ngx';
+import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -34,6 +37,8 @@ import { Push } from '@ionic-native/push/ngx';
     SplashScreen,
     Push,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Camera,
+    PhotoViewer
   ],
   bootstrap: [AppComponent]
 })

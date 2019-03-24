@@ -3,6 +3,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 import { FileUpload } from '../model/file-upload';
+import { Subject, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,28 +16,22 @@ export class UploadFileService {
 
   private basePath = '/uploads';
 
-  pushFileToStorage(fileUpload: FileUpload, uploadFiles: { files: Array<string> }) {
-    const storageRef = firebase.storage().ref();
-    const uploadTask = storageRef.child(`${this.basePath}/${fileUpload.file.name}`).put(fileUpload.file);
+  saveBase64ToStorage(imageData: string): Subject<any> {
+    const status = new Subject();
+    const base64Image = 'data:image/jpeg;base64,' + imageData;
 
-    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-      (snapshot) => {
-        // in progress
-        const snap = snapshot as firebase.storage.UploadTaskSnapshot;
-      },
-      (error) => {
-        // fail
-        console.log(error);
-      },
+    const uploadTask = firebase.storage().ref().child(`${this.basePath}/image${Date.now()}.jpg`)
+      .putString(base64Image, firebase.storage.StringFormat.DATA_URL);
+
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
+    }, (error) => {
+    },
       () => {
-        // success
         uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-          console.log('Загружен файл');
-          console.log(downloadURL);
-
-          uploadFiles.files.push(downloadURL);
+          status.next(downloadURL);
         });
       }
     );
+    return status;
   }
 }
