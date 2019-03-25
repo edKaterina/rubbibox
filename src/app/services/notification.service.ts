@@ -11,6 +11,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { Storage } from '@ionic/storage';
 import { Subject, BehaviorSubject, ReplaySubject } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,8 @@ export class NotificationService {
     private categoryService: CategoryService,
     private storage: Storage,
     private push: Push,
-    private router: Router
+    private router: Router,
+    private translateService: TranslateService
   ) {
     this.storage.get('settingCategory').then(value => {
       this.settingCategory = value;
@@ -65,10 +67,6 @@ export class NotificationService {
           isChangeSetting = true;
         }
 
-        if (isChangeSetting) {
-          console.log('Изменены настройки: ', value1);
-        }
-
         this.settingCategory = value1;
         this.storage.set('settingCategory', this.settingCategory);
 
@@ -77,7 +75,6 @@ export class NotificationService {
         this.settingCategory.forEach(element => {
           topicsEng.push(this.transliterate(element));
         });
-        console.log(topicsEng);
 
         if (topicsEng.length > 0) {
           const options: PushOptions = {
@@ -103,7 +100,9 @@ export class NotificationService {
               // переход с Push по нажатию
               this.router.navigateByUrl(notification.additionalData.url);
             } else {
-              this.coreService.presentToast('Новое уведомление');
+              this.translateService.get('Новое уведомление').subscribe((res: string) => {
+                this.coreService.presentToast(res);
+              });
             }
           });
 
@@ -173,7 +172,10 @@ export class NotificationService {
           const data = a.payload.val() as NotifyModel;
           data.key = id;
 
-          this.coreService.presentToast('Новое уведомление');
+          this.translateService.get('Новое уведомление').subscribe((res: string) => {
+            this.coreService.presentToast(res);
+          });
+
           this.db.object(NotificationService.typeNotifications + '/' + this.authService.getLogin() + '/' + data.key).update({
             active: false
           });
@@ -201,7 +203,7 @@ export class NotificationService {
   }
 
   // транлитерация
-  transliterate(word: any):any {
+  transliterate(word: any): any {
     let answer = '';
     const a = {};
 

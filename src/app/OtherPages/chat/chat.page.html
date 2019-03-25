@@ -40,11 +40,11 @@
 <ion-footer>
   <ion-toolbar class="footerToolbar">
     <ion-buttons>
-      <ion-input type="text" placeholder="Сообщение" [(ngModel)]="message.text" (keyup.enter)="sendMessage()"></ion-input>
+      <ion-input type="text" [placeholder]="'Сообщение' | translate" [(ngModel)]="message.text" (keyup.enter)="sendMessage()"></ion-input>
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <ion-button (click)="sendMessage()" [disabled]="message.text === ''">Отправить</ion-button>
+      <ion-button (click)="sendMessage()" [disabled]="message.text === ''" translate>Отправить</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

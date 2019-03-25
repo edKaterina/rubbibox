@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Уведомления</ion-title>
+    <ion-title translate>Уведомления</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -10,7 +10,7 @@
 <ion-content>
   <ion-item text-wrap *ngIf="count==0">
       <ion-label text-wrap padding>
-        <h2>Список уведомлений пуст.</h2>
+        <h2 translate>Список уведомлений пуст.</h2>
       </ion-label>
     </ion-item>
 
@@ -22,7 +22,7 @@
         </ion-text>
         <h2>{{note.text}}</h2>
         <ion-text color="medium">
-          <p>{{note.subject}}</p>
+          <p translate>{{note.subject}}</p>
         </ion-text>
       </ion-label>
       <ion-icon name="mail-unread" size="small" slot="end" color="danger" *ngIf="!note.isRead"></ion-icon>

@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { PeopleListPage } from './people-list.page';
+import { CoreModule } from './../../modules/core/core.module';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    CoreModule,
     RouterModule.forChild(routes)
   ],
   declarations: [PeopleListPage]

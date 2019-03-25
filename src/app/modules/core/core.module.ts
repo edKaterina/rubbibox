@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { ResponsesListComponent } from './../../components/responses-list/responses-list.component';
 import { UserDetailComponent } from './../../components/user-detail/user-detail.component';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [UserDetailComponent, FormUploadComponent, SortNotifyPipe, ResponsesListComponent],
@@ -14,9 +15,16 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     IonicModule.forRoot(),
     FormsModule,
-    RouterModule
+    RouterModule,
+    TranslateModule.forChild()
   ],
-  exports: [UserDetailComponent, FormUploadComponent, SortNotifyPipe, ResponsesListComponent]
+  exports: [
+    UserDetailComponent,
+    FormUploadComponent,
+    SortNotifyPipe,
+    ResponsesListComponent,
+    TranslateModule
+  ]
 })
 
 export class CoreModule {

@@ -1,6 +1,6 @@
 <div *ngIf="isMyAd">
   <ion-list-header color="primary">
-      <ion-label>Предложения</ion-label>
+      <ion-label translate>Предложения</ion-label>
   </ion-list-header>
 
   <ion-item text-wrap *ngIf="countResponse==0">
@@ -8,7 +8,7 @@
           <ion-text color="medium">
               <p></p>
           </ion-text>
-          <h2>Предложений еще не поступало</h2>
+          <h2 translate>Предложений еще не поступало</h2>
       </ion-label>
   </ion-item>
   
@@ -29,7 +29,7 @@
 
 <div *ngIf="!isMyAd && isMyResponse && isLoadResponse">
   <ion-list-header color="primary">
-      <ion-label>Ваше предложение</ion-label>
+      <ion-label translate>Ваше предложение</ion-label>
   </ion-list-header>
 
   <ion-item text-wrap [routerLink]="['/chat', userAd]">
@@ -39,7 +39,7 @@
           </ion-text>
           <h2>{{myResponse.response}}</h2>
           <ion-text color="medium">
-              <p>Вы</p>
+              <p translate>Вы</p>
           </ion-text>
       </ion-label>
   </ion-item>
@@ -47,22 +47,22 @@
 
 <div *ngIf="!isMyAd && !isMyResponse && isLoadResponse">
   <ion-list-header color="primary">
-      <ion-label>Ваше предложение</ion-label>
+      <ion-label translate>Ваше предложение</ion-label>
   </ion-list-header>
   <ion-item>
-      <ion-textarea rows="3" [(ngModel)]="newResponse.response" placeholder="Ваше предложение на объявление">
+      <ion-textarea rows="3" [(ngModel)]="newResponse.response" [placeholder]="'Ваше предложение на объявление' | translate">
       </ion-textarea>
-      <ion-button color="primary" fill="outline" size="default" (click)="addResponse(id)">
+      <ion-button color="primary" fill="outline" size="default" (click)="addResponse(id)" translate>
           Отправить
       </ion-button>
   </ion-item>
   <ion-item *ngIf="!isExistProfileMaster">
-      <ion-label position="stacked">Ф.И.О.</ion-label>
-      <ion-textarea rows="2" [(ngModel)]="notePeople.fio" placeholder="Фамилия, имя, отчество"></ion-textarea>
+      <ion-label position="stacked" translate>Ф.И.О.</ion-label>
+      <ion-textarea rows="2" [(ngModel)]="notePeople.fio" [placeholder]="'Фамилия, имя, отчество' | translate"></ion-textarea>
   </ion-item>
 
   <ion-item *ngIf="!isExistProfileMaster">
-      <ion-label position="stacked">Мобильный телефон</ion-label>
-      <ion-input [(ngModel)]="notePeople.phone" placeholder="+7927*******"></ion-input>
+      <ion-label position="stacked" translate>Мобильный телефон</ion-label>
+      <ion-input [(ngModel)]="notePeople.phone" [placeholder]="'+7927*******' | translate"></ion-input>
   </ion-item>
 </div>

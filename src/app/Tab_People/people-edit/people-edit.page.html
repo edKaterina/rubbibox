@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Стать мастером</ion-title>
+    <ion-title translate>Стать мастером</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -10,40 +10,39 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <ion-label position="stacked">Категория</ion-label>
-      <ion-select [(ngModel)]="note.category" okText="ОК" cancelText="Отмена" placeholder="выберите из списка">
+      <ion-label position="stacked" translate>Категория</ion-label>
+      <ion-select [(ngModel)]="note.category" [okText]="'ОК' | translate" [cancelText]="'Отмена' | translate"
+          [placeholder]="'выберите из списка' | translate">
         <ion-select-option *ngFor="let category of categoryList" [value]="category">{{category}}</ion-select-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Фото
+      <ion-label position="stacked" translate>Фото
         <rtp-form-upload count=1 [(files)]="note.img"></rtp-form-upload>
       </ion-label>
     </ion-item>
   
     <ion-item>
-      <ion-label position="stacked">Ф.И.О.</ion-label>
-      <ion-textarea rows="2" [(ngModel)]="note.fio" placeholder="Фамилия, имя, отчество"></ion-textarea>
+      <ion-label position="stacked" translate>Ф.И.О.</ion-label>
+      <ion-textarea rows="2" [(ngModel)]="note.fio" [placeholder]="'Фамилия, имя, отчество' | translate"></ion-textarea>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Мобильный телефон</ion-label>
-      <ion-input [(ngModel)]="note.phone" placeholder="+7927*******"></ion-input>
+      <ion-label position="stacked" translate>Мобильный телефон</ion-label>
+      <ion-input [(ngModel)]="note.phone" [placeholder]="'+7927*******' | translate"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Коротко о себе</ion-label>
-      <ion-textarea rows="2" [(ngModel)]="note.title" placeholder="Напишите коротко, отобразится в списке мастеров.">
-      </ion-textarea>
+      <ion-label position="stacked" translate>Коротко о себе</ion-label>
+      <ion-textarea rows="2" [(ngModel)]="note.title" [placeholder]="'Напишите коротко' | translate"></ion-textarea>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Подробно о себе</ion-label>
-      <ion-textarea rows="6" [(ngModel)]="note.description"
-        placeholder="Подробное описание будет видно в вашем профиле, тут можно расписать все подробно."></ion-textarea>
+      <ion-label position="stacked" translate>Подробно о себе</ion-label>
+      <ion-textarea rows="6" [(ngModel)]="note.description" [placeholder]="'Подробное описание' | translate"></ion-textarea>
     </ion-item>
 
-    <ion-button color="primary" expand="block" (click)="addNote(note)">Сохранить</ion-button>
+    <ion-button color="primary" expand="block" (click)="addNote(note)" translate>Сохранить</ion-button>
   </ion-list>
 </ion-content>

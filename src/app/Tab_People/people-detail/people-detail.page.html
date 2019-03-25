@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Мастер</ion-title>
+    <ion-title translate>Мастер</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -22,10 +22,10 @@
 
     <ion-row>
         <ion-col>
-            <ion-button expand="block" fill="outline" href="tel:{{ note.phone }}">Позвонить</ion-button>
+            <ion-button expand="block" fill="outline" href="tel:{{ note.phone }}" translate>Позвонить</ion-button>
         </ion-col>
         <ion-col>
-            <ion-button expand="block" fill="outline" [routerLink]="['/chat', note.user]">Написать</ion-button>
+            <ion-button expand="block" fill="outline" [routerLink]="['/chat', note.user]" translate>Написать</ion-button>
         </ion-col>
       </ion-row>
 
