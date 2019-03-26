@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { AdModel } from '../../model/ad-model';
 import { map } from 'rxjs/operators';
 import { CategoryService } from 'src/app/services/category.service';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-AllAd',
@@ -12,7 +13,8 @@ import { CategoryService } from 'src/app/services/category.service';
 })
 export class AllAdPage implements OnInit {
 
-    noteList3: any = [];
+    noteList: Array<AdModel> = [];
+
     categoryList: Observable<any[]>;
     private settingCategory: any = [];
 
@@ -22,6 +24,9 @@ export class AllAdPage implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.adService.getAdSubscriptionListCache().then(value => {
+            this.noteList = value;
+        });
     }
 
     ionViewDidEnter() {
@@ -44,42 +49,10 @@ export class AllAdPage implements OnInit {
 
                 this.settingCategory = value1;
                 if (isChangeSetting) {
-                    this.noteList3 = [];
-                    this.settingCategory.forEach(element => {
-                        const list = this.adService.getAdList(element as string)
-                            .snapshotChanges().pipe(map(actions => {
-                                let category = element; // на случай если не будет элементов в катгории
-
-                                if (actions[0]) {
-                                    const data = actions[0].payload.val();
-                                    category = data.category;
-                                }
-
-                                this.noteList3 = this.noteList3.filter((item) => {
-                                    return (item as AdModel).category !== category;
-                                });
-
-                                return actions.map(a => {
-                                    const data2 = a.payload.val();
-                                    const id = a.payload.key;
-                                    data2.key = id;
-                                    this.noteList3.push({ id, ...data2 });
-                                    return { id, ...data2 };
-                                });
-                            }));
-
-                        list.subscribe(value2 => {
-                            this.noteList3.sort((a: AdModel, b: AdModel) => {
-                                if (a.dateCreate < b.dateCreate) {
-                                    return 1;
-                                } else if (a.dateCreate > b.dateCreate) {
-                                    return -1;
-                                } else {
-                                    return 0;
-                                }
-                            });
+                    this.adService.getAdSubscriptionList(this.settingCategory)
+                        .subscribe(value10 => {
+                            this.noteList = value10;
                         });
-                    });
                 }
             });
         });

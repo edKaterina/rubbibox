@@ -8,9 +8,16 @@ import { ResponsesListComponent } from './../../components/responses-list/respon
 import { UserDetailComponent } from './../../components/user-detail/user-detail.component';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { SortAdPipe } from 'src/app/pipe/sort-ad.pipe';
 
 @NgModule({
-  declarations: [UserDetailComponent, FormUploadComponent, SortNotifyPipe, ResponsesListComponent],
+  declarations: [
+    UserDetailComponent,
+    FormUploadComponent,
+    SortNotifyPipe,
+    ResponsesListComponent,
+    SortAdPipe
+  ],
   imports: [
     CommonModule,
     IonicModule.forRoot(),
@@ -22,6 +29,7 @@ import { TranslateModule } from '@ngx-translate/core';
     UserDetailComponent,
     FormUploadComponent,
     SortNotifyPipe,
+    SortAdPipe,
     ResponsesListComponent,
     TranslateModule
   ]

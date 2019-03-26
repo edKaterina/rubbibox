@@ -3,8 +3,8 @@ import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AdModel } from '../../model/ad-model';
-import { map } from 'rxjs/operators';
 import { ResponseService } from 'src/app/services/response.service';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-myAd',
@@ -18,25 +18,21 @@ export class MyAdPage implements OnInit {
     constructor(
         private authService: AuthService,
         private adService: AdService,
-        private responseService: ResponseService
+        private responseService: ResponseService,
     ) {
     }
 
     ngOnInit() {
-        this.authService.auth().then(login => {
-            this.noteList = this.adService.getAdListUser(login)
-                .snapshotChanges().pipe(
-                    map(actions => actions.map(a => {
-                        const id = a.payload.key;
-                        const data = a.payload.val();
-                        data.key = id;
-                        return { id, ...data };
-                    }))
-                );
+        this.adService.getAdListUserCache().then(value => {
+            this.noteList = of(value);
+        });
 
-            this.noteList.subscribe(value2 => {
-                this.count = value2.length;
-            });
+        this.authService.auth().then(login => {
+            this.adService.getAdListUserServer(login)
+                .subscribe(items => {
+                    this.count = items.length;
+                    this.noteList = of(items);
+                });
         });
     }
 

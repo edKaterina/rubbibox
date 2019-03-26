@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { peopleModel } from '../../model/people-model';
 import { map } from 'rxjs/operators';
 import { MasterService } from 'src/app/services/master.service';
@@ -18,13 +18,12 @@ export class PeopleListPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.peopleList = this.masterService.getPeopleList().snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.val();
-        const id = a.payload.key;
-        data.key = id;
-        return { id, ...data };
-      }))
-    );
+    this.masterService.getPeopleListCache().then(value => {
+      this.peopleList = of(value);
+    });
+
+    this.masterService.getPeopleListServer().subscribe(value =>{
+      this.peopleList = of(value);
+    });
   }
 }
