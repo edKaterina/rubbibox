@@ -14,7 +14,7 @@
         <h2>{{category.name}}</h2>
         <p>{{category.description}}</p>
       </ion-label>
-      <ion-toggle color="primary" checked="{{getStatusSubscription(category)}}"
+      <ion-toggle color="primary" checked="{{ setting.indexOf(category.name) >= 0 }}"
         (ionChange)="changeSubscription($event, category)"></ion-toggle>
     </ion-item>
   </ion-list>

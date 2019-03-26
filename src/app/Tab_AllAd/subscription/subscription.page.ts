@@ -37,8 +37,4 @@ export class SubscriptionPage implements OnInit {
     this.storage.set(subscription.name, event.detail.checked);
     this.notificationService.initPush();
   }
-
-  getStatusSubscription(subscription) {
-    return (this.setting.indexOf(subscription.name) >= 0);
-  }
 }
