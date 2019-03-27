@@ -100,9 +100,7 @@ export class NotificationService {
               // переход с Push по нажатию
               this.router.navigateByUrl(notification.additionalData.url);
             } else {
-              this.translateService.get('Новое уведомление').subscribe((res: string) => {
-                this.coreService.presentToast(res);
-              });
+              this.coreService.presentToast('Новое уведомление');
             }
           });
 
@@ -172,9 +170,7 @@ export class NotificationService {
           const data = a.payload.val() as NotifyModel;
           data.key = id;
 
-          this.translateService.get('Новое уведомление').subscribe((res: string) => {
-            this.coreService.presentToast(res);
-          });
+          this.coreService.presentToast('Новое уведомление');
 
           this.db.object(NotificationService.typeNotifications + '/' + this.authService.getLogin() + '/' + data.key).update({
             active: false
