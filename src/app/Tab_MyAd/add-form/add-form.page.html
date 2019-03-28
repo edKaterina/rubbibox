@@ -12,16 +12,16 @@
   <ion-item>
     <ion-label position="stacked" translate>Категория</ion-label>
     <ion-select [(ngModel)]="note.category" [okText]="'ОК' | translate" [cancelText]="'Отмена' | translate"
-      [placeholder]="'выберите из списка' | translate">
+      [placeholder]="'выберите из списка' | translate" (ionChange)="changeCategory()">
       <ion-select-option *ngFor="let category of categoryList" [value]="category">{{category}}</ion-select-option>
     </ion-select>
   </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked" translate>Описание</ion-label>
-    <ion-textarea rows="6" [(ngModel)]="note.job" [placeholder]="'Опишите подробно задачу' | translate">
-    </ion-textarea>
+  <ion-item *ngFor="let field of fields" [ngSwitch]="field.type">
+    <ion-label position="stacked" translate>{{ field.label }}</ion-label>    
+    <ion-textarea [rows]="field.rows" [id]="field.name" [placeholder]="field.placeholder | translate" *ngSwitchCase="typeField.textarea"></ion-textarea>
+    <ion-input [id]="field.name" [placeholder]="field.placeholder | translate" *ngSwitchCase="typeField.input"></ion-input>
   </ion-item>
 
-  <ion-button color="primary" expand="block" (click)="addNote(note)" translate>Отправить</ion-button>
+  <ion-button color="primary" expand="block" (click)="addAdForFields()" *ngIf="fields" translate>Отправить</ion-button>
 </ion-content>

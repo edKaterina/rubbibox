@@ -15,6 +15,7 @@ export class DetailPage {
     id: string;
     note: AdModel = new AdModel;
     subscriptionDetail: Subscription;
+    fields: any;
 
     constructor(
         private activateRoute: ActivatedRoute,
@@ -26,6 +27,7 @@ export class DetailPage {
             this.subscriptionDetail = this.adService.getAdDetail(this.id).snapshotChanges().subscribe(value => {
                 this.note = value.payload.val();
                 this.note.key = value.key;
+                this.fields = AdModel.getFileds(this.note.category);
             });
         });
     }

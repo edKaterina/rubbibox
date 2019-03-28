@@ -9,19 +9,21 @@
 
 <ion-content>
     <ion-list>
-
-        <ion-item text-wrap>
+        <ion-item text-wrap *ngFor="let field of fields; let i = index" lines="none">
             <ion-label text-wrap>
-                <ion-text color="medium">
+                <ion-text color="medium" *ngIf="i==0">
                     <p>{{note.dateCreate | date:'HH:m d.MM.y'}}</p>
                 </ion-text>
-                <h2>{{note.job}}</h2>
-                <ion-text color="medium">
-                    <p>{{note.category}}</p>
+                <ion-text color="medium" *ngIf="i!=0">
+                    <p>{{field.label}}</p>
                 </ion-text>
+
+                <h2>{{ note[field.name] }}</h2>
             </ion-label>
         </ion-item>
-        
+
         <rtp-responses-list [id]="id"></rtp-responses-list>
-    </ion-list>    
+    </ion-list>
+
+
 </ion-content>

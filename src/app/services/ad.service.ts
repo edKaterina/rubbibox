@@ -125,6 +125,14 @@ export class AdService {
     return this.db.list(AdService.typeAds).push(note);
   }
 
+  // Добавить объявление
+  addAdForFields(note: any): Promise<any>{
+    note['user'] = this.authService.getLogin();
+    note['dateCreate'] = new Date().toISOString();
+
+    return this.db.list(AdService.typeAds).push(note);
+  }
+
   // Удалить объявление
   removeAd(note: AdModel) {
     return this.db.list(AdService.typeAds).remove(note.key);
