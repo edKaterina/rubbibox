@@ -10,7 +10,7 @@ pipelines:
     - step:
         script: # Modify the commands below to build your repository.
         - npm install    
-        - ng test --singleRun=true
+        - ng test
         - export DISPLAY=:1
         - Xvfb $DISPLAY -ac -screen 0 1280x1024x8 &
         - ng e2e --env=prod
