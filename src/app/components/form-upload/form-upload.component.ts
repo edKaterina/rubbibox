@@ -94,6 +94,7 @@ export class FormUploadComponent {
       this.isLoadingImage = true;
       this.uploadService.saveBase64ToStorage(imageData).subscribe(uploadURLImage => {
         this.photoFiles.push(uploadURLImage);
+        this.files = this.photoFiles;
         this.isLoadingImage = false;
         this.changeAllowDownload();
       });
