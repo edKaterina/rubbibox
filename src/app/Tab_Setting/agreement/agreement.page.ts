@@ -15,6 +15,9 @@ export class AgreementPage implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
     this.db.object('setting/agreement').valueChanges().subscribe(value => {
       this.textAgreement = value as string;
     });

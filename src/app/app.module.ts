@@ -14,7 +14,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { IonicStorageModule } from '@ionic/storage';
-import { Push } from '@ionic-native/push/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
 
 import { Camera } from '@ionic-native/camera/ngx';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
@@ -51,7 +51,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     StatusBar,
     SplashScreen,
-    Push,
+    FCM,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Camera,
     PhotoViewer

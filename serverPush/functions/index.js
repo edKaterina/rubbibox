@@ -3,16 +3,16 @@ let admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
 exports.newAd = functions.database.ref('ads/{key}').onCreate((snapshot, context) => {
-    //console.log(snapshot);
     let payload = {
         notification: {
-            body:  snapshot._data.job,
+            body: snapshot._data.job,
             sound: 'default',
             badge: '1',
-            title: snapshot._data.category
+            title: snapshot._data.category,
+            click_action: 'FCM_PLUGIN_ACTIVITY'
         },
         data: {
-            "url": '/detail/'+context.params['key']
+            "url": '/detail/' + context.params['key']
         }
     };
 
@@ -24,7 +24,6 @@ exports.newAd = functions.database.ref('ads/{key}').onCreate((snapshot, context)
         });
 
     return 'ok';
-    //}
 });
 
 exports.newNotify = functions.database.ref('/notifications/{user}/{key2}').onWrite((change, context) => {
@@ -36,16 +35,16 @@ exports.newNotify = functions.database.ref('/notifications/{user}/{key2}').onWri
     // if (!change.after.exists()) {
     //     return null;
     // }
-    
+
     const original = change.after.val();
     console.log(original);
 
-    if (original.active==false){
+    if (original.active == false) {
         //console.log('Пропускаем статус доставки уведомления');
         return null;
     }
 
-    if (original.isRead==true){
+    if (original.isRead == true) {
         //console.log('Пропускаем событие чтения');
         return null;
     }
@@ -58,10 +57,11 @@ exports.newNotify = functions.database.ref('/notifications/{user}/{key2}').onWri
 
             let payload = {
                 notification: {
-                    body:   original.text,
-                    sound:  'default',
-                    badge:  '1',
-                    title:  original.subject
+                    body: original.text,
+                    sound: 'default',
+                    badge: '1',
+                    title: original.subject,
+                    click_action: 'FCM_PLUGIN_ACTIVITY'
                 },
                 data: {
                     "url": original.url

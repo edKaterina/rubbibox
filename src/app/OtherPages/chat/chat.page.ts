@@ -24,12 +24,12 @@ export class ChatPage {
     messages: any;
     chatID;
     audio;
-    isLoad: Boolean = false;
 
     message: MessageModel = new MessageModel;
     prevDataCreate = '2000-03-08T08:50:42.157Z';
     pipe = new DatePipe('en-US'); // Use your own locale
     subscription: Subscription;
+    oldCountMessages: number;
 
     constructor(
         private activateRoute: ActivatedRoute,
@@ -76,16 +76,19 @@ export class ChatPage {
                     }
 
                     this.scrollNewMessage();
-                    if (this.isLoad) {
-                        this.audio.play();
-                    }
-                    this.isLoad = true;
-
                     this.prevDataCreate = data.dateCreate;
                     return { id, ...data };
                 }))
             );
-            this.subscription = this.messageList.subscribe();
+            this.subscription = this.messageList.subscribe(messages => {
+                if (this.oldCountMessages) {
+                    if (this.oldCountMessages !== messages.length) {
+                        this.scrollNewMessage();
+                        this.audio.play();
+                    }
+                }
+                this.oldCountMessages = messages.length;
+            });
         });
     }
 

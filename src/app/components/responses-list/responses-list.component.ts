@@ -70,14 +70,11 @@ export class ResponsesListComponent implements OnDestroy, OnInit {
             this.isMyResponse = false;
             this.countResponse = value.length;
             value.forEach(value1 => {
-              console.log('response');
-              console.log(value1);
               if (value1.user === this.authService.getLogin()) {
                 this.isMyResponse = true;
                 this.myResponse = value1;
               }
 
-              console.log(this.activateRoute.snapshot.url);
               this.notificationService.setMarkRead('Ad_' + this.id + '_' + value1.user);
             });
             this.isLoadResponse = true;

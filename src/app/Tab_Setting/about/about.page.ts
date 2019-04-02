@@ -15,6 +15,9 @@ export class AboutPage implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
     this.db.object('setting/about').valueChanges().subscribe(value => {
       this.textAbout = value as string;
     });

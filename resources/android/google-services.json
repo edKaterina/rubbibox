@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "828314602702",
+    "firebase_url": "https://rtpdemo-36b7f.firebaseio.com",
+    "project_id": "rtpdemo-36b7f",
+    "storage_bucket": "rtpdemo-36b7f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828314602702:android:76c79b1b92fca22d",
+        "android_client_info": {
+          "package_name": "ru.brightmobile.RTPlatform"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "828314602702-s86vbptjidjqpo3vu585eb2q4o41gc8b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbPVkpWtBQo4hEnTQYI6MNK8_KiDR4q_g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

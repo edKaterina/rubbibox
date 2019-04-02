@@ -15,6 +15,10 @@ export class MyAdPage implements OnInit {
     noteList: Observable<AdModel[]>;
     count = -1;
 
+    trackByFn(index: number, item: AdModel) {
+        return item.key;
+    }
+
     constructor(
         private authService: AuthService,
         private adService: AdService,

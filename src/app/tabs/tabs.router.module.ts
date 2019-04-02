@@ -81,7 +81,19 @@ const routes: Routes = [
             path: 'chat/:id',
             loadChildren: '../OtherPages/chat/chat.module#ChatPageModule'
           },
-          { path: 'notifications', loadChildren: '../Tab_Setting/notifications/notifications.module#NotificationsPageModule' }
+          {
+            path: 'notifications',
+            loadChildren: '../Tab_Setting/notifications/notifications.module#NotificationsPageModule'
+          },
+          {
+            path: 'agreement',
+            loadChildren: '../Tab_Setting/agreement/agreement.module#AgreementPageModule'
+          },
+          {
+            path: 'about',
+            loadChildren: '../Tab_Setting/about/about.module#AboutPageModule'
+          }
+
         ]
       },
       {
@@ -102,7 +114,7 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [
-      RouterModule
+    RouterModule
   ]
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }

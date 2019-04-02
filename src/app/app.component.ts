@@ -30,10 +30,10 @@ export class AppComponent {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
 
-            this.authService.auth();
-            this.notificationService.initPush();
-
-            this.splashScreen.hide();
+            this.authService.auth().then(login => {
+                this.notificationService.initPush();
+                this.splashScreen.hide();
+            });
         });
     }
 }

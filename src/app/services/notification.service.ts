@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { CoreService } from './core.service';
 import { CategoryService } from './category.service';
-import { PushObject, Push, PushOptions } from '@ionic-native/push/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
 import { Router } from '@angular/router';
 import { NotifyModel } from '../model/notify-model';
 import { map } from 'rxjs/operators';
@@ -21,7 +21,6 @@ export class NotificationService {
   public static typeNotifications = 'notifications';  // Уведомления
   public static typePush = 'push';                    // Токены для отправки Push
 
-  private pushObject: PushObject;
   private settingCategory: any = [];
   private countBadge: Subject<number>;
 
@@ -32,7 +31,7 @@ export class NotificationService {
     private coreService: CoreService,
     private categoryService: CategoryService,
     private storage: Storage,
-    private push: Push,
+    private fcm: FCM,
     private router: Router,
     private translateService: TranslateService
   ) {
@@ -41,15 +40,40 @@ export class NotificationService {
     });
 
     this.countBadge = new ReplaySubject(1);
-    this.countBadge.subscribe(count => {
-      if (this.pushObject) {
-        this.pushObject.setApplicationIconBadgeNumber(count);
-      }
+  }
+
+  // Подписка на топик Push-уведомлений
+  subscribeToTopic(topic: string) {
+    this.fcm.subscribeToTopic(this.transliterate(topic));
+  }
+
+  // Отписка от топика Push-уведомлений
+  unsubscribeFromTopic(topic: string) {
+    this.fcm.unsubscribeFromTopic(this.transliterate(topic));
+  }
+
+  // Инициализация Push-уведомлений без условий
+  // на входе массив топиков на которые нужно подписаться или пустой массив
+  initPush(topicsEng?: Array<string>) {
+    this.fcm.getToken().then(token => {
+      this.saveTokenPush(token);
+    });
+
+    this.fcm.onTokenRefresh().subscribe(token => {
+      this.saveTokenPush(token);
+    });
+
+    this.fcm.onNotification().subscribe(data => {
+      if (data.wasTapped) {
+        this.router.navigateByUrl(data.url);
+      } else {
+        this.coreService.presentToast('Новое уведомление');
+      };
     });
   }
 
-  // Инициализация Push-уведомлений
-  initPush() {
+  // Инициализация Push-уведомлений с подпиской на массив топиков из подписки в settingCategory
+  initPushSubscribeCategory() {
     this.categoryService.getOnCategory().subscribe(value => {
       value.then(value1 => {
         let isChangeSetting = false;
@@ -59,7 +83,6 @@ export class NotificationService {
             isChangeSetting = true;
           } else {
             if (this.settingCategory.toString() !== value1.toString()) {
-              console.log(value1.toString());
               isChangeSetting = true;
             }
           }
@@ -76,38 +99,7 @@ export class NotificationService {
           topicsEng.push(this.transliterate(element));
         });
 
-        if (topicsEng.length > 0) {
-          const options: PushOptions = {
-            android: {
-              topics: topicsEng,
-              sound: true
-            },
-            ios: {
-              alert: true,
-              badge: true,
-              sound: true,
-              topics: topicsEng
-            }
-          };
-
-          this.pushObject = this.push.init(options);
-
-          this.pushObject.on('notification').subscribe((notification: any) => {
-            console.log('Received a notification', notification);
-            console.log(notification);
-
-            if (notification.additionalData.foreground === false) {
-              // переход с Push по нажатию
-              this.router.navigateByUrl(notification.additionalData.url);
-            } else {
-              this.coreService.presentToast('Новое уведомление');
-            }
-          });
-
-          this.pushObject.on('registration').subscribe((registration: any) => {
-            this.saveTokenPush(registration['registrationId']);
-          });
-        }
+        this.initPush(topicsEng);
       });
     });
   }

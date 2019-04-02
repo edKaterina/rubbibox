@@ -13,6 +13,10 @@ export class PeopleListPage implements OnInit {
 
   peopleList: Observable<any[]>;
 
+  trackByFn(index: number, item: peopleModel) {
+    return item.key;
+  }
+
   constructor(
     private masterService: MasterService
   ) { }
@@ -22,7 +26,7 @@ export class PeopleListPage implements OnInit {
       this.peopleList = of(value);
     });
 
-    this.masterService.getPeopleListServer().subscribe(value =>{
+    this.masterService.getPeopleListServer().subscribe(value => {
       this.peopleList = of(value);
     });
   }

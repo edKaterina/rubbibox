@@ -13,10 +13,16 @@ import { of } from 'rxjs';
 })
 export class AllAdPage implements OnInit {
 
-    noteList: Array<AdModel> = [];
+    //noteList: Array<AdModel> = [];
+    noteList: Observable<AdModel[]>;
 
     categoryList: Observable<any[]>;
     private settingCategory: any = [];
+    count = -1;
+
+    trackByFn(index: number, item: AdModel) {
+        return item.key;
+    }
 
     constructor(
         private adService: AdService,
@@ -25,21 +31,22 @@ export class AllAdPage implements OnInit {
 
     ngOnInit() {
         this.adService.getAdSubscriptionListCache().then(value => {
-            this.noteList = value;
+            if (value) {
+                this.noteList = of(value);
+            }
         });
     }
 
     ionViewDidEnter() {
         this.categoryService.getOnCategory().subscribe(value => {
-            value.then(value1 => {
+            value.then(categories => {
                 let isChangeSetting = false;
 
                 if (this.settingCategory) {
-                    if (this.settingCategory.length !== value1.length) {
+                    if (this.settingCategory.length !== categories.length) {
                         isChangeSetting = true;
                     } else {
-                        if (this.settingCategory.toString() !== value1.toString()) {
-                            console.log(value1.toString());
+                        if (this.settingCategory.toString() !== categories.toString()) {
                             isChangeSetting = true;
                         }
                     }
@@ -47,11 +54,12 @@ export class AllAdPage implements OnInit {
                     isChangeSetting = true;
                 }
 
-                this.settingCategory = value1;
+                this.settingCategory = categories;
                 if (isChangeSetting) {
-                    this.adService.getAdSubscriptionList(this.settingCategory)
-                        .subscribe(value10 => {
-                            this.noteList = value10;
+                    this.adService.getAdSubscriptionList(this.settingCategory)                    
+                        .subscribe(ads => {
+                            this.noteList = of(ads);
+                            this.count = ads.length;
                         });
                 }
             });

@@ -40,7 +40,7 @@
 <ion-footer>
   <ion-toolbar class="footerToolbar">
     <ion-buttons>
-      <ion-input type="text" [placeholder]="'Сообщение' | translate" [(ngModel)]="message.text" (keyup.enter)="sendMessage()"></ion-input>
+      <ion-textarea rows="1" type="text" [placeholder]="'Сообщение' | translate" [(ngModel)]="message.text" (keyup.enter)="sendMessage()"></ion-textarea>
     </ion-buttons>
 
     <ion-buttons slot="end">

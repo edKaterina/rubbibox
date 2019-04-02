@@ -2,13 +2,40 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
-  { path: 'detail/:id', loadChildren: './OtherPages/detail/detail.module#DetailPageModule'},
-  { path: 'peopledetail/:id', loadChildren: './Tab_People/people-detail/people-detail.module#PeopleDetailPageModule'},
-  { path: 'chat/:id', loadChildren: './OtherPages/chat/chat.module#ChatPageModule'},
-  { path: 'notifications', loadChildren: './Tab_Setting/notifications/notifications.module#NotificationsPageModule'},
-  { path: 'agreement', loadChildren: './Tab_Setting/agreement/agreement.module#AgreementPageModule' },
-  { path: 'about', loadChildren: './Tab_Setting/about/about.module#AboutPageModule' }
+  {
+    path: '',
+    loadChildren: './tabs/tabs.module#TabsPageModule'
+  },
+  {
+    path: 'peopledetail/:id',
+    children:
+      [
+        {
+          path: '',
+          loadChildren: './Tab_People/people-detail/people-detail.module#PeopleDetailPageModule'
+        }
+      ]
+  },
+  {
+    path: 'chat/:id',
+    children:
+      [
+        {
+          path: '',
+          loadChildren: './OtherPages/chat/chat.module#ChatPageModule'
+        }
+      ]
+  },
+  {
+    path: 'detail/:id',
+    children:
+      [
+        {
+          path: '',
+          loadChildren: './OtherPages/detail/detail.module#DetailPageModule'
+        }
+      ]
+  }
 ];
 @NgModule({
   imports: [
@@ -16,4 +43,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

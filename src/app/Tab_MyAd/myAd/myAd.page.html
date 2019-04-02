@@ -20,7 +20,7 @@
   </ion-fab>
 
   <ion-list>
-    <ion-item *ngFor="let note of noteList | async | sortAd">
+    <ion-item *ngFor="let note of noteList | async | sortAd; trackBy: trackByFn">
       <ion-label [routerLink]="['/detail', note.key]">
         <ion-text color="medium">
           <p>{{note.dateCreate | date:'HH:mm d.MM.y'}}</p>

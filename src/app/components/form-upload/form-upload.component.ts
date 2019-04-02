@@ -7,13 +7,14 @@ import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 
 @Component({
   selector: 'rtp-form-upload',
-  inputs: ['count', 'files'],
+  inputs: ['count', 'files', 'isReadOnly'],
   templateUrl: './form-upload.component.html',
   styleUrls: ['./form-upload.component.scss']
 })
 export class FormUploadComponent {
 
   count: number; // предельное количество файлов
+  isReadOnly: boolean; // режим без редактирования
   isLoadingImage: boolean;
   photoFiles: Array<string>;
   isAllowDownload: boolean; // разрешено загружать еще файлы
@@ -58,32 +59,37 @@ export class FormUploadComponent {
   }
 
   async removeFile(file: string) {
-    const index = this.photoFiles.indexOf(file);
+    if (this.isReadOnly) {
+      this.photoViewer.show(file);
+    } else {
 
-    const alert = await this.alertController.create({
-      header: 'Выберите действие',
-      buttons: [{
-        text: 'На весь экран',
-        handler: () => {
-          this.photoViewer.show(file);
-        }
-      }, {
-        text: 'Удалить',
-        role: 'destructive',
-        handler: () => {
-          this.photoFiles.splice(index, 1);
-          this.changeAllowDownload();
-        }
-      }, {
-        text: 'Отмена',
-        role: 'cancel',
-        handler: () => {
+      const index = this.photoFiles.indexOf(file);
 
-        }
-      }]
-    });
+      const alert = await this.alertController.create({
+        header: 'Выберите действие',
+        buttons: [{
+          text: 'На весь экран',
+          handler: () => {
+            this.photoViewer.show(file);
+          }
+        }, {
+          text: 'Удалить',
+          role: 'destructive',
+          handler: () => {
+            this.photoFiles.splice(index, 1);
+            this.changeAllowDownload();
+          }
+        }, {
+          text: 'Отмена',
+          role: 'cancel',
+          handler: () => {
 
-    await alert.present();
+          }
+        }]
+      });
+
+      await alert.present();
+    }
   }
 
   selectImage(source: number) {

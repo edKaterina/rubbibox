@@ -42,9 +42,11 @@ export class AdService {
     return list;
   }
 
+  // Список объявлений включенных в подписке из кэша прошлого ответа сервера
   getAdSubscriptionListCache() {
     return this.storage.get('cache_AdSubscriptionList');
   }
+
   // Список объявлений включенных в подписке
   getAdSubscriptionList(settingCategory: Array<string>): ReplaySubject<AdModel[]> {
     this.AdSubscriptionList = [];
@@ -97,7 +99,8 @@ export class AdService {
           this.AdSubscriptionList = this.AdSubscriptionList.concat(addAd);
         }
 
-        arrayResult.next(this.AdSubscriptionList);
+        if (index + 1 === settingCategory.length)
+          arrayResult.next(this.AdSubscriptionList);
         this.storage.set('cache_AdSubscriptionList', this.AdSubscriptionList);
       });
     });
@@ -126,7 +129,7 @@ export class AdService {
   }
 
   // Добавить объявление
-  addAdForFields(note: any): Promise<any>{
+  addAdForFields(note: any): Promise<any> {
     note['user'] = this.authService.getLogin();
     note['dateCreate'] = new Date().toISOString();
 

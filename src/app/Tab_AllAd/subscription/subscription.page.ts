@@ -35,6 +35,11 @@ export class SubscriptionPage implements OnInit {
 
   changeSubscription(event, subscription) {
     this.storage.set(subscription.name, event.detail.checked);
-    this.notificationService.initPush();
+    
+    if (event.detail.checked){
+      this.notificationService.subscribeToTopic(subscription.name);
+    } else {
+      this.notificationService.unsubscribeFromTopic(subscription.name);
+    }
   }
 }
