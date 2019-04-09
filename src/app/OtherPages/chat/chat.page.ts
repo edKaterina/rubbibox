@@ -9,6 +9,7 @@ import { ViewChild } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { NotificationService } from 'src/app/services/notification.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-chat',
@@ -35,7 +36,8 @@ export class ChatPage {
         private activateRoute: ActivatedRoute,
         private chatService: ChatService,
         private authService: AuthService,
-        private notivicationService: NotificationService
+        private notivicationService: NotificationService,
+        private translateService: TranslateService
     ) {
         this.userTo = this.activateRoute.snapshot.params['id'];
 
@@ -93,14 +95,16 @@ export class ChatPage {
     }
 
     sendMessage() {
-        const notify = new NotifyModel;
-        notify.subject = 'Новое сообщение';
-        notify.text = this.message.text;
-        notify.url = '/chat/' + this.authService.getLogin();
+        this.translateService.get('Новое сообщение').subscribe(async (res: string) => {
+            const notify = new NotifyModel;
+            notify.subject = res;
+            notify.text = this.message.text;
+            notify.url = '/chat/' + this.authService.getLogin();
 
-        this.notivicationService.updateNotify('messages', this.userTo, notify);
-        this.chatService.sendMessage(this.chatID, this.message);
-        this.message.text = '';
+            this.notivicationService.updateNotify('messages', this.userTo, notify);
+            this.chatService.sendMessage(this.chatID, this.message);
+            this.message.text = '';
+        });
     }
 
     scrollNewMessage() {

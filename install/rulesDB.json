@@ -1,20 +1,58 @@
 {
-    "rules": {
-        ".read": true,
-        ".write": true,
-        "ads": {
-            ".indexOn": [
-                "category",
-                "user"
-            ]
-        },
-        "notifications": {
-            "$key": {
-                ".indexOn": [
-                    "active",
-                    "isRead"
-                ]
-            }
+  "rules": {
+		"push": {
+			".read": false,
+        "$key": {
+        	".write": "$key === auth.uid"
+        }			
+		},
+		"ads": {
+      ".read": true,
+      ".indexOn": ["category", "user"],      
+			"$key": {
+        ".write": "data.child('user').val() === auth.uid
+									|| newData.child('user').val() === auth.uid"
+      }
+		},
+		"categories": {
+      ".read": true,
+      ".write": false
+    },
+    "dialogs": {
+        "$key": {
+        	".read": "$key.contains(auth.uid)",
+          ".write": "$key.contains(auth.uid)"
+			}	
+    },
+		"masters": {
+			".read": true,
+			"$key":	{
+				".write": "$key === auth.uid"
+			}        
+		},      
+    "notifications": {      
+			"$key": {
+				".indexOn": ["active", "isRead"],
+        ".read": "$key === auth.uid",
+        ".write": "$key === auth.uid",
+        "$user": {          
+        	".write": "$user.contains(auth.uid)"
         }
+			}
+    },
+    "responses": {
+      "$idAd": {
+				".read": "root.child('ads').child($idAd).child('user').val() === auth.uid",
+        ".write": "root.child('ads').child($idAd).child('user').val() === auth.uid",
+      	"$key":	{
+      		".read": "$key === auth.uid",
+          ".write": "$key === auth.uid"
+      	}        
+      }
+    },
+    "setting": {
+      ".read": true,
+      ".write": false
     }
+  }
 }

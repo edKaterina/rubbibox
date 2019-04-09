@@ -12,6 +12,7 @@ import { peopleModel } from '../../model/people-model';
 import { ResponseService } from 'src/app/services/response.service';
 import { MasterService } from 'src/app/services/master.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'rtp-responses-list',
@@ -46,46 +47,57 @@ export class ResponsesListComponent implements OnDestroy, OnInit {
     private adService: AdService,
     private responseService: ResponseService,
     private masterService: MasterService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private translateService: TranslateService
   ) {
   }
 
   ngOnInit() {
     this.authService.auth().then(login => {
-      this.adService.getAdDetail(this.id).valueChanges().subscribe(value => {
-        const adDetail = value;
+      this.adService.getAdDetail(this.id).valueChanges().subscribe(adDetail => {
         this.userAd = adDetail.user;
         if (adDetail.user === login) {
           this.isMyAd = true;
         }
 
-        this.masterService.getPeopleDetail(this.authService.getLogin()).valueChanges().subscribe(value => {
-          if (!value) {
+        this.masterService.getPeopleDetail(this.authService.getLogin()).valueChanges().subscribe(peopleDetail => {
+          if (!peopleDetail) {
             // console.log('Отсутствует профиль мастера');
             this.isExistProfileMaster = false;
           }
 
-          this.responseList = this.responseService.getResponse(this.id).valueChanges();
-          this.subscription = this.responseList.subscribe(value => {
-            this.isMyResponse = false;
-            this.countResponse = value.length;
-            value.forEach(value1 => {
-              if (value1.user === this.authService.getLogin()) {
-                this.isMyResponse = true;
-                this.myResponse = value1;
-              }
-
-              this.notificationService.setMarkRead('Ad_' + this.id + '_' + value1.user);
+          if (this.isMyAd) {
+            this.responseList = this.responseService.getResponse(this.id).valueChanges();
+            this.subscription = this.responseList.subscribe(responseList => {
+              this.isMyResponse = false;
+              this.countResponse = responseList.length;
+              responseList.forEach(responseDetail => {
+                if (responseDetail.user === this.authService.getLogin()) {
+                  this.isMyResponse = true;
+                  this.myResponse = responseDetail;
+                }
+                this.notificationService.setMarkRead('Ad_' + this.id + '_' + responseDetail.user);
+              });
+              this.isLoadResponse = true;
             });
-            this.isLoadResponse = true;
-          });
+          } else {
+            this.responseService.getMyResponse(this.id).valueChanges().subscribe(response => {
+              if (response) {
+                this.isMyResponse = true;
+                this.myResponse = response;
+              }
+              this.isLoadResponse = true;
+            });
+          }
         });
       });
     });
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   addResponse(idAd: string) {
@@ -106,14 +118,16 @@ export class ResponsesListComponent implements OnDestroy, OnInit {
 
     this.masterService.addPeople(this.notePeople);
     this.responseService.addResponse(idAd, this.newResponse).then(value => {
-      const notify = new NotifyModel;
-      notify.subject = 'Новое предложение';
-      notify.text = this.newResponse.response;
-      notify.url = '/detail/' + idAd;
+      this.translateService.get('Новое предложение').subscribe(async (res: string) => {
+        const notify = new NotifyModel;
+        notify.subject = res;
+        notify.text = this.newResponse.response;
+        notify.url = '/detail/' + idAd;
 
-      this.notificationService.updateNotify('Ad_' + this.id, this.userAd, notify);
-      console.log('Отправил');
-      this.newResponse.response = '';
+        this.notificationService.updateNotify('Ad_' + this.id, this.userAd, notify);
+        console.log('Отправил');
+        this.newResponse.response = '';
+      });
     });
   }
 }

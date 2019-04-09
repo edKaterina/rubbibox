@@ -11,11 +11,11 @@
     </ion-fab-button>
   </ion-fab>
 
-  <ion-list>
-    <ion-item *ngFor="let note of peopleList | async; trackBy: trackByFn">
+  <ion-virtual-scroll [items]="peopleList" [trackBy]="trackByFn">
+    <ion-item *virtualItem="let note">
       <ion-thumbnail slot="start">
-        <img [src]="note.img[0]" *ngIf="note.img">
-        <img src="assets/user.png" *ngIf="!note.img">
+        <ion-img [src]="note.img[0]" *ngIf="note.img"></ion-img>
+        <ion-img src="assets/user.png" *ngIf="!note.img"></ion-img>
       </ion-thumbnail>
 
       <ion-label text-wrap>
@@ -30,9 +30,8 @@
         </div>
         <ion-button fill="outline" href="tel:{{ note.phone }}" translate>Позвонить</ion-button>
         <ion-button fill="outline" [routerLink]="['/chat', note.user]" translate>Написать</ion-button>
-
       </ion-label>
     </ion-item>
-  </ion-list>
+  </ion-virtual-scroll>
 
 </ion-content>

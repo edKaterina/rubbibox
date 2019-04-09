@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { peopleModel } from '../../model/people-model';
-import { map } from 'rxjs/operators';
 import { MasterService } from 'src/app/services/master.service';
 
 @Component({
@@ -9,9 +7,9 @@ import { MasterService } from 'src/app/services/master.service';
   templateUrl: './people-list.page.html',
   styleUrls: ['./people-list.page.scss'],
 })
-export class PeopleListPage implements OnInit {
+export class PeopleListPage implements OnInit, AfterViewInit {
 
-  peopleList: Observable<any[]>;
+  peopleList: Array<peopleModel>;
 
   trackByFn(index: number, item: peopleModel) {
     return item.key;
@@ -23,11 +21,13 @@ export class PeopleListPage implements OnInit {
 
   ngOnInit() {
     this.masterService.getPeopleListCache().then(value => {
-      this.peopleList = of(value);
+      this.peopleList = value;
     });
+  }
 
+  ngAfterViewInit() {
     this.masterService.getPeopleListServer().subscribe(value => {
-      this.peopleList = of(value);
+      this.peopleList = value;
     });
   }
 }

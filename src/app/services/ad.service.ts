@@ -99,9 +99,10 @@ export class AdService {
           this.AdSubscriptionList = this.AdSubscriptionList.concat(addAd);
         }
 
-        if (index + 1 === settingCategory.length)
+        setTimeout(() => {
           arrayResult.next(this.AdSubscriptionList);
-        this.storage.set('cache_AdSubscriptionList', this.AdSubscriptionList);
+          this.storage.set('cache_AdSubscriptionList', this.AdSubscriptionList);
+        }, 1000);
       });
     });
 

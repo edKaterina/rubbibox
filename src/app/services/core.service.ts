@@ -12,6 +12,15 @@ export class CoreService {
     private translateService: TranslateService
   ) { }
 
+  // Ограничение кол-ва символов в поле данных
+  public static trimField(data: any, field: string, count: number) {
+    if (data[field]) {
+      if (data[field].length > count) {
+        data[field] = data[field].slice(0, count) + '...';
+      }
+    }
+  }
+
   // информационное всплывающее сообщение на 2 секунды
   async presentToast(mess: string) {
     this.translateService.get(mess).subscribe(async (res: string) => {
@@ -23,4 +32,5 @@ export class CoreService {
       toast.present();
     });
   }
+
 }

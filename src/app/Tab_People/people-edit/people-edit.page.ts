@@ -23,8 +23,7 @@ export class PeopleEditPage implements OnInit {
     private masterService: MasterService,
     public platform: Platform
   ) {
-    this.authService.auth().then(value => {
-
+    this.authService.auth().then(login => {
       this.note.category = 'Курьер';
       this.note.user = this.authService.getLogin();
       this.categoryService.getCategoryList().valueChanges().subscribe(value => {

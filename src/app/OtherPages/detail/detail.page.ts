@@ -4,6 +4,7 @@ import { AuthService } from './../../services/auth.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdModel } from '../../model/ad-model';
+import { isEmpty } from 'rxjs/operators';
 
 @Component({
     selector: 'app-detail',
@@ -16,6 +17,8 @@ export class DetailPage {
     note: AdModel = new AdModel;
     subscriptionDetail: Subscription;
     fields: any;
+    isLoad: Boolean;
+    isNotFound: Boolean = true;
 
     constructor(
         private activateRoute: ActivatedRoute,
@@ -26,13 +29,18 @@ export class DetailPage {
         this.authService.auth().then(value => {
             this.subscriptionDetail = this.adService.getAdDetail(this.id).snapshotChanges().subscribe(value => {
                 this.note = value.payload.val();
-                this.note.key = value.key;
-                this.fields = AdModel.getFileds(this.note.category);
+                if (this.note) {
+                    this.fields = AdModel.getFileds(this.note.category);
+                    this.note.key = value.key;
+                    this.isNotFound = false;
+                }
+                this.isLoad = true;
             });
         });
     }
 
-    ionViewDidLeave(){
+    ionViewDidLeave() {
         this.subscriptionDetail.unsubscribe();
     }
 }
+

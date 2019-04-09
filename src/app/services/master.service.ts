@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Storage } from '@ionic/storage';
+import { CoreService } from './core.service';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,10 @@ export class MasterService {
       map(actions => actions.map(a => {
         const data = a.payload.val() as peopleModel;
         data.key = a.payload.key;
+
+        CoreService.trimField(data, 'fio', 60);
+        CoreService.trimField(data, 'title', 80);
+
         return data;
       }))
     );
@@ -48,7 +53,7 @@ export class MasterService {
     return list;
   }
 
-  // информацияо мастере
+  // информация о мастере
   getPeopleDetail(id: string): AngularFireObject<peopleModel> {
     return this.db.object(MasterService.typeMasters + '/' + id);
   }

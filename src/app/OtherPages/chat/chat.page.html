@@ -22,11 +22,11 @@
         <span>{{ messageItem.text }}</span>
       </ion-col>
       <ion-col *ngIf="messageItem.user !== nickname">
-        <div class="time">{{messageItem.dateCreate | date:'hh:MM'}}</div>
+        <div class="time">{{messageItem.dateCreate | date:'HH:m'}}</div>
       </ion-col>
 
       <ion-col *ngIf="messageItem.user === nickname">
-          <div class="mytime">{{messageItem.dateCreate | date:'hh:MM'}}</div>
+          <div class="mytime">{{messageItem.dateCreate | date:'HH:m'}}</div>
         </ion-col>
       <ion-col offset="3" size="9" *ngIf="messageItem.user === nickname" class="message"
         [ngClass]="{'my_message': messageItem.user === nickname, 'other_message': messageItem.user !== nickname}">
