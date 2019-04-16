@@ -16,29 +16,6 @@ export class CategoryService {
     private storage: Storage
   ) { }
 
-  // Список категорий включенных в подписке
-  // возвращает массив промисов со значением включенно категории
-  getOnCategory(): Observable<Promise<string[]>> {
-    return this.getCategoryList().valueChanges().pipe(map(actions => {
-      const arrayResult = [];
-      const arrayCategory = [];
-      const arrayPromise = [];
-      actions.forEach(value => {
-        const category = value as CategoryModel;
-        arrayPromise.push(this.storage.get(category.name));
-        arrayCategory.push(category.name);
-      });
-      return Promise.all(arrayPromise).then(value1 => {
-        value1.forEach(function (key, index) {
-          if (value1[index]) {
-            arrayResult.push(arrayCategory[index]);
-          }
-        });
-        return arrayResult;
-      });
-    }));
-  }
-
   // Список категорий
   getCategoryList(): AngularFireList<CategoryModel> {
     return this.db.list(CategoryService.typeCategories);

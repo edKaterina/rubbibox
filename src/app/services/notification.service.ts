@@ -72,38 +72,6 @@ export class NotificationService {
     });
   }
 
-  // Инициализация Push-уведомлений с подпиской на массив топиков из подписки в settingCategory
-  initPushSubscribeCategory() {
-    this.categoryService.getOnCategory().subscribe(value => {
-      value.then(value1 => {
-        let isChangeSetting = false;
-
-        if (this.settingCategory) {
-          if (this.settingCategory.length !== value1.length) {
-            isChangeSetting = true;
-          } else {
-            if (this.settingCategory.toString() !== value1.toString()) {
-              isChangeSetting = true;
-            }
-          }
-        } else {
-          isChangeSetting = true;
-        }
-
-        this.settingCategory = value1;
-        this.storage.set('settingCategory', this.settingCategory);
-
-        const topicsEng: any = [];
-
-        this.settingCategory.forEach(element => {
-          topicsEng.push(this.transliterate(element));
-        });
-
-        this.initPush(topicsEng);
-      });
-    });
-  }
-
   // Сохранение токена для отправки Push-уведомлений
   saveTokenPush(token: string) {
     this.authService.auth().then(value => {
@@ -152,8 +120,7 @@ export class NotificationService {
 
   // инициализация системы уведомлений
   initNotify() {
-    this.authService.auth().then(login => {
-
+    this.authService.state.subscribe(authData => {
       const notifyListNew = this.db.list(NotificationService.typeNotifications + '/' + this.authService.getLogin(), ref => {
         return ref.orderByChild('active').equalTo(true);
       }).snapshotChanges().pipe(

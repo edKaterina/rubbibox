@@ -92,8 +92,11 @@ const routes: Routes = [
           {
             path: 'about',
             loadChildren: '../Tab_Setting/about/about.module#AboutPageModule'
+          },
+          {
+            path: 'balance',
+            loadChildren: '../Tab_Setting/balance/balance.module#BalancePageModule'
           }
-
         ]
       },
       {

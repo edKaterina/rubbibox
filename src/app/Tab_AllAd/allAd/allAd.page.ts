@@ -5,6 +5,8 @@ import { AdModel } from '../../model/ad-model';
 import { map } from 'rxjs/operators';
 import { CategoryService } from 'src/app/services/category.service';
 import { of } from 'rxjs';
+import { SubscriptionService } from 'src/app/services/subscription.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'app-AllAd',
@@ -13,11 +15,7 @@ import { of } from 'rxjs';
 })
 export class AllAdPage implements OnInit {
 
-    //noteList: Array<AdModel> = [];
     noteList: Observable<AdModel[]>;
-
-    categoryList: Observable<any[]>;
-    private settingCategory: any = [];
     count = -1;
 
     trackByFn(index: number, item: AdModel) {
@@ -26,42 +24,26 @@ export class AllAdPage implements OnInit {
 
     constructor(
         private adService: AdService,
-        private categoryService: CategoryService
+        private categoryService: CategoryService,
+        private subscriptionService: SubscriptionService,
+        private authService: AuthService
     ) { }
 
     ngOnInit() {
         this.adService.getAdSubscriptionListCache().then(value => {
             if (value) {
                 this.noteList = of(value);
+                this.count = value.length;
             }
         });
-    }
 
-    ionViewDidEnter() {
-        this.categoryService.getOnCategory().subscribe(value => {
-            value.then(categories => {
-                let isChangeSetting = false;
-
-                if (this.settingCategory) {
-                    if (this.settingCategory.length !== categories.length) {
-                        isChangeSetting = true;
-                    } else {
-                        if (this.settingCategory.toString() !== categories.toString()) {
-                            isChangeSetting = true;
-                        }
-                    }
-                } else {
-                    isChangeSetting = true;
-                }
-
-                this.settingCategory = categories;
-                if (isChangeSetting) {
-                    this.adService.getAdSubscriptionList(this.settingCategory)                    
-                        .subscribe(ads => {
-                            this.noteList = of(ads);
-                            this.count = ads.length;
-                        });
-                }
+        this.authService.state.subscribe(authData => {
+            this.subscriptionService.listCategory().subscribe(subscriptionItems => {
+                this.adService.getAdSubscriptionList(subscriptionItems)
+                    .subscribe(ads => {
+                        this.noteList = of(ads);
+                        this.count = ads.length;
+                    });
             });
         });
     }

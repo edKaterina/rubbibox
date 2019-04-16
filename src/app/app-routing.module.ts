@@ -35,7 +35,8 @@ const routes: Routes = [
           loadChildren: './OtherPages/detail/detail.module#DetailPageModule'
         }
       ]
-  }
+  },
+  { path: 'auth', loadChildren: './Tab_Setting/auth/auth.module#AuthPageModule' }
 ];
 @NgModule({
   imports: [

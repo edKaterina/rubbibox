@@ -1,7 +1,9 @@
 const functions = require('firebase-functions');
 let admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
+const db = admin.database();
 
+// новое объявление, нужно отправить Push по топику
 exports.newAd = functions.database.ref('ads/{key}').onCreate((snapshot, context) => {
     let payload = {
         notification: {
@@ -26,6 +28,7 @@ exports.newAd = functions.database.ref('ads/{key}').onCreate((snapshot, context)
     return 'ok';
 });
 
+// новое уведомление, нужно отправить Push
 exports.newNotify = functions.database.ref('/notifications/{user}/{key2}').onWrite((change, context) => {
 
     // if (change.before.exists()) {
@@ -81,6 +84,7 @@ exports.newNotify = functions.database.ref('/notifications/{user}/{key2}').onWri
     return 'ok';
 });
 
+// перевод русского топика на латиницу
 function transliterate(word) {
     let answer = '';
     const a = {};
@@ -103,3 +107,131 @@ function transliterate(word) {
     }
     return answer.toLowerCase();
 }
+
+// колбек функция для АТС при поступлении звонка
+exports.callbackAuthPhone = functions.https.onRequest((req, res) => {
+    var dataQuery = req.body;
+
+    db.ref('auth/' + dataQuery.caller_id).once("value", (data) => {
+        var dateCreate = data.val() && data.val().dateCreate;
+        var authID = data.val() && data.val().authID;
+        var uid = data.val() && data.val().uid;
+        if (dateCreate) {
+            var deltaTime = new Date().valueOf() - dateCreate;
+            if (deltaTime <= 60000) {
+                // Найдем есть ли у нас уже такой пользователь с номером
+                admin.auth().getUserByPhoneNumber('+' + dataQuery.caller_id)
+                    .then(function (userRecord) {
+                        console.log('Successfully fetched user data:', userRecord.toJSON());
+
+                        // нашли пользователя с номером, его и восстанавливаем                        
+                        createAndSaveToken(userRecord.uid, dataQuery.caller_id, authID);
+                    })
+                    .catch(function (error) {
+                        console.log('Error fetching user data:', error);
+
+                        // не нашли пользователя с номером, тогда закрепим текущий uid за этим номером
+                        createAndSaveToken(uid, dataQuery.caller_id, authID);
+                    });
+            }
+        }
+    });
+
+    res.status(200).send(req.query.zd_echo);
+});
+
+// создает кастомный токен пользователя для авторизации по звонку
+function createAndSaveToken(uid, caller_id, authID) {
+    admin.auth().createCustomToken(uid)
+        .then(function (customToken) {
+            admin.auth().updateUser(uid, {
+                phoneNumber: '+' + caller_id
+            });
+            admin.database().ref().child('authHistory/' + authID).update({
+                call_id: customToken
+            });
+        })
+        .catch(function (error) {
+            console.log('Error creating custom token:', error);
+        });
+}
+
+// функция выдачи индентификатора авторизации по звонку
+exports.getAuthID = functions.https.onRequest((req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+
+    db.ref('auth/' + req.query.phone).once("value", (data) => {
+        var dateCreate = data.val() && data.val().dateCreate;
+        var authID = data.val() && data.val().authID;
+        if (dateCreate) {
+            var deltaTime = new Date().valueOf() - dateCreate;
+            // console.log(deltaTime);
+            if (deltaTime <= 60000) {
+                res.status(200).json({ error: 'Авторизация возможна через минуту.' });
+                return;
+            }
+        }
+
+        db.ref('authHistory/' + authID).remove();
+        var authRef = db.ref().child('authHistory').push();
+        authRef.set({
+            phoneClient: req.query.phone,
+            phoneAuth: '+74991131939',
+            dateCreate: new Date().valueOf()
+        }, function (value) {
+            db.ref().child('auth/' + req.query.phone).set({
+                phoneAuth: '+74991131939',
+                dateCreate: new Date().valueOf(),
+                authID: authRef.key,
+                uid: req.query.uid
+            });
+            res.status(200).json({
+                key: authRef.key,
+                call: 'tel:+74991131939'
+            });
+        });
+    });
+});
+
+// Функция для колбека платежного агрегатора, пополнение баланса
+exports.callbackBalance = functions.https.onRequest((req, res) => {
+    var userID = req.query.userID;
+    var sum = 1000; // с минусом вычтет из баланса
+    operationBalance(userID, sum, null, 'Пополнение баланса', '(с помощью пластиковой карты)');
+    res.status(200).send();
+});
+
+// Функция работы с балансом
+function operationBalance(userID, sum, ref, title, detail) {
+    const adaRankRef = db.ref(`balance/${userID}/sum`);
+    adaRankRef.transaction(function (balance) {
+        var newValue = balance + sum;        
+        return newValue;
+    }, (error, committed, snapshot) => {
+        if (committed) {
+            db.ref(`balance/${userID}/history`).push({
+                sum: sum,
+                dateCreate: new Date().toISOString(),
+                title: title,
+                detail: detail
+            });            
+            if (ref) {
+                ref.child('pay').set(true);
+            }
+        }
+    });
+}
+
+// новая подписка, если платная, спишем деньги
+exports.newSubscription = functions.database.ref('subscription/{user}/{category}').onCreate((snapshot, context) => {    
+    db.ref('categories').orderByChild('name').equalTo(context.params['category']).
+        once('value', (data) => {
+            const categoryItems = data.val();
+            for (const key in categoryItems) {
+                const price = categoryItems[key]['price'];
+                if (price > 0) {
+                    operationBalance(context.params['user'], -price, snapshot.ref, `Подписка на "${context.params['category']}"`, '(ежемесячный платеж за доступ к объявлениям)');
+                }
+            }
+        });
+});

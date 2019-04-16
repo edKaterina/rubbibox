@@ -53,6 +53,24 @@
     "setting": {
       ".read": true,
       ".write": false
-    }
+    },
+    "authHistory": {
+    	"$authID": {
+      	"call_id": {
+        	".read": true
+      	}
+    	}
+  	},
+    "balance": {			
+      "$key": {
+        ".read": "$key === auth.uid"
+      }			
+		},
+    "subscription": {			
+        "$key": {
+        	".read": "$key === auth.uid",
+          ".write": "$key === auth.uid"
+        }			
+		}      
   }
 }

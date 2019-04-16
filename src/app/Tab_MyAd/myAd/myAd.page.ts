@@ -31,8 +31,8 @@ export class MyAdPage implements OnInit {
             this.noteList = of(value);
         });
 
-        this.authService.auth().then(login => {
-            this.adService.getAdListUserServer(login)
+        this.authService.state.subscribe(authData => {
+            this.adService.getAdListUserServer(authData.uid)
                 .subscribe(items => {
                     this.count = items.length;
                     this.noteList = of(items);

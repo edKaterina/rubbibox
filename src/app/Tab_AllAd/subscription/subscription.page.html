@@ -14,7 +14,8 @@
         <h2>{{category.name}}</h2>
         <p>{{category.description}}</p>
       </ion-label>
-      <ion-toggle color="primary" checked="{{ setting.indexOf(category.name) >= 0 }}"
+      <!-- {{ setting.indexOf(category.name) >= 0 }} -->
+      <ion-toggle *ngIf="isLoad" color="primary" [checked]="setting[category.name]"
         (ionChange)="changeSubscription($event, category)"></ion-toggle>
     </ion-item>
   </ion-list>
