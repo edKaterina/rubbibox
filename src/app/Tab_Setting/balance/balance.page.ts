@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class BalancePage implements OnInit {
   historyList: Observable<BalanceModel[]>;
+  count = 0;
   currentBalance = 0;
 
   constructor(
@@ -31,6 +32,9 @@ export class BalancePage implements OnInit {
         }
       });
       this.historyList = this.balanceService.history().valueChanges();
+      this.historyList.subscribe(value =>{
+        this.count = value.length;
+      });
     });
   }
 
