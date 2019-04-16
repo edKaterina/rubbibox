@@ -16,6 +16,32 @@
 инициализируем сервис Function и нужный нам проект firebase init functions
 и загрузим функции на сервер firebase deploy --only functions
 
+## Авторизация по звонку
+
+Скрипт <адрес вашего сервера Firebase>/callbackAuthPhone нужно добавить в АТС zadarma.com.
+Номер можно сменить на ваш в серверной функции getAuthID.
+Позднее предоставлю сервис для подключения к нашему общему номеру авторизации.
+
+Для авторизации по звонку необходимо включить кастомную авторизацию
+https://firebase.google.com/docs/auth/admin/create-custom-tokens
+
+Если коротко:
+включить Identity and Access Management (IAM) API https://console.developers.google.com/apis/library/iam.googleapis.com
+и выдать права аккаунту заканчивающийся на @appspot.gserviceaccount.com
+https://console.developers.google.com/apis/api/iam.googleapis.com/credentials
+шаг1 https://take.ms/UF2hN
+шаг2 https://take.ms/EZEQC
+
+В любой непонятной ситуации читайте журнал ошибок исполнения функции в Firebase, там будут подсказки.
+
+## Баланс
+
+Пополнить баланс можно функцией <адрес сервар Firebase>/callbackBalance?userID=<uid пользователя>
+позднее она будет доработана под CallBack вызова платежной системы.
+
+Функция newSubscription оплата за подписку.
+operationBalance - можно использовать в своих функциях для пополнения и списания с баланса.
+
 ## Сборка
 
 Для восстановления зависимостей воспользуйтесь командой
