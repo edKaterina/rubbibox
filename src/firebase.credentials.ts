@@ -4,5 +4,6 @@ export const FIREBASE_CONFIG = {
   databaseURL: "https://rtpdemo-36b7f.firebaseio.com",
   projectId: "rtpdemo-36b7f",
   storageBucket: "rtpdemo-36b7f.appspot.com",
-  messagingSenderId: "828314602702"
+  messagingSenderId: "828314602702",
+  yandexMoney: '41001360993691'
 };

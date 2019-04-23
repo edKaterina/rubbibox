@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { AdService } from './../../services/ad.service';
 import { AuthService } from './../../services/auth.service';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdModel } from '../../model/ad-model';
 import { isEmpty } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { isEmpty } from 'rxjs/operators';
     templateUrl: './detail.page.html',
     styleUrls: ['./detail.page.scss'],
 })
-export class DetailPage {
+export class DetailPage implements OnDestroy {
 
     id: string;
     note: AdModel = new AdModel;
@@ -39,7 +39,7 @@ export class DetailPage {
         });
     }
 
-    ionViewDidLeave() {
+    ngOnDestroy() {
         this.subscriptionDetail.unsubscribe();
     }
 }

@@ -12,9 +12,14 @@
     <ion-item *ngFor="let category of categoryList | async">
       <ion-label text-wrap>
         <h2>{{category.name}}</h2>
+        <ion-label color="tertiary" *ngIf="price[category.name]>0">
+          <h3>Подписка платная, {{price[category.name]}} рублей/месяц</h3>
+        </ion-label>
+        <ion-label color="danger" *ngIf="isLoad && price[category.name]>0 && setting[category.name] && pay[category.name]==false">
+          <h3>Недостаточно средств для покупки подписки.</h3>
+        </ion-label>
         <p>{{category.description}}</p>
       </ion-label>
-      <!-- {{ setting.indexOf(category.name) >= 0 }} -->
       <ion-toggle *ngIf="isLoad" color="primary" [checked]="setting[category.name]"
         (ionChange)="changeSubscription($event, category)"></ion-toggle>
     </ion-item>

@@ -45,7 +45,19 @@
   </ion-item>
 </div>
 
-<div *ngIf="!isMyAd && !isMyResponse && isLoadResponse">
+<div *ngIf="!isMyAd && isLoadResponse && !isPermitResponse">
+    <ion-list-header color="primary">
+        <ion-label translate>Ваше предложение</ion-label>
+    </ion-list-header>
+  
+    <ion-item text-wrap>
+        <ion-label text-wrap>
+            <h2>Отправка предложений на данную категорию платная и у вас недостаточно средств для покупки.</h2>
+        </ion-label>
+    </ion-item>
+</div>
+
+<div *ngIf="!isMyAd && !isMyResponse && isLoadResponse && isPermitResponse">
   <ion-list-header color="primary">
       <ion-label translate>Ваше предложение</ion-label>
   </ion-list-header>

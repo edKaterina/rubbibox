@@ -10,6 +10,8 @@
 
 В Firebase активировать "Authentication" и включить способ входа "Анонимный вход".
 
+В Firebase активировать "Cloud Firestore" для хранения фото.
+
 В Firebase активировать "Functions". Перейти в консоли в папку serverPush.
 Установим утилиту управления npm -g install firebase-tools
 авторизуемся firebase login
@@ -40,11 +42,19 @@ https://console.developers.google.com/apis/api/iam.googleapis.com/credentials
 
 ## Баланс
 
-Пополнить баланс можно функцией <адрес сервар Firebase>/callbackBalance?userID=<uid пользователя>
-позднее она будет доработана под CallBack вызова платежной системы.
+Пополнение происходит с помощью пластиковой карты на сервис Яндекс.Деньги.
+
+Необходимо в серверной функции isValidPay, переменной yandexSecret присвоить секрет из настроек Я.Деньги.
+В файле src/firebase.credentials.ts необходимо указать yandexMoney с номером кошелька.
 
 Функция newSubscription оплата за подписку.
 operationBalance - можно использовать в своих функциях для пополнения и списания с баланса.
+
+Скрипт для проверки оплаты и продления подписки необходимо поставить в Cron.
+Можно воспользоваться планировщиком от Google: https://console.cloud.google.com/cloudscheduler
+Стоит учитывать что планировщик работает только в активированном платном тарифе, можно завести для планировщика отдельный проект на Firebase.
+
+Установка: https://yadi.sk/i/6X2Z3Li9gc0e6A события в полночь каждый день.
 
 ## Сборка
 

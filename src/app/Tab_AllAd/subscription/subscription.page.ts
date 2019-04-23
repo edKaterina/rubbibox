@@ -16,6 +16,8 @@ import * as firebase from 'firebase/app';
 export class SubscriptionPage implements OnInit {
   categoryList: Observable<any[]>;
   setting = {};
+  pay = {};
+  price = {};
   isLoad = false;
 
   constructor(
@@ -28,12 +30,22 @@ export class SubscriptionPage implements OnInit {
     this.categoryList.subscribe(categotyItems => {
       categotyItems.forEach(categoryItem => {
         this.setting[categoryItem.name] = false;
+        this.price[categoryItem.name] = categoryItem.price;
+        if (categoryItem.price > 0) {
+          this.pay[categoryItem.name] = false;
+        }
       });
 
-      subscriptionService.listCategory()
+      subscriptionService.list()
         .subscribe(subscriptionItems => {
           subscriptionItems.forEach(subscriptionItem => {
-            this.setting[subscriptionItem] = true;
+            this.setting[subscriptionItem['key']] = true;
+            if (subscriptionItem['pay']) {
+              this.pay[subscriptionItem['key']] = true;
+            } else if (!subscriptionItem['pay'] && this.price[subscriptionItem['key']] > 0) {
+              this.pay[subscriptionItem['key']] = false;
+            }
+
           });
           this.isLoad = true;
         });

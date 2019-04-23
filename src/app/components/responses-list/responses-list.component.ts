@@ -13,6 +13,7 @@ import { ResponseService } from 'src/app/services/response.service';
 import { MasterService } from 'src/app/services/master.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { TranslateService } from '@ngx-translate/core';
+import { SubscriptionService } from 'src/app/services/subscription.service';
 
 @Component({
   selector: 'rtp-responses-list',
@@ -31,6 +32,8 @@ export class ResponsesListComponent implements OnDestroy, OnInit {
 
   isMyResponse: Boolean;
   isLoadResponse: Boolean;
+  isPermitResponse: Boolean;
+
   countResponse = 0;
 
   isExistProfileMaster: Boolean = true;
@@ -48,7 +51,8 @@ export class ResponsesListComponent implements OnDestroy, OnInit {
     private responseService: ResponseService,
     private masterService: MasterService,
     private notificationService: NotificationService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private subscriptionService: SubscriptionService
   ) {
   }
 
@@ -81,12 +85,19 @@ export class ResponsesListComponent implements OnDestroy, OnInit {
               this.isLoadResponse = true;
             });
           } else {
-            this.responseService.getMyResponse(this.id).valueChanges().subscribe(response => {
-              if (response) {
-                this.isMyResponse = true;
-                this.myResponse = response;
+            this.subscriptionService.isPermitResponse(adDetail.category).subscribe(result => {
+              this.isPermitResponse = result;
+              if (this.isPermitResponse) {
+                this.responseService.getMyResponse(this.id).valueChanges().subscribe(response => {
+                  if (response) {
+                    this.isMyResponse = true;
+                    this.myResponse = response;
+                  }
+                  this.isLoadResponse = true;
+                });
+              } else {
+                this.isLoadResponse = true;
               }
-              this.isLoadResponse = true;
             });
           }
         });

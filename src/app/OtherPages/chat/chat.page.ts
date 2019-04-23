@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { NotificationService } from 'src/app/services/notification.service';
 import { TranslateService } from '@ngx-translate/core';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
     selector: 'app-chat',
@@ -33,6 +34,7 @@ export class ChatPage {
     oldCountMessages: number;
 
     constructor(
+        private iab: InAppBrowser,
         private activateRoute: ActivatedRoute,
         private chatService: ChatService,
         private authService: AuthService,
@@ -53,7 +55,6 @@ export class ChatPage {
 
 
     ionViewDidLeave() {
-        console.log('ionViewDidLeave');
         this.messageList = null;
         this.subscription.unsubscribe();
     }
@@ -64,6 +65,13 @@ export class ChatPage {
                 map(actions => actions.map(a => {
                     const id = a.payload.key;
                     const data = a.payload.val();
+
+                    // обработка ссылок
+                    const link = data.text;
+                    if (link.indexOf('http://') !== -1 || link.indexOf('https://') !== -1) {
+                        data.link = link;
+                    }
+
                     data.key = id;
 
                     this.notivicationService.setMarkRead('messages_' + this.userTo);
@@ -122,5 +130,12 @@ export class ChatPage {
 
         this.content.scrollToPoint(0, 50000, 500);
         //}
+    }
+
+    openLink(link?: string) {
+        if (link) {
+            const browser = this.iab.create(link);
+            browser.show();
+        }
     }
 }

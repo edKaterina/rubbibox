@@ -22,6 +22,9 @@ import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+
+import { Badge } from '@ionic-native/badge/ngx';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,7 +40,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     AppRoutingModule,
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot({
+      name: 'RTPlatform',
+      driverOrder: ['indexeddb', 'sqlite', 'websql']
+    }),
     AngularFireDatabaseModule,
     HttpClientModule,
     TranslateModule.forRoot({
@@ -52,6 +58,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     StatusBar,
     SplashScreen,
     FCM,
+    Badge,
+    InAppBrowser,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Camera,
     PhotoViewer

@@ -17,7 +17,7 @@
       </ion-col>
     </ion-row>
     <ion-row  align-items-end>
-      <ion-col size="9" *ngIf="messageItem.user !== nickname" class="message"
+      <ion-col size="9" *ngIf="messageItem.user !== nickname" class="message" (click)="openLink(messageItem.link)"
         [ngClass]="{'my_message': messageItem.user === nickname, 'other_message': messageItem.user !== nickname}">
         <span>{{ messageItem.text }}</span>
       </ion-col>
@@ -28,7 +28,7 @@
       <ion-col *ngIf="messageItem.user === nickname">
           <div class="mytime">{{messageItem.dateCreate | date:'HH:m'}}</div>
         </ion-col>
-      <ion-col offset="3" size="9" *ngIf="messageItem.user === nickname" class="message"
+      <ion-col offset="3" size="9" *ngIf="messageItem.user === nickname" class="message" (click)="openLink(messageItem.link)"
         [ngClass]="{'my_message': messageItem.user === nickname, 'other_message': messageItem.user !== nickname}">
         <span>{{ messageItem.text }}</span>
       </ion-col>

@@ -94,7 +94,7 @@ function transliterate(word) {
     a["Ф"] = "F"; a["Ы"] = "I"; a["В"] = "V"; a["А"] = "a"; a["П"] = "P"; a["Р"] = "R"; a["О"] = "O"; a["Л"] = "L"; a["Д"] = "D"; a["Ж"] = "ZH"; a["Э"] = "E";
     a["ф"] = "f"; a["ы"] = "i"; a["в"] = "v"; a["а"] = "a"; a["п"] = "p"; a["р"] = "r"; a["о"] = "o"; a["л"] = "l"; a["д"] = "d"; a["ж"] = "zh"; a["э"] = "e";
     a["Я"] = "Ya"; a["Ч"] = "CH"; a["С"] = "S"; a["М"] = "M"; a["И"] = "I"; a["Т"] = "T"; a["Ь"] = ""; a["Б"] = "B"; a["Ю"] = "YU";
-    a["я"] = "ya"; a["ч"] = "ch"; a["с"] = "s"; a["м"] = "m"; a["и"] = "i"; a["т"] = "t"; a["ь"] = ""; a["б"] = "b"; a["ю"] = "yu"; a[" "] = "_";
+    a["я"] = "ya"; a["ч"] = "ch"; a["с"] = "s"; a["м"] = "m"; a["и"] = "i"; a["т"] = "t"; a["ь"] = ""; a["б"] = "b"; a["ю"] = "yu"; a[" "] = "_"; a["("] = ""; a[")"] = "";
 
     for (const i in word) {
         if (word.hasOwnProperty(i)) {
@@ -194,36 +194,79 @@ exports.getAuthID = functions.https.onRequest((req, res) => {
 });
 
 // Функция для колбека платежного агрегатора, пополнение баланса
-exports.callbackBalance = functions.https.onRequest((req, res) => {
-    var userID = req.query.userID;
-    var sum = 1000; // с минусом вычтет из баланса
-    operationBalance(userID, sum, null, 'Пополнение баланса', '(с помощью пластиковой карты)');
+// exports.callbackBalance = functions.https.onRequest((req, res) => {
+//     var userID = req.query.userID;
+//     var sum = 1000; // с минусом вычтет из баланса
+//     operationBalance(userID, sum, null, 'Пополнение баланса', '(с помощью пластиковой карты)');
+//     res.status(200).send();
+// });
+
+// Проверка валидности пришедшего платежа
+function isValidPay(params) {
+    var yandexSecret = 'cOHbxxJ6k28FBlHQBV2J8jHq';
+
+    var result = params['notification_type']
+        + '&' + params['operation_id']
+        + '&' + params['amount']
+        + '&' + params['currency']
+        + '&' + params['datetime']
+        + '&' + params['sender']
+        + '&' + params['codepro']
+        + '&' + yandexSecret
+        + '&' + params['label'];
+
+    return (require('crypto').createHash('sha1').update(result).digest('hex') == params['sha1_hash']);
+}
+
+// Функция для колбека Яндекс.Деньги, пополнение баланса
+exports.callbackYandexBalance = functions.https.onRequest((req, res) => {
+    var userID = req.body.label;
+    var sum = parseFloat(req.body.withdraw_amount);
+
+    if (isValidPay(req.body)) {
+        operationBalance(userID, sum, null, 'Пополнение баланса', '(с помощью пластиковой карты)');
+    } else
+        console.error('Не валидный платеж или неверный yandexSecret в серверной функции isValidPay', req.body);
+
     res.status(200).send();
 });
 
 // Функция работы с балансом
 function operationBalance(userID, sum, ref, title, detail) {
     const adaRankRef = db.ref(`balance/${userID}/sum`);
-    adaRankRef.transaction(function (balance) {
-        var newValue = balance + sum;        
-        return newValue;
-    }, (error, committed, snapshot) => {
-        if (committed) {
-            db.ref(`balance/${userID}/history`).push({
-                sum: sum,
-                dateCreate: new Date().toISOString(),
-                title: title,
-                detail: detail
-            });            
-            if (ref) {
-                ref.child('pay').set(true);
-            }
+
+    adaRankRef.once('value', (data) => {
+        var newSumAfterOperation = parseFloat(data.val());
+        if (!newSumAfterOperation) {
+            newSumAfterOperation = 0;
+        }
+        newSumAfterOperation = newSumAfterOperation + sum;
+        if (newSumAfterOperation >= 0) {
+            adaRankRef.transaction(function (balance) {
+                var newValue = balance + sum;
+                return newValue;
+            }, (error, committed, snapshot) => {
+                if (committed) {
+                    db.ref(`balance/${userID}/history`).push({
+                        sum: sum,
+                        dateCreate: new Date().toISOString(),
+                        title: title,
+                        detail: detail
+                    });
+                    if (ref) {
+                        ref.update({
+                            pay: true,
+                            dateBeginPeriod: new Date().toISOString()
+                        });
+                    }
+                }
+            });
         }
     });
 }
 
 // новая подписка, если платная, спишем деньги
-exports.newSubscription = functions.database.ref('subscription/{user}/{category}').onCreate((snapshot, context) => {    
+exports.newSubscription = functions.database.ref('subscription/{user}/{category}').onCreate((snapshot, context) => {
     db.ref('categories').orderByChild('name').equalTo(context.params['category']).
         once('value', (data) => {
             const categoryItems = data.val();
@@ -234,4 +277,42 @@ exports.newSubscription = functions.database.ref('subscription/{user}/{category}
                 }
             }
         });
+});
+
+// Функция проверки подписок, оплата и продление
+exports.checkSubscription = functions.https.onRequest((req, res) => {
+    const payCategory = {};
+    db.ref('categories').once('value', (data) => {
+        const categoryItems = data.val();
+        for (const key in categoryItems) {
+            const price = categoryItems[key]['price'];
+            const name = categoryItems[key]['name'];
+            if (price > 0) {
+                payCategory[name] = price;
+            }
+        }
+
+        db.ref('subscription').
+            once('value', (data) => {
+                const subscriptionUsers = data.val();
+                for (const user in subscriptionUsers) {
+                    const subscriptionCategory = subscriptionUsers[user];
+                    for (const category in subscriptionCategory) {
+                        if (payCategory[category]) {
+                            if (!subscriptionCategory[category]['pay'] == true) { // не было оплачено ранее
+                                operationBalance(user, -parseFloat(payCategory[category]), db.ref(`subscription/${user}/${category}`), `Подписка на "${category}"`, '(ежемесячный платеж за доступ к объявлениям)');
+                            }
+                            const dateBeginPeriod = subscriptionCategory[category]['dateBeginPeriod'];
+                            var deltaTime = (new Date().valueOf() - Date.parse(dateBeginPeriod)) / (1000 * 60 * 60 * 24);
+                            if (deltaTime > 30) { // прошло 30 дней, пора продлевать подписку
+                                operationBalance(user, -parseFloat(payCategory[category]), db.ref(`subscription/${user}/${category}`), `Подписка на "${category}"`, '(ежемесячный платеж за доступ к объявлениям)');
+                            }
+                        }
+                    }
+                }
+            });
+    });
+
+
+    res.status(200).send();
 });

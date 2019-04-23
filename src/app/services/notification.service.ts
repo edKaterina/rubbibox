@@ -2,16 +2,13 @@ import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { CoreService } from './core.service';
-import { CategoryService } from './category.service';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { Router } from '@angular/router';
 import { NotifyModel } from '../model/notify-model';
 import { map } from 'rxjs/operators';
-import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import { Storage } from '@ionic/storage';
-import { Subject, BehaviorSubject, ReplaySubject } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
+import { Subject, ReplaySubject } from 'rxjs';
+import { Badge } from '@ionic-native/badge/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -21,24 +18,16 @@ export class NotificationService {
   public static typeNotifications = 'notifications';  // Уведомления
   public static typePush = 'push';                    // Токены для отправки Push
 
-  private settingCategory: any = [];
-  private countBadge: Subject<number>;
-
+  private countBadge: ReplaySubject<number>;
 
   constructor(
     private db: AngularFireDatabase,
     private authService: AuthService,
     private coreService: CoreService,
-    private categoryService: CategoryService,
-    private storage: Storage,
     private fcm: FCM,
     private router: Router,
-    private translateService: TranslateService
+    private badge: Badge
   ) {
-    this.storage.get('settingCategory').then(value => {
-      this.settingCategory = value;
-    });
-
     this.countBadge = new ReplaySubject(1);
   }
 
@@ -68,7 +57,7 @@ export class NotificationService {
         this.router.navigateByUrl(data.url);
       } else {
         this.coreService.presentToast('Новое уведомление');
-      };
+      }
     });
   }
 
@@ -153,6 +142,8 @@ export class NotificationService {
       notifyListNoRead.subscribe(value => {
         console.log('Количество непрочитанных уведомлений: ' + value.length);
         this.countBadge.next(value.length);
+
+        this.badge.set(value.length);
       });
     });
   }
@@ -229,6 +220,8 @@ export class NotificationService {
     a['б'] = 'b';
     a['ю'] = 'yu';
     a[' '] = '_';
+    a['('] = '';
+    a[')'] = '';
 
     for (const i in word) {
       if (word.hasOwnProperty(i)) {

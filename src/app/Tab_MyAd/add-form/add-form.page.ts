@@ -28,8 +28,6 @@ export class AddFormPage implements OnInit {
   ) {
     this.categoryService.getCategoryList().valueChanges().subscribe(value => {
       this.categoryList = value.map(value1 => {
-        this.note.category = value1['name'];
-        this.fields = AdModel.getFileds(this.note.category);
         return value1['name'];
       });
     });
