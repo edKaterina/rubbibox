@@ -103,6 +103,10 @@ export class ChatPage {
     }
 
     sendMessage() {
+        if (this.message.text.trim().length == 0) {
+            return;
+        }
+
         this.translateService.get('Новое сообщение').subscribe(async (res: string) => {
             const notify = new NotifyModel;
             notify.subject = res;

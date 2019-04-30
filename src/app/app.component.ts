@@ -28,7 +28,10 @@ export class AppComponent {
 
     initializeApp() {
         this.platform.ready().then(() => {
-            this.statusBar.styleDefault();
+            if(this.platform.is('android'))
+                this.statusBar.styleLightContent();
+            else
+                this.statusBar.styleDefault();
 
             this.authService.auth().then(login => {
                 this.notificationService.initPush();
