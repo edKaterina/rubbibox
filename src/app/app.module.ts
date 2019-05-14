@@ -25,6 +25,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { Badge } from '@ionic-native/badge/ngx';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { AppMinimize } from '@ionic-native/app-minimize/ngx';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -59,7 +61,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     SplashScreen,
     FCM,
     Badge,
+    ScreenOrientation,
     InAppBrowser,
+    AppMinimize,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Camera,
     PhotoViewer

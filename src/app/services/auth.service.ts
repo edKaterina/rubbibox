@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, Observable, Subject } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { HttpClient } from '@angular/common/http';
 import { CoreService } from './core.service';
@@ -36,6 +36,18 @@ export class AuthService {
         resolve(authData.uid);
       });
     });
+  }
+
+  // функция для guard обеспечивающая авторизацию
+  guardAuth(): Observable<any> {
+    const isAuth = new Subject();
+
+    this.auth().then(() => {
+      isAuth.next(true);
+      isAuth.complete();
+    });
+
+    return isAuth;
   }
 
   // Сохраненный логин авторизованного пользователя

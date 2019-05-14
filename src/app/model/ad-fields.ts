@@ -1,6 +1,7 @@
 export enum TypeField {
     input,      // тип ion-input
-    textarea    // тип ion-textarea
+    textarea,   // тип ion-textarea
+    select      // тип ion-select
 }
 
 export class AdFields {
@@ -10,4 +11,7 @@ export class AdFields {
     rows?: number;        // кол-во строк в textarea
     placeholder?: string; // подсказка при вводе поля
     required?: boolean;   // обязательность заполнения поля
+    values?: Array<string>;  // элменты чекбокса
+    multiple?: boolean;      // множественный выбор в списках
+    typeInput?: string;      // тип вводимой информации
 }

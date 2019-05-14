@@ -42,7 +42,7 @@ export class ChatService {
   }
 
   // Список сообщений в диалоге
-  getMessages(chat:string):AngularFireList<MessageModel> {
+  getMessages(chat: string): AngularFireList<MessageModel> {
     return this.db.list(ChatService.typeDialogs + '/' + chat + '/messages');
   }
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { AuthGuard } from '../services/auth.guard';
 
 const routes: Routes = [
   {
@@ -12,11 +13,13 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../Tab_MyAd/myAd/myAd.module#MyAdPageModule'
+            loadChildren: '../Tab_MyAd/myAd/myAd.module#MyAdPageModule',
+            canActivate: [AuthGuard]
           },
           {
             path: 'add-form',
-            loadChildren: '../Tab_MyAd/add-form/add-form.module#AddFormPageModule'
+            loadChildren: '../Tab_MyAd/add-form/add-form.module#AddFormPageModule',
+            canActivate: [AuthGuard]
           }
         ]
       },
@@ -25,19 +28,23 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../Tab_AllAd/allAd/allAd.module#AllAdPageModule'
+            loadChildren: '../Tab_AllAd/allAd/allAd.module#AllAdPageModule',
+            canActivate: [AuthGuard]
           },
           {
             path: 'detail/:id',
-            loadChildren: '../OtherPages/detail/detail.module#DetailPageModule'
+            loadChildren: '../OtherPages/detail/detail.module#DetailPageModule',
+            canActivate: [AuthGuard]
           },
           {
             path: 'subscription',
-            loadChildren: '../Tab_AllAd/subscription/subscription.module#SubscriptionPageModule'
+            loadChildren: '../Tab_AllAd/subscription/subscription.module#SubscriptionPageModule',
+            canActivate: [AuthGuard]
           },
           {
             path: 'chat/:id',
-            loadChildren: '../OtherPages/chat/chat.module#ChatPageModule'
+            loadChildren: '../OtherPages/chat/chat.module#ChatPageModule',
+            canActivate: [AuthGuard]
           }
         ]
       },
@@ -54,11 +61,13 @@ const routes: Routes = [
           },
           {
             path: 'peopleedit',
-            loadChildren: '../Tab_People/people-edit/people-edit.module#PeopleEditPageModule'
+            loadChildren: '../Tab_People/people-edit/people-edit.module#PeopleEditPageModule',
+            canActivate: [AuthGuard]
           },
           {
             path: 'chat/:id',
-            loadChildren: '../OtherPages/chat/chat.module#ChatPageModule'
+            loadChildren: '../OtherPages/chat/chat.module#ChatPageModule',
+            canActivate: [AuthGuard]
           }
         ]
       },
@@ -71,19 +80,23 @@ const routes: Routes = [
           },
           {
             path: 'peopleedit',
-            loadChildren: '../Tab_People/people-edit/people-edit.module#PeopleEditPageModule'
+            loadChildren: '../Tab_People/people-edit/people-edit.module#PeopleEditPageModule',
+            canActivate: [AuthGuard]
           },
           {
             path: 'subscription',
-            loadChildren: '../Tab_AllAd/subscription/subscription.module#SubscriptionPageModule'
+            loadChildren: '../Tab_AllAd/subscription/subscription.module#SubscriptionPageModule',
+            canActivate: [AuthGuard]
           },
           {
             path: 'chat/:id',
-            loadChildren: '../OtherPages/chat/chat.module#ChatPageModule'
+            loadChildren: '../OtherPages/chat/chat.module#ChatPageModule',
+            canActivate: [AuthGuard]
           },
           {
             path: 'notifications',
-            loadChildren: '../Tab_Setting/notifications/notifications.module#NotificationsPageModule'
+            loadChildren: '../Tab_Setting/notifications/notifications.module#NotificationsPageModule',
+            canActivate: [AuthGuard]
           },
           {
             path: 'agreement',
@@ -95,7 +108,8 @@ const routes: Routes = [
           },
           {
             path: 'balance',
-            loadChildren: '../Tab_Setting/balance/balance.module#BalancePageModule'
+            loadChildren: '../Tab_Setting/balance/balance.module#BalancePageModule',
+            canActivate: [AuthGuard]
           }
         ]
       },

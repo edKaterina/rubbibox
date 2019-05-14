@@ -30,17 +30,15 @@ export class BalancePage implements OnInit {
         this.currentBalance = balance;
       }
     });
-    this.authService.state.subscribe(authData => {
-      this.balanceService.currentBalance().valueChanges().subscribe(balance => {
-        this.currentBalance = balance;
-        if (!balance) {
-          this.currentBalance = 0;
-        }
-      });
-      this.historyList = this.balanceService.history().valueChanges();
-      this.historyList.subscribe(value => {
-        this.count = value.length;
-      });
+    this.balanceService.currentBalance().valueChanges().subscribe(balance => {
+      this.currentBalance = balance;
+      if (!balance) {
+        this.currentBalance = 0;
+      }
+    });
+    this.historyList = this.balanceService.history().valueChanges();
+    this.historyList.subscribe(value => {
+      this.count = value.length;
     });
   }
 
@@ -76,19 +74,17 @@ export class BalancePage implements OnInit {
   }
 
   pay(sum: number) {
-    this.authService.state.subscribe(authData => {
-      const params = [];
-      params.push('receiver=' + FIREBASE_CONFIG.yandexMoney);
-      params.push('sum=' + sum);
-      params.push('label=' + authData.uid);
-      params.push('targets=Пополнение счета в RTPlatform');
-      params.push('origin=form');
-      params.push('selectedPaymentType=AC');
-      params.push('quickpay-form=shop');
+    const params = [];
+    params.push('receiver=' + FIREBASE_CONFIG.yandexMoney);
+    params.push('sum=' + sum);
+    params.push('label=' + this.authService.getLogin());
+    params.push('targets=Пополнение счета в RTPlatform');
+    params.push('origin=form');
+    params.push('selectedPaymentType=AC');
+    params.push('quickpay-form=shop');
 
-      const browser = this.iab.create('https://money.yandex.ru/transfer?' + params.join('&'));
-      browser.show();
-    });
+    const browser = this.iab.create('https://money.yandex.ru/transfer?' + params.join('&'));
+    browser.show();
   }
 
 }

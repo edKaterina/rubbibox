@@ -8,20 +8,32 @@
 </ion-header>
 
 <ion-content>
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <ion-item>
+      <ion-label position="stacked" translate>Категория</ion-label>
+      <ion-select mode="ios" name="category" ngModel required="true" [okText]="'ОК' | translate"
+        [cancelText]="'Отмена' | translate" [placeholder]="'выберите из списка' | translate"
+        (ionChange)="changeCategory(form.value.category)">
+        <ion-select-option *ngFor="let category of categoryList" [value]="category">{{category}}</ion-select-option>
+      </ion-select>
+    </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked" translate>Категория</ion-label>
-    <ion-select [(ngModel)]="note.category" [okText]="'ОК' | translate" [cancelText]="'Отмена' | translate"
-      [placeholder]="'выберите из списка' | translate" (ionChange)="changeCategory()">
-      <ion-select-option *ngFor="let category of categoryList" [value]="category">{{category}}</ion-select-option>
-    </ion-select>
-  </ion-item>
+    <ion-item *ngFor="let field of fields" [ngSwitch]="field.type">
+      <ion-label position="stacked" translate>{{ field.label }}</ion-label>
 
-  <ion-item *ngFor="let field of fields" [ngSwitch]="field.type">
-    <ion-label position="stacked" translate>{{ field.label }}</ion-label>    
-    <ion-textarea [rows]="field.rows" [id]="field.name" [placeholder]="field.placeholder | translate" *ngSwitchCase="typeField.textarea"></ion-textarea>
-    <ion-input [id]="field.name" [placeholder]="field.placeholder | translate" *ngSwitchCase="typeField.input"></ion-input>
-  </ion-item>
+      <ion-textarea [name]="field.name" ngModel [required]="field.required" [rows]="field.rows"
+        [placeholder]="field.placeholder | translate" *ngSwitchCase="typeField.textarea"></ion-textarea>
 
-  <ion-button color="primary" expand="block" (click)="addAdForFields()" *ngIf="fields" translate>Отправить</ion-button>
+      <ion-input [name]="field.name" ngModel [required]="field.required" [placeholder]="field.placeholder | translate"
+        *ngSwitchCase="typeField.input" [type]="field.typeInput">
+      </ion-input>
+
+      <ion-select mode="ios" [multiple]="field.multiple" *ngSwitchCase="typeField.select" [name]="field.name" ngModel [required]="field.required" [placeholder]="field.placeholder" [okText]="'ОК' | translate"
+        [cancelText]="'Отмена' | translate" [placeholder]="field.placeholder">
+        <ion-select-option *ngFor="let value of field.values" [value]="value">{{value}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button padding color="primary" expand="block" type="submit" [disabled]="form.invalid" translate>Отправить</ion-button>
+  </form>
 </ion-content>

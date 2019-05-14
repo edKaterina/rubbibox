@@ -23,20 +23,18 @@ export class PeopleEditPage implements OnInit {
     private masterService: MasterService,
     public platform: Platform
   ) {
-    this.authService.auth().then(login => {
-      this.note.category = 'Курьер';
-      this.note.user = this.authService.getLogin();
-      this.categoryService.getCategoryList().valueChanges().subscribe(value => {
-        this.categoryList = value.map(value1 => {
-          return value1['name'];
-        });
+    this.note.category = 'Курьер';
+    this.note.user = this.authService.getLogin();
+    this.categoryService.getCategoryList().valueChanges().subscribe(value => {
+      this.categoryList = value.map(value1 => {
+        return value1['name'];
       });
+    });
 
-      this.masterService.getPeopleDetail(this.note.user).valueChanges().subscribe(value => {
-        if (value) {
-          this.note = value as peopleModel;
-        }
-      });
+    this.masterService.getPeopleDetail(this.note.user).valueChanges().subscribe(value => {
+      if (value) {
+        this.note = value as peopleModel;
+      }
     });
   }
 

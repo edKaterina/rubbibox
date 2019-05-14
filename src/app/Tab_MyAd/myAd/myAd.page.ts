@@ -1,5 +1,4 @@
 import { AdService } from './../../services/ad.service';
-import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AdModel } from '../../model/ad-model';
@@ -20,7 +19,6 @@ export class MyAdPage implements OnInit {
     }
 
     constructor(
-        private authService: AuthService,
         private adService: AdService,
         private responseService: ResponseService,
     ) {
@@ -31,13 +29,11 @@ export class MyAdPage implements OnInit {
             this.noteList = of(value);
         });
 
-        this.authService.state.subscribe(authData => {
-            this.adService.getAdListUserServer(authData.uid)
-                .subscribe(items => {
-                    this.count = items.length;
-                    this.noteList = of(items);
-                });
-        });
+        this.adService.getAdListUserServer()
+            .subscribe(items => {
+                this.count = items.length;
+                this.noteList = of(items);
+            });
     }
 
     removeAd(note) {

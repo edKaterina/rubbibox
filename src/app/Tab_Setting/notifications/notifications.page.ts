@@ -1,4 +1,3 @@
-import { AuthService } from './../../services/auth.service';
 import { NotifyModel } from './../../model/notify-model';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
@@ -18,7 +17,6 @@ export class NotificationsPage {
   subscription: Subscription;
 
   constructor(
-    private authService: AuthService,
     private notivicationService: NotificationService
   ) { }
 
@@ -28,20 +26,18 @@ export class NotificationsPage {
   }
 
   ionViewDidEnter() {
-    this.authService.auth().then(login => {
-      this.list = this.notivicationService.getNotify()
-        .snapshotChanges().pipe(
-          map(actions => actions.map(a => {
-            const id = a.payload.key;
-            const data = a.payload.val();
-            data.key = id;
-            return { id, ...data };
-          }))
-        );
+    this.list = this.notivicationService.getNotify()
+      .snapshotChanges().pipe(
+        map(actions => actions.map(a => {
+          const id = a.payload.key;
+          const data = a.payload.val();
+          data.key = id;
+          return { id, ...data };
+        }))
+      );
 
-      this.subscription = this.list.subscribe(value2 => {
-        this.count = value2.length;
-      });
+    this.subscription = this.list.subscribe(value2 => {
+      this.count = value2.length;
     });
   }
 

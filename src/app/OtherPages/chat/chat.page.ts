@@ -2,7 +2,7 @@ import { AuthService } from './../../services/auth.service';
 import { ChatService } from './chat.service';
 import { NotifyModel } from './../../model/notify-model';
 import { MessageModel } from '../../model/message-model';
-import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { ViewChild } from '@angular/core';
@@ -43,13 +43,11 @@ export class ChatPage {
     ) {
         this.userTo = this.activateRoute.snapshot.params['id'];
 
-        this.authService.auth().then(login => {
-            this.nickname = login;
-            this.audio = new Audio();
-            this.audio.src = 'assets/notify.mp3';
+        this.nickname = this.authService.getLogin();
+        this.audio = new Audio();
+        this.audio.src = 'assets/notify.mp3';
 
-            this.chatID = this.chatService.getChatID(this.userTo);
-        });
+        this.chatID = this.chatService.getChatID(this.userTo);
     }
 
 
@@ -60,45 +58,43 @@ export class ChatPage {
     }
 
     ionViewDidEnter() {
-        this.authService.auth().then(value => {
-            this.messageList = this.chatService.getMessages(this.chatID).snapshotChanges().pipe(
-                map(actions => actions.map(a => {
-                    const id = a.payload.key;
-                    const data = a.payload.val();
+        this.messageList = this.chatService.getMessages(this.chatID).snapshotChanges().pipe(
+            map(actions => actions.map(a => {
+                const id = a.payload.key;
+                const data = a.payload.val();
 
-                    // обработка ссылок
-                    const link = data.text;
-                    if (link.indexOf('http://') !== -1 || link.indexOf('https://') !== -1) {
-                        data.link = link;
-                    }
+                // обработка ссылок
+                const link = data.text;
+                if (link.indexOf('http://') !== -1 || link.indexOf('https://') !== -1) {
+                    data.link = link;
+                }
 
-                    data.key = id;
+                data.key = id;
 
-                    this.notivicationService.setMarkRead('messages_' + this.userTo);
+                this.notivicationService.setMarkRead('messages_' + this.userTo);
 
-                    if (this.pipe.transform(this.prevDataCreate, 'dd.MM.y') !== this.pipe.transform(data.dateCreate, 'dd.MM.y')) {
-                        const curDate = this.pipe.transform(data.dateCreate, 'dd.MM.y');
-                        if (curDate === this.pipe.transform(new Date, 'dd.MM.y')) {
-                            data.dateGroup = 'сегодня';
-                        } else {
-                            data.dateGroup = this.pipe.transform(data.dateCreate, 'dd.MM.y');
-                        }
-                    }
-
-                    this.scrollNewMessage();
-                    this.prevDataCreate = data.dateCreate;
-                    return { id, ...data };
-                }))
-            );
-            this.subscription = this.messageList.subscribe(messages => {
-                if (this.oldCountMessages) {
-                    if (this.oldCountMessages !== messages.length) {
-                        this.scrollNewMessage();
-                        this.audio.play();
+                if (this.pipe.transform(this.prevDataCreate, 'dd.MM.y') !== this.pipe.transform(data.dateCreate, 'dd.MM.y')) {
+                    const curDate = this.pipe.transform(data.dateCreate, 'dd.MM.y');
+                    if (curDate === this.pipe.transform(new Date, 'dd.MM.y')) {
+                        data.dateGroup = 'сегодня';
+                    } else {
+                        data.dateGroup = this.pipe.transform(data.dateCreate, 'dd.MM.y');
                     }
                 }
-                this.oldCountMessages = messages.length;
-            });
+
+                this.scrollNewMessage();
+                this.prevDataCreate = data.dateCreate;
+                return { id, ...data };
+            }))
+        );
+        this.subscription = this.messageList.subscribe(messages => {
+            if (this.oldCountMessages) {
+                if (this.oldCountMessages !== messages.length) {
+                    this.scrollNewMessage();
+                    this.audio.play();
+                }
+            }
+            this.oldCountMessages = messages.length;
         });
     }
 

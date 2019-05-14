@@ -24,9 +24,7 @@ export class AllAdPage implements OnInit {
 
     constructor(
         private adService: AdService,
-        private categoryService: CategoryService,
-        private subscriptionService: SubscriptionService,
-        private authService: AuthService
+        private subscriptionService: SubscriptionService
     ) { }
 
     ngOnInit() {
@@ -37,14 +35,12 @@ export class AllAdPage implements OnInit {
             }
         });
 
-        this.authService.state.subscribe(authData => {
-            this.subscriptionService.listCategory().subscribe(subscriptionItems => {
-                this.adService.getAdSubscriptionList(subscriptionItems)
-                    .subscribe(ads => {
-                        this.noteList = of(ads);
-                        this.count = ads.length;
-                    });
-            });
+        this.subscriptionService.listCategory().subscribe(subscriptionItems => {
+            this.adService.getAdSubscriptionList(subscriptionItems)
+                .subscribe(ads => {
+                    this.noteList = of(ads);
+                    this.count = ads.length;
+                });
         });
     }
 }

@@ -25,7 +25,10 @@ export class AdService {
   }
 
   // Список объявлений пользователя
-  getAdListUserServer(user: string): Observable<AdModel[]> {
+  getAdListUserServer(user?: string): Observable<AdModel[]> {
+    if (!user) {
+      user = this.authService.getLogin();
+    }
     const list = this.db.list(AdService.typeAds, ref => {
       return ref.orderByChild('user').equalTo(user);
     }).snapshotChanges().pipe(

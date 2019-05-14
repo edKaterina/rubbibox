@@ -34,6 +34,28 @@ export class AdModel {
                     label: 'Площадь',
                     type: TypeField.input,
                     placeholder: 'Общая площадь'
+                },
+                {
+                    name: 'date',
+                    label: 'Дата',
+                    type: TypeField.input,
+                    placeholder: 'Дата',
+                    typeInput: 'date'
+                },
+                {
+                    name: 'options',
+                    label: 'Опции (чекбоксы)',
+                    type: TypeField.select,
+                    placeholder: 'выберите несколько',
+                    multiple: true,
+                    values: ['1', '2', '3']
+                },
+                {
+                    name: 'select',
+                    label: 'Выбор из списка',
+                    type: TypeField.select,
+                    placeholder: 'выберите из списка',
+                    values: ['1', '2', '3']
                 }
             ];
         } else {

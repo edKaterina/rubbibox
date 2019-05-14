@@ -57,50 +57,48 @@ export class ResponsesListComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit() {
-    this.authService.auth().then(login => {
-      this.adService.getAdDetail(this.id).valueChanges().subscribe(adDetail => {
-        this.userAd = adDetail.user;
-        if (adDetail.user === login) {
-          this.isMyAd = true;
+    this.adService.getAdDetail(this.id).valueChanges().subscribe(adDetail => {
+      this.userAd = adDetail.user;
+      if (adDetail.user === this.authService.getLogin()) {
+        this.isMyAd = true;
+      }
+
+      this.masterService.getPeopleDetail(this.authService.getLogin()).valueChanges().subscribe(peopleDetail => {
+        if (!peopleDetail) {
+          // console.log('Отсутствует профиль мастера');
+          this.isExistProfileMaster = false;
         }
 
-        this.masterService.getPeopleDetail(this.authService.getLogin()).valueChanges().subscribe(peopleDetail => {
-          if (!peopleDetail) {
-            // console.log('Отсутствует профиль мастера');
-            this.isExistProfileMaster = false;
-          }
-
-          if (this.isMyAd) {
-            this.responseList = this.responseService.getResponse(this.id).valueChanges();
-            this.subscription = this.responseList.subscribe(responseList => {
-              this.isMyResponse = false;
-              this.countResponse = responseList.length;
-              responseList.forEach(responseDetail => {
-                if (responseDetail.user === this.authService.getLogin()) {
-                  this.isMyResponse = true;
-                  this.myResponse = responseDetail;
-                }
-                this.notificationService.setMarkRead('Ad_' + this.id + '_' + responseDetail.user);
-              });
-              this.isLoadResponse = true;
-            });
-          } else {
-            this.subscriptionService.isPermitResponse(adDetail.category).subscribe(result => {
-              this.isPermitResponse = result;
-              if (this.isPermitResponse) {
-                this.responseService.getMyResponse(this.id).valueChanges().subscribe(response => {
-                  if (response) {
-                    this.isMyResponse = true;
-                    this.myResponse = response;
-                  }
-                  this.isLoadResponse = true;
-                });
-              } else {
-                this.isLoadResponse = true;
+        if (this.isMyAd) {
+          this.responseList = this.responseService.getResponse(this.id).valueChanges();
+          this.subscription = this.responseList.subscribe(responseList => {
+            this.isMyResponse = false;
+            this.countResponse = responseList.length;
+            responseList.forEach(responseDetail => {
+              if (responseDetail.user === this.authService.getLogin()) {
+                this.isMyResponse = true;
+                this.myResponse = responseDetail;
               }
+              this.notificationService.setMarkRead('Ad_' + this.id + '_' + responseDetail.user);
             });
-          }
-        });
+            this.isLoadResponse = true;
+          });
+        } else {
+          this.subscriptionService.isPermitResponse(adDetail.category).subscribe(result => {
+            this.isPermitResponse = result;
+            if (this.isPermitResponse) {
+              this.responseService.getMyResponse(this.id).valueChanges().subscribe(response => {
+                if (response) {
+                  this.isMyResponse = true;
+                  this.myResponse = response;
+                }
+                this.isLoadResponse = true;
+              });
+            } else {
+              this.isLoadResponse = true;
+            }
+          });
+        }
       });
     });
   }
