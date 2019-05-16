@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import {LoadingController, ToastController} from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
@@ -9,7 +9,8 @@ export class CoreService {
 
   constructor(
     public toastController: ToastController,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    public loadingController: LoadingController,
   ) { }
 
   // Ограничение кол-ва символов в поле данных
@@ -31,6 +32,19 @@ export class CoreService {
       });
       toast.present();
     });
+  }
+
+  //Спиннер загрузки с сообщением
+  async presentLoading(mess: string) {
+      const loading = await this.loadingController.create({
+          message: mess,
+      });
+      await loading.present();
+  }
+
+  //Закрытие спиннера
+  dismissLoading(){
+      this.loadingController.dismiss();
   }
 
 }
