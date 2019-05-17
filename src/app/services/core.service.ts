@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {LoadingController, ToastController} from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-
+import {AngularFireDatabase} from "@angular/fire/database";
+import {Storage} from '@ionic/storage';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,6 +12,10 @@ export class CoreService {
     public toastController: ToastController,
     private translateService: TranslateService,
     public loadingController: LoadingController,
+
+    private db: AngularFireDatabase,
+    private storage: Storage,
+
   ) { }
 
   // Ограничение кол-ва символов в поле данных
@@ -46,5 +51,22 @@ export class CoreService {
   dismissLoading(){
       this.loadingController.dismiss();
   }
+
+
+  //Загрузка видимости пунктов настроек из базы данных
+  getSettings() {
+    return this.db.object('setting/toggles').valueChanges();
+  }
+
+  //Загрузка видимости пунктов настроек из кэша
+  getCacheSettings(){
+    return this.storage.get('setting');
+  }
+
+  //Запись видимости пунктов настроек в кэш
+  setCacheSettings(setting){
+    this.storage.set('setting',setting);
+  }
+
 
 }

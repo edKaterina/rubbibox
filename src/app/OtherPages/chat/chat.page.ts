@@ -33,6 +33,10 @@ export class ChatPage {
     subscription: Subscription;
     oldCountMessages: number;
 
+    trackByFn(index: number, item: MessageModel) {
+        return item.key;
+    }
+
     constructor(
         private iab: InAppBrowser,
         private activateRoute: ActivatedRoute,

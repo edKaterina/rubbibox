@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content #content>
-  <ion-grid class="gridMessages" *ngFor="let messageItem of messageList | async">
+  <ion-grid class="gridMessages" *ngFor="let messageItem of messageList | async; trackBy: trackByFn">
     <ion-row *ngIf="messageItem.dateGroup">
       <ion-col align-self-center>
           <ion-text color="medium">
@@ -22,11 +22,11 @@
         <span>{{ messageItem.text }}</span>
       </ion-col>
       <ion-col *ngIf="messageItem.user !== nickname">
-        <div class="time">{{messageItem.dateCreate | date:'HH:m'}}</div>
+        <div class="time">{{messageItem.dateCreate | date:'HH:mm'}}</div>
       </ion-col>
 
       <ion-col *ngIf="messageItem.user === nickname">
-          <div class="mytime">{{messageItem.dateCreate | date:'HH:m'}}</div>
+          <div class="mytime">{{messageItem.dateCreate | date:'HH:mm'}}</div>
         </ion-col>
       <ion-col offset="3" size="9" *ngIf="messageItem.user === nickname" class="message" (click)="openLink(messageItem.link)"
         [ngClass]="{'my_message': messageItem.user === nickname, 'other_message': messageItem.user !== nickname}">
