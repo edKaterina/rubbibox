@@ -49,27 +49,13 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'people',
+        path: 'dialog',
         children: [
           {
             path: '',
-            loadChildren: '../Tab_People/people-list/people-list.module#PeopleListPageModule'
-          },
-          {
-            path: 'peopledetail/:id',
-            loadChildren: '../Tab_People/people-detail/people-detail.module#PeopleDetailPageModule'
-          },
-          {
-            path: 'peopleedit',
-            loadChildren: '../Tab_People/people-edit/people-edit.module#PeopleEditPageModule',
-            canActivate: [AuthGuard]
-          },
-          {
-            path: 'chat/:id',
-            loadChildren: '../OtherPages/chat/chat.module#ChatPageModule',
-            canActivate: [AuthGuard]
+            loadChildren: '../OtherPages/dialogs/dialogs.module#DialogsPageModule'
           }
-        ]
+          ]
       },
       {
         path: 'setting',

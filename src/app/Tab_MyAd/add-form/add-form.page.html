@@ -9,6 +9,7 @@
 
 <ion-content>
   <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+
     <ion-item>
       <ion-label position="stacked" translate>Категория</ion-label>
       <ion-select mode="ios" name="category" ngModel required="true" [okText]="'ОК' | translate"
@@ -17,6 +18,11 @@
         <ion-select-option *ngFor="let category of categoryList" [value]="category">{{category}}</ion-select-option>
       </ion-select>
     </ion-item>
+
+<!--    <ion-item>-->
+<!--      <ion-label position="stacked" translate>Фото</ion-label>-->
+<!--      <rtp-form-upload count=1 [(files)]="[]"></rtp-form-upload>-->
+<!--    </ion-item>-->
 
     <ion-item *ngFor="let field of fields" [ngSwitch]="field.type">
       <ion-label position="stacked" translate>{{ field.label }}</ion-label>

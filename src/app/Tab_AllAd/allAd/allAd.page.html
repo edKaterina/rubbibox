@@ -11,23 +11,95 @@
 </ion-fab>
 
 <ion-content>
-  <ion-list>
-    <ion-item text-wrap [routerLink]="['/tabs/allAd/subscription']" *ngIf="count==0">
-      <ion-label text-wrap padding>
-        <h2 translate>Список объявлений пуст</h2>
-      </ion-label>
-    </ion-item>
 
-    <ion-item text-wrap *ngFor="let note of noteList | async | sortAd; trackBy: trackByFn" [routerLink]="['/detail', note.key]">
+
+  <ion-list>
+
+    <ion-item  [routerLink]="['/detail','-LgbZiK-us8JThqG1x7D']">
+
+      <ion-avatar slot="start">
+        <ion-img src="https://pngimage.net/wp-content/uploads/2018/06/товар-иконка-png-5.png"></ion-img>
+      </ion-avatar>
+
       <ion-label text-wrap>
         <ion-text color="medium">
-          <p>{{note.dateCreate | date:'HH:mm d.MM.y'}}</p>
+          <p>16:17 5.06.2019</p>
         </ion-text>
-        <h2>{{note.job}}</h2>
+        <h2>Задача 1</h2>
         <ion-text color="medium">
-          <p>{{note.category}}</p>
+          <p>Категория: Транспорт</p>
         </ion-text>
       </ion-label>
+
+
+      <ion-icon slot="end" name="arrow-forward"></ion-icon>
+
     </ion-item>
+
+    <ion-item  [routerLink]="['/detail','-LgbZiK-us8JThqG1x7D']">
+
+      <ion-avatar slot="start">
+        <ion-img src="https://image.freepik.com/free-vector/_1063-6.jpg"></ion-img>
+      </ion-avatar>
+
+      <ion-label text-wrap>
+        <ion-text color="medium">
+          <p>10:12 25.03.2019</p>
+        </ion-text>
+        <h2>Задача 2</h2>
+        <ion-text color="medium">
+          <p>Категория: Недвижимость</p>
+        </ion-text>
+      </ion-label>
+
+      <ion-icon slot="end" name="arrow-forward"></ion-icon>
+
+    </ion-item>
+
+    <ion-item  [routerLink]="['/detail','-LgbZiK-us8JThqG1x7D']">
+
+      <ion-avatar slot="start">
+        <ion-img src="https://pngimage.net/wp-content/uploads/2018/06/товар-иконка-png-5.png"></ion-img>
+      </ion-avatar>
+
+      <ion-label text-wrap>
+        <ion-text color="medium">
+          <p>10:12 25.03.2019</p>
+        </ion-text>
+        <h2>Задача 2</h2>
+        <ion-text color="medium">
+          <p>Категория: Услуги</p>
+        </ion-text>
+      </ion-label>
+
+      <ion-icon  slot="end" name="arrow-forward"></ion-icon>
+
+    </ion-item>
+
+
+
   </ion-list>
+
+
+
+<!--  <ion-list>-->
+<!--    <ion-item text-wrap [routerLink]="['/tabs/allAd/subscription']" *ngIf="count==0">-->
+<!--      <ion-label text-wrap padding>-->
+<!--        <h2 translate>Список объявлений пуст</h2>-->
+<!--      </ion-label>-->
+<!--    </ion-item>-->
+
+<!--    <ion-item text-wrap *ngFor="let note of noteList | async | sortAd; trackBy: trackByFn" [routerLink]="['/detail', note.key]">-->
+<!--      <ion-label text-wrap>-->
+<!--        <ion-text color="medium">-->
+<!--          <p>{{note.dateCreate | date:'HH:mm d.MM.y'}}</p>-->
+<!--        </ion-text>-->
+<!--        <h2>{{note.job}}</h2>-->
+<!--        <ion-text color="medium">-->
+<!--          <p>{{note.category}}</p>-->
+<!--        </ion-text>-->
+<!--      </ion-label>-->
+<!--    </ion-item>-->
+<!--  </ion-list>-->
+
 </ion-content>

@@ -1,0 +1,19 @@
+.dialog-date {
+  position: relative;
+  bottom: 10px;
+}
+
+.noRead {
+  height: 10px;
+  width: 10px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+  right: 29px;
+  display: block;
+  margin-top: 10px;
+}
+
+.ios .noRead {
+  right: 21px !important;
+}

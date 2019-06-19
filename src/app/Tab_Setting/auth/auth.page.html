@@ -9,43 +9,69 @@
 
 <ion-content padding>
 
-  <div *ngIf="user && user.isAnonymous">
-    <ion-item>
-      <ion-label position="stacked" translate>Мобильный телефон</ion-label>
-      <ion-input type="tel" [(ngModel)]="phone" [placeholder]="'+7927*******' | translate"></ion-input>
-    </ion-item>
+  <div class="login-container">
+    <span class="reg-title">Введите свой номер телефона для входа</span>
 
-    <ion-button color="primary" expand="block" (click)="authService.linkAuthPhone(phone)" translate>Авторизоваться
-    </ion-button>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Телефон</ion-label>
+        <ion-input placeholder="8 (999) 999-99-99"  ></ion-input>
+      </ion-item>
 
-    <p>
-      <br>
-      Для авторизации необходимо будет позвонить по номеру телефона, трубку никто не возьмет, соответсвенно оплачивать
-      его не нужно. После звонка авторизация будет пройдена.
-    </p>
+      <ion-item>
+        <ion-label position="floating">Код</ion-label>
+        <ion-input    type="text" id="code" ></ion-input>
+      </ion-item>
 
-    <p>
-      <br>
-      На данный момент вы анонимный пользователь, авторизация привязана к текущему устройству. В случае удаления
-      приложения, вы потеряете все данные.
-    </p>
+    </ion-list>
+
+
+    <ion-button class="submit" >Отправить код</ion-button>
 
   </div>
 
-  <div *ngIf="user && !user.isAnonymous">
-    <ion-item text-wrap lines="none">
-      <ion-label text-wrap>
-        <ion-text color="medium" *ngIf="i!=0">
-          <p>Статус авторизации</p>
-        </ion-text>
-
-        <h2>Телефон: {{ user.phoneNumber }} &nbsp;</h2>
-      </ion-label>
-    </ion-item>
 
 
-    <ion-button color="danger" expand="block" (click)="authService.logout()" translate>Выйти</ion-button>
-  </div>
+
+
+
+<!--  <div *ngIf="user && user.isAnonymous">-->
+<!--    <ion-item>-->
+<!--      <ion-label position="stacked" translate>Мобильный телефон</ion-label>-->
+<!--      <ion-input type="tel" [(ngModel)]="phone" [placeholder]="'+7927*******' | translate"></ion-input>-->
+<!--    </ion-item>-->
+
+<!--    <ion-button color="primary" expand="block" (click)="authService.linkAuthPhone(phone)" translate>Авторизоваться-->
+<!--    </ion-button>-->
+
+<!--    <p>-->
+<!--      <br>-->
+<!--      Для авторизации необходимо будет позвонить по номеру телефона, трубку никто не возьмет, соответсвенно оплачивать-->
+<!--      его не нужно. После звонка авторизация будет пройдена.-->
+<!--    </p>-->
+
+<!--    <p>-->
+<!--      <br>-->
+<!--      На данный момент вы анонимный пользователь, авторизация привязана к текущему устройству. В случае удаления-->
+<!--      приложения, вы потеряете все данные.-->
+<!--    </p>-->
+
+<!--  </div>-->
+
+<!--  <div *ngIf="user && !user.isAnonymous">-->
+<!--    <ion-item text-wrap lines="none">-->
+<!--      <ion-label text-wrap>-->
+<!--        <ion-text color="medium" *ngIf="i!=0">-->
+<!--          <p>Статус авторизации</p>-->
+<!--        </ion-text>-->
+
+<!--        <h2>Телефон: {{ user.phoneNumber }} &nbsp;</h2>-->
+<!--      </ion-label>-->
+<!--    </ion-item>-->
+
+
+<!--    <ion-button color="danger" expand="block" (click)="authService.logout()" translate>Выйти</ion-button>-->
+<!--  </div>-->
 
 
 </ion-content>

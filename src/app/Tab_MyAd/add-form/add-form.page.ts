@@ -37,9 +37,9 @@ export class AddFormPage implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.adService.addAdForFields(form.value).then(() => {
+    // this.adService.addAdForFields(form.value).then(() => {
       form.reset();
-    });
+    // });
     this.router.navigate(['/tabs/myAd']);
   }
 }
