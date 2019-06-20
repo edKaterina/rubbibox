@@ -1,0 +1,46 @@
+.slider{
+  //
+  //&__img{
+  //  position: relative;
+  //  width: auto;
+  //  height: auto;
+  //
+  //  text-align: center;
+  //  vertical-align: middle;
+  //}
+
+  &__img-wrap{
+
+    height: 100%;
+
+    & img{
+      position: absolute;
+      margin: auto;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+  }
+
+  &__wrap{
+    height: 380px;
+  }
+
+  &__cover {
+
+    position: absolute;
+    display: block;
+    top: -13px;
+    left: -30px;
+    right: 0;
+    bottom: -13px;
+    background: no-repeat center;
+    background-size: cover;
+    -webkit-filter: blur(13px);
+    filter: blur(13px);
+    opacity: .4;
+  }
+
+}

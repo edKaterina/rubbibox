@@ -1,0 +1,22 @@
+<ion-slides pager="true">
+
+    <ion-slide *ngIf="!imgList">
+        <div class="slider__wrap">
+            <span class="slider__cover" [style.background]="'url(' + noImageUrl + ')'"></span>
+            <div class="slider__img-wrap">
+                <img src="{{noImageUrl}}">
+            </div>
+        </div>
+    </ion-slide>
+
+
+    <ion-slide *ngFor="let img of imgList">
+        <div class="slider__wrap">
+            <span class="slider__cover" [style.background]="'url(' + img + ')'"></span>
+            <div class="slider__img-wrap">
+                <img src="{{img}}">
+            </div>
+        </div>
+    </ion-slide>
+
+</ion-slides>
