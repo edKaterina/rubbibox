@@ -7,37 +7,45 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
 
-<!--    <app-offer-image-slider [imgList]="detailInfo.arImg"></app-offer-image-slider>-->
-
+        <app-offer-image-slider [imgList]="detailInfo.arImg"></app-offer-image-slider>
 
 
     <app-offer-detail-user-info [UserID]="detailInfo.uid"></app-offer-detail-user-info>
 
 
-
     <ion-list>
 
-<!--        <ion-item text-wrap lines="none" *ngIf="!isLoad">-->
-<!--            <ion-label text-wrap>-->
-<!--                <ion-skeleton-text animated style="width: 40%; height: 14px"></ion-skeleton-text>-->
-<!--                <ion-skeleton-text animated style="width: 100%; height: 16px"></ion-skeleton-text>-->
-<!--                <ion-skeleton-text animated style="width: 40%; height: 16px"></ion-skeleton-text>-->
-<!--            </ion-label>-->
-<!--        </ion-item>-->
+        <!--        <ion-item text-wrap lines="none" *ngIf="!isLoad">-->
+        <!--            <ion-label text-wrap>-->
+        <!--                <ion-skeleton-text animated style="width: 40%; height: 14px"></ion-skeleton-text>-->
+        <!--                <ion-skeleton-text animated style="width: 100%; height: 16px"></ion-skeleton-text>-->
+        <!--                <ion-skeleton-text animated style="width: 40%; height: 16px"></ion-skeleton-text>-->
+        <!--            </ion-label>-->
+        <!--        </ion-item>-->
 
 
-        <ion-item text-wrap *ngFor="let field of fields; let i = index" lines="none">
+        <!--        <ion-item text-wrap *ngFor="let field of fields; let i = index" lines="none">-->
+        <!--            <ion-label text-wrap>-->
+        <!--                <ion-text color="medium" *ngIf="i==0">-->
+        <!--                    <p>{{note.dateCreate | date:'HH:m dd.MM.y'}}</p>-->
+        <!--                </ion-text>-->
+        <!--                <ion-text color="medium" *ngIf="i!=0">-->
+        <!--                    <p>{{field.label}}</p>-->
+        <!--                </ion-text>-->
+
+        <!--                <h2>{{ note[field.name] }} &nbsp;</h2>-->
+        <!--            </ion-label>-->
+        <!--        </ion-item>-->
+
+        <ion-item>
             <ion-label text-wrap>
-                <ion-text color="medium" *ngIf="i==0">
-                    <p>{{note.dateCreate | date:'HH:m dd.MM.y'}}</p>
+                <ion-text color="primary">
+                    <h3>Описание</h3>
                 </ion-text>
-                <ion-text color="medium" *ngIf="i!=0">
-                    <p>{{field.label}}</p>
-                </ion-text>
+                <div class="detailItem__desc">{{detailInfo.fields.description}}</div>
 
-                <h2>{{ note[field.name] }} &nbsp;</h2>
             </ion-label>
         </ion-item>
 
