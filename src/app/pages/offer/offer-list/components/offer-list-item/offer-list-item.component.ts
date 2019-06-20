@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class OfferListItemComponent implements OnInit {
 
-    noImageUrl = '../assets/helpImage/no-image.png'
+    noImageUrl = '../assets/helpImage/no-image.png';
     noPriceText = 'Цена не указана';
 
     @Input() offerItem;

@@ -10,19 +10,10 @@
       <p text-nowrap  class="offer-item__date">{{offerItem.dateCreate}}</p>
     </ion-text>
     <h2 text-nowrap  class="offer-item__name">{{offerItem.name}}</h2>
-    <h2 text-nowrap  class="offer-item__price">{{offerItem.price}}</h2>
+    <h2 text-nowrap  class="offer-item__price">{{offerItem.price || noPriceText}}</h2>
     <ion-text color="medium">
       <p text-nowrap  class="offer-item__category">Категория: {{offerItem.category}}</p>
     </ion-text>
   </ion-label>
 
 </ion-item>
-
-
-<!--<ion-label>-->
-<!--    <div class="offer-item__container">-->
-<!--      <div class="offer-item__header">{{offerItem.name}}</div>-->
-<!--      <div class="offer-item__content">sad</div>-->
-
-<!--    </div>-->
-<!--</ion-label>-->
