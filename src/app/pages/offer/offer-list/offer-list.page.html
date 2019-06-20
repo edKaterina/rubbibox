@@ -1,9 +1,49 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>offerList</ion-title>
+    <ion-title>Все объявления</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button [routerLink]="['/tabs/allAd/subscription']">
+    <ion-icon name="switch"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
 <ion-content padding>
+
+
+  <ion-list>
+
+    <app-offer-list-item
+            *ngFor="let offer of offerList"
+            [offerItem]="offer"
+            routerLink="1"
+    ></app-offer-list-item>
+
+
+  </ion-list>
+
+
+
+  <!--  <ion-list>-->
+  <!--    <ion-item text-wrap [routerLink]="['/tabs/allAd/subscription']" *ngIf="count==0">-->
+  <!--      <ion-label text-wrap padding>-->
+  <!--        <h2 translate>Список объявлений пуст</h2>-->
+  <!--      </ion-label>-->
+  <!--    </ion-item>-->
+
+  <!--    <ion-item text-wrap *ngFor="let note of noteList | async | sortAd; trackBy: trackByFn" [routerLink]="['/detail', note.key]">-->
+  <!--      <ion-label text-wrap>-->
+  <!--        <ion-text color="medium">-->
+  <!--          <p>{{note.dateCreate | date:'HH:mm d.MM.y'}}</p>-->
+  <!--        </ion-text>-->
+  <!--        <h2>{{note.job}}</h2>-->
+  <!--        <ion-text color="medium">-->
+  <!--          <p>{{note.category}}</p>-->
+  <!--        </ion-text>-->
+  <!--      </ion-label>-->
+  <!--    </ion-item>-->
+  <!--  </ion-list>-->
 
 </ion-content>

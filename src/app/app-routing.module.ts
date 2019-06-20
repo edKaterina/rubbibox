@@ -39,7 +39,14 @@ const routes: Routes = [
       ],
       canActivate: [AuthGuard]
   },
-  { path: 'auth', loadChildren: './Tab_Setting/auth/auth.module#AuthPageModule' }
+  { path: 'auth', loadChildren: './Tab_Setting/auth/auth.module#AuthPageModule' },
+  { path: 'user-profile', loadChildren: './pages/user/user-profile/user-profile.module#UserProfilePageModule' },
+  { path: 'offer-add-edit', loadChildren: './pages/offer/offer-add-edit/offer-add-edit.module#OfferAddEditPageModule' },
+  { path: 'offers/:id', loadChildren: './pages/offer/offer-detail/offer-detail.module#OfferDetailPageModule' },
+  { path: 'offers', loadChildren: './pages/offer/offer-list/offer-list.module#OfferListPageModule' },
+  { path: 'auth', loadChildren: './pages/auth/auth/auth.module#AuthPageModule' },
+  { path: 'dialog-list', loadChildren: './pages/dialog/dialog-list/dialog-list.module#DialogListPageModule' },
+  { path: 'chat', loadChildren: './pages/dialog/chat/chat.module#ChatPageModule' }
 ];
 @NgModule({
   imports: [
