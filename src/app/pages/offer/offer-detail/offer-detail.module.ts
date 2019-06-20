@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { OfferDetailPage } from './offer-detail.page';
 import { OfferImageSliderComponent } from './components/offer-image-slider/offer-image-slider.component';
+import { OfferDetailUserInfoComponent } from './components/offer-detail-user-info/offer-detail-user-info.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [OfferDetailPage, OfferImageSliderComponent]
+  declarations: [OfferDetailPage, OfferImageSliderComponent, OfferDetailUserInfoComponent]
 })
 export class OfferDetailPageModule {}

@@ -10,6 +10,7 @@ export class OfferDetailPage implements OnInit {
 
     detailInfo =
         {
+            uid: '123',
             name: '2-к квартира, 42 м², 5/5 э. Очень длинное название для объявления',
             price: '1 600 000 ₽',
             // не Больше 5 картинок
