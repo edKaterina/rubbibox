@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {IMAGE_SETTINGS} from '../../../../../settings/no-image.settings';
 
 @Component({
     selector: 'app-offer-list-item',
@@ -7,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class OfferListItemComponent implements OnInit {
 
-    noImageUrl = '../assets/helpImage/no-image.png';
+    noImageUrl = IMAGE_SETTINGS.NO_IMAGE;
     noPriceText = 'Цена не указана';
 
     @Input() offerItem;
