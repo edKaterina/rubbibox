@@ -1,9 +1,11 @@
-import { AdService } from './../../services/ad.service';
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { AdModel } from '../../model/ad-model';
-import { ResponseService } from 'src/app/services/response.service';
-import { of } from 'rxjs';
+import {AdService} from './../../services/ad.service';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {AdModel} from '../../model/ad-model';
+import {ResponseService} from 'src/app/services/response.service';
+import {of} from 'rxjs';
+
+import {IonTabs} from '@ionic/angular';
 
 @Component({
     selector: 'app-myAd',
@@ -11,6 +13,8 @@ import { of } from 'rxjs';
     styleUrls: ['myAd.page.scss']
 })
 export class MyAdPage implements OnInit {
+
+
     noteList: Observable<AdModel[]>;
     count = -1;
 
@@ -25,6 +29,8 @@ export class MyAdPage implements OnInit {
     }
 
     ngOnInit() {
+
+
         this.adService.getAdListUserCache().then(value => {
             this.noteList = of(value);
         });

@@ -1,19 +1,19 @@
-<ion-tabs>
+<ion-tabs >
 
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="myAd">
+  <ion-tab-bar *ngIf="tabsBarShow$ | async" slot="bottom">
+    <ion-tab-button tab="my-offers">
       <ion-icon name="star"></ion-icon>
       <ion-label translate>Мои</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="allAd">
+    <ion-tab-button tab="offers">
       <ion-icon name="list-box"></ion-icon>
       <ion-label translate>Все</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="dialog">
-      <ion-icon name="contacts"></ion-icon>
-      <ion-label >Диалоги</ion-label>
+      <ion-icon name="chatboxes"></ion-icon>
+      <ion-label >Сообщения</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="setting">

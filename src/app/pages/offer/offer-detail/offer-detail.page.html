@@ -1,16 +1,17 @@
 <ion-header>
     <ion-toolbar>
         <ion-title translate>Подробнее</ion-title>
+
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <ion-back-button [defaultHref]="'tabs/offers'"></ion-back-button>
         </ion-buttons>
+
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-        <app-offer-image-slider [imgList]="detailInfo.arImg"></app-offer-image-slider>
-
+    <app-offer-image-slider [imgList]="detailInfo.arImg"></app-offer-image-slider>
 
     <app-offer-detail-user-info [UserID]="detailInfo.uid"></app-offer-detail-user-info>
 

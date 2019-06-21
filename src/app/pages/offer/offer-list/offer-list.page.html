@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button [routerLink]="['/tabs/allAd/subscription']">
+  <ion-fab-button [routerLink]="['/tabs/offers/subscription']" routerDirection="forward">
     <ion-icon name="switch"></ion-icon>
   </ion-fab-button>
 </ion-fab>
@@ -18,7 +18,7 @@
     <app-offer-list-item
             *ngFor="let offer of offerList"
             [offerItem]="offer"
-            routerLink="1"
+            routerLink="offer/1"
     ></app-offer-list-item>
 
 

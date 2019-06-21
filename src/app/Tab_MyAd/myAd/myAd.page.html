@@ -6,7 +6,7 @@
 
 
 <ion-content>
-  <ion-item text-wrap [routerLink]="['/tabs/myAd/add-form']" *ngIf="count==0">
+  <ion-item text-wrap [routerLink]="['/tabs/my-offers/add-form']" *ngIf="count==0">
     <ion-label text-wrap padding>
       <h2 [innerHTML]="'Список ваших объявлений пуст' | translate"></h2>
     </ion-label>
@@ -14,7 +14,7 @@
 
   <!-- fab placed to the bottom end -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button [routerLink]="['/tabs/myAd/add-form']">
+    <ion-fab-button [routerLink]="['/tabs/my-offers/add-form']">
       <ion-icon name="ios-add-circle-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -29,7 +29,7 @@
         <ion-img src="https://image.freepik.com/free-vector/_1063-6.jpg"></ion-img>
       </ion-avatar>
 
-      <ion-label text-wrap [routerLink]="['/detail','-LgbZiK-us8JThqG1x7D']">
+      <ion-label text-wrap [routerLink]="['/tabs/offers/offer','-LgbZiK-us8JThqG1x7D']" routerDirection="forward">
         <ion-text color="medium">
           <p>16:17 5.06.2019</p>
         </ion-text>
@@ -46,7 +46,7 @@
       <ion-avatar slot="start">
         <ion-img src="https://pngimage.net/wp-content/uploads/2018/06/товар-иконка-png-5.png"></ion-img>
       </ion-avatar>
-      <ion-label text-wrap [routerLink]="['/detail','-LgbZiK-us8JThqG1x7D']">
+      <ion-label text-wrap [routerLink]="['/tabs/offers/offer','-LgbZiK-us8JThqG1x7D']" routerDirection="forward">
         <ion-text color="medium">
           <p>10:12 25.03.2019</p>
         </ion-text>
@@ -65,7 +65,7 @@
         <ion-img src="https://pngimage.net/wp-content/uploads/2018/06/товар-иконка-png-5.png"></ion-img>
       </ion-avatar>
 
-      <ion-label text-wrap [routerLink]="['/detail','-LgbZiK-us8JThqG1x7D']">
+      <ion-label text-wrap [routerLink]="['/tabs/offers/offer','-LgbZiK-us8JThqG1x7D']" routerDirection="forward">
         <ion-text color="medium">
           <p>10:12 25.03.2019</p>
         </ion-text>

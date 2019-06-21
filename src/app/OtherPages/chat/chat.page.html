@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title><rtp-user-detail [idUser]="this.userTo"></rtp-user-detail></ion-title>
+    <ion-title>Иванов Иван Иванченко</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -9,6 +9,7 @@
 
 <ion-content #content>
   <ion-grid class="gridMessages" *ngFor="let messageItem of messageList | async; trackBy: trackByFn">
+
     <ion-row *ngIf="messageItem.dateGroup">
       <ion-col align-self-center>
           <ion-text color="medium">
@@ -16,7 +17,38 @@
           </ion-text>
       </ion-col>
     </ion-row>
+
+
     <ion-row  align-items-end>
+
+      <ion-col size="9" *ngIf="messageItem.user == nickname" class="message" (click)="openLink(messageItem.link)"
+               [ngClass]="{'my_message': messageItem.user !== nickname, 'other_message': messageItem.user == nickname}">
+        <span>{{ messageItem.text }}</span>
+      </ion-col>
+      <ion-col *ngIf="messageItem.user == nickname">
+        <div class="time">{{messageItem.dateCreate | date:'HH:mm'}}</div>
+      </ion-col>
+
+      <ion-col *ngIf="messageItem.user !== nickname">
+        <div class="mytime">{{messageItem.dateCreate | date:'HH:mm'}}</div>
+      </ion-col>
+      <ion-col offset="3" size="9" *ngIf="messageItem.user !== nickname" class="message" (click)="openLink(messageItem.link)"
+               [ngClass]="{'my_message': messageItem.user !== nickname, 'other_message': messageItem.user !== nickname}">
+        <span>{{ messageItem.text }}</span>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row *ngIf="messageItem.dateGroup">
+      <ion-col align-self-center>
+        <ion-text color="medium">
+          <div padding class="dateGroup">{{messageItem.dateGroup}}</div>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row  align-items-end>
+
       <ion-col size="9" *ngIf="messageItem.user !== nickname" class="message" (click)="openLink(messageItem.link)"
         [ngClass]="{'my_message': messageItem.user === nickname, 'other_message': messageItem.user !== nickname}">
         <span>{{ messageItem.text }}</span>
