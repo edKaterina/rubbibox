@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IMAGE_SETTINGS} from '../../../../../settings/no-image.settings';
+import {IMAGE_SETTINGS} from '../../../../../config/no-image.settings';
 
 @Component({
     selector: 'app-offer-detail-user-info',
