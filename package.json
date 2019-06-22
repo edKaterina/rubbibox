@@ -1,7 +1,7 @@
 {
-  "name": "RTPlatform",
-  "version": "1.0.11",
-  "author": "Евгений Малаховский",
+  "name": "bscore",
+  "version": "0.1.1",
+  "author": "BS",
   "homepage": "https://rtplatform.ru",
   "scripts": {
     "ng": "ng",
