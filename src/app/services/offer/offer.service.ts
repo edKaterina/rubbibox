@@ -16,18 +16,18 @@ export class OfferService {
 
 
     constructor(
-
+        private db: DbService
     ) {
     }
 
     getList(): Observable<Offer[]> {
 
-
+        return this.db.getList<Offer>(OfferService.path);
 
     }
 
     getById(id: string) {
-
+        return this.db.getById(OfferService.path, {id});
     }
 
     add() {
