@@ -11,11 +11,7 @@ const routes: Routes = [
     // Конкретная заявка
     {path: 'offer/:id', loadChildren: '../../pages/offer/offer-detail/offer-detail.module#OfferDetailPageModule'},
 
-    {
-        path: 'add',
-        loadChildren: '../../Tab_MyAd/add-form/add-form.module#AddFormPageModule',
-
-    },
+    {path: 'add', loadChildren: '../../Tab_MyAd/add-form/add-form.module#AddFormPageModule'},
 
     {path: 'dialog/:id', loadChildren: '../../OtherPages/chat/chat.module#ChatPageModule'},
 ];
