@@ -1,8 +1,6 @@
-import {AdModel} from './../model/ad-model';
-import {AngularFireList, AngularFireObject} from '@angular/fire/database';
 import {Injectable} from '@angular/core';
-import {Observable, Subject, of, ReplaySubject} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+
 
 import {DbService} from '../core/db.service';
 import {Offer} from '../../interfaces/model/offer';
@@ -42,6 +40,11 @@ export class OfferService {
 
     }
 
-
-
+    getCategoryList(): Observable<string[]> {
+        return of([
+            'Автомобили',
+            'Недвижимость',
+            'Услуги'
+        ]);
+    }
 }
