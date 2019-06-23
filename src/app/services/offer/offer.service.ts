@@ -24,8 +24,8 @@ export class OfferService {
 
     }
 
-    getById(id: string) {
-        return this.db.getById(OfferService.path, {id});
+    getById(id: string): Observable<Offer> {
+        return this.db.getById<Offer>(OfferService.path, {id});
     }
 
     add(offer: Offer) {

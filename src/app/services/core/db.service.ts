@@ -20,17 +20,17 @@ export class DbService {
         return this.db.list(path).snapshotChanges().pipe(
             first(),
             map(data =>
-                data.map(a => ({id: a.payload.key, data: {...a.payload.val()} } as unknown | T))
+                data.map(a => ({id: a.payload.key, data: {...a.payload.val()}} as unknown | T))
             )
         ) as Observable<T[]>;
     }
 
 
-    getById(path, {id}) {
-        return this.db.list(path).valueChanges().pipe(
+    getById<T>(path, {id}): Observable<T> {
+        return this.db.object(path).valueChanges().pipe(
             first(),
-            map(data => ({id, data}))
-        );
+            map(data => ({id, data: data[id]} as unknown | T))
+        ) as Observable<T>;
     }
 
     push(path, {data}) {

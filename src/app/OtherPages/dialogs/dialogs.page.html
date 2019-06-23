@@ -1,172 +1,195 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Диалоги</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Диалоги</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <ion-list>
+        <ion-item lines="full" *ngFor="let dialog of list | async | sortDialog">
+            <ion-avatar [routerLink]="['/tabs/profile',dialog.user]" slot="start">
+                <img [src]="dialog.userData.picture">
+            </ion-avatar>
+            <ion-label [routerLink]="[dialog.url]">
+                <h3>{{dialog.userData.name}}</h3>
+                <p>
+                    {{dialog.text}}
+                </p>
+            </ion-label>
+            <ion-label [routerLink]="[dialog.url]" style="display: inherit;" slot="end">
+                <p color="medium" class="dialog-date">{{dialog.dateCreate | date:'HH:m'}}</p>
+                <div class="noRead" *ngIf="!dialog.isRead"></div>
+            </ion-label>
+        </ion-item>
+    </ion-list>
 
-<!--  <ion-item  lines="full" *ngFor="let dialog of list | async | sortDialog">-->
-<!--    <ion-avatar [routerLink]="['/system/profile',dialog.profile]" slot="start">-->
-<!--      <img  [src]="dialog.userData.picture">-->
-<!--    </ion-avatar>-->
-<!--    <ion-label [routerLink]="[dialog.url]">-->
-<!--      <h3>{{dialog.userData.name}}</h3>-->
-<!--      <p>-->
-<!--        {{dialog.text}}-->
-<!--      </p>-->
-<!--    </ion-label>-->
-<!--    <ion-label [routerLink]="[dialog.url]" style="display: inherit;" slot="end">-->
-<!--      <p color="medium" class="dialog-date">{{dialog.dateCreate | date:'HH:m'}}</p>-->
-<!--      <div class="noRead" *ngIf="!dialog.isRead"></div>-->
-<!--    </ion-label>-->
-<!--  </ion-item>-->
+    <ion-list>
+        <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
+            <ion-avatar slot="start">
+                <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+            </ion-avatar>
+            <ion-label>
+                <h3>Максим Петрович</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus
+                    nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo
+                    natus nemo officiis similique.</p>
+            </ion-label>
+            <ion-label style="display: inherit;" slot="end">
+                <p color="medium" class="dialog-date">15:30</p>
+                <div class="noRead"></div>
+            </ion-label>
+        </ion-item>
 
-<ion-list>
-  <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
-    <ion-avatar slot="start">
-      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-    </ion-avatar>
-    <ion-label>
-      <h3>Максим Петрович</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo natus nemo officiis similique.</p>
-    </ion-label>
-    <ion-label style="display: inherit;" slot="end">
-      <p color="medium" class="dialog-date">15:30</p>
-      <div class="noRead"></div>
-    </ion-label>
-  </ion-item>
+        <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
+            <ion-avatar slot="start">
+                <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
+            </ion-avatar>
+            <ion-label>
+                <h3>Влад Петрович</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus
+                    nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo
+                    natus nemo officiis similique.</p>
+            </ion-label>
+            <ion-label style="display: inherit;" slot="end">
+                <p color="medium" class="dialog-date">15:30</p>
+            </ion-label>
+        </ion-item>
 
-  <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
-    <ion-avatar slot="start">
-      <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
-    </ion-avatar>
-    <ion-label>
-      <h3>Влад Петрович</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo natus nemo officiis similique.</p>
-    </ion-label>
-    <ion-label style="display: inherit;" slot="end">
-      <p color="medium" class="dialog-date">15:30</p>
-    </ion-label>
-  </ion-item>
+        <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
+            <ion-avatar slot="start">
+                <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
+            </ion-avatar>
+            <ion-label>
+                <h3>Влад Петрович</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus
+                    nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo
+                    natus nemo officiis similique.</p>
+            </ion-label>
+            <ion-label style="display: inherit;" slot="end">
+                <p color="medium" class="dialog-date">15:30</p>
+            </ion-label>
+        </ion-item>
 
-  <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
-    <ion-avatar slot="start">
-      <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
-    </ion-avatar>
-    <ion-label>
-      <h3>Влад Петрович</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo natus nemo officiis similique.</p>
-    </ion-label>
-    <ion-label style="display: inherit;" slot="end">
-      <p color="medium" class="dialog-date">15:30</p>
-    </ion-label>
-  </ion-item>
+        <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
+            <ion-avatar slot="start">
+                <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
+            </ion-avatar>
+            <ion-label>
+                <h3>Влад Петрович</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus
+                    nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo
+                    natus nemo officiis similique.</p>
+            </ion-label>
+            <ion-label style="display: inherit;" slot="end">
+                <p color="medium" class="dialog-date">15:30</p>
+            </ion-label>
+        </ion-item>
 
-  <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
-    <ion-avatar slot="start">
-      <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
-    </ion-avatar>
-    <ion-label>
-      <h3>Влад Петрович</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo natus nemo officiis similique.</p>
-    </ion-label>
-    <ion-label style="display: inherit;" slot="end">
-      <p color="medium" class="dialog-date">15:30</p>
-    </ion-label>
-  </ion-item>
+        <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
+            <ion-avatar slot="start">
+                <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
+            </ion-avatar>
+            <ion-label>
+                <h3>Влад Петрович</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus
+                    nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo
+                    natus nemo officiis similique.</p>
+            </ion-label>
+            <ion-label style="display: inherit;" slot="end">
+                <p color="medium" class="dialog-date">15:30</p>
+            </ion-label>
+        </ion-item>
 
-  <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
-    <ion-avatar slot="start">
-      <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
-    </ion-avatar>
-    <ion-label>
-      <h3>Влад Петрович</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo natus nemo officiis similique.</p>
-    </ion-label>
-    <ion-label style="display: inherit;" slot="end">
-      <p color="medium" class="dialog-date">15:30</p>
-    </ion-label>
-  </ion-item>
+        <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
+            <ion-avatar slot="start">
+                <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
+            </ion-avatar>
+            <ion-label>
+                <h3>Влад Петрович</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus
+                    nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo
+                    natus nemo officiis similique.</p>
+            </ion-label>
+            <ion-label style="display: inherit;" slot="end">
+                <p color="medium" class="dialog-date">15:30</p>
+            </ion-label>
+        </ion-item>
 
-  <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
-    <ion-avatar slot="start">
-      <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
-    </ion-avatar>
-    <ion-label>
-      <h3>Влад Петрович</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo natus nemo officiis similique.</p>
-    </ion-label>
-    <ion-label style="display: inherit;" slot="end">
-      <p color="medium" class="dialog-date">15:30</p>
-    </ion-label>
-  </ion-item>
+        <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
+            <ion-avatar slot="start">
+                <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
+            </ion-avatar>
+            <ion-label>
+                <h3>Влад Петрович</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus
+                    nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo
+                    natus nemo officiis similique.</p>
+            </ion-label>
+            <ion-label style="display: inherit;" slot="end">
+                <p color="medium" class="dialog-date">15:30</p>
+            </ion-label>
+        </ion-item>
 
-  <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
-    <ion-avatar slot="start">
-      <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
-    </ion-avatar>
-    <ion-label>
-      <h3>Влад Петрович</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo natus nemo officiis similique.</p>
-    </ion-label>
-    <ion-label style="display: inherit;" slot="end">
-      <p color="medium" class="dialog-date">15:30</p>
-    </ion-label>
-  </ion-item>
+        <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
+            <ion-avatar slot="start">
+                <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
+            </ion-avatar>
+            <ion-label>
+                <h3>Влад Петрович</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus
+                    nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo
+                    natus nemo officiis similique.</p>
+            </ion-label>
+            <ion-label style="display: inherit;" slot="end">
+                <p color="medium" class="dialog-date">15:30</p>
+            </ion-label>
+        </ion-item>
 
-  <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
-    <ion-avatar slot="start">
-      <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
-    </ion-avatar>
-    <ion-label>
-      <h3>Влад Петрович</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo natus nemo officiis similique.</p>
-    </ion-label>
-    <ion-label style="display: inherit;" slot="end">
-      <p color="medium" class="dialog-date">15:30</p>
-    </ion-label>
-  </ion-item>
+        <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
+            <ion-avatar slot="start">
+                <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
+            </ion-avatar>
+            <ion-label>
+                <h3>Влад Петрович</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus
+                    nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo
+                    natus nemo officiis similique.</p>
+            </ion-label>
+            <ion-label style="display: inherit;" slot="end">
+                <p color="medium" class="dialog-date">15:30</p>
+            </ion-label>
+        </ion-item>
 
-  <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
-    <ion-avatar slot="start">
-      <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
-    </ion-avatar>
-    <ion-label>
-      <h3>Влад Петрович</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo natus nemo officiis similique.</p>
-    </ion-label>
-    <ion-label style="display: inherit;" slot="end">
-      <p color="medium" class="dialog-date">15:30</p>
-    </ion-label>
-  </ion-item>
+        <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
+            <ion-avatar slot="start">
+                <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
+            </ion-avatar>
+            <ion-label>
+                <h3>Влад Петрович</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus
+                    nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo
+                    natus nemo officiis similique.</p>
+            </ion-label>
+            <ion-label style="display: inherit;" slot="end">
+                <p color="medium" class="dialog-date">15:30</p>
+            </ion-label>
+        </ion-item>
 
-  <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
-    <ion-avatar slot="start">
-      <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
-    </ion-avatar>
-    <ion-label>
-      <h3>Влад Петрович</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo natus nemo officiis similique.</p>
-    </ion-label>
-    <ion-label style="display: inherit;" slot="end">
-      <p color="medium" class="dialog-date">15:30</p>
-    </ion-label>
-  </ion-item>
+        <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
+            <ion-avatar slot="start">
+                <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
+            </ion-avatar>
+            <ion-label>
+                <h3>Влад Петрович</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus
+                    nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo
+                    natus nemo officiis similique.</p>
+            </ion-label>
+            <ion-label style="display: inherit;" slot="end">
+                <p color="medium" class="dialog-date">15:30</p>
+            </ion-label>
+        </ion-item>
 
-  <ion-item [routerLink]="['dialog','-LgbZiK-us8JThqG1x7D']" lines="full">
-    <ion-avatar slot="start">
-      <img src="https://st2.depositphotos.com/8440746/11967/v/950/depositphotos_119670044-stock-illustration-user-icon-man-profile-businessman.jpg">
-    </ion-avatar>
-    <ion-label>
-      <h3>Влад Петрович</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eveniet incidunt laborum natus nulla quisquam tenetur unde? Neque quia tempore unde veritatis! Atque deserunt eligendi explicabo natus nemo officiis similique.</p>
-    </ion-label>
-    <ion-label style="display: inherit;" slot="end">
-      <p color="medium" class="dialog-date">15:30</p>
-    </ion-label>
-  </ion-item>
-
-  </ion-list>
+    </ion-list>
 
 </ion-content>
