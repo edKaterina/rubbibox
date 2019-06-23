@@ -2,8 +2,7 @@ import {AngularFireDatabase} from '@angular/fire/database';
 import {Injectable} from '@angular/core';
 
 import {first, map} from 'rxjs/operators';
-
-
+import {Observable} from 'rxjs';
 
 
 @Injectable({
@@ -14,17 +13,16 @@ export class DbService {
 
     constructor(
         private db: AngularFireDatabase,
-
     ) {
     }
 
-    getList(path) {
+    getList<T>(path): Observable<T[]> {
         return this.db.list(path).snapshotChanges().pipe(
             first(),
             map(data =>
-                data.map(a => ({data: {...a.payload.val()}, id: a.payload.key}))
+                data.map(a => ({id: a.payload.key, data: {...a.payload.val()} } as unknown | T))
             )
-        );
+        ) as Observable<T[]>;
     }
 
 
