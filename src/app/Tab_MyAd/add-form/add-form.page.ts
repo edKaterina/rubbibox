@@ -7,6 +7,7 @@ import {TypeField} from '../../model/ad-fields';
 import {NgForm} from '@angular/forms';
 import {OfferService} from '../../services/offer/offer.service';
 import {Offer} from '../../interfaces/model/offer';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
     selector: 'app-add-form',
@@ -23,7 +24,8 @@ export class AddFormPage implements OnInit {
 
     constructor(
         private router: Router,
-        private offerService: OfferService
+        private offerService: OfferService,
+        private authService: AuthService
     ) {
     }
 
@@ -32,13 +34,16 @@ export class AddFormPage implements OnInit {
 
     }
 
-    onSubmit(form: NgForm) {
+    async onSubmit(form: NgForm) {
+
+        const uid = await this.authService.auth();
 
         const offer: Offer = {
             data: {
                 ...form.value,
                 arImg: this.photo,
-                dateCreate: (new Date()).toISOString()
+                dateCreate: (new Date()).toISOString(),
+                owner: uid
             }
         };
 

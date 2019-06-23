@@ -6,6 +6,7 @@ export interface Offer {
         price: number,
         arImg?: string[],
         dateCreate: Date,
-        category: String
+        category: String,
+        owner: string,
     };
 }
