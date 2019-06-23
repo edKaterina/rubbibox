@@ -28,8 +28,8 @@ export class OfferService {
         return this.db.getById(OfferService.path, {id});
     }
 
-    add() {
-
+    add(offer: Offer) {
+        this.db.push(OfferService.path, offer);
     }
 
     edit() {
