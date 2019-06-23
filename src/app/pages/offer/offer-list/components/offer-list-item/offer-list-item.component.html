@@ -7,7 +7,7 @@
 
     <ion-label text-wrap>
         <ion-text class="ion-text-nowrap" color="medium">
-            <p text-nowrap class="offer-item__date">{{offerItem.dateCreate}}</p>
+            <p text-nowrap class="offer-item__date">{{offerItem.dateCreate | date}}</p>
         </ion-text>
         <h2 text-nowrap class="offer-item__name">{{offerItem.name}}</h2>
         <h2 text-nowrap class="offer-item__price">{{offerItem.price ? offerItem.price + ' ₽' : noPriceText}}</h2>
