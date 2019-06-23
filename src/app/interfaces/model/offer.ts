@@ -2,8 +2,9 @@ export interface Offer {
     id?: string;
     data: {
         name: string,
+        description: string,
         price: number,
-        imgUrl: string,
+        arImg?: string[],
         dateCreate: Date,
         category: String
     };
