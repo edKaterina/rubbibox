@@ -1,56 +1,43 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title >Фильтр</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="onClickClose()">Готово</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Фильтр</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="onClickClose()">Готово</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-list>
+    <ion-list>
 
-    <ion-item >
-      <ion-label text-wrap>
-        <h2>Недвижимость</h2>
-      </ion-label>
-      <ion-toggle color="primary"></ion-toggle>
-    </ion-item>
+        <ion-item *ngFor="let cat of categoryList">
 
-    <ion-item >
-      <ion-label text-wrap>
-        <h2>Услуги</h2>
-      </ion-label>
-      <ion-toggle color="primary"></ion-toggle>
-    </ion-item>
+            <ion-label text-wrap>
+                <h2>{{cat.name}}</h2>
+            </ion-label>
+            <ion-toggle color="primary" [(ngModel)]="cat.toggle"></ion-toggle>
 
-    <ion-item >
-      <ion-label text-wrap>
-        <h2>Автомобили</h2>
-      </ion-label>
-      <ion-toggle color="primary"></ion-toggle>
-    </ion-item>
+        </ion-item>
 
-  </ion-list>
+    </ion-list>
 
 
-
-  <!--  <ion-list>-->
-  <!--    <ion-item *ngFor="let category of categoryList | async">-->
-  <!--      <ion-label text-wrap>-->
-  <!--        <h2>{{category.name}}</h2>-->
-  <!--        <ion-label color="tertiary" *ngIf="price[category.name]>0">-->
-  <!--          <h3>Подписка платная, {{price[category.name]}} рублей/месяц</h3>-->
-  <!--        </ion-label>-->
-  <!--        <ion-label color="danger" *ngIf="isLoad && price[category.name]>0 && setting[category.name] && pay[category.name]==false">-->
-  <!--          <h3>Недостаточно средств для покупки подписки.</h3>-->
-  <!--        </ion-label>-->
-  <!--        <p>{{category.description}}</p>-->
-  <!--      </ion-label>-->
-  <!--      <ion-toggle *ngIf="isLoad" color="primary" [checked]="setting[category.name]"-->
-  <!--        (ionChange)="changeSubscription($event, category)"></ion-toggle>-->
-  <!--    </ion-item>-->
-  <!--  </ion-list>-->
+    <!--  <ion-list>-->
+    <!--    <ion-item *ngFor="let category of categoryList | async">-->
+    <!--      <ion-label text-wrap>-->
+    <!--        <h2>{{category.name}}</h2>-->
+    <!--        <ion-label color="tertiary" *ngIf="price[category.name]>0">-->
+    <!--          <h3>Подписка платная, {{price[category.name]}} рублей/месяц</h3>-->
+    <!--        </ion-label>-->
+    <!--        <ion-label color="danger" *ngIf="isLoad && price[category.name]>0 && setting[category.name] && pay[category.name]==false">-->
+    <!--          <h3>Недостаточно средств для покупки подписки.</h3>-->
+    <!--        </ion-label>-->
+    <!--        <p>{{category.description}}</p>-->
+    <!--      </ion-label>-->
+    <!--      <ion-toggle *ngIf="isLoad" color="primary" [checked]="setting[category.name]"-->
+    <!--        (ionChange)="changeSubscription($event, category)"></ion-toggle>-->
+    <!--    </ion-item>-->
+    <!--  </ion-list>-->
 
 </ion-content>
