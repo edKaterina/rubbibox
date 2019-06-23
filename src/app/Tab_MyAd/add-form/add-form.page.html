@@ -1,45 +1,80 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title translate>Новое объявление</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title translate>Новое объявление</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
 
-    <ion-item>
-      <ion-label position="stacked" translate>Категория</ion-label>
-      <ion-select mode="ios" name="category" ngModel required="true" [okText]="'ОК' | translate"
-        [cancelText]="'Отмена' | translate" [placeholder]="'выберите из списка' | translate"
-        (ionChange)="changeCategory(form.value.category)">
-        <ion-select-option *ngFor="let category of categoryList" [value]="category">{{category}}</ion-select-option>
-      </ion-select>
-    </ion-item>
+        <ion-item>
+            <ion-label position="stacked" translate>Категория</ion-label>
+            <ion-select
+                    mode="ios"
+                    name="category"
+                    ngModel
+                    required="true"
+                    [okText]="'ОК' | translate"
+                    [cancelText]="'Отмена' | translate"
+                    [placeholder]="'выберите из списка' | translate">
+                <ion-select-option
+                        *ngFor="let category of categoryList$ | async"
+                        [value]="category">
 
-<!--    <ion-item>-->
-<!--      <ion-label position="stacked" translate>Фото</ion-label>-->
-<!--      <rtp-form-upload count=1 [(files)]="[]"></rtp-form-upload>-->
-<!--    </ion-item>-->
+                    {{category}}
 
-    <ion-item *ngFor="let field of fields" [ngSwitch]="field.type">
-      <ion-label position="stacked" translate>{{ field.label }}</ion-label>
+                </ion-select-option>
+            </ion-select>
+        </ion-item>
 
-      <ion-textarea [name]="field.name" ngModel [required]="field.required" [rows]="field.rows"
-        [placeholder]="field.placeholder | translate" *ngSwitchCase="typeField.textarea"></ion-textarea>
 
-      <ion-input [name]="field.name" ngModel [required]="field.required" [placeholder]="field.placeholder | translate"
-        *ngSwitchCase="typeField.input" [type]="field.typeInput">
-      </ion-input>
+        <div *ngIf="form.value.category">
 
-      <ion-select mode="ios" [multiple]="field.multiple" *ngSwitchCase="typeField.select" [name]="field.name" ngModel [required]="field.required" [placeholder]="field.placeholder" [okText]="'ОК' | translate"
-        [cancelText]="'Отмена' | translate" [placeholder]="field.placeholder">
-        <ion-select-option *ngFor="let value of field.values" [value]="value">{{value}}</ion-select-option>
-      </ion-select>
-    </ion-item>
+            <ion-item>
+                <ion-label position="stacked" translate>Фото</ion-label>
+                <rtp-form-upload count=1 [(files)]="photo"></rtp-form-upload>
+            </ion-item>
 
-    <ion-button padding color="primary" expand="block" type="submit" [disabled]="form.invalid" translate>Отправить</ion-button>
-  </form>
+
+            <ion-item>
+                <ion-label position="stacked">Название</ion-label>
+                <ion-input
+                        name="name"
+                        ngModel
+                        [required]="true"
+                        type="text">
+                </ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Стоимость</ion-label>
+                <ion-input
+                        name="price"
+                        ngModel
+                        [required]="true"
+                        type="number">
+                </ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Описание</ion-label>
+
+                <ion-textarea
+                        name="description"
+                        ngModel
+                        [required]="true"
+                        [rows]="5">
+
+                </ion-textarea>
+            </ion-item>
+
+        </div>
+
+
+        <ion-button padding color="primary" expand="block" type="submit" [disabled]="form.invalid">Отправить
+        </ion-button>
+    </form>
 </ion-content>
