@@ -40,6 +40,6 @@ export class AddFormPage implements OnInit {
     // this.adService.addAdForFields(form.value).then(() => {
       form.reset();
     // });
-    this.router.navigate(['/tabs/myAd']);
+    this.router.navigate(['/system/myAd']);
   }
 }

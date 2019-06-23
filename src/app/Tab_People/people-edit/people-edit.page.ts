@@ -43,7 +43,7 @@ export class PeopleEditPage implements OnInit {
 
   addNote(note) {
     this.masterService.addPeople(note).then(ref => {
-      this.router.navigate(['/tabs/people']);
+      this.router.navigate(['/system/people']);
     });
   }
 }

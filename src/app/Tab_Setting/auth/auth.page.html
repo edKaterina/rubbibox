@@ -37,7 +37,7 @@
 
 
 
-<!--  <div *ngIf="user && user.isAnonymous">-->
+<!--  <div *ngIf="profile && profile.isAnonymous">-->
 <!--    <ion-item>-->
 <!--      <ion-label position="stacked" translate>Мобильный телефон</ion-label>-->
 <!--      <ion-input type="tel" [(ngModel)]="phone" [placeholder]="'+7927*******' | translate"></ion-input>-->
@@ -60,14 +60,14 @@
 
 <!--  </div>-->
 
-<!--  <div *ngIf="user && !user.isAnonymous">-->
+<!--  <div *ngIf="profile && !profile.isAnonymous">-->
 <!--    <ion-item text-wrap lines="none">-->
 <!--      <ion-label text-wrap>-->
 <!--        <ion-text color="medium" *ngIf="i!=0">-->
 <!--          <p>Статус авторизации</p>-->
 <!--        </ion-text>-->
 
-<!--        <h2>Телефон: {{ user.phoneNumber }} &nbsp;</h2>-->
+<!--        <h2>Телефон: {{ profile.phoneNumber }} &nbsp;</h2>-->
 <!--      </ion-label>-->
 <!--    </ion-item>-->
 

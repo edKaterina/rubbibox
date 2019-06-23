@@ -63,10 +63,10 @@ export class AppComponent {
 
         this.platform.backButton.subscribe(() => {
             const listFirstURL = [
-                '/tabs/allAd',
-                '/tabs/myAd',
-                '/tabs/people',
-                '/tabs/setting'
+                '/system/allAd',
+                '/system/myAd',
+                '/system/people',
+                '/system/setting'
             ];
             if (listFirstURL.indexOf(this.currentURL) >= 0) {
                 this.appMinimize.minimize();

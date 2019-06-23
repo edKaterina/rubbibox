@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button [routerLink]="['/tabs/people/peopleedit']">
+    <ion-fab-button [routerLink]="['/system/people/peopleedit']">
       <ion-icon name="person-add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -19,7 +19,7 @@
       </ion-thumbnail>
 
       <ion-label text-wrap>
-        <div [routerLink]="['/tabs/people/peopledetail', note.key]">
+        <div [routerLink]="['/system/people/peopledetail', note.key]">
           <!-- <ion-text color="medium">
             <p>{{ note.category}}</p>
           </ion-text> -->

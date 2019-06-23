@@ -5,10 +5,10 @@ import {TabsController} from '../services/tabs.controller';
 
 @Component({
     selector: 'app-tabs',
-    templateUrl: 'tabs.page.html',
-    styleUrls: ['tabs.page.scss']
+    templateUrl: 'system.page.html',
+    styleUrls: ['system.page.scss']
 })
-export class TabsPage {
+export class SystemPage {
 
     tabsBarShow$;
 

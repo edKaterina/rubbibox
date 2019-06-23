@@ -13,17 +13,17 @@ describe('RTPlatform', () => {
   });
 
   it('запуск вкладки \"Все объявления\"', () => {
-    page.navigateTo('/tabs/allAd');
+    page.navigateTo('/system/allAd');
     expect(page.getPageTitle()).toContain('Все объявления');
   });
 
   it('запуск вкладки \"Мастера\"', () => {
-    page.navigateTo('/tabs/people');
+    page.navigateTo('/system/people');
     expect(page.getPageTitle()).toContain('Мастера');
   });
 
   it('запуск вкладки \"Настройки\"', () => {
-    page.navigateTo('/tabs/setting');
+    page.navigateTo('/system/setting');
     expect(page.getPageTitle()).toContain('Настройки');
   });
 
