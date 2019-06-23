@@ -14,6 +14,8 @@ const routes: Routes = [
     {path: 'add', loadChildren: '../../Tab_MyAd/add-form/add-form.module#AddFormPageModule'},
 
     {path: 'dialog/:id', loadChildren: '../../OtherPages/chat/chat.module#ChatPageModule'},
+
+    // { path: 'offer-filter-modal', loadChildren: './offer-filter-modal/offer-filter-modal.module#OfferFilterModalPageModule' }
 ];
 
 @NgModule({

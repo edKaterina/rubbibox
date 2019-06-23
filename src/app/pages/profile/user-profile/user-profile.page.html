@@ -1,9 +1,75 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>userProfile</ion-title>
+    <ion-title translate>Меню</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+  <ion-list>
 
+    <!--    <ion-item [routerLink]="['/system/setting/subscription']">-->
+    <!--      <ion-label text-wrap>-->
+    <!--        <h2 translate>Подписки</h2>-->
+    <!--        <ion-text color="medium">-->
+    <!--          <p translate>Подписки описание</p>-->
+    <!--        </ion-text>-->
+    <!--      </ion-label>-->
+    <!--    </ion-item>-->
+
+    <ion-item [routerLink]="['/system/profile/peopleedit']">
+      <ion-label text-wrap>
+        <h2 >Профиль</h2>
+        <ion-text color="medium">
+          <p> Редактирование профилья пользователя</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item  [routerLink]="['/auth']">
+      <ion-label text-wrap>
+        <h2 translate>Авторизация</h2>
+        <ion-text color="medium">
+          <p translate>Чтобы не потерять свои объявления, а также авторизоваться на другом устройстве.</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+
+    <!--    <ion-item *ngIf="isShow?.balance" [routerLink]="['/system/setting/balance']">-->
+    <!--      <ion-label text-wrap>-->
+    <!--        <h2 translate>Баланс</h2>-->
+    <!--        <ion-text color="medium">-->
+    <!--          <p translate>Текущий баланс, пополнение с пластиковой карты и история движения средств.</p>-->
+    <!--        </ion-text>-->
+    <!--      </ion-label>-->
+    <!--    </ion-item>    -->
+
+    <!--    <ion-item [routerLink]="['/system/setting/notifications']">-->
+    <!--      <ion-label text-wrap>-->
+    <!--        <h2 translate>Персональные уведомления</h2>-->
+    <!--        <ion-text color="medium">-->
+    <!--          <p translate>Персональные уведомления описание</p>-->
+    <!--        </ion-text>-->
+    <!--      </ion-label>      -->
+    <!--      <ion-badge slot="end" color="danger" *ngIf="countBadge>0">{{ countBadge }}</ion-badge>-->
+    <!--    </ion-item>-->
+
+    <ion-item [routerLink]="['/system/profile/agreement']">
+      <ion-label text-wrap>
+        <h2 translate>Пользовательское соглашение</h2>
+        <ion-text color="medium">
+          <p translate>Пользовательское соглашение описание</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-item [routerLink]="['/system/profile/about']">
+      <ion-label text-wrap>
+        <h2 translate>О сервисе</h2>
+        <ion-text color="medium">
+          <p translate>О сервисе описание</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
 </ion-content>

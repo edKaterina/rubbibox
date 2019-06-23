@@ -11,8 +11,12 @@ const routes: Routes = [
 
   {
     path: '',
-    loadChildren: '../../Tab_Setting/setting/setting.module#SettingPageModule'
+    loadChildren: '../../pages/profile/user-profile/user-profile.module#ProfilePageModule'
   },
+
+
+
+
   {
     path: 'peopleedit',
     loadChildren: '../../Tab_People/people-edit/people-edit.module#PeopleEditPageModule',

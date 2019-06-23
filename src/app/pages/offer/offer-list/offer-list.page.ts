@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {ModalController} from '@ionic/angular';
+import {OfferFilterModalPage} from '../offer-filter-modal/offer-filter-modal.page';
 
 @Component({
     selector: 'app-offer-list',
@@ -82,13 +84,24 @@ export class OfferListPage implements OnInit {
         },
     ];
 
-    constructor() {
-
-       // "Недвижимость", "Транспорт", "Услуги"
-
+    constructor(public modalController: ModalController) {
     }
 
     ngOnInit() {
+    }
+
+
+    onClickFilterModalOpen() {
+        this.presentModal();
+    }
+
+    async presentModal() {
+
+        const modal = await this.modalController.create({
+            component: OfferFilterModalPage
+        });
+
+        return await modal.present();
     }
 
 }

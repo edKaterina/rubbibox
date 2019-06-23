@@ -7,6 +7,7 @@ import {IonicModule} from '@ionic/angular';
 
 import {OfferListPage} from './offer-list.page';
 import {OfferListItemComponent} from './components/offer-list-item/offer-list-item.component';
+import {OfferFilterModalPage} from '../offer-filter-modal/offer-filter-modal.page';
 
 const routes: Routes = [
     {
@@ -24,7 +25,12 @@ const routes: Routes = [
     ],
     declarations: [
         OfferListPage,
+        OfferFilterModalPage,
         OfferListItemComponent
+    ],
+
+    entryComponents: [
+        OfferFilterModalPage
     ]
 })
 export class OfferListPageModule {
