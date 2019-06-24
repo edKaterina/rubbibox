@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {AuthGuard} from '../../services/auth.guard';
+import {canActivate, redirectUnauthorizedTo} from "@angular/fire/auth-guard";
 
-
-
+const redirectUnauthorizedToLogin = redirectUnauthorizedTo(['/auth']);
 const routes: Routes = [
 
   // {path: '', redirectTo: 'offers'},
@@ -20,22 +19,22 @@ const routes: Routes = [
   {
     path: 'peopleedit',
     loadChildren: '../../Tab_People/people-edit/people-edit.module#PeopleEditPageModule',
-    canActivate: [AuthGuard]
+    ...canActivate(redirectUnauthorizedToLogin)
   },
   {
     path: 'subscription',
     loadChildren: '../../Tab_AllAd/subscription/subscription.module#SubscriptionPageModule',
-    canActivate: [AuthGuard]
+    ...canActivate(redirectUnauthorizedToLogin)
   },
   {
     path: 'chat/:id',
     loadChildren: '../../OtherPages/chat/chat.module#ChatPageModule',
-    canActivate: [AuthGuard]
+    ...canActivate(redirectUnauthorizedToLogin)
   },
   {
     path: 'notifications',
     loadChildren: '../../Tab_Setting/notifications/notifications.module#NotificationsPageModule',
-    canActivate: [AuthGuard]
+    ...canActivate(redirectUnauthorizedToLogin)
   },
   {
     path: 'agreement',
@@ -48,17 +47,17 @@ const routes: Routes = [
   {
     path: 'balance',
     loadChildren: '../../Tab_Setting/balance/balance.module#BalancePageModule',
-    canActivate: [AuthGuard]
+    ...canActivate(redirectUnauthorizedToLogin)
   },
   {
     path: 'subscription',
     loadChildren: '../../Tab_AllAd/subscription/subscription.module#SubscriptionPageModule',
-    canActivate: [AuthGuard]
+    ...canActivate(redirectUnauthorizedToLogin)
   },
   {
     path: 'chat/:id',
     loadChildren: '../../OtherPages/chat/chat.module#ChatPageModule',
-    canActivate: [AuthGuard]
+    ...canActivate(redirectUnauthorizedToLogin)
   }
 
 

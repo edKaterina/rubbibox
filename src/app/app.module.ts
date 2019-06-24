@@ -28,6 +28,7 @@ import { Badge } from '@ionic-native/badge/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { AppMinimize } from '@ionic-native/app-minimize/ngx';
 import {AngularFireAuthModule} from "@angular/fire/auth";
+import {AngularFireAuthGuardModule} from "@angular/fire/auth-guard";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -47,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AngularFireAuthGuardModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
