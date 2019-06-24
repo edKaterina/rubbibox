@@ -13,7 +13,7 @@
 
     <app-offer-image-slider [imgList]="detailInfo?.data.arImg"></app-offer-image-slider>
 
-    <app-offer-detail-user-info [UserID]="detailInfo?.data.owner"></app-offer-detail-user-info>
+    <app-offer-detail-user-info [uid]="detailInfo?.data.owner"></app-offer-detail-user-info>
 
 
     <ion-list>
@@ -28,17 +28,6 @@
 
             </ion-label>
         </ion-item>
-
-        <ion-row>
-            <ion-col>
-                <ion-button expand="block" fill="outline" href="tel:89288288282" translate>Позвонить</ion-button>
-            </ion-col>
-            <ion-col>
-                <ion-button expand="block" fill="outline" [routerLink]="['/system/offers/dialog','xmJGc4ekBkOLRud25OaBftb53Fy1']"
-                            translate>Написать
-                </ion-button>
-            </ion-col>
-        </ion-row>
 
     </ion-list>
 

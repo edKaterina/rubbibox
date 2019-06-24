@@ -1,6 +1,18 @@
-<ion-item>
+<ion-item lines="full" no-padding style="--inner-padding-end: 0px;">
   <ion-avatar slot="start">
-    <img src="{{userData.profileUrl || noUserImageUrl}}">
+    <img src="{{user?.data.img || noUserImageUrl}}">
   </ion-avatar>
-  <ion-label>{{userData.name}}</ion-label>
+  <ion-label>
+    <ion-text><p>{{user?.data.fio}}</p></ion-text>
+    <ion-row>
+      <ion-col no-padding>
+        <ion-button expand="block" fill="outline" href="tel:{{user?.data.phone}}" translate>Позвонить</ion-button>
+      </ion-col>
+      <ion-col no-padding>
+        <ion-button expand="block" fill="outline" [routerLink]="['/system/offers/dialog',user?.id]"
+                    translate>Написать
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-label>
 </ion-item>
