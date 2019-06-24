@@ -11,9 +11,9 @@ export class AuthService {
     }
 
     // Сохраненный логин авторизованного пользователя
-    async auth() {
-        const user = await this.fAuth.authState.pipe(first()).toPromise();
-        return user ? user.uid : null;
+    getLogin() {
+        const uid = this.fAuth.auth.currentUser.uid;
+        return uid?uid:null;
     }
 
     // выход из учетной записи

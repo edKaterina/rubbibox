@@ -39,7 +39,7 @@ export class AddFormPage implements OnInit {
 
     async onSubmit(form: NgForm) {
 
-        const uid = await this.authService.auth();
+        const uid = await this.authService.getLogin();
 
         const offer: Offer = {
             data: {

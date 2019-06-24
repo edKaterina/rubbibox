@@ -19,20 +19,16 @@ export class SubscriptionService {
 
   // создать подписку
   create(category: string) {
-    this.authService.state.subscribe(authData => {
-      this.db.object(`subscription/${authData.uid}/${category}`).set({
+      this.db.object(`subscription/${this.authService.getLogin()}/${category}`).set({
         dateCreate: new Date().toISOString(),
         dateBeginPeriod: new Date().toISOString(),
         category: category
       });
-    });
   }
 
   // удалить подписку
   delete(category: string) {
-    this.authService.state.subscribe(authData => {
-      this.db.list(`subscription/${authData.uid}`).remove(category);
-    });
+      this.db.list(`subscription/${this.authService.getLogin()}`).remove(category);
   }
 
   // список категорий в подписке

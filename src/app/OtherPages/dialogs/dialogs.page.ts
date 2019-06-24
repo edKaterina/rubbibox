@@ -34,7 +34,7 @@ export class DialogsPage {
     //           .subscribe(value => {
     //               console.log(value);
     //           });*/
-    //     this.authService.auth().then(login => {
+    //     this.authService.getLogin().then(login => {
     //         this.list = this.notivicationService.getNotify()
     //             .snapshotChanges()
     //             .pipe(

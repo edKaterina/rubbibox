@@ -63,11 +63,9 @@ export class NotificationService {
 
   // Сохранение токена для отправки Push-уведомлений
   saveTokenPush(token: string) {
-    this.authService.auth().then(value => {
       this.db.object(NotificationService.typePush + '/' + this.authService.getLogin()).update({
         'token': token
       });
-    });
   }
 
   // Запись уведомления пользователя
@@ -109,7 +107,6 @@ export class NotificationService {
 
   // инициализация системы уведомлений
   initNotify() {
-    this.authService.state.subscribe(authData => {
       const notifyListNew = this.db.list(NotificationService.typeNotifications + '/' + this.authService.getLogin(), ref => {
         return ref.orderByChild('active').equalTo(true);
       }).snapshotChanges().pipe(
@@ -145,7 +142,6 @@ export class NotificationService {
 
         this.badge.set(value.length);
       });
-    });
   }
 
   // транлитерация
