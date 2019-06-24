@@ -3,10 +3,10 @@
     <img src="{{user?.data.img || noUserImageUrl}}">
   </ion-avatar>
   <ion-label>
-    <ion-text><p>{{user?.data.fio}}</p></ion-text>
+    <ion-text><p>{{user?.data.fio || 'Пользователь не указал ФИО'}}</p></ion-text>
     <ion-row>
       <ion-col no-padding>
-        <ion-button expand="block" fill="outline" href="tel:{{user?.data.phone}}" translate>Позвонить</ion-button>
+        <ion-button [disabled]="!user?.data.phone" expand="block" fill="outline" href="tel:{{user?.data.phone}}" translate>Позвонить</ion-button>
       </ion-col>
       <ion-col no-padding>
         <ion-button expand="block" fill="outline" [routerLink]="['/system/offers/dialog',user?.id]"
