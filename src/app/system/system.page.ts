@@ -22,7 +22,7 @@ export class SystemPage {
 
         this.tabsBarShow$ = tabsController.isTabsBarShow$;
 
-        this.notificationService.initNotify();
+        //this.notificationService.initNotify();
         this.notificationService.getBadge().subscribe(count => {
             this.countBadge = count;
         });

@@ -47,10 +47,8 @@ export class AppComponent {
                 this.statusBar.styleDefault();
             }
 
-            this.authService.auth().then(login => {
-                this.notificationService.initPush();
+                //this.notificationService.initPush();
                 this.splashScreen.hide();
-            });
         });
     }
 
