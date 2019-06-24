@@ -27,6 +27,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Badge } from '@ionic-native/badge/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { AppMinimize } from '@ionic-native/app-minimize/ngx';
+import {AngularFireAuthModule} from "@angular/fire/auth";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -45,6 +46,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

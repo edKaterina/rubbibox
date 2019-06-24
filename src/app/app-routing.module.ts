@@ -9,8 +9,9 @@ const routes: Routes = [
         pathMatch: 'full'
     },
 
-    {   path: 'system', loadChildren: './system/system.module#SystemModule'},
-    {   path: 'auth', loadChildren: './Tab_Setting/auth/auth.module#AuthPageModule'}
+    {path: 'system', loadChildren: './system/system.module#SystemModule'},
+    {path: 'auth', loadChildren: './pages/auth/login/login.module#LoginPageModule'}
+
 ];
 
 @NgModule({

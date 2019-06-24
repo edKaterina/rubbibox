@@ -1,0 +1,13 @@
+<div text-center>
+  <ion-item no-padding>
+    <ion-label position="stacked">Мобильный телефон</ion-label>
+    <ion-input type="text" inputmode="numeric" [(ngModel)]="phoneNumber"></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" id="sign-in-button" (click)="applyPhone()">
+    <span slot="end">Войти с помощью СМС</span>
+    <ion-icon slot="start" size="small" name="mail"></ion-icon>
+  </ion-button>
+</div>
+
+<div id="recaptcha-container"></div>
