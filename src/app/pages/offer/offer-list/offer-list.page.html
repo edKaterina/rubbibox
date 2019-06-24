@@ -10,10 +10,10 @@
     </ion-fab-button>
 </ion-fab>
 
-<ion-content padding>
+<ion-content>
 
 
-    <ion-list>
+    <ion-list lines="full">
 
         <app-offer-list-item
                 *ngFor="let offer of offerList$ | async | categoryFilter:filterParam"
