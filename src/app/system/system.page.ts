@@ -1,7 +1,7 @@
 import {AuthService} from './../services/auth.service';
 import {Component} from '@angular/core';
 import {NotificationService} from '../services/notification.service';
-import {TabsController} from '../services/tabs.controller';
+import {NavigationStart, Router} from "@angular/router";
 
 @Component({
     selector: 'app-tabs',
@@ -10,21 +10,24 @@ import {TabsController} from '../services/tabs.controller';
 })
 export class SystemPage {
 
-    tabsBarShow$;
+    public enable = true;
 
     public countBadge: number;
 
     constructor(
         private authService: AuthService,
         private notificationService: NotificationService,
-        private tabsController: TabsController
+        private router: Router
     ) {
-
-        this.tabsBarShow$ = tabsController.isTabsBarShow$;
-
         //this.notificationService.initNotify();
         this.notificationService.getBadge().subscribe(count => {
             this.countBadge = count;
+        });
+    }
+
+    ngOnInit() {
+        this.router.events.subscribe((event) => {
+           if (event instanceof NavigationStart) this.enable = true;
         });
     }
 }

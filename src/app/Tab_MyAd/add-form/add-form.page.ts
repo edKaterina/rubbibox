@@ -8,6 +8,7 @@ import {NgForm} from '@angular/forms';
 import {OfferService} from '../../services/offer/offer.service';
 import {Offer} from '../../interfaces/model/offer';
 import {AuthService} from '../../services/auth.service';
+import {SystemPage} from "../../system/system.page";
 
 @Component({
     selector: 'app-add-form',
@@ -25,8 +26,10 @@ export class AddFormPage implements OnInit {
     constructor(
         private router: Router,
         private offerService: OfferService,
-        private authService: AuthService
+        private authService: AuthService,
+        private tabs: SystemPage
     ) {
+        this.tabs.enable = false;
     }
 
     ngOnInit() {

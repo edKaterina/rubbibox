@@ -10,7 +10,7 @@ const routes: Routes = [
 
         children: [
 
-            {path: '/system', redirectTo: 'offers'},
+            {path: '', redirectTo: 'offers'},
 
             {path: 'offers', loadChildren: '../pages/offer/offer.module#OfferModule'},
 
