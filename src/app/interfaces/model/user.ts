@@ -4,5 +4,6 @@ export interface User {
         fio: string,
         img: Array<string>,
         info: string,
+        phone: string,
     };
 }
