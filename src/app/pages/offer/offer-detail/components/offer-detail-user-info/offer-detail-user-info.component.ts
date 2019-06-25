@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IMAGE_SETTINGS} from '../../../../../config/no-image.settings';
 import {User} from '../../../../../interfaces/model/user';
-import {Observable} from "rxjs";
 import {UserService} from "../../../../../services/user/user.service";
 @Component({
     selector: 'app-offer-detail-user-info',
@@ -15,13 +14,15 @@ export class OfferDetailUserInfoComponent implements OnInit {
 
     user: User;
 
-    @Input() uid;
+    @Input()
+    set uid(uid){
+        if (uid)
+            this.userService.getById(uid).subscribe((user:User)=>{this.user = user});
+    };
 
     constructor(private userService: UserService) {
     }
 
-    ngOnInit() {
-        this.userService.getById(this.uid).subscribe((user:User)=>{this.user = user});
-    }
+    ngOnInit() {}
 
 }

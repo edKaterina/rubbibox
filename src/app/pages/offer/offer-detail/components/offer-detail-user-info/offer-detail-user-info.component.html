@@ -1,15 +1,15 @@
 <ion-item lines="full" no-padding style="--inner-padding-end: 0px;">
   <ion-avatar slot="start">
-    <img src="{{user?.data.img || noUserImageUrl}}">
+    <img src="{{user?.data?.img ? user.data.img[0] || noUserImageUrl : noUserImageUrl}}">
   </ion-avatar>
   <ion-label>
-    <ion-text><p>{{user?.data.fio || 'Пользователь не указал ФИО'}}</p></ion-text>
+    <ion-text><p>{{user?.data?.fio || 'Пользователь не указал ФИО'}}</p></ion-text>
     <ion-row>
       <ion-col no-padding>
-        <ion-button [disabled]="!user?.data.phone" expand="block" fill="outline" href="tel:{{user?.data.phone}}" translate>Позвонить</ion-button>
+        <ion-button [disabled]="!user?.data?.phone" expand="block" fill="outline" href="tel:{{user?.data?.phone}}" translate>Позвонить</ion-button>
       </ion-col>
       <ion-col no-padding>
-        <ion-button expand="block" fill="outline" [routerLink]="['/system/offers/dialog',user?.id]"
+        <ion-button expand="block" fill="outline" [routerLink]="'/chat/'+user?.id"
                     translate>Написать
         </ion-button>
       </ion-col>
