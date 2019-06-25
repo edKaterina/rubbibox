@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {NotificationService} from '../../../services/notification.service';
-import {CoreService} from '../../../services/core.service';
+import {Component} from '@angular/core';
+
 
 @Component({
     selector: 'app-user-profile',
@@ -9,21 +8,7 @@ import {CoreService} from '../../../services/core.service';
 })
 export class UserProfilePage {
 
-    public countBadge: number;
-    public isShow: {};
-
     constructor(
-        private notivicationService: NotificationService,
-        private coreService: CoreService,
-    ) {
-        this.coreService.getSettings().subscribe((setting) => {
-            this.coreService.setCacheSettings(setting);
-        });
-        this.coreService.getCacheSettings().then((setting) => {
-            this.isShow = setting;
-        });
-        this.notivicationService.getBadge().subscribe(count => {
-            this.countBadge = count;
-        });
-    }
+    ) {}
+
 }

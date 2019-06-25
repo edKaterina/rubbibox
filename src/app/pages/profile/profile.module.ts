@@ -12,28 +12,9 @@ const routes: Routes = [
     path: '',
     loadChildren: '../../pages/profile/user-profile/user-profile.module#ProfilePageModule'
   },
-
-
-
-
   {
-    path: 'peopleedit',
-    loadChildren: '../../Tab_People/people-edit/people-edit.module#PeopleEditPageModule',
-    ...canActivate(redirectUnauthorizedToLogin)
-  },
-  {
-    path: 'subscription',
-    loadChildren: '../../Tab_AllAd/subscription/subscription.module#SubscriptionPageModule',
-    ...canActivate(redirectUnauthorizedToLogin)
-  },
-  {
-    path: 'chat/:id',
-    loadChildren: '../../OtherPages/chat/chat.module#ChatPageModule',
-    ...canActivate(redirectUnauthorizedToLogin)
-  },
-  {
-    path: 'notifications',
-    loadChildren: '../../Tab_Setting/notifications/notifications.module#NotificationsPageModule',
+    path: 'user-edit',
+    loadChildren: '../../pages/profile/user-edit/user-edit.module#UserEditPageModule',
     ...canActivate(redirectUnauthorizedToLogin)
   },
   {
@@ -44,21 +25,6 @@ const routes: Routes = [
     path: 'about',
     loadChildren: '../../Tab_Setting/about/about.module#AboutPageModule'
   },
-  {
-    path: 'balance',
-    loadChildren: '../../Tab_Setting/balance/balance.module#BalancePageModule',
-    ...canActivate(redirectUnauthorizedToLogin)
-  },
-  {
-    path: 'subscription',
-    loadChildren: '../../Tab_AllAd/subscription/subscription.module#SubscriptionPageModule',
-    ...canActivate(redirectUnauthorizedToLogin)
-  },
-  {
-    path: 'chat/:id',
-    loadChildren: '../../OtherPages/chat/chat.module#ChatPageModule',
-    ...canActivate(redirectUnauthorizedToLogin)
-  }
 
 
 ];
