@@ -36,11 +36,11 @@ export class FormUploadComponent {
     @Output() filesChange = new EventEmitter();
 
     set files(value: Array<string>) {
-        if (value)
+        if (value){
             this.photoFiles = value;
-        else this.photoFiles = [];
-        this.filesChange.emit(this.photoFiles);
-        this.changeAllowDownload();
+            this.filesChange.emit(this.photoFiles);
+            this.changeAllowDownload();
+        }
     }
 
     constructor(
