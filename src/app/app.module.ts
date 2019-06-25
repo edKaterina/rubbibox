@@ -39,7 +39,9 @@ export function HttpLoaderFactory(http: HttpClient) {
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+        backButtonText:''
+    }),
     AppRoutingModule,
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     IonicStorageModule.forRoot({
