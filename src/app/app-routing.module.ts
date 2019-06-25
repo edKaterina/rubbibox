@@ -10,8 +10,8 @@ const routes: Routes = [
     },
 
     {path: 'system', loadChildren: './system/system.module#SystemModule'},
-    {path: 'auth', loadChildren: './pages/auth/login/login.module#LoginPageModule'}
-
+    {path: 'auth', loadChildren: './pages/auth/login/login.module#LoginPageModule'},
+    {path: 'chat/:id', loadChildren: '../../OtherPages/chat/chat.module#ChatPageModule'},
 ];
 
 @NgModule({
