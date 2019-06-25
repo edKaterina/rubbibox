@@ -1,7 +1,7 @@
 <ion-item>
 
     <ion-thumbnail slot="start" class="thumbnail">
-        <img src="{{offerItem.arImg[0] || noImageUrl}}">
+        <img src="{{offerItem.arImg ? offerItem.arImg[0] || noImageUrl : noImageUrl}}">
     </ion-thumbnail>
 
 
