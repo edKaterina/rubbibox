@@ -54,6 +54,6 @@ export class AddFormPage implements OnInit {
 
         form.reset();
 
-        this.router.navigate(['/system/profile']);
+        this.router.navigate(['/system/offers']);
     }
 }
