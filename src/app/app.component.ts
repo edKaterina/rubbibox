@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { NotificationService } from './services/notification.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { AppMinimize } from '@ionic-native/app-minimize/ngx';
@@ -23,7 +22,6 @@ export class AppComponent {
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private authService: AuthService,
-        private notificationService: NotificationService,
         private screenOrientation: ScreenOrientation,
         private appMinimize: AppMinimize,
         private router: Router,
@@ -61,10 +59,9 @@ export class AppComponent {
 
         this.platform.backButton.subscribe(() => {
             const listFirstURL = [
-                '/system/allAd',
-                '/system/myAd',
-                '/system/people',
-                '/system/setting'
+                '/system/offers',
+                '/system/dialogs',
+                '/system/profile',
             ];
             if (listFirstURL.indexOf(this.currentURL) >= 0) {
                 this.appMinimize.minimize();
