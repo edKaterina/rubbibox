@@ -1,6 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
+import {canActivate, redirectUnauthorizedTo} from "@angular/fire/auth-guard";
+
+const redirectUnauthorizedToLogin = redirectUnauthorizedTo(['/auth']);
 
 
 const routes: Routes = [
@@ -11,7 +14,11 @@ const routes: Routes = [
     {path: 'offer/:id', loadChildren: '../../pages/offer/offer-detail/offer-detail.module#OfferDetailPageModule'},
 
     //Добавить заявку
-    {path: 'add', loadChildren: '../../pages/offer/offer-add-edit/offer-add-edit.module#OfferAddEditPageModule'},
+    {
+        path: 'add',
+        loadChildren: '../../pages/offer/offer-add-edit/offer-add-edit.module#OfferAddEditPageModule',
+        ...canActivate(redirectUnauthorizedToLogin)
+    },
 
 ];
 
