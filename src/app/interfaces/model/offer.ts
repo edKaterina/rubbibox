@@ -5,7 +5,7 @@ export interface Offer {
         description: string,
         price: number,
         arImg?: string[],
-        dateCreate: Date,
+        dateCreate: string,
         category: String,
         owner: string,
     };
