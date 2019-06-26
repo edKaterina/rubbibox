@@ -1,16 +1,34 @@
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { ChatService } from './chat.service';
-import { NotifyModel } from './../../model/notify-model';
-import { MessageModel } from '../../model/message-model';
-import { Component } from '@angular/core';
+import { Message } from '../../../interfaces/model/message';
+import {Component, Pipe, PipeTransform} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { ViewChild } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
-import { NotificationService } from 'src/app/services/notification.service';
 import { TranslateService } from '@ngx-translate/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import {UserService} from "../../../services/user/user.service";
+import {User} from "../../../interfaces/model/user";
+
+@Pipe({
+    name: 'userfioPipe'
+})
+export class UserFioPipe implements PipeTransform {
+    constructor(private userService: UserService) {}
+
+    transform(value: string): any {
+        return this.userService.getById(value).pipe(
+            map((user:User)=>{
+                return (user.data && user.data.fio ? user.data.fio : '')
+            })
+        )
+    }
+
+
+}
+
 
 @Component({
     selector: 'app-chat',
@@ -27,13 +45,13 @@ export class ChatPage {
     chatID;
     audio;
 
-    message: MessageModel = new MessageModel;
+    message: Message = new Message;
     prevDataCreate = '2000-03-08T08:50:42.157Z';
     pipe = new DatePipe('en-US'); // Use your own locale
     subscription: Subscription;
     oldCountMessages: number;
 
-    trackByFn(index: number, item: MessageModel) {
+    trackByFn(index: number, item: Message) {
         return item.key;
     }
 
@@ -42,7 +60,6 @@ export class ChatPage {
         private activateRoute: ActivatedRoute,
         private chatService: ChatService,
         private authService: AuthService,
-        private notivicationService: NotificationService,
         private translateService: TranslateService
     ) {
         this.userTo = this.activateRoute.snapshot.params['id'];
@@ -75,8 +92,6 @@ export class ChatPage {
 
                 data.key = id;
 
-                this.notivicationService.setMarkRead('messages_' + this.userTo);
-
                 if (this.pipe.transform(this.prevDataCreate, 'dd.MM.y') !== this.pipe.transform(data.dateCreate, 'dd.MM.y')) {
                     const curDate = this.pipe.transform(data.dateCreate, 'dd.MM.y');
                     if (curDate === this.pipe.transform(new Date, 'dd.MM.y')) {
@@ -108,32 +123,13 @@ export class ChatPage {
         }
 
         this.translateService.get('Новое сообщение').subscribe(async (res: string) => {
-            const notify = new NotifyModel;
-            notify.subject = res;
-            notify.text = this.message.text;
-            notify.url = '/chat/' + this.authService.getLogin();
-
-            this.notivicationService.updateNotify('messages', this.userTo, notify);
             this.chatService.sendMessage(this.chatID, this.message);
             this.message.text = '';
         });
     }
 
     scrollNewMessage() {
-        // if (this.isShown) {
-        // let dimensions = this.content.getContentDimensions();
-        // console.log(this.content);
-        // this.content.getScrollElement().then(scrollElement => {
-        //     console.log(scrollElement);
-
-        //     console.log(scrollElement.el.scrollHeight);
-        //     console.log(scrollElement.el.clientHeight);
-
-        // });
-
-
         this.content.scrollToPoint(0, 50000, 500);
-        //}
     }
 
     openLink(link?: string) {

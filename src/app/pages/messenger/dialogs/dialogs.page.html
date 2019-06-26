@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Диалоги</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item lines="full" *ngFor="let dialog of dialogs$  | async | sortDialogs; trackBy: trackByFn">
+            <ion-avatar [routerLink]="['/chat',dialog.key]" slot="start">
+                <img src="{{dialog.user.data?.img ? dialog.user.data.img[0] || noUserImageUrl : noUserImageUrl}}">
+            </ion-avatar>
+            <ion-label [routerLink]="['/chat',dialog.key]">
+                <h3>{{dialog.user.data?.fio || 'Пользователь не указал ФИО'}}</h3>
+                <p>{{dialog.message}}</p>
+            </ion-label>
+            <ion-label [routerLink]="[dialog.url]" style="display: inherit;" slot="end">
+                <p color="medium" class="dialog-date">{{dialog.dateCreate | date:'HH:mm'}}</p>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

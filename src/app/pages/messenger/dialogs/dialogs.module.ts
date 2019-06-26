@@ -5,8 +5,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DialogsPage } from './dialogs.page';
-import { CoreModule } from '../../modules/core/core.module';
+import {DialogsPage, SortDialogsPipe} from './dialogs.page';
+
+import { CoreModule } from '../../../modules/core/core.module';
 
 const routes: Routes = [
   {
@@ -23,6 +24,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CoreModule
   ],
-  declarations: [DialogsPage]
+  declarations: [DialogsPage,SortDialogsPipe]
 })
 export class DialogsPageModule {}

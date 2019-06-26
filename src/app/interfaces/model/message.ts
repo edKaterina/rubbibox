@@ -1,4 +1,4 @@
-export class MessageModel {
+export class Message {
     key?:       string;
     dateCreate: string;  // Дата создания
     text:       string;  // Текст сообщения
