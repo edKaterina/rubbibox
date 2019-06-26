@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 
 import {DbService} from '../core/db.service';
 import {Offer} from '../../interfaces/model/offer';
+import {AuthService} from "../auth.service";
 
 
 @Injectable({
@@ -14,14 +15,17 @@ export class OfferService {
 
 
     constructor(
-        private db: DbService
+        private db: DbService,
+        private authService: AuthService
     ) {
     }
 
     getList(): Observable<Offer[]> {
-
         return this.db.getList<Offer>(OfferService.path);
+    }
 
+    getMy(): Observable<Offer[]> {
+        return this.db.snapshotChangesList<Offer>(OfferService.path,{name:'owner',value:this.authService.getLogin()});
     }
 
     getById(id: string): Observable<Offer> {
@@ -32,12 +36,12 @@ export class OfferService {
         this.db.push(OfferService.path, offer);
     }
 
-    edit() {
-
+    edit(offer: Offer) {
+        return this.db.edit(OfferService.path,{id:offer.id,data:offer.data});
     }
 
-    delete() {
-
+    delete(offer) {
+        return this.db.delete(OfferService.path, offer);
     }
 
     getCategoryList(): Observable<string[]> {
