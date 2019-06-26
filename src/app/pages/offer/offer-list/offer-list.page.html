@@ -14,7 +14,7 @@
 
     <ion-list lines="full">
         <app-offer-list-item
-                *ngFor="let offer of offerList$ | async | categoryFilter:filterParam"
+                *ngFor="let offer of offerList$ | async | dateCreateOffer | categoryFilter:filterParam"
                 [offerItem]="offer.data"
                 [routerLink]="['offer',offer.id]"
         ></app-offer-list-item>

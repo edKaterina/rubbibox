@@ -5,6 +5,21 @@ import {OfferService} from '../../../services/offer/offer.service';
 import {Observable} from 'rxjs';
 import {Offer} from '../../../interfaces/model/offer';
 
+@Pipe({
+    name: 'dateCreateOffer',
+})
+export class DateCreateOfferPipe implements PipeTransform{
+    transform(value: Array<Offer>, args?: any): any {
+        if (value) {
+            return value.sort(this.compare);
+        }
+    }
+    compare(a: Offer, b: Offer) {
+        if (a.data.dateCreate < b.data.dateCreate) return 1;
+        else if (a.data.dateCreate > b.data.dateCreate) return -1;
+        return 0;
+    }
+}
 
 @Pipe({
     name: 'categoryFilter'
