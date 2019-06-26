@@ -3,14 +3,14 @@
     <img src="{{user?.data?.img ? user.data.img[0] || noUserImageUrl : noUserImageUrl}}">
   </ion-avatar>
   <ion-label>
-    <ion-text><p>{{user?.data?.fio || 'Пользователь не указал ФИО'}}</p></ion-text>
+    <ion-text><p translate>{{user?.data?.fio || 'noFio'}}</p></ion-text>
     <ion-row>
       <ion-col no-padding>
-        <ion-button [disabled]="!user?.data?.phone" expand="block" fill="outline" href="tel:{{user?.data?.phone}}" translate>Позвонить</ion-button>
+        <ion-button [disabled]="!user?.data?.phone" expand="block" fill="outline" href="tel:{{user?.data?.phone}}" translate>call</ion-button>
       </ion-col>
       <ion-col no-padding>
         <ion-button expand="block" fill="outline" [routerLink]="'/chat/'+user?.id"
-                    translate>Написать
+                    translate>write
         </ion-button>
       </ion-col>
     </ion-row>

@@ -11,7 +11,7 @@ import {IMAGE_SETTINGS} from "../../../../../config/no-image.settings";
 export class UserOffersComponent implements OnInit {
 
   noImageUrl = IMAGE_SETTINGS.NO_IMAGE;
-  noPriceText = 'Цена не указана';
+  noPriceText = 'noPrice';
 
   constructor(private offerService: OfferService) { }
 

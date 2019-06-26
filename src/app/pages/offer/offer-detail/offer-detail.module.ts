@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { OfferDetailPage } from './offer-detail.page';
 import { OfferImageSliderComponent } from './components/offer-image-slider/offer-image-slider.component';
 import { OfferDetailUserInfoComponent } from './components/offer-detail-user-info/offer-detail-user-info.component';
+import {CoreModule} from "../../../modules/core/core.module";
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    CoreModule,
     RouterModule.forChild(routes)
   ],
   declarations: [OfferDetailPage, OfferImageSliderComponent, OfferDetailUserInfoComponent]

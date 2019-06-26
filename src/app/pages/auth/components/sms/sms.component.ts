@@ -1,4 +1,4 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component} from '@angular/core';
 import {AlertController, NavController} from "@ionic/angular";
 
 import {AngularFireAuth} from '@angular/fire/auth';
@@ -15,12 +15,15 @@ export class SmsAuthComponent implements AfterViewInit {
 
     public recaptchaVerifier: firebase.auth.RecaptchaVerifier;
     public phoneNumber;
+    public code;
+    public confirmationResult;
 
     constructor(
         private fAuth: AngularFireAuth,
+        private userSerivce: UserService,
         private alertCtrl: AlertController,
         private navCtrl: NavController,
-        private userSerivce: UserService
+        private cdr: ChangeDetectorRef,
     ) {
     }
 
@@ -30,38 +33,33 @@ export class SmsAuthComponent implements AfterViewInit {
 
     applyPhone() {
         const appVerifier = this.recaptchaVerifier;
-        const phoneNumberString = `+${this.phoneNumber.replace(/\D+/g, "")}`;
+        const phoneNumberString = '+'+this.phoneNumber.replace(/\D+/g, "");
+        console.log(phoneNumberString);
         this.fAuth.auth.signInWithPhoneNumber(phoneNumberString, appVerifier).then(confirmationResult => {
-            this.applyCode(confirmationResult);
+            this.confirmationResult = confirmationResult;
+            //this.cdr.detectChanges();
         }).catch((error) => {
             console.log(error);
         })
     }
 
-    async applyCode(confirmationResult) {
-        const prompt = await this.alertCtrl.create({
-            header: 'Введите СМС-код',
-            inputs: [{name: 'confirmationCode', placeholder: 'XXXXXX', type: 'number', min: 0, max: 999999}],
-            buttons: [
-                {
-                    text: 'Отправить',
-                    handler: (data) => {
-                        const credential = firebase.auth.PhoneAuthProvider.credential(confirmationResult.verificationId, data.confirmationCode);
-                        this.fAuth.auth.signInWithCredential(credential).then((result) => {
-                            const user: User = {
-                                id: result.uid,
-                                data: {phone: result.phoneNumber}
-                            };
-                            this.userSerivce.edit(user);
-                            this.navCtrl.navigateRoot('/');
-                        }).catch((error) => {
-                            console.log(error);
-                        });
-                    }
-                }
-            ]
+    async applyCode() {
+        const credential = firebase.auth.PhoneAuthProvider.credential(this.confirmationResult.verificationId, this.code);
+        this.fAuth.auth.signInWithCredential(credential).then((result) => {
+            const user: User = {
+                id: result.uid,
+                data: {phone: result.phoneNumber}
+            };
+            this.userSerivce.edit(user);
+            this.navCtrl.navigateRoot('/');
+        }).catch((error) => {
+            console.log(error);
         });
-        await prompt.present();
+    }
+
+    cancel(){
+        this.confirmationResult = '';
+        this.cdr.detectChanges();
     }
 
 }

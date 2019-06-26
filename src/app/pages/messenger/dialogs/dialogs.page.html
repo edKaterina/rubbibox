@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Диалоги</ion-title>
+        <ion-title translate>messages</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -11,7 +11,7 @@
                 <img src="{{dialog.user.data?.img ? dialog.user.data.img[0] || noUserImageUrl : noUserImageUrl}}">
             </ion-avatar>
             <ion-label [routerLink]="['/chat',dialog.key]">
-                <h3>{{dialog.user.data?.fio || 'Пользователь не указал ФИО'}}</h3>
+                <h3>{{dialog.user.data?.fio || 'noFio' | translate}}</h3>
                 <p>{{dialog.message}}</p>
             </ion-label>
             <ion-label [routerLink]="[dialog.url]" style="display: inherit;" slot="end">

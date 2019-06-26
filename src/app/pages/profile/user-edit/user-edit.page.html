@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Профиль</ion-title>
+    <ion-title translate>profile</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -11,20 +11,20 @@
   <ion-list>
 
     <ion-item>
-      <ion-label position="stacked" translate>Фото</ion-label>
+      <ion-label position="stacked" translate>photo</ion-label>
       <rtp-form-upload count=1 [(files)]="user?.data.img"></rtp-form-upload>
     </ion-item>
   
     <ion-item>
-      <ion-label position="stacked" translate>Ф.И.О.</ion-label>
-      <ion-textarea maxlength="60" rows="2" [(ngModel)]="user?.data.fio" [placeholder]="'Фамилия, имя, отчество' | translate"></ion-textarea>
+      <ion-label position="stacked" translate>fio</ion-label>
+      <ion-textarea maxlength="60" rows="2" [(ngModel)]="user?.data.fio"></ion-textarea>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked" translate>О себе</ion-label>
-      <ion-textarea  maxlength="80" rows="2" [(ngModel)]="user?.data.info" [placeholder]="'Напишите коротко' | translate"></ion-textarea>
+      <ion-label position="stacked" translate>about</ion-label>
+      <ion-textarea  maxlength="80" rows="2" [(ngModel)]="user?.data.info"></ion-textarea>
     </ion-item>
 
-    <ion-button color="primary" expand="block" (click)="editUser(user)" translate>Сохранить</ion-button>
+    <ion-button color="primary" expand="block" (click)="editUser(user)" translate>send</ion-button>
   </ion-list>
 </ion-content>

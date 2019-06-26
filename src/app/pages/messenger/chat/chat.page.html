@@ -12,7 +12,7 @@
     <ion-row *ngIf="messageItem.dateGroup">
       <ion-col align-self-center>
         <ion-text color="medium">
-          <div padding class="dateGroup">{{messageItem.dateGroup}}</div>
+          <div padding class="dateGroup">{{messageItem.dateGroup | translate}}</div>
         </ion-text>
       </ion-col>
     </ion-row>
@@ -40,11 +40,11 @@
 <ion-footer>
   <ion-toolbar class="footerToolbar">
     <ion-buttons>
-      <ion-textarea rows="1" type="text" [placeholder]="'Сообщение' | translate" [(ngModel)]="message.text" (keyup.enter)="sendMessage()"></ion-textarea>
+      <ion-textarea rows="1" type="text" [placeholder]="'message' | translate" [(ngModel)]="message.text" (keyup.enter)="sendMessage()"></ion-textarea>
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <ion-button (click)="sendMessage()" [disabled]="message.text === ''" translate>Отправить</ion-button>
+      <ion-button (click)="sendMessage()" [disabled]="message.text === ''" translate>send</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

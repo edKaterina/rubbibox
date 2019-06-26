@@ -95,7 +95,7 @@ export class ChatPage {
                 if (this.pipe.transform(this.prevDataCreate, 'dd.MM.y') !== this.pipe.transform(data.dateCreate, 'dd.MM.y')) {
                     const curDate = this.pipe.transform(data.dateCreate, 'dd.MM.y');
                     if (curDate === this.pipe.transform(new Date, 'dd.MM.y')) {
-                        data.dateGroup = 'сегодня';
+                        data.dateGroup = 'today';
                     } else {
                         data.dateGroup = this.pipe.transform(data.dateCreate, 'dd.MM.y');
                     }
@@ -122,7 +122,7 @@ export class ChatPage {
             return;
         }
 
-        this.translateService.get('Новое сообщение').subscribe(async (res: string) => {
+        this.translateService.get('new_message').subscribe(async (res: string) => {
             this.chatService.sendMessage(this.chatID, this.message);
             this.message.text = '';
         });

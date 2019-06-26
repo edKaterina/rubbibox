@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button defaultHref="/system/offers"></ion-back-button>
     </ion-buttons>
-    <ion-title translate>Новое объявление</ion-title>
+    <ion-title translate>add</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,15 +11,15 @@
   <form #form="ngForm" (ngSubmit)="onSubmit(form)">
 
     <ion-item>
-      <ion-label position="stacked" translate>Категория</ion-label>
+      <ion-label position="stacked" translate>category</ion-label>
       <ion-select
               mode="ios"
               name="category"
               ngModel
               required="true"
-              [okText]="'ОК' | translate"
-              [cancelText]="'Отмена' | translate"
-              [placeholder]="'выберите из списка' | translate">
+              [okText]="'ok' | translate"
+              [cancelText]="'cancel' | translate"
+              [placeholder]="'select' | translate">
         <ion-select-option
                 *ngFor="let category of categoryList$ | async"
                 [value]="category">
@@ -34,13 +34,13 @@
     <div *ngIf="form.value.category">
 
       <ion-item>
-        <ion-label position="stacked" translate>Фото</ion-label>
+        <ion-label position="stacked" translate>photo</ion-label>
         <rtp-form-upload count=1 [(files)]="photo"></rtp-form-upload>
       </ion-item>
 
 
       <ion-item>
-        <ion-label position="stacked">Название</ion-label>
+        <ion-label position="stacked" translate>title</ion-label>
         <ion-input
                 name="name"
                 ngModel
@@ -50,7 +50,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Стоимость</ion-label>
+        <ion-label position="stacked" translate>price</ion-label>
         <ion-input
                 name="price"
                 ngModel
@@ -60,7 +60,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Описание</ion-label>
+        <ion-label position="stacked" translate>description</ion-label>
 
         <ion-textarea
                 name="description"
@@ -74,7 +74,7 @@
     </div>
 
 
-    <ion-button padding color="primary" expand="block" type="submit" [disabled]="form.invalid">Отправить
+    <ion-button padding color="primary" expand="block" type="submit" [disabled]="form.invalid" translate>send
     </ion-button>
   </form>
 </ion-content>

@@ -9,7 +9,7 @@ import {IMAGE_SETTINGS} from '../../../../../config/no-image.settings';
 export class OfferListItemComponent implements OnInit {
 
     noImageUrl = IMAGE_SETTINGS.NO_IMAGE;
-    noPriceText = 'Цена не указана';
+    noPriceText = 'noPrice';
 
     @Input() offerItem;
 

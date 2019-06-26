@@ -3,7 +3,7 @@
         <img src="{{user?.data?.img ? user.data.img[0] || noUserImageUrl : noUserImageUrl}}">
     </ion-avatar>
     <ion-label>
-        <ion-text><p style="margin: 0;padding-right: 10px;">{{user?.data?.fio || 'Профиль'}}</p></ion-text>
-        <ion-text color="medium"><p style="margin: 0;padding-right: 10px;font-size: 11px">Редактировать</p></ion-text>
+        <ion-text><p style="margin: 0;padding-right: 10px;">{{user?.data?.fio || 'profile' | translate}}</p></ion-text>
+        <ion-text color="medium"><p style="margin: 0;padding-right: 10px;font-size: 11px" translate>edit</p></ion-text>
     </ion-label>
 </ion-item>
