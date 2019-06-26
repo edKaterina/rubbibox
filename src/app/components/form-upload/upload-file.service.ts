@@ -1,18 +1,14 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
-import { FileUpload } from '../model/file-upload';
-import { Subject, ReplaySubject } from 'rxjs';
+import { Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UploadFileService {
 
-  constructor(
-    private db: AngularFireDatabase
-  ) { }
+  constructor() { }
 
   private basePath = '/uploads';
 

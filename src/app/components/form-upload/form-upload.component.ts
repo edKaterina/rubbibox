@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {UploadFileService} from '../../services/upload-file.service';
+import {UploadFileService} from './upload-file.service';
 import {ActionSheetController} from '@ionic/angular';
 import {AlertController} from '@ionic/angular';
 import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
