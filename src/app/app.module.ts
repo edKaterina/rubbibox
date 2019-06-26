@@ -9,10 +9,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { FIREBASE_CONFIG } from '../firebase.credentials';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-
 import { IonicStorageModule } from '@ionic/storage';
 import { FCM } from '@ionic-native/fcm/ngx';
 
@@ -27,8 +23,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Badge } from '@ionic-native/badge/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { AppMinimize } from '@ionic-native/app-minimize/ngx';
-import {AngularFireAuthModule} from "@angular/fire/auth";
-import {AngularFireAuthGuardModule} from "@angular/fire/auth-guard";
+import {FirebaseModule} from "./modules/firebase/firebase.module";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -43,14 +38,10 @@ export function HttpLoaderFactory(http: HttpClient) {
         backButtonText:''
     }),
     AppRoutingModule,
-    AngularFireModule.initializeApp(FIREBASE_CONFIG),
     IonicStorageModule.forRoot({
       name: 'RTPlatform',
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    AngularFireAuthGuardModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -59,6 +50,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    FirebaseModule,
   ],
   providers: [
     StatusBar,
