@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 
-
 @Component({
     selector: 'app-user-profile',
     templateUrl: './user-profile.page.html',
@@ -8,7 +7,6 @@ import {Component} from '@angular/core';
 })
 export class UserProfilePage {
 
-    constructor(
-    ) {}
+    constructor() {}
 
 }

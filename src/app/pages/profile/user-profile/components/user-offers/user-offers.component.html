@@ -1,0 +1,21 @@
+<ion-list lines="full" *ngIf="offers">
+    <ion-item *ngFor="let offer of offers" [detail]="false">
+
+        <ion-thumbnail [routerLink]="['offer',offer.id]" slot="start" class="thumbnail">
+            <img src="{{offer.data.arImg ? offer.data.arImg[0] || noImageUrl : noImageUrl}}">
+        </ion-thumbnail>
+
+        <ion-label text-wrap [routerLink]="['offer',offer.id]">
+            <ion-text class="ion-text-nowrap" color="medium">
+                <p text-nowrap class="offer-item__date">{{offer.data.dateCreate | date: 'dd.MM.y HH:mm'}}</p>
+            </ion-text>
+            <h2 text-nowrap class="offer-item__name">{{offer.data.name}}</h2>
+            <h2 text-nowrap class="offer-item__price">{{offer.data.price ? offer.data.price + ' ₽' : noPriceText}}</h2>
+            <ion-text color="medium">
+                <p text-nowrap class="offer-item__category">Категория: {{offer.data.category}}</p>
+            </ion-text>
+        </ion-label>
+        <ion-icon slot="end" name="trash" color="danger" (click)="remove(offer)"></ion-icon>
+    </ion-item>
+</ion-list>
+<ion-text *ngIf="!offers" text-center><h3>Объявлений нет</h3></ion-text>
