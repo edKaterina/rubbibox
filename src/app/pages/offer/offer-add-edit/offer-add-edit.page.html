@@ -1,9 +1,81 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>offerAddEdit</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title translate>Новое объявление</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
 
+    <ion-item>
+      <ion-label position="stacked" translate>Категория</ion-label>
+      <ion-select
+              mode="ios"
+              name="category"
+              ngModel
+              required="true"
+              [okText]="'ОК' | translate"
+              [cancelText]="'Отмена' | translate"
+              [placeholder]="'выберите из списка' | translate">
+        <ion-select-option
+                *ngFor="let category of categoryList$ | async"
+                [value]="category">
+
+          {{category}}
+
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
+    <div *ngIf="form.value.category">
+
+      <ion-item>
+        <ion-label position="stacked" translate>Фото</ion-label>
+        <rtp-form-upload count=1 [(files)]="photo"></rtp-form-upload>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label position="stacked">Название</ion-label>
+        <ion-input
+                name="name"
+                ngModel
+                [required]="true"
+                type="text">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Стоимость</ion-label>
+        <ion-input
+                name="price"
+                ngModel
+                [required]="true"
+                type="number">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Описание</ion-label>
+
+        <ion-textarea
+                name="description"
+                ngModel
+                [required]="true"
+                [rows]="5">
+
+        </ion-textarea>
+      </ion-item>
+
+    </div>
+
+
+    <ion-button padding color="primary" expand="block" type="submit" [disabled]="form.invalid">Отправить
+    </ion-button>
+  </form>
 </ion-content>
+
