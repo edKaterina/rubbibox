@@ -1,10 +1,11 @@
 
 ion-thumbnail {
-  --size: 80px;
-  --border-radius: 6px;
+  --size: calc(50vw - 0.5px);
+
 
   width: var(--size);
   height: var(--size);
+  margin-bottom: 1px;
 }
 
 

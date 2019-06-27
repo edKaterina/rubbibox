@@ -11,13 +11,17 @@
 </ion-fab>
 
 <ion-content>
-
-    <ion-list lines="full">
+    <ion-grid>
+<ion-row justify-content-between>
         <app-offer-list-item
                 *ngFor="let offer of offerList$ | async | dateCreateOffer | categoryFilter:filterParam"
                 [offerItem]="offer.data"
                 [routerLink]="['offer',offer.id]"
         ></app-offer-list-item>
+        </ion-row>
+    </ion-grid>
+    <ion-list lines="full">
+
     </ion-list>
 
 

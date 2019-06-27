@@ -2,7 +2,7 @@
     <ion-toolbar>
         <ion-title translate>filter</ion-title>
         <ion-buttons slot="end">
-            <ion-button (click)="onClickClose()" translate>ok</ion-button>
+            <ion-button (click)="onClickClose()" translate>Отмена</ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
@@ -10,14 +10,23 @@
 <ion-content>
 
     <ion-list>
+<ion-item>
+    <ion-input placeholder="Введите город..."  [(ngModel)]="citySearch"></ion-input>
+</ion-item>
+        <ion-item *ngFor="let city of cityList | cityFilter:citySearch" >
 
-        <ion-item *ngFor="let cat of categoryList">
+            <ion-label text-wrap (click)="onClickClose()">
+                <h2>{{city.name}}</h2>
+            </ion-label>
+            <!--<ion-toggle color="primary" [(ngModel)]="cat.toggle"></ion-toggle>-->
+        </ion-item>
+       <!-- <ion-item *ngFor="let cat of categoryList">
 
             <ion-label text-wrap>
                 <h2>{{cat.name}}</h2>
             </ion-label>
             <ion-toggle color="primary" [(ngModel)]="cat.toggle"></ion-toggle>
-        </ion-item>
+        </ion-item>-->
     </ion-list>
 
 </ion-content>

@@ -8,15 +8,19 @@ import {Offer} from '../../../interfaces/model/offer';
 @Pipe({
     name: 'dateCreateOffer',
 })
-export class DateCreateOfferPipe implements PipeTransform{
+export class DateCreateOfferPipe implements PipeTransform {
     transform(value: Array<Offer>, args?: any): any {
         if (value) {
             return value.sort(this.compare);
         }
     }
+
     compare(a: Offer, b: Offer) {
-        if (a.data.dateCreate < b.data.dateCreate) return 1;
-        else if (a.data.dateCreate > b.data.dateCreate) return -1;
+        if (a.data.dateCreate < b.data.dateCreate) {
+            return 1;
+        } else if (a.data.dateCreate > b.data.dateCreate) {
+            return -1;
+        }
         return 0;
     }
 }
@@ -31,7 +35,6 @@ export class CategoryFilterPipe implements PipeTransform {
         if (!options || !options.length) {
             return value;
         }
-
 
 
         return value.filter((offer) => options.some(opt =>
@@ -64,7 +67,6 @@ export class OfferListPage implements OnInit {
 
     ngOnInit() {
         this.offerList$ = this.offerService.getList();
-
     }
 
 
