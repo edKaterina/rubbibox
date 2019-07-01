@@ -2,7 +2,8 @@
     <ion-toolbar>
         <ion-title translate>filter</ion-title>
         <ion-buttons slot="end">
-            <ion-button (click)="onClickClose()" translate>Отмена</ion-button>
+            <ion-button (click)="onClickApply()" >Применить</ion-button>
+            <ion-button (click)="onClickRefresh()" >Сбросить</ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
@@ -10,23 +11,40 @@
 <ion-content>
 
     <ion-list>
-<ion-item>
-    <ion-input placeholder="Введите город..."  [(ngModel)]="citySearch"></ion-input>
-</ion-item>
-        <ion-item *ngFor="let city of cityList | cityFilter:citySearch" >
 
-            <ion-label text-wrap (click)="onClickClose()">
-                <h2>{{city.name}}</h2>
-            </ion-label>
-            <!--<ion-toggle color="primary" [(ngModel)]="cat.toggle"></ion-toggle>-->
-        </ion-item>
-       <!-- <ion-item *ngFor="let cat of categoryList">
+        <ion-card>
 
-            <ion-label text-wrap>
-                <h2>{{cat.name}}</h2>
-            </ion-label>
-            <ion-toggle color="primary" [(ngModel)]="cat.toggle"></ion-toggle>
-        </ion-item>-->
+            <ion-card-header>
+                Категории
+            </ion-card-header>
+            <ion-virtual-scroll [items]="categoryList" approxItemHeight="100%">
+                <ion-item *virtualItem="let cat;">
+                    <ion-label text-wrap>
+                        <h2>{{cat.name}}</h2>
+                    </ion-label>
+                    <ion-toggle color="primary" [(ngModel)]="cat.toggle"></ion-toggle>
+                </ion-item>
+            </ion-virtual-scroll>
+        </ion-card>
+        <ion-card>
+            <ion-card-header>
+                Города
+            </ion-card-header>
+            <ion-item>
+                <ion-input placeholder="Введите город..." [(ngModel)]="citySearch"></ion-input>
+                <ion-icon name="search" slot="end"></ion-icon>
+            </ion-item>
+
+        <ion-virtual-scroll [items]="cityList| cityFilter:citySearch" approxItemHeight="100%">
+            <ion-item *virtualItem="let item;">
+
+                <ion-label text-wrap (click)="onClickCity(item.name)">
+                    <h2>{{item.name}}</h2>
+                </ion-label>
+            </ion-item>
+        </ion-virtual-scroll>
+        </ion-card>
+
     </ion-list>
 
 </ion-content>

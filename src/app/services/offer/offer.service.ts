@@ -4,7 +4,8 @@ import {Observable, of} from 'rxjs';
 
 import {DbService} from '../core/db.service';
 import {Offer} from '../../interfaces/model/offer';
-import {AuthService} from "../auth.service";
+import {AuthService} from '../auth.service';
+import {map} from 'rxjs/operators';
 
 
 @Injectable({
@@ -25,7 +26,7 @@ export class OfferService {
     }
 
     getMy(): Observable<Offer[]> {
-        return this.db.snapshotChangesList<Offer>(OfferService.path,{name:'owner',value:this.authService.getLogin()});
+        return this.db.snapshotChangesList<Offer>(OfferService.path, {name: 'owner', value: this.authService.getLogin()});
     }
 
     getById(id: string): Observable<Offer> {
@@ -37,18 +38,33 @@ export class OfferService {
     }
 
     edit(offer: Offer) {
-        return this.db.edit(OfferService.path,{id:offer.id,data:offer.data});
+        return this.db.edit(OfferService.path, {id: offer.id, data: offer.data});
     }
 
     delete(offer) {
         return this.db.delete(OfferService.path, offer);
     }
 
-    getCategoryList(): Observable<string[]> {
-        return of([
-            'Автомобили',
-            'Недвижимость',
-            'Услуги'
-        ]);
+    getCategoryList(): Observable<any> {
+        return this.db.snapshotChangesList<any>('/categories')
+            .pipe(
+                map((items) =>
+                    items.map((category) => {
+                        return category.data.name;
+                    })
+                )
+            )
+            ;
+
+        /*  return of([
+              'Автомобили',
+              'Недвижимость',
+              'Услуги'
+          ]);*/
+    }
+
+    getCityList(): Observable<any> {
+        return this.db.snapshotChangesList<any>('/cities');
+
     }
 }

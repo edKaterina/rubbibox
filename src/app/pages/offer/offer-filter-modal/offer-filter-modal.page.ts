@@ -11,10 +11,9 @@ export class CityFilterPipe implements PipeTransform {
 
     transform(value: Array<any>, searchCity: string): any {
 
-        if (!searchCity || !searchCity.length) {
+        if (!searchCity) {
             return value;
         }
-
 
         return value.filter((city) =>
             city.name.toUpperCase().indexOf(searchCity.toUpperCase()) > -1
@@ -33,20 +32,16 @@ export class CityFilterPipe implements PipeTransform {
 export class OfferFilterModalPage implements OnInit {
 
     categoryList;
-    cityList = [
-        {name: 'Казань', id: 1},
-        {name: 'Нижний Новгород', id: 2},
-        {name: 'Ярославль', id: 3},
-        {name: 'Калининград', id: 4},
-        {name: 'Екатеринбург', id: 5},
-    ];
+    cityList;
     citySearch;
     @Input() current;
+    @Input() city;
 
     constructor(
         private modalController: ModalController,
         private offerService: OfferService
     ) {
+
     }
 
     ngOnInit() {
@@ -71,15 +66,39 @@ export class OfferFilterModalPage implements OnInit {
             )
             .subscribe((category) => {
                 this.categoryList = category;
-                console.log(category);
+
+            });
+        this.offerService.getCityList()
+            .pipe(
+                map(cities => cities.map(city => {
+                        city.data.toggle = false;
+
+                        return city.data;
+                    }),
+                )
+            )
+            .subscribe((city) => {
+                this.cityList = city;
+                this.citySearch = this.city;
             });
 
     }
 
 
-    onClickClose() {
+    onClickCity(name) {
+        this.citySearch = name;
+    }
+
+    onClickRefresh() {
+        this.categoryList.map(item => item.toggle = true);
+        this.citySearch = undefined;
+        this.onClickApply();
+    }
+
+    onClickApply() {
         this.modalController.dismiss({
-            'result': this.categoryList
+            'category': this.categoryList,
+            'city': this.citySearch,
         });
     }
 

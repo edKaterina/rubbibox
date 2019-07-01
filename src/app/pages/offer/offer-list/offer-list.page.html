@@ -1,6 +1,6 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-title translate>search</ion-title>
+<ion-header >
+    <ion-toolbar mode="ios">
+        <ion-title  translate>search</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -12,9 +12,9 @@
 
 <ion-content>
     <ion-grid>
-<ion-row justify-content-between>
+<ion-row >
         <app-offer-list-item
-                *ngFor="let offer of offerList$ | async | dateCreateOffer | categoryFilter:filterParam"
+                *ngFor="let offer of offerList$ | async | dateCreateOffer | cityCatFilter: citySearch| categoryFilter: filterParam"
                 [offerItem]="offer.data"
                 [routerLink]="['offer',offer.id]"
         ></app-offer-list-item>

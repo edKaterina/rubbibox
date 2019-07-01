@@ -1,69 +1,71 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {RouteReuseStrategy} from '@angular/router';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
+import {SplashScreen} from '@ionic-native/splash-screen/ngx';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 
-import { IonicStorageModule } from '@ionic/storage';
-import { FCM } from '@ionic-native/fcm/ngx';
+import {IonicStorageModule} from '@ionic/storage';
+import {FCM} from '@ionic-native/fcm/ngx';
 
-import { Camera } from '@ionic-native/camera/ngx';
-import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
+import {Camera} from '@ionic-native/camera/ngx';
+import {PhotoViewer} from '@ionic-native/photo-viewer/ngx';
 
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
-import { Badge } from '@ionic-native/badge/ngx';
-import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
-import { AppMinimize } from '@ionic-native/app-minimize/ngx';
-import {FirebaseModule} from "./modules/firebase/firebase.module";
+import {Badge} from '@ionic-native/badge/ngx';
+import {ScreenOrientation} from '@ionic-native/screen-orientation/ngx';
+import {AppMinimize} from '@ionic-native/app-minimize/ngx';
+import {FirebaseModule} from './modules/firebase/firebase.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot({
-        backButtonText:''
-    }),
-    AppRoutingModule,
-    IonicStorageModule.forRoot({
-      name: 'RTPlatform',
-      driverOrder: ['indexeddb', 'sqlite', 'websql']
-    }),
-    HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    FirebaseModule,
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    FCM,
-    Badge,
-    ScreenOrientation,
-    InAppBrowser,
-    AppMinimize,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Camera,
-    PhotoViewer
-  ],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent],
+    entryComponents: [],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot({
+            backButtonText: ''
+        }),
+        AppRoutingModule,
+        IonicStorageModule.forRoot({
+            name: 'RTPlatform',
+            driverOrder: ['indexeddb', 'sqlite', 'websql']
+        }),
+        HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        FirebaseModule,
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        FCM,
+        Badge,
+        ScreenOrientation,
+        InAppBrowser,
+        AppMinimize,
+
+        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+        Camera,
+        PhotoViewer
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

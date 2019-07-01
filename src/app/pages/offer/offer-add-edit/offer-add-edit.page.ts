@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import {OfferService} from "../../../services/offer/offer.service";
-import {AuthService} from "../../../services/auth.service";
-import {SystemPage} from "../../../system/system.page";
-import {NgForm} from "@angular/forms";
-import {Offer} from "../../../interfaces/model/offer";
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {OfferService} from '../../../services/offer/offer.service';
+import {AuthService} from '../../../services/auth.service';
+import {SystemPage} from '../../../system/system.page';
+import {NgForm} from '@angular/forms';
+import {Offer} from '../../../interfaces/model/offer';
+import {map} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-offer-add-edit',
-  templateUrl: './offer-add-edit.page.html',
-  styleUrls: ['./offer-add-edit.page.scss'],
+    selector: 'app-offer-add-edit',
+    templateUrl: './offer-add-edit.page.html',
+    styleUrls: ['./offer-add-edit.page.scss'],
 })
 export class OfferAddEditPage implements OnInit {
 
     categoryList$: any;
     photo = [];
+    cityList;
 
     constructor(
         private router: Router,
@@ -23,6 +25,16 @@ export class OfferAddEditPage implements OnInit {
         private tabs: SystemPage
     ) {
         this.tabs.enable = false;
+        this.offerService.getCityList()
+            .pipe(
+                map(cities => cities.map(city => {
+                        return city.data.name;
+                    }),
+                )
+            )
+            .subscribe((city) => {
+                this.cityList = city;
+            });
     }
 
     ngOnInit() {

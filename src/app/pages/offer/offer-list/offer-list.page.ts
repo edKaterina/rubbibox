@@ -36,7 +36,6 @@ export class CategoryFilterPipe implements PipeTransform {
             return value;
         }
 
-
         return value.filter((offer) => options.some(opt =>
             (opt.name === offer.data.category) && opt.toggle
         ));
@@ -46,6 +45,23 @@ export class CategoryFilterPipe implements PipeTransform {
 
 }
 
+@Pipe({
+    name: 'cityCatFilter'
+})
+export class CityCatFilterPipe implements PipeTransform {
+
+    transform(value: Array<Offer>, options: string): any {
+
+        if (!options || !options.length) {
+            return value;
+        }
+
+        return value.filter((offer) => options === offer.data.city);
+
+    }
+
+
+}
 
 @Component({
     selector: 'app-offer-list',
@@ -57,7 +73,7 @@ export class OfferListPage implements OnInit {
     offerList$: Observable<Offer[]>;
 
     filterParam: [];
-
+    citySearch: string;
 
     constructor(
         private offerService: OfferService,
@@ -72,7 +88,8 @@ export class OfferListPage implements OnInit {
 
     onClickFilterModalOpen() {
         this.presentModal().then(data => {
-            this.filterParam = data;
+            this.filterParam = data.category;
+            this.citySearch = data.city;
         });
     }
 
@@ -82,6 +99,7 @@ export class OfferListPage implements OnInit {
             component: OfferFilterModalPage,
             componentProps: {
                 'current': this.filterParam,
+                'city': this.citySearch,
             }
         });
 
@@ -89,7 +107,7 @@ export class OfferListPage implements OnInit {
 
         const {data} = await modal.onDidDismiss();
 
-        return data.result;
+        return data;
     }
 
 }
