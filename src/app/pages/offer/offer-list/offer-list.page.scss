@@ -4,3 +4,19 @@ ion-grid{
 ion-title{
 
 }
+.offer{
+  &__list{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-content: flex-start;
+
+  }
+  &__item {
+    --size: calc(33.33vw - 10px);
+    width: var(--size);
+    height:var(--size);
+
+    margin-bottom: 1px;
+  }
+}
