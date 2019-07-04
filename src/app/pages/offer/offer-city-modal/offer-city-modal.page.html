@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Выбор города</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-virtual-scroll [items]="current">
+    <ion-item *virtualItem="let cur" (click)="closeModal(cur)">
+      <ion-label >
+        {{cur}}
+      </ion-label>
+    </ion-item>
+  </ion-virtual-scroll>
+</ion-content>
