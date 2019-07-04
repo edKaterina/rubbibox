@@ -5,25 +5,25 @@ ion-title {
 
 }
 
-ion-thumbnail:nth-child(3n)  {
+ion-thumbnail:nth-child(3n-1)  {
 
-  --size: 33.15vw;
+  --size: calc(33.33vw - 1px);
 
 
   width: var(--size);
   height: var(--size);
-  margin-right: 0px;
+  margin: 0px 1.5px;
   margin-bottom: 1px;
 }
 
 ion-thumbnail {
-  --size: 33.15vw;
+  --size: calc(33.33vw - 1px);
 
 
   width: var(--size);
   height: var(--size);
   margin-bottom: 1px;
-  margin-right: 1px;
+  margin-right: 0px;
 }
 
 .offer{
