@@ -6,6 +6,8 @@ import {SystemPage} from '../../../system/system.page';
 import {NgForm} from '@angular/forms';
 import {Offer} from '../../../interfaces/model/offer';
 import {map} from 'rxjs/operators';
+import {ModalController} from '@ionic/angular';
+import {OfferCityModalPage} from '../offer-city-modal/offer-city-modal.page';
 
 @Component({
     selector: 'app-offer-add-edit',
@@ -17,12 +19,13 @@ export class OfferAddEditPage implements OnInit {
     categoryList$: any;
     photo = [];
     cityList;
-
+city;
     constructor(
         private router: Router,
         private offerService: OfferService,
         private authService: AuthService,
-        private tabs: SystemPage
+        private tabs: SystemPage,
+        private modalController: ModalController
     ) {
         this.tabs.enable = false;
         this.offerService.getCityList()
@@ -35,6 +38,7 @@ export class OfferAddEditPage implements OnInit {
             .subscribe((city) => {
                 this.cityList = city;
             });
+
     }
 
     ngOnInit() {
@@ -60,5 +64,27 @@ export class OfferAddEditPage implements OnInit {
         form.reset();
 
         this.router.navigate(['/system/offers']);
+    }
+
+    choiseCity(form) {
+        this.presentModal().then(data => {
+            this.city = data;
+        });
+    }
+
+    async presentModal() {
+
+        const modal = await this.modalController.create({
+            component: OfferCityModalPage,
+            componentProps: {
+                'current': this.cityList
+            }
+        });
+
+        await modal.present();
+
+        const {data} = await modal.onDidDismiss();
+
+        return data;
     }
 }

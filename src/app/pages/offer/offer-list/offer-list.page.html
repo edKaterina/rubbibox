@@ -1,6 +1,6 @@
-<ion-header >
+<ion-header>
     <ion-toolbar mode="ios">
-        <ion-title  translate>search</ion-title>
+        <ion-title translate>search</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -12,21 +12,14 @@
 
 <ion-content>
 
-<!--<div class="offer__list">
-        <app-offer-list-item class="offer__item"
-                *ngFor="let offer of offerList$ | async | dateCreateOffer | cityCatFilter: citySearch| categoryFilter: filterParam"
-                [offerItem]="offer.data"
-                [routerLink]="['offer',offer.id]"
-        ></app-offer-list-item>
-    </div>-->
 
-       <ion-grid>
-<ion-row justify-content-between>
-        <app-offer-list-item
-                *ngFor="let offer of offerList$ | async | dateCreateOffer | cityCatFilter: citySearch| categoryFilter: filterParam"
-                [offerItem]="offer.data"
-                [routerLink]="['offer',offer.id]"
-        ></app-offer-list-item>
+    <ion-grid>
+        <ion-row justify-content-start>
+            <ion-thumbnail [routerLink]="['offer',offer.id]"
+                           *ngFor="let offer of offerList$ | async | dateCreateOffer | cityCatFilter: citySearch| categoryFilter: filterParam">
+                <img src="{{offer.data.arImg ? offer.data.arImg[0] || noImageUrl : noImageUrl}}">
+            </ion-thumbnail>
+
         </ion-row>
     </ion-grid>
     <ion-list lines="full">

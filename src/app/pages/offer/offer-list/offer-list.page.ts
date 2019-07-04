@@ -4,6 +4,7 @@ import {OfferFilterModalPage} from '../offer-filter-modal/offer-filter-modal.pag
 import {OfferService} from '../../../services/offer/offer.service';
 import {Observable} from 'rxjs';
 import {Offer} from '../../../interfaces/model/offer';
+import {IMAGE_SETTINGS} from '../../../config/no-image.settings';
 
 @Pipe({
     name: 'dateCreateOffer',
@@ -71,7 +72,8 @@ export class CityCatFilterPipe implements PipeTransform {
 export class OfferListPage implements OnInit {
 
     offerList$: Observable<Offer[]>;
-
+    noImageUrl = IMAGE_SETTINGS.NO_IMAGE;
+    noPriceText = 'noPrice';
     filterParam: [];
     citySearch: string;
 

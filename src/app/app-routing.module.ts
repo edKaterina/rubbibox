@@ -16,7 +16,7 @@ const routes: Routes = [
     {
         path: 'chat/:id', loadChildren: './pages/messenger/chat/chat.module#ChatPageModule',
         ...canActivate(redirectUnauthorizedToLogin)
-    },
+    }
 
 
 ];

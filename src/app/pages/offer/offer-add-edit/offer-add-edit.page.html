@@ -31,10 +31,10 @@
         </ion-item>
 
 
-        <div [hidden]="!form.value.category">
-            <ion-item >
+
+            <ion-item [hidden]="!form.value.category">
                 <ion-label position="stacked" translate>city</ion-label>
-                <ion-select
+                <!--<ion-select
                         mode="ios"
                         name="city"
                         ngModel
@@ -42,21 +42,34 @@
                         [okText]="'ok' | translate"
                         [cancelText]="'cancel' | translate"
                         [placeholder]="'select' | translate"
+
                 >
-                    <ion-select-option
-                            *ngFor="let city of cityList "
-                            [value]="city">
-                        {{city}}
-                    </ion-select-option>
-                </ion-select>
+                    <ion-virtual-scroll [items]="cityList">
+
+                        <ion-select-option
+                                *virtualItem="let city  "
+                                [value]="city">
+                            {{city}}
+                        </ion-select-option>
+
+                    </ion-virtual-scroll>
+                </ion-select>-->
+                <ion-input
+                        name="city"
+                        [(ngModel)]="city"
+                        readonly
+                        (click)="choiseCity(form)"
+                        [required]="true"
+                        type="text">
+                </ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item [hidden]="!form.value.category">
                 <ion-label position="stacked" translate>photo</ion-label>
                 <rtp-form-upload count=1 [(files)]="photo"></rtp-form-upload>
             </ion-item>
 
 
-            <ion-item>
+            <ion-item [hidden]="!form.value.category">
                 <ion-label position="stacked" translate>title</ion-label>
                 <ion-input
                         name="name"
@@ -66,7 +79,7 @@
                 </ion-input>
             </ion-item>
 
-            <ion-item>
+            <ion-item [hidden]="!form.value.category">
                 <ion-label position="stacked" translate>price</ion-label>
                 <ion-input
                         name="price"
@@ -76,7 +89,7 @@
                 </ion-input>
             </ion-item>
 
-            <ion-item>
+            <ion-item [hidden]="!form.value.category">
                 <ion-label position="stacked" translate>description</ion-label>
 
                 <ion-textarea
@@ -88,11 +101,9 @@
                 </ion-textarea>
             </ion-item>
 
-        </div>
-
-
-        <ion-button padding color="primary" expand="block" type="submit" [disabled]="form.invalid" translate>send
+        <ion-button [hidden]="!form.value.category"  color="primary" expand="block" type="submit" [disabled]="form.invalid" translate>send
         </ion-button>
+
     </form>
 </ion-content>
 

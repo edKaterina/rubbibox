@@ -1,9 +1,31 @@
 ion-grid{
   --ion-grid-padding:5px 5px;
 }
-ion-title{
+ion-title {
 
 }
+
+ion-thumbnail:nth-child(3n)  {
+
+  --size: 33.15vw;
+
+
+  width: var(--size);
+  height: var(--size);
+  margin-right: 0px;
+  margin-bottom: 1px;
+}
+
+ion-thumbnail {
+  --size: 33.15vw;
+
+
+  width: var(--size);
+  height: var(--size);
+  margin-bottom: 1px;
+  margin-right: 1px;
+}
+
 .offer{
   &__list{
     display: flex;

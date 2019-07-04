@@ -8,7 +8,8 @@ import {IonicModule} from '@ionic/angular';
 import {CategoryFilterPipe, CityCatFilterPipe, DateCreateOfferPipe, OfferListPage} from './offer-list.page';
 import {OfferListItemComponent} from './components/offer-list-item/offer-list-item.component';
 import {CityFilterPipe, OfferFilterModalPage} from '../offer-filter-modal/offer-filter-modal.page';
-import {CoreModule} from "../../../modules/core/core.module";
+import {CoreModule} from '../../../modules/core/core.module';
+import {OfferCityModalPage} from '../offer-city-modal/offer-city-modal.page';
 
 const routes: Routes = [
     {
@@ -37,6 +38,7 @@ const routes: Routes = [
 
     entryComponents: [
         OfferFilterModalPage
+
     ]
 })
 export class OfferListPageModule {
