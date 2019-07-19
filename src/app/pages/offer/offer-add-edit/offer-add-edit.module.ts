@@ -7,7 +7,7 @@ import {IonicModule} from '@ionic/angular';
 
 import {OfferAddEditPage} from './offer-add-edit.page';
 import {CoreModule} from '../../../modules/core/core.module';
-import {OfferFilterModalPage} from '../offer-filter-modal/offer-filter-modal.page';
+import {CityFilterPipe, OfferFilterModalPage} from '../offer-filter-modal/offer-filter-modal.page';
 import {OfferCityModalPage} from '../offer-city-modal/offer-city-modal.page';
 
 const routes: Routes = [
@@ -25,7 +25,8 @@ const routes: Routes = [
         CoreModule,
         RouterModule.forChild(routes)
     ],
-    declarations: [OfferAddEditPage, OfferCityModalPage],
+    declarations: [OfferAddEditPage, OfferCityModalPage
+       ],
     entryComponents: [
         OfferCityModalPage
     ]

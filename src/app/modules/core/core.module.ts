@@ -6,9 +6,11 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { FormUploadComponent } from '../../components/form-upload/form-upload.component';
+import {CityFilterPipe} from '../../pages/offer/offer-filter-modal/offer-filter-modal.page';
 
 const components = [
     FormUploadComponent,
+  CityFilterPipe,
 ];
 
 @NgModule({

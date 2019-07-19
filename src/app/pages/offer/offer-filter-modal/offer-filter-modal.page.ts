@@ -10,17 +10,21 @@ import {CitiesService} from '../../../services/cities.service';
 })
 export class CityFilterPipe implements PipeTransform {
 
-    transform(value: Array<any>, searchCity: string): any {
+    transform(value: Array<any>, searchCity: { search: string, city: string }): any {
 
-        if (!searchCity) {
+        if (!searchCity.search) {
             return value;
         }
 
         return value.filter((city) => {
+
                 if (city.city) {
-                    return (city.city.toUpperCase().indexOf(searchCity.toUpperCase()) > -1);
+                    if (searchCity.city === city.city) {
+                        return true;
+                    }
+                    return (city.city.toUpperCase().indexOf(searchCity.search.toUpperCase()) > -1);
                 } else {
-                    return (city.toUpperCase().indexOf(searchCity.toUpperCase()) > -1);
+                    return (city.toUpperCase().indexOf(searchCity.search.toUpperCase()) > -1);
                 }
             }
         );
@@ -75,7 +79,7 @@ export class OfferFilterModalPage implements OnInit {
                 this.categoryList = category;
 
             });
-        this.search = this.region && this.city ? this.city : this.region;
+
 
         this.cities.getCitiesByRegion(this.region).subscribe(
             value => {
@@ -97,6 +101,7 @@ export class OfferFilterModalPage implements OnInit {
                 this.cityList = value;
                 this.region = region;
                 this.city = undefined;
+                this.search = undefined;
             }
         );
 
@@ -107,9 +112,10 @@ export class OfferFilterModalPage implements OnInit {
         this.region = undefined;
         this.search = undefined;
     }
+
     onClickCity(name) {
         this.city = name;
-        this.search = name;
+        // this.search = name;
     }
 
     onClickRefresh() {
@@ -120,6 +126,7 @@ export class OfferFilterModalPage implements OnInit {
     }
 
     onClickApply() {
+        this.region = this.city ? this.region : '';
         this.modalController.dismiss({
             'category': this.categoryList,
             'city': this.city,

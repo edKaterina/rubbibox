@@ -52,13 +52,13 @@ export class CategoryFilterPipe implements PipeTransform {
 })
 export class CityCatFilterPipe implements PipeTransform {
 
-    transform(value: Array<Offer>, options: string): any {
+    transform(value: Array<Offer>, options: any): any {
 
-        if (!options || !options.length) {
+        if (!options || !options.city) {
             return value;
         }
 
-        return value.filter((offer) => options === offer.data.city);
+        return value.filter((offer) => options.city === offer.data.city.city && options.region === offer.data.city.region);
 
     }
 
@@ -76,7 +76,7 @@ export class OfferListPage implements OnInit {
     noImageUrl = IMAGE_SETTINGS.NO_IMAGE;
     noPriceText = 'noPrice';
     filterParam: [];
-    citySearch: { region: string; city: string };
+    citySearch: { region: string, city: string } = {region: '', city: ''};
     region: string;
 
     constructor(
@@ -91,15 +91,18 @@ export class OfferListPage implements OnInit {
         this.offerList$ = this.offerService.getList();
     }
 
+    doRefresh(event) {
+        this.offerList$ = this.offerService.getList();
+        event.target.complete();
+    }
 
     onClickFilterModalOpen() {
         this.presentModal().then(data => {
             this.filterParam = data.category;
             this.citySearch = {
-                region: data.city,
+                region: data.region,
                 city: data.city
-            }
-            ;
+            };
             this.region = data.region;
         });
     }
@@ -110,8 +113,8 @@ export class OfferListPage implements OnInit {
             component: OfferFilterModalPage,
             componentProps: {
                 'current': this.filterParam,
-                'city': this.citySearch,
-                'region': this.region
+                'city': this.citySearch.city,
+                'region': this.citySearch.region
             }
         });
 

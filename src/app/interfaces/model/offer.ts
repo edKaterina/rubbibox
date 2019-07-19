@@ -8,6 +8,6 @@ export interface Offer {
         dateCreate: string,
         category: String,
         owner: string,
-        city?: string,
+        city?: { city: string, region: string },
     };
 }

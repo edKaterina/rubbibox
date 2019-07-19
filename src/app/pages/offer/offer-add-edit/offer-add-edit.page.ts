@@ -8,6 +8,10 @@ import {Offer} from '../../../interfaces/model/offer';
 import {map} from 'rxjs/operators';
 import {ModalController} from '@ionic/angular';
 import {OfferCityModalPage} from '../offer-city-modal/offer-city-modal.page';
+import {CitiesService} from '../../../services/cities.service';
+
+
+
 
 @Component({
     selector: 'app-offer-add-edit',
@@ -19,22 +23,18 @@ export class OfferAddEditPage implements OnInit {
     categoryList$: any;
     photo = [];
     cityList;
-city;
+    city = {city: '', region: ''};
+
     constructor(
         private router: Router,
         private offerService: OfferService,
+        private cityService: CitiesService,
         private authService: AuthService,
         private tabs: SystemPage,
         private modalController: ModalController
     ) {
         this.tabs.enable = false;
-        this.offerService.getCityList()
-            .pipe(
-                map(cities => cities.map(city => {
-                        return city.data.name;
-                    }),
-                )
-            )
+        this.cityService.getAllCities()
             .subscribe((city) => {
                 this.cityList = city;
             });
@@ -53,6 +53,7 @@ city;
         const offer: Offer = {
             data: {
                 ...form.value,
+                city: this.city,
                 arImg: this.photo,
                 dateCreate: (new Date()).toISOString(),
                 owner: uid
@@ -77,7 +78,7 @@ city;
         const modal = await this.modalController.create({
             component: OfferCityModalPage,
             componentProps: {
-                'current': this.cityList
+                'city': this.city
             }
         });
 

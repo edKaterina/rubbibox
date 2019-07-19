@@ -1,16 +1,18 @@
 <ion-header>
     <ion-toolbar mode="ios">
         <ion-title translate>search</ion-title>
-        <ion-button (click)="onClickFilterModalOpen()" color="light" slot="end">
-            <ion-icon name="options"></ion-icon>
-        </ion-button>
+        <ion-buttons (click)="onClickFilterModalOpen()" color="light" slot="end" style="    margin-right: 5px;">
+            <ion-icon name="options" size="large"></ion-icon>
+        </ion-buttons>
     </ion-toolbar>
 
 </ion-header>
 
 
 <ion-content>
-
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
 
     <ion-grid>
         <ion-row justify-content-start>
@@ -21,9 +23,7 @@
 
         </ion-row>
     </ion-grid>
-    <ion-list lines="full">
 
-    </ion-list>
 
 
 </ion-content>

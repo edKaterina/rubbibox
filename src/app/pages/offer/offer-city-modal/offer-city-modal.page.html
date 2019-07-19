@@ -5,11 +5,37 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-virtual-scroll [items]="current">
-    <ion-item *virtualItem="let cur" (click)="closeModal(cur)">
-      <ion-label >
-        {{cur}}
+
+    <ion-item>
+      <ion-input placeholder="Введите город..." [(ngModel)]="search"></ion-input>
+      <ion-icon name="search" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item *ngIf="region">
+      <ion-icon name="arrow-back" slot="start"></ion-icon>
+      <ion-label text-wrap (click)="onClickBack()">
+        <h2>{{region}}</h2>
       </ion-label>
     </ion-item>
-  </ion-virtual-scroll>
+    <ion-virtual-scroll [items]="cityList| cityFilter:{search:search, city: city}" *ngIf="region" approxItemHeight="100%">
+
+      <ion-item *virtualItem="let item;">
+
+        <ion-label text-wrap>
+          <h2>{{item.city}}</h2>
+        </ion-label>
+        <ion-radio slot="start" mode="ios" (click)="onClickCity(item.city)"
+                   [checked]="item.city === city"></ion-radio>
+
+      </ion-item>
+    </ion-virtual-scroll>
+    <ion-virtual-scroll [items]="regionList| cityFilter:{search:search, city: city}" *ngIf="!region" approxItemHeight="100%">
+
+      <ion-item *virtualItem="let item;">
+
+        <ion-label text-wrap (click)="onClickRegion(item)">
+          <h2>{{item}}</h2>
+        </ion-label>
+      </ion-item>
+    </ion-virtual-scroll>
+
 </ion-content>

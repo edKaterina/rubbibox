@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import * as data from '../../assets/russia.json';
+import * as data from '../../assets/cities.json';
 import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
 
