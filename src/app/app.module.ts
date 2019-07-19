@@ -24,6 +24,7 @@ import {Badge} from '@ionic-native/badge/ngx';
 import {ScreenOrientation} from '@ionic-native/screen-orientation/ngx';
 import {AppMinimize} from '@ionic-native/app-minimize/ngx';
 import {FirebaseModule} from './modules/firebase/firebase.module';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -60,7 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ScreenOrientation,
         InAppBrowser,
         AppMinimize,
-
+        Firebase,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         Camera,
         PhotoViewer

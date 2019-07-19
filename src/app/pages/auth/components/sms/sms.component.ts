@@ -1,22 +1,27 @@
-import {AfterViewInit, ChangeDetectorRef, Component} from '@angular/core';
-import {AlertController, NavController} from "@ionic/angular";
+import {AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
+import {AlertController, NavController, Platform} from '@ionic/angular';
 
 import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from 'firebase';
-import {User} from "../../../../interfaces/model/user";
-import {UserService} from "../../../../services/user/user.service";
+import {NgForm} from '@angular/forms';
+import {Router} from '@angular/router';
+import {UserService} from '../../../../services/user/user.service';
+import {AuthService} from '../../../../services/auth.service';
 
 @Component({
     selector: 'sms',
     templateUrl: './sms.component.html',
     styleUrls: ['./sms.component.scss'],
 })
-export class SmsAuthComponent implements AfterViewInit {
+export class SmsAuthComponent implements OnInit {
 
-    public recaptchaVerifier: firebase.auth.RecaptchaVerifier;
-    public phoneNumber;
-    public code;
-    public confirmationResult;
+    recaptchaVerifier: firebase.auth.RecaptchaVerifier;
+    phoneNumber;
+    code;
+    confirmationResult;
+    confirm = false;
+    sms = false;
+    isSendPhone: boolean;
 
     constructor(
         private fAuth: AngularFireAuth,
@@ -24,40 +29,47 @@ export class SmsAuthComponent implements AfterViewInit {
         private alertCtrl: AlertController,
         private navCtrl: NavController,
         private cdr: ChangeDetectorRef,
+        private authService: AuthService,
+        private router: Router,
+        private zone: NgZone,
+        private platform: Platform
     ) {
     }
 
-    ngAfterViewInit() {
-        this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {'size': 'invisible'});
+    ngOnInit() {
+        this.authService.initAuthSMS(window);
     }
 
-    applyPhone() {
-        const appVerifier = this.recaptchaVerifier;
-        const phoneNumberString = '+'+this.phoneNumber.replace(/\D+/g, "");
-        console.log(phoneNumberString);
-        this.fAuth.auth.signInWithPhoneNumber(phoneNumberString, appVerifier).then(confirmationResult => {
-            this.confirmationResult = confirmationResult;
-            //this.cdr.detectChanges();
-        }).catch((error) => {
-            console.log(error);
-        })
+    isMobile() {
+        return (this.platform.is('android') || this.platform.is('ios'));
     }
 
-    async applyCode() {
-        const credential = firebase.auth.PhoneAuthProvider.credential(this.confirmationResult.verificationId, this.code);
-        this.fAuth.auth.signInWithCredential(credential).then((result) => {
-            const user: User = {
-                id: result.uid,
-                data: {phone: result.phoneNumber}
-            };
-            this.userSerivce.edit(user);
-            this.navCtrl.navigateRoot('/');
-        }).catch((error) => {
-            console.log(error);
-        });
+    onSubmit(form: NgForm) {
+        console.log(form.value);
+        if (!this.isSendPhone) {
+            this.authService.sendPhone(form.value.phone).then(result => {
+                if (result) {
+                    this.isSendPhone = true;
+                }
+            });
+        } else {
+            form.value.phone = this.phoneNumber;
+            this.authService.sendCode(form.value.code, form.value).then(user => {
+                if (user) {
+                    this.router.navigate(['/system/profile']);
+                }
+            });
+        }
     }
 
-    cancel(){
+    changePhone(form: NgForm) {
+        this.isSendPhone = false;
+        form.reset();
+    }
+
+    cancel() {
+        this.confirm = false;
+        this.sms = false;
         this.confirmationResult = '';
         this.cdr.detectChanges();
     }

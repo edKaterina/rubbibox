@@ -1,27 +1,26 @@
 <div text-center>
-
+  <form #form="ngForm"  (ngSubmit)="onSubmit(form)">
   <ion-item no-padding>
     <ion-label position="stacked" translate>phone</ion-label>
-    <ion-input [readonly]="confirmationResult" [placeholder]="'phone_placeholder'|translate" inputmode="numeric" [(ngModel)]="phoneNumber"></ion-input>
+    <ion-input [disabled]="isSendPhone" [placeholder]="'phone_placeholder'|translate" inputmode="numeric" name="phone" [(ngModel)]="phoneNumber"></ion-input>
   </ion-item>
 
-  <ion-item no-padding *ngIf="confirmationResult">
+  <ion-item no-padding *ngIf="isSendPhone">
     <ion-label position="stacked" translate>confirmation_code</ion-label>
-    <ion-input placeholder="******" inputmode="numeric" [(ngModel)]="code"></ion-input>
+    <ion-input placeholder="******" inputmode="numeric" required name="code" [(ngModel)]="code"></ion-input>
   </ion-item>
 
-  <ion-button *ngIf="!confirmationResult" expand="full" shape="round" color="primary" id="sign-in-button" (click)="applyPhone()">
+  <ion-button  expand="full" shape="round" color="primary" id="sign-in-button" type="submit" *ngIf="!isSendPhone" [disabled]="form.invalid">
     <span slot="end" translate>viaSMS</span>
     <ion-icon slot="start" size="small" name="mail"></ion-icon>
   </ion-button>
 
-  <ion-button *ngIf="confirmationResult" expand="full" shape="round" color="primary" (click)="applyCode()">
+  <ion-button *ngIf="isSendPhone" expand="full" shape="round" type="submit"  color="primary" >
     <span slot="end" translate>login</span>
   </ion-button>
 
-  <ion-button *ngIf="confirmationResult" expand="full" shape="round" color="light" (click)="cancel()">
+  <ion-button expand="full" shape="round" color="light" *ngIf="isSendPhone" (click)="changePhone(form)">
     <span slot="end" translate>cancel</span>
   </ion-button>
-</div>
-
+</form>
 <div id="recaptcha-container"></div>
