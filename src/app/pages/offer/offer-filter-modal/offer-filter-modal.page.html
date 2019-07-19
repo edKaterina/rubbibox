@@ -2,8 +2,12 @@
     <ion-toolbar>
         <ion-title translate>filter</ion-title>
         <ion-buttons slot="end">
-            <ion-button (click)="onClickApply()" >Применить</ion-button>
-            <ion-button (click)="onClickRefresh()" >Сбросить</ion-button>
+            <ion-button (click)="onClickApply()">
+                <ion-icon name="checkmark"></ion-icon>
+            </ion-button>
+            <ion-button (click)="onClickRefresh()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
@@ -31,18 +35,33 @@
                 Города
             </ion-card-header>
             <ion-item>
-                <ion-input placeholder="Введите город..." [(ngModel)]="citySearch"></ion-input>
+                <ion-input placeholder="Введите город..." [(ngModel)]="search"></ion-input>
                 <ion-icon name="search" slot="end"></ion-icon>
             </ion-item>
-
-        <ion-virtual-scroll [items]="cityList| cityFilter:citySearch" approxItemHeight="100%">
-            <ion-item *virtualItem="let item;">
-
-                <ion-label text-wrap (click)="onClickCity(item.name)">
-                    <h2>{{item.name}}</h2>
+            <ion-item *ngIf="region">
+                <ion-icon name="arrow-back" slot="start"></ion-icon>
+                <ion-label text-wrap (click)="onClickBack()">
+                    <h2>{{region}}</h2>
                 </ion-label>
             </ion-item>
-        </ion-virtual-scroll>
+            <ion-virtual-scroll [items]="cityList| cityFilter:citySearch" *ngIf="region" approxItemHeight="100%">
+
+                <ion-item *virtualItem="let item;">
+
+                    <ion-label text-wrap (click)="onClickCity(item.city)">
+                        <h2>{{item.city}}</h2>
+                    </ion-label>
+                </ion-item>
+            </ion-virtual-scroll>
+            <ion-virtual-scroll [items]="regionList| cityFilter:citySearch" *ngIf="!region" approxItemHeight="100%">
+
+                <ion-item *virtualItem="let item;">
+
+                    <ion-label text-wrap (click)="onClickRegion(item)">
+                        <h2>{{item}}</h2>
+                    </ion-label>
+                </ion-item>
+            </ion-virtual-scroll>
         </ion-card>
 
     </ion-list>

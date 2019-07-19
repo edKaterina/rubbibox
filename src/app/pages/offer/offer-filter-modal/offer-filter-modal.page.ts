@@ -3,6 +3,7 @@ import {ModalController} from '@ionic/angular';
 import {OfferService} from '../../../services/offer/offer.service';
 import {map} from 'rxjs/operators';
 import {Offer} from '../../../interfaces/model/offer';
+import {CitiesService} from '../../../services/cities.service';
 
 @Pipe({
     name: 'cityFilter'
@@ -15,8 +16,13 @@ export class CityFilterPipe implements PipeTransform {
             return value;
         }
 
-        return value.filter((city) =>
-            city.name.toUpperCase().indexOf(searchCity.toUpperCase()) > -1
+        return value.filter((city) => {
+                if (city.city) {
+                    return (city.city.toUpperCase().indexOf(searchCity.toUpperCase()) > -1);
+                } else {
+                    return (city.toUpperCase().indexOf(searchCity.toUpperCase()) > -1);
+                }
+            }
         );
 
     }
@@ -32,21 +38,22 @@ export class CityFilterPipe implements PipeTransform {
 export class OfferFilterModalPage implements OnInit {
 
     categoryList;
+    regionList;
     cityList;
-    citySearch;
+    search;
     @Input() current;
     @Input() city;
+    @Input() region;
 
     constructor(
         private modalController: ModalController,
-        private offerService: OfferService
+        private offerService: OfferService,
+        private cities: CitiesService
     ) {
 
     }
 
     ngOnInit() {
-
-
         this.offerService.getCategoryList()
             .pipe(
                 map(category => category.map(cat => ({name: cat, toggle: true}))),
@@ -68,37 +75,55 @@ export class OfferFilterModalPage implements OnInit {
                 this.categoryList = category;
 
             });
-        this.offerService.getCityList()
-            .pipe(
-                map(cities => cities.map(city => {
-                        city.data.toggle = false;
+        this.search = this.region && this.city ? this.city : this.region;
 
-                        return city.data;
-                    }),
-                )
-            )
-            .subscribe((city) => {
-                this.cityList = city;
-                this.citySearch = this.city;
-            });
+        this.cities.getCitiesByRegion(this.region).subscribe(
+            value => {
+                this.cityList = value;
+            }
+        );
+        this.cities.getRegions().subscribe(
+            value => {
+                this.regionList = value;
+            }
+        );
+
 
     }
 
+    onClickRegion(region) {
+        this.cities.getCitiesByRegion(region).subscribe(
+            value => {
+                this.cityList = value;
+                this.region = region;
+                this.city = undefined;
+            }
+        );
 
+    }
+
+    onClickBack() {
+        this.city = undefined;
+        this.region = undefined;
+        this.search = undefined;
+    }
     onClickCity(name) {
-        this.citySearch = name;
+        this.city = name;
+        this.search = name;
     }
 
     onClickRefresh() {
         this.categoryList.map(item => item.toggle = true);
-        this.citySearch = undefined;
+        this.city = undefined;
+        this.region = undefined;
         this.onClickApply();
     }
 
     onClickApply() {
         this.modalController.dismiss({
             'category': this.categoryList,
-            'city': this.citySearch,
+            'city': this.city,
+            'region': this.region
         });
     }
 

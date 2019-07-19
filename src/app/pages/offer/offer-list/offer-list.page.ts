@@ -5,6 +5,7 @@ import {OfferService} from '../../../services/offer/offer.service';
 import {Observable} from 'rxjs';
 import {Offer} from '../../../interfaces/model/offer';
 import {IMAGE_SETTINGS} from '../../../config/no-image.settings';
+import {CitiesService} from '../../../services/cities.service';
 
 @Pipe({
     name: 'dateCreateOffer',
@@ -75,15 +76,18 @@ export class OfferListPage implements OnInit {
     noImageUrl = IMAGE_SETTINGS.NO_IMAGE;
     noPriceText = 'noPrice';
     filterParam: [];
-    citySearch: string;
+    citySearch: { region: string; city: string };
+    region: string;
 
     constructor(
         private offerService: OfferService,
-        private modalController: ModalController
+        private modalController: ModalController,
+        private cities: CitiesService
     ) {
     }
 
     ngOnInit() {
+
         this.offerList$ = this.offerService.getList();
     }
 
@@ -91,7 +95,12 @@ export class OfferListPage implements OnInit {
     onClickFilterModalOpen() {
         this.presentModal().then(data => {
             this.filterParam = data.category;
-            this.citySearch = data.city;
+            this.citySearch = {
+                region: data.city,
+                city: data.city
+            }
+            ;
+            this.region = data.region;
         });
     }
 
@@ -102,6 +111,7 @@ export class OfferListPage implements OnInit {
             componentProps: {
                 'current': this.filterParam,
                 'city': this.citySearch,
+                'region': this.region
             }
         });
 
