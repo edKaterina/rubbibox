@@ -38,6 +38,13 @@
             {
               "client_id": "269788389042-ghvgqlnt02b3pbgmap305bvsib3ehjoc.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "269788389042-csm0v99agendin8t6tplllfr8dtjlo8l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "de.rubbibox.app"
+              }
             }
           ]
         }
