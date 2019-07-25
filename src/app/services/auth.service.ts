@@ -6,7 +6,6 @@ import {HttpClient} from '@angular/common/http';
 import {CoreService} from './core.service';
 import {FIREBASE_CONFIG} from '../../firebase.credentials';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {auth} from 'firebase/app';
 import * as firebase from 'firebase';
 import {Router} from '@angular/router';
 import {Platform} from '@ionic/angular';
@@ -53,6 +52,17 @@ export class AuthService {
         });
     }
 
+    getCurrentUser() {
+        return new Promise<any>((resolve, reject) => {
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                    resolve(user);
+                } else {
+                    reject('No user logged in');
+                }
+            });
+        });
+    }
 
 
     // Сохраненный логин авторизованного пользователя
@@ -60,6 +70,7 @@ export class AuthService {
 
         return firebase.auth().currentUser ? firebase.auth().currentUser.uid : false;
     }
+
     async authWait(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.state.subscribe((authData) => {
@@ -69,6 +80,7 @@ export class AuthService {
             }));
         });
     }
+
     // инициализация капчи для авторизации по смс
     initAuthSMS(win) {
         if (!this.platform.is('ios') && !this.platform.is('android')) {
@@ -79,6 +91,7 @@ export class AuthService {
             this.windowRef.recaptchaVerifier.render();
         }
     }
+
     saveProfile(values?: { [key: string]: string }) {
         console.log('saveProfile', values);
         this.db.object(`users/${this.getLogin()}/phone`).set(values.phone);
@@ -104,6 +117,7 @@ export class AuthService {
             this.coreService.presentAlert(error);
         });
     }
+
     // Подтверждает авторизацию по коду отправленному в методе sendPhone
     sendCodeChange(code: string, values?: { [key: string]: string }): Promise<any> {
         this.coreService.presentLoading('Проверка кода');
@@ -117,6 +131,7 @@ export class AuthService {
             this.coreService.presentAlert(error);
         });
     }
+
     // авторизация, на телефон будет отправлен смс с кодом
     sendPhone(phone: string): Promise<any> {
         return new Promise((resolve, reject) => {
@@ -149,6 +164,7 @@ export class AuthService {
             }
         });
     }
+
     // Присоединение номера телефона к аккаунту
     linkAuthPhone(phone: string) {
         if (!phone) {

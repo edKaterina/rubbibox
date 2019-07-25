@@ -1,9 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {SystemPage} from './system.page';
-import {canActivate, redirectUnauthorizedTo} from "@angular/fire/auth-guard";
+import {AuthGuard} from '../services/auth.guard';
 
-const redirectUnauthorizedToLogin = redirectUnauthorizedTo(['/auth']);
 
 const routes: Routes = [
     {
@@ -20,12 +19,12 @@ const routes: Routes = [
             {
                 path: 'dialogs',
                 loadChildren: '../pages/messenger/messenger.module#MessengerModule',
-                ...canActivate(redirectUnauthorizedToLogin)
+                canActivate: [AuthGuard]
             },
             {
                 path: 'profile',
                 loadChildren: '../pages/profile/profile.module#ProfileModule',
-                ...canActivate(redirectUnauthorizedToLogin)
+                canActivate: [AuthGuard]
             }
         ]
     }
