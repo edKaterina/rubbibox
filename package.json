@@ -39,6 +39,8 @@
     "cordova-android": "8.0.0",
     "cordova-browser": "5.0.4",
     "cordova-ios": "5.0.0",
+    "cordova-plugin-androidx": "^1.0.2",
+    "cordova-plugin-androidx-adapter": "^1.1.0",
     "cordova-plugin-appminimize": "1.0.1",
     "cordova-plugin-camera": "^4.0.3",
     "cordova-plugin-device": "^2.0.2",
@@ -107,7 +109,9 @@
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-screen-orientation": {},
       "cordova-plugin-appminimize": {},
-      "cordova-plugin-firebase-lib": {}
+      "cordova-plugin-firebase-lib": {},
+      "cordova-plugin-androidx": {},
+      "cordova-plugin-androidx-adapter": {}
     },
     "platforms": [
       "android",
