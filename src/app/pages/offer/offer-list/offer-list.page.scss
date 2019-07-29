@@ -16,7 +16,8 @@ ion-thumbnail:nth-child(3n-1)  {
 
   width: var(--size);
   height: var(--size);
-  margin: 0px 1.5px;
+  margin: 0px 0px;
+  margin-left: 1px;
   margin-bottom: 1px;
 }
 
@@ -28,6 +29,7 @@ ion-thumbnail {
   height: var(--size);
   margin-bottom: 1px;
   margin-right: 0px;
+  margin-left: 1px;
 }
 
 .offer{
