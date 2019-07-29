@@ -5,6 +5,10 @@ ion-title {
 
 }
 
+#icon {
+  color: #575757;
+}
+
 ion-thumbnail:nth-child(3n-1)  {
 
   --size: calc(33.33vw - 1px);
