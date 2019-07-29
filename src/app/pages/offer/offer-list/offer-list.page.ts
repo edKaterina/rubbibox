@@ -87,7 +87,6 @@ export class OfferListPage implements OnInit {
     }
 
     ngOnInit() {
-
         this.offerList$ = this.offerService.getList();
     }
 
