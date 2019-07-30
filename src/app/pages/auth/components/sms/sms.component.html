@@ -2,7 +2,7 @@
   <form #form="ngForm"  (ngSubmit)="onSubmit(form)">
   <ion-item no-padding>
     <ion-label position="stacked" translate>phone</ion-label>
-    <ion-input [disabled]="isSendPhone" [placeholder]="'phone_placeholder'|translate" inputmode="numeric" name="phone" [(ngModel)]="phoneNumber"></ion-input>
+    <ion-input [disabled]="isSendPhone" [placeholder]="'phone_placeholder'|translate" inputmode="tel" name="phone" [(ngModel)]="phoneNumber"></ion-input>
   </ion-item>
 
   <ion-item no-padding *ngIf="isSendPhone">
