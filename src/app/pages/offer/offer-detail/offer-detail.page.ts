@@ -26,7 +26,6 @@ export class OfferDetailPage implements OnInit {
 
         this.offerService.getById(this.id).subscribe(data => {
             this.detailInfo = data;
-            console.log(this.detailInfo)
         });
     }
 
