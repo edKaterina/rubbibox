@@ -62,6 +62,7 @@ export class OfferAddEditPage implements OnInit {
 
         this.offerService.add(offer);
 
+        this.photo = [];
         form.reset();
 
         this.router.navigate(['/system/offers']);
