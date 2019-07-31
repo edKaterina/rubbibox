@@ -87,6 +87,10 @@ export class OfferAddEditPage implements OnInit {
 
         const {data} = await modal.onDidDismiss();
 
-        return data;
+        if(data.region != '' && data.city != ''){
+            return data;
+        }else{
+            this.city = {city: '', region: ''}
+        }
     }
 }

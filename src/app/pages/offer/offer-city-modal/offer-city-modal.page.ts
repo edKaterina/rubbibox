@@ -41,7 +41,6 @@ export class OfferCityModalPage implements OnInit {
         );
     }
 
-
     onClickRegion(region) {
         this.cities.getCitiesByRegion(region).subscribe(
             value => {
@@ -51,7 +50,6 @@ export class OfferCityModalPage implements OnInit {
                 this.search = undefined;
             }
         );
-
     }
 
     onClickBack() {
