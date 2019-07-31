@@ -9,6 +9,10 @@ ion-title {
   color: #575757;
 }
 
+.row {
+
+}
+
 ion-thumbnail:nth-child(3n-1)  {
 
   --size: calc(33.33vw - 1px);
@@ -20,6 +24,15 @@ ion-thumbnail:nth-child(3n-1)  {
   margin-bottom: 1px;
 }
 
+ion-thumbnail:nth-child(3n)  {
+
+  --size: calc(33.33vw - 1px);
+
+  width: var(--size);
+  height: var(--size);
+  margin-left: 1px;
+}
+
 ion-thumbnail {
   --size: calc(33.33vw - 1px);
 
@@ -28,7 +41,7 @@ ion-thumbnail {
   height: var(--size);
   margin-bottom: 1px;
   margin-right: 0px;
-  margin-left: 1px;
+  margin-left: 0.5px;
 }
 
 .offer{

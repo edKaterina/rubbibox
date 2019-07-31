@@ -14,8 +14,9 @@
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
 
-    <ion-grid>
-        <ion-row justify-content-start>
+
+    <ion-grid class="row">
+        <ion-row justify-content-start >
             <ion-thumbnail [routerLink]="['offer',offer.id]"
                            *ngFor="let offer of offerList$ | async | dateCreateOffer | cityCatFilter: citySearch| categoryFilter: filterParam">
                 <img src="{{offer.data.arImg ? offer.data.arImg[0] || noImageUrl : noImageUrl}}">
