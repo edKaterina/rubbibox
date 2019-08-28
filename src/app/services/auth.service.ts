@@ -102,7 +102,7 @@ export class AuthService {
         this.coreService.presentLoading('Проверка кода');
 
         const credential = firebase.auth.PhoneAuthProvider.credential(this.verificationId, code);
-        return firebase.auth().signInWithCredential(credential).then(result => {
+        return firebase.auth().signInAndRetrieveDataWithCredential(credential).then(result => {
             this.coreService.dismissLoading();
             if (values) {
                 this.authWait().then(uid => {
@@ -111,7 +111,7 @@ export class AuthService {
                     }
                 });
             }
-            return result.uid;
+            return result.user.uid;
         }).catch(error => {
             this.coreService.dismissLoading();
             this.coreService.presentAlert(error);
