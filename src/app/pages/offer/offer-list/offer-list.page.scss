@@ -35,12 +35,9 @@ ion-thumbnail:nth-child(3n)  {
 
 ion-thumbnail {
   --size: calc(33.33vw - 1px);
-
-
   width: var(--size);
   height: var(--size);
-  margin-bottom: 1px;
-  margin-right: 0px;
+  margin-bottom: 0.5px;
   margin-left: 0.5px;
 }
 
