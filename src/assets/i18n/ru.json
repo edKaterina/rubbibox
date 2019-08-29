@@ -40,5 +40,6 @@
   "agreement": "Nutzungsvereinbarung",
   "agreement_desc": "",
   "service_about": "Über Rubbibox",
-  "service_about_desc": ""
+  "service_about_desc": "",
+  "call_root": "Erlaubnis anrufen"
 }

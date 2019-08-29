@@ -5,15 +5,17 @@ export class User {
         img?: Array<string>,
         info?: string,
         phone: string,
+        permissionCall: boolean,
     };
 
-    constructor(id = '', {fio = '', img = [], info = '', phone = ''}) {
+    constructor(id = '', {fio = '', img = [], info = '', phone = '', permissionCall = false}) {
         this.id = id;
         this.data = {
             fio,
             img,
             info,
-            phone
-        }
+            phone,
+            permissionCall,
+        };
     }
 }

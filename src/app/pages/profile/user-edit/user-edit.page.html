@@ -24,6 +24,10 @@
       <ion-label position="stacked" translate>about</ion-label>
       <ion-textarea  maxlength="80" rows="2" [(ngModel)]="user?.data.info"></ion-textarea>
     </ion-item>
+    <ion-item lines="inset">
+      <ion-label translate>call_root</ion-label>
+      <ion-checkbox slot="start" [(ngModel)]="user?.data.permissionCall"></ion-checkbox>
+    </ion-item>
 
     <ion-button color="primary" expand="block" (click)="editUser(user)" translate>send</ion-button>
   </ion-list>
