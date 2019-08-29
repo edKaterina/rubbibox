@@ -15,30 +15,31 @@ ion-title {
 
 ion-thumbnail:nth-child(3n-1)  {
 
-  --size: calc(33.33vw - 1px);
-
-
+  --size: 33.3vw;
+  --border: 1px;
   width: var(--size);
   height: var(--size);
-  margin-left: 1px;
-  margin-bottom: 1px;
+  padding-left: var(--border);
+  padding-right: var(--border);
+  padding-bottom: var(--border);
 }
 
-ion-thumbnail:nth-child(3n)  {
-
-  --size: calc(33.33vw - 1px);
-
-  width: var(--size);
-  height: var(--size);
-  margin-left: 1px;
-}
+//ion-thumbnail:nth-child(3n)  {
+//
+//  --size: calc(33.33vw - 1px);
+//
+//  width: var(--size);
+//  height: var(--size);
+//  padding-left: var(--border);
+//  padding-right:var(--border);
+//}
 
 ion-thumbnail {
-  --size: calc(33.33vw - 1px);
+  --size: 33.3vw;
+  --border: 1px;
   width: var(--size);
   height: var(--size);
-  margin-bottom: 0.5px;
-  margin-left: 0.5px;
+  padding-bottom: var(--border);
 }
 
 .offer{

@@ -149,7 +149,7 @@ export class AuthService {
                 }).catch(error => {
                     console.log('error: ' + error);
                     this.coreService.dismissLoading();
-                    this.coreService.presentAlert(error);
+                    this.coreService.presentAlert(JSON.stringify(error));
                 });
             } else {
                 firebase.auth().signInWithPhoneNumber(phone, this.windowRef.recaptchaVerifier)
@@ -159,7 +159,7 @@ export class AuthService {
                         resolve('ok');
                     }).catch(error => {
                     this.coreService.dismissLoading();
-                    this.coreService.presentAlert(error);
+                    this.coreService.presentAlert(JSON.stringify(error));
                 });
             }
         });
