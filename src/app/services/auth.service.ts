@@ -114,24 +114,9 @@ export class AuthService {
             return result.user.uid;
         }).catch(error => {
             this.coreService.dismissLoading();
-            this.coreService.presentAlert(error);
+            this.coreService.presentAlert(JSON.stringify(error));
         });
     }
-
-    // Подтверждает авторизацию по коду отправленному в методе sendPhone
-    sendCodeChange(code: string, values?: { [key: string]: string }): Promise<any> {
-        this.coreService.presentLoading('Проверка кода');
-
-        const credential = firebase.auth.PhoneAuthProvider.credential(this.verificationId, code);
-        return firebase.auth().currentUser.updatePhoneNumber(credential).then(result => {
-            this.coreService.dismissLoading();
-            return result;
-        }).catch(error => {
-            this.coreService.dismissLoading();
-            this.coreService.presentAlert(error);
-        });
-    }
-
     // авторизация, на телефон будет отправлен смс с кодом
     sendPhone(phone: string): Promise<any> {
         return new Promise((resolve, reject) => {
@@ -162,35 +147,6 @@ export class AuthService {
                     this.coreService.presentAlert(JSON.stringify(error));
                 });
             }
-        });
-    }
-
-    // Присоединение номера телефона к аккаунту
-    linkAuthPhone(phone: string) {
-        if (!phone) {
-            this.coreService.presentToast('Введите номер телефона');
-            return;
-        }
-
-        if (phone.substr(0, 1) === '+') {
-            phone = phone.substr(1);
-        }
-
-        const server = `https://us-central1-${FIREBASE_CONFIG.projectId}.cloudfunctions.net`;
-        const uid = firebase.auth().currentUser.uid;
-
-        this.httpClient.get(`${server}/getAuthID?phone=${phone}&uid=${uid}`).subscribe(data => {
-            if (data['error']) {
-                this.coreService.presentToast(data['error']);
-                return;
-            }
-
-            document.location.href = data['call'];
-            this.db.object(`authHistory/${data['key']}/call_id`).valueChanges().subscribe(value => {
-                if (value) {
-                    firebase.auth().signInWithCustomToken(value as string);
-                }
-            });
         });
     }
 
