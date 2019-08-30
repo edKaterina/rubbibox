@@ -15,7 +15,7 @@ ion-title {
 
 ion-thumbnail:nth-child(3n-1)  {
 
-  --size: 33.3vw;
+  --size: calc(100vw / 3);
   --border: 1px;
   width: var(--size);
   height: var(--size);
@@ -24,18 +24,9 @@ ion-thumbnail:nth-child(3n-1)  {
   padding-bottom: var(--border);
 }
 
-//ion-thumbnail:nth-child(3n)  {
-//
-//  --size: calc(33.33vw - 1px);
-//
-//  width: var(--size);
-//  height: var(--size);
-//  padding-left: var(--border);
-//  padding-right:var(--border);
-//}
 
 ion-thumbnail {
-  --size: 33.3vw;
+  --size: calc(100vw / 3);
   --border: 1px;
   width: var(--size);
   height: var(--size);
