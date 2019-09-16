@@ -12,6 +12,8 @@ const routes: Routes = [
 
     // Конкретная заявка
     {path: 'offer/:id', loadChildren: '../../pages/offer/offer-detail/offer-detail.module#OfferDetailPageModule'},
+// Пользователь
+    {path: 'user/:id', loadChildren: '../../pages/offer/offer-user/offer-user.module#OfferUserPageModule'},
 
     //Добавить заявку
     {

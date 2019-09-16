@@ -16,7 +16,8 @@ const routes: Routes = [
     {
         path: 'chat/:id', loadChildren: './pages/messenger/chat/chat.module#ChatPageModule',
         canActivate: [AuthGuard]
-    }
+    },  { path: 'offer-user', loadChildren: './pages/offer/offer-user/offer-user.module#OfferUserPageModule' }
+
 
 
 ];
