@@ -8,6 +8,10 @@ const routes: Routes = [
         loadChildren: '../../pages/profile/user-profile/user-profile.module#ProfilePageModule'
     },
     {
+        path: 'favorite',
+        loadChildren: './favorite/favorite.module#FavoritePageModule'
+    },
+    {
         path: 'user-edit',
         loadChildren: '../../pages/profile/user-edit/user-edit.module#UserEditPageModule',
     },

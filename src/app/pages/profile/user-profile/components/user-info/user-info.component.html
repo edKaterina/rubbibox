@@ -1,9 +1,46 @@
-<ion-item detail="true" slot="start" lines="none" style="width: auto;display: inline-flex;max-width: 100%">
-    <ion-avatar slot="start">
-        <img src="{{user?.data?.img ? user.data.img[0] || noUserImageUrl : noUserImageUrl}}">
-    </ion-avatar>
-    <ion-label style="    ">
-        <ion-text><p style="margin: 0;padding-right: 10px;">{{user?.data?.fio || 'profile' | translate}}</p></ion-text>
-        <ion-text color="medium"><p style="margin: 0;padding-right: 10px;font-size: 11px" translate>edit</p></ion-text>
-    </ion-label>
-</ion-item>
+<ng-container *ngIf="user | async as userData; else loading">
+    <ion-item slot="start" lines="none">
+        <ion-avatar slot="start">
+            <img alt="" [src]="userData.data.img ? userData.data.img[0] || noUserImageUrl : noUserImageUrl">
+        </ion-avatar>
+        <ion-label>
+            <ion-text><p style="margin: 0;padding-right: 10px;">{{userData.data.fio || 'profile' | translate}}</p>
+            </ion-text>
+            <ion-text color="medium"><p style="margin: 0;padding-right: 10px;font-size: 14px"
+                                        translate>{{userData.data.login}}</p></ion-text>
+        </ion-label>
+        <ion-label slot="end">
+            <ion-text color="medium"><p style="margin: 0;padding-right: 10px;font-size: 11px ;    float: right;"
+                                        translate>
+                edit</p></ion-text>
+        </ion-label>
+    </ion-item>
+</ng-container>
+
+<ng-template #loading>
+    <ion-item slot="start" lines="none">
+        <ion-avatar slot="start">
+            <ion-skeleton-text>
+                <ion-thumbnail></ion-thumbnail>
+            </ion-skeleton-text>
+        </ion-avatar>
+        <ion-label>
+            <ion-text>
+                <p style="margin: 0;padding-right: 10px;">
+                    <ion-skeleton-text></ion-skeleton-text>
+                </p>
+            </ion-text>
+            <ion-text color="medium">
+                <p style="margin: 0;padding-right: 10px;font-size: 14px"
+                   translate>
+                    <ion-skeleton-text></ion-skeleton-text>
+                </p>
+            </ion-text>
+        </ion-label>
+        <ion-label slot="end">
+            <ion-text color="medium"><p style="margin: 0;padding-right: 10px;font-size: 11px ;    float: right;"
+                                        translate>
+                edit</p></ion-text>
+        </ion-label>
+    </ion-item>
+</ng-template>

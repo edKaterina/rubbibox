@@ -39,11 +39,10 @@ export class OfferUserPage implements OnInit {
         this.authService.authWait().then((login) => {
             this.user = this.userService.getById(this.userId).pipe(
                 map((item: User) => {
-                        console.log(item);
                         return item;
                     }
                 ));
-            this.favor = this.favoriteService.isFavor('users', this.userId).pipe(tap(item => console.log()));
+            this.favor = this.favoriteService.isFavor('users', this.userId);
         });
 
         this.offerList$ = this.offerService.getListByUser(this.userId);
@@ -52,7 +51,6 @@ export class OfferUserPage implements OnInit {
     }
 
     toggleFavorite(favor) {
-        console.log(favor);
         this.favoriteService.setFavor('users', this.userId, !favor);
     }
 

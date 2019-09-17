@@ -38,5 +38,9 @@
   "service_about_desc": "",
   "call_root": "Anrufe erlauben",
   "I": "Ich",
-  "noLogin": "Name nicht angegeben"
+  "noLogin": "Name nicht angegeben",
+  "favoriten": "Favoriten",
+  "my_add": "Meine Rubbis",
+  "favorite_add": "Rubbis",
+  "favorite_user": "User"
 }

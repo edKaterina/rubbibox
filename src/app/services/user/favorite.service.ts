@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
 import {DbService} from '../core/db.service';
-import {User} from '../../interfaces/model/user';
 import {AuthService} from '../auth.service';
-import {map, tap} from 'rxjs/operators';
+import {combineAll, first, map, switchMap} from 'rxjs/operators';
 import {AngularFireDatabase} from '@angular/fire/database';
+import {UserService} from './user.service';
+import {combineLatest, forkJoin} from 'rxjs';
+import {OfferService} from '../offer/offer.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +15,10 @@ export class FavoriteService {
 
     constructor(
         private db: AngularFireDatabase,
-        private authService: AuthService
+        private dbService: DbService,
+        private authService: AuthService,
+        private userService: UserService,
+        private addService: OfferService
     ) {
     }
 
@@ -22,6 +27,39 @@ export class FavoriteService {
             .snapshotChanges()
             .pipe(map(item => item.payload.val()
             ));
+    }
+
+    getMyFavorites() {
+        return this.dbService.getList(FavoriteService.path + '/' + this.authService.getLogin()).pipe(
+            map((favors) => {
+
+                return favors.reduce((object, item: { id: string, data: any }, index) => {
+                    object[item.id] = Object.keys(item.data);
+                    return object;
+                }, {});
+
+            }),
+            switchMap((items: any) => {
+                const res: any = {};
+                if (items.users) {
+                    res.users = forkJoin(items.users.map(item => {
+                        return this.userService.getById(item);
+                    }));
+
+                }
+                if (items.adds) {
+                    res.adds = forkJoin(items.adds.map(item => {
+                        return this.addService.getById(item);
+                    }));
+
+                }
+
+                return forkJoin(
+                    res
+                );
+            }),
+            first()
+        );
     }
 
     setFavor(type, id, favor) {

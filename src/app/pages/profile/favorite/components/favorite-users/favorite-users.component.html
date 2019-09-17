@@ -1,0 +1,26 @@
+<ng-container *ngIf="(data ) as offers ">
+    {{deleted|json}}
+    <ion-item [lines]="hidden? 'full' :'none'" (click)="hidden = !hidden">
+        <ion-label translate>favorite_user</ion-label>
+        <ion-icon class="icon" [name]="hidden? 'md-arrow-dropdown':'md-arrow-dropup'"></ion-icon>
+    </ion-item>
+    <ion-item-group [hidden]="hidden">
+        <ion-item *ngFor="let userData of offers " [detail]="false">
+
+            <ion-avatar [routerLink]="['/system/offers/user/',userData.id]" slot="start" class="thumbnail">
+                <img alt="" [src]="userData.data.img ? userData.data.img[0] || noUserImageUrl : noUserImageUrl">
+            </ion-avatar>
+
+            <ion-label text-wrap [routerLink]="['userData',userData.id]">
+                <h2 text-nowrap class="userData-item__name">{{userData.data.name || 'noFio'|translate}}</h2>
+                <ion-text class="ion-text-nowrap" color="medium">
+                    <p text-nowrap class="userData-item__date">{{userData.data.login || 'noLogin'|translate}}</p>
+                </ion-text>
+            </ion-label>
+            <ion-icon slot="end" name="heart" color="danger" (click)="deleteFavorite(userData.id)"></ion-icon>
+        </ion-item>
+    </ion-item-group>
+
+
+</ng-container>
+

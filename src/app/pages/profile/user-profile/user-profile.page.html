@@ -1,14 +1,26 @@
 <ion-header>
-  <ion-toolbar>
-    <app-user-info [routerLink]="['/system/profile/user-edit']"></app-user-info>
-    <ion-buttons slot="end">
-      <ion-button [routerLink]="['/system/profile/settings']" ><ion-icon name="information-circle-outline"></ion-icon></ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar mode="ios">
+        <ion-title translate>I</ion-title>
+        <ion-buttons slot="end">
+            <ion-button [routerLink]="['/system/profile/settings']">
+                <ion-icon name="information-circle-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list no-padding>
-    <app-user-offers></app-user-offers>
-  </ion-list>
+    <app-user-info [routerLink]="['/system/profile/user-edit']"></app-user-info>
+
+    <ion-list no-padding>
+        <ion-item lines="full" detail="false" [routerLink]="['/system/profile/favorite']">
+            <ion-label translate>favoriten</ion-label>
+            <ion-icon class="icon" [name]="'md-arrow-dropright'"></ion-icon>
+        </ion-item>
+        <ion-item lines="full" (click)="openAdd = !openAdd">
+            <ion-label translate>my_add</ion-label>
+            <ion-icon class="icon" [name]="!openAdd? 'md-arrow-dropdown':'md-arrow-dropup'"></ion-icon>
+        </ion-item>
+        <app-user-offers [hidden]="!openAdd"></app-user-offers>
+    </ion-list>
 </ion-content>

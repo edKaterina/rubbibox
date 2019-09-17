@@ -21,6 +21,16 @@
         <ion-list>
 
 
+            <ng-container *ngIf="(favor|async) as fav; else noFavorite">
+                <ion-button (click)="toggleFavorite(true)">
+                    <ion-icon class="heart" name="heart"></ion-icon>
+                </ion-button>
+            </ng-container>
+            <ng-template #noFavorite>
+                <ion-button (click)="toggleFavorite(false)">
+                    <ion-icon class="heart" name="heart-empty"></ion-icon>
+                </ion-button>
+            </ng-template>
             <ion-item no-padding>
                 <ion-label text-wrap>
                     <ion-text color="primary">

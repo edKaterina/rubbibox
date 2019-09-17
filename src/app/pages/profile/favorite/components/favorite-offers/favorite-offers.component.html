@@ -1,0 +1,28 @@
+<ng-container *ngIf="data as offers">
+    <ion-item [lines]="hidden? 'full' :'none'" (click)="hidden = !hidden">
+        <ion-label translate>favorite_add</ion-label>
+        <ion-icon class="icon" [name]="hidden? 'md-arrow-dropdown':'md-arrow-dropup'"></ion-icon>
+    </ion-item>
+    <ion-item-group [hidden]="hidden">
+        <ion-item *ngFor="let offer of offers" [detail]="false">
+
+            <ion-avatar [routerLink]="['/system/offers/user/',offer.id]" slot="start" class="thumbnail">
+                <img [src]="offer.data.arImg  ? offer.data.arImg[0] || noImageUrl : noImageUrl">
+            </ion-avatar>
+
+            <ion-label text-wrap [routerLink]="['offer',offer.id]">
+                <ion-text class="ion-text-nowrap" color="medium">
+                    <p text-nowrap class="offer-item__date">{{offer.data.dateCreate | date: 'dd.MM.y HH:mm'}}</p>
+                </ion-text>
+                <h2 text-nowrap class="offer-item__name">{{offer.data.name}}</h2>
+                <ion-text color="medium">
+                    <p text-nowrap class="offer-item__category"><span translate>category</span> {{offer.data.category}}
+                    </p>
+                </ion-text>
+            </ion-label>
+            <ion-icon slot="end" name="heart" color="danger" (click)="deleteFavorite(offer.id)"></ion-icon>
+        </ion-item>
+    </ion-item-group>
+
+
+</ng-container>

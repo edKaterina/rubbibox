@@ -3,6 +3,7 @@ import {IMAGE_SETTINGS} from '../../../../../config/no-image.settings';
 import {User} from '../../../../../interfaces/model/user';
 import {UserService} from "../../../../../services/user/user.service";
 import {AuthService} from "../../../../../services/auth.service";
+import {FavoriteService} from '../../../../../services/user/favorite.service';
 
 @Component({
     selector: 'app-offer-detail-user-info',
@@ -31,5 +32,6 @@ export class OfferDetailUserInfoComponent implements OnInit {
 
     ngOnInit() {
     }
+
 
 }

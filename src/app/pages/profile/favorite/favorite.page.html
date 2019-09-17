@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title translate>favoriten</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ng-container *ngIf="myFavorites |async as data">
+        <ion-list lines="full">
+            <app-favorite-adds *ngIf="data.adds" [(data)]="data.adds | deletedPipe: deleted" [deleted]="deleted"
+                               (delete)="deleteFavorite($event)"></app-favorite-adds>
+            <app-favorite-users *ngIf="data.users" [data]="data.users | deletedPipe: deleted" [deleted]="deleted"
+                                (delete)="deleteFavorite($event)"></app-favorite-users>
+
+
+        </ion-list>
+    </ng-container>
+</ion-content>
