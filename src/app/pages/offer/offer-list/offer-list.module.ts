@@ -32,7 +32,6 @@ const routes: Routes = [
         OfferListItemComponent,
         CategoryFilterPipe,
         CityCatFilterPipe,
-        DateCreateOfferPipe,
     ],
 
     entryComponents: [

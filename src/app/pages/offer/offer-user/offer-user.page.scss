@@ -1,0 +1,52 @@
+
+ion-grid{
+  --ion-grid-padding:5px 5px;
+}
+ion-title {
+
+}
+
+#icon {
+  color: #575757;
+}
+
+.row {
+
+}
+
+ion-thumbnail:nth-child(3n-1)  {
+
+  --size: calc(100vw / 3);
+  --border: 1px;
+  width: var(--size);
+  height: var(--size);
+  padding-left: var(--border);
+  padding-right: var(--border);
+  padding-bottom: var(--border);
+}
+
+
+ion-thumbnail {
+  --size: calc(100vw / 3);
+  --border: 1px;
+  width: var(--size);
+  height: var(--size);
+  padding-bottom: var(--border);
+}
+
+.offer{
+  &__list{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-content: flex-start;
+
+  }
+  &__item {
+    --size: calc(33.33vw - 10px);
+    width: var(--size);
+    height:var(--size);
+
+    margin-bottom: 1px;
+  }
+}

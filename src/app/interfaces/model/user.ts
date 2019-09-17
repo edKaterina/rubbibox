@@ -6,7 +6,10 @@ export class User {
         info?: string,
         phone: string,
         permissionCall: boolean,
+        login?: string
+
     };
+    isFavor?: boolean;
 
     constructor(id = '', {fio = '', img = [], info = '', phone = '', permissionCall = false}) {
         this.id = id;

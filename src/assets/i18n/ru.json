@@ -4,13 +4,11 @@
   "viaSMS": "Passwort per SMS",
   "confirmation_code": "SMS-Code eingeben",
   "phone_placeholder": "Format +491...",
-
   "search": "Alle Rubbis",
   "city": "Stadt",
   "add": "Neuer Rubbi abgeben",
   "messages": "Nachrichten",
   "profile": "Profil",
-
   "detail": "",
   "description": "Beschreibung",
   "message": "Nachricht ...",
@@ -23,11 +21,9 @@
   "send": "Senden",
   "noPrice": "Preis nicht angegeben",
   "filter": "Suche verfeinern",
-
   "noFio": "Name nicht angegeben",
   "call": "Anrufen",
   "write": "Nachricht",
-
   "today": "Heute",
   "new_message": "Neue Nachricht",
   "ok": "ОК",
@@ -35,11 +31,12 @@
   "edit": "Bearbeiten",
   "no_offers": "Du hast keine Rubbis",
   "select": "Bitte auswählen",
-
   "settings": "Info",
   "agreement": "Nutzungsvereinbarung",
   "agreement_desc": "",
   "service_about": "Über Rubbibox",
   "service_about_desc": "",
-  "call_root": "Anrufe erlauben"
+  "call_root": "Anrufe erlauben",
+  "I": "Ich",
+  "noLogin": "Name nicht angegeben"
 }

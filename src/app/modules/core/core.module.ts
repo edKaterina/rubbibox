@@ -7,10 +7,12 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { FormUploadComponent } from '../../components/form-upload/form-upload.component';
 import {CityFilterPipe} from '../../pages/offer/offer-filter-modal/offer-filter-modal.page';
+import {DateCreateOfferPipe} from '../../pages/offer/offer-list/offer-list.page';
 
 const components = [
     FormUploadComponent,
   CityFilterPipe,
+  DateCreateOfferPipe
 ];
 
 @NgModule({

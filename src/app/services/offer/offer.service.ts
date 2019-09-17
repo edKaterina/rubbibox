@@ -25,6 +25,10 @@ export class OfferService {
         return this.db.getList<Offer>(OfferService.path);
     }
 
+    getListByUser(id): Observable<Offer[]> {
+        return this.db.getList<Offer>(OfferService.path, {name: 'owner', value: id});
+    }
+
     getMy(): Observable<Offer[]> {
         return this.db.snapshotChangesList<Offer>(OfferService.path, {name: 'owner', value: this.authService.getLogin()});
     }
