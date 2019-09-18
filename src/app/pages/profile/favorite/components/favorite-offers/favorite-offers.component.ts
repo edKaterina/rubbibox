@@ -11,7 +11,6 @@ export class FavoriteOffersComponent implements OnInit {
     @Output() delete: EventEmitter<any> = new EventEmitter();
     hidden = true;
     noImageUrl = IMAGE_SETTINGS.NO_IMAGE;
-    @Input() deleted;
 
     constructor() {
     }

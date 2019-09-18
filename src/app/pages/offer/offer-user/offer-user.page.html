@@ -1,10 +1,10 @@
-<ng-container *ngIf="user | async as userData; else loading">
-    <ion-header>
-        <ion-toolbar>
-            <ion-buttons slot="start">
-                <ion-back-button></ion-back-button>
-            </ion-buttons>
+<ion-header>
 
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ng-container *ngIf="user | async as userData; else loadingHeader">
             <ion-item lines="none" no-padding>
                 <ion-avatar slot="start">
                     <img [src]="userData.data?.img ? userData.data.img[0] || noUserImageUrl : noUserImageUrl" alt="">
@@ -29,10 +29,41 @@
                     <ion-icon name="arrow-round-up"></ion-icon>
                 </ion-button>
             </ion-buttons>
-        </ion-toolbar>
-    </ion-header>
+        </ng-container>
+        <ng-template #loadingHeader>
+            <ion-item lines="none" no-padding>
+                <ion-avatar slot="start">
+                    <ion-skeleton-text></ion-skeleton-text>
+                </ion-avatar>
+                <ion-label>
+                    <ion-text>
+                        <p translate>
+                            <ion-skeleton-text></ion-skeleton-text>
+                        </p>
+                    </ion-text>
+                    <ion-text>
+                        <p translate style="color: #1A70FF">
+                            <ion-skeleton-text></ion-skeleton-text>
+                        </p>
+                    </ion-text>
+                </ion-label>
+            </ion-item>
+            <ion-buttons slot="end">
+                <ion-button>
+                    <ion-skeleton-text></ion-skeleton-text>
+                </ion-button>
 
-    <ion-content>
+                <ion-button>
+                    <ion-icon name="arrow-round-up"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+        </ng-template>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+    <ng-container *ngIf="user | async as userData; else loadData">
         <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
             <ion-refresher-content></ion-refresher-content>
         </ion-refresher>
@@ -47,32 +78,9 @@
 
             </ion-row>
         </ion-grid>
-    </ion-content>
-</ng-container>
-<ng-template #loading>
-    <ion-header>
-        <ion-toolbar>
-            <ion-buttons slot="start">
-                <ion-back-button></ion-back-button>
-            </ion-buttons>
-            <ion-title>
-                <ion-avatar slot="start">
-                    <img [src]="noUserImageUrl">
-                </ion-avatar>
-                <ion-text><p translate>noFio</p></ion-text>
-            </ion-title>
-            <ion-buttons slot="end">
-                <ion-button (click)="empty=!empty">
-                    <ion-icon name="heart-empty"></ion-icon>
-                </ion-button>
-                <ion-button (click)="share()">
-                    <ion-icon name="arrow-round-up"></ion-icon>
-                </ion-button>
-            </ion-buttons>
-        </ion-toolbar>
-    </ion-header>
+    </ng-container>
+    <ng-template #loadData>
+        <ion-skeleton-text></ion-skeleton-text>
+    </ng-template>
+</ion-content>
 
-    <ion-content padding>
-
-    </ion-content>
-</ng-template>

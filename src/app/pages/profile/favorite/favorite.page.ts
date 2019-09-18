@@ -1,7 +1,8 @@
 import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
 import {FavoriteService} from '../../../services/user/favorite.service';
-import {tap} from 'rxjs/operators';
+import {map, switchMap, tap} from 'rxjs/operators';
 import {AlertController} from '@ionic/angular';
+import {BehaviorSubject} from 'rxjs';
 
 @Pipe({name: 'deletedPipe'})
 export class DeletedPipe implements PipeTransform {
@@ -23,21 +24,30 @@ export class DeletedPipe implements PipeTransform {
 })
 export class FavoritePage {
     myFavorites;
-    deleted: string [] = [];
+    deleted: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
     constructor(private favoriteServise: FavoriteService,
                 private alertController: AlertController) {
     }
 
     ionViewDidEnter() {
-        this.myFavorites = this.favoriteServise.getMyFavorites();
+        this.myFavorites = this.favoriteServise.getMyFavorites().pipe(switchMap((items: any) => {
+            return this.deleted.pipe(map((deletedItemsId) => {
+                return Object.keys(items).reduce((its, type) => {
+                    const arrType = items[type].filter((item: { id: string, data: any }) => deletedItemsId.indexOf(item.id) === -1);
+                    if (arrType.length > 0) {
+                        its[type] = arrType;
+                    }
+                    return its;
+                }, {});
+
+            }));
+        }));
     }
 
     deleteFavorite(event) {
         this.presentAlertConfirm(event);
-        this.favoriteServise.setFavor(event.type, event.id, false).then(value => {
-            this.deleted.push(event.id);
-        });
+
     }
 
     async presentAlertConfirm(event) {
@@ -52,7 +62,9 @@ export class FavoritePage {
                     text: 'Да',
                     handler: () => {
                         this.favoriteServise.setFavor(event.type, event.id, false).then(value => {
-                            this.deleted.push(event.id);
+                            const del = this.deleted.getValue();
+                            del.push(event.id);
+                            this.deleted.next(del);
                         });
                     }
                 }

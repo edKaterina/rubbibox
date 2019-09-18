@@ -7,9 +7,9 @@
 <ion-content>
     <ng-container *ngIf="myFavorites |async as data">
         <ion-list lines="full">
-            <app-favorite-adds *ngIf="data.adds" [(data)]="data.adds | deletedPipe: deleted" [deleted]="deleted"
+            <app-favorite-adds *ngIf="data.adds" [data]="data.adds"
                                (delete)="deleteFavorite($event)"></app-favorite-adds>
-            <app-favorite-users *ngIf="data.users" [data]="data.users | deletedPipe: deleted" [deleted]="deleted"
+            <app-favorite-users *ngIf="data.users" [data]="data.users"
                                 (delete)="deleteFavorite($event)"></app-favorite-users>
 
 

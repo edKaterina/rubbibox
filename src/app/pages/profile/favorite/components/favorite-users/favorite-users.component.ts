@@ -8,7 +8,6 @@ import {IMAGE_SETTINGS} from '../../../../../config/no-image.settings';
 })
 export class FavoriteUsersComponent implements OnInit {
     @Input() data;
-    @Input() deleted;
     @Output() delete: EventEmitter<any> = new EventEmitter();
     noUserImageUrl = IMAGE_SETTINGS.NO_USER_IMAGE;
 
