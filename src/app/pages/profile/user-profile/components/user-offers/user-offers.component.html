@@ -1,8 +1,9 @@
-<ng-container *ngIf="data as offers; else nodata">
-    <ion-item lines="full" *ngFor="let offer of offers" [detail]="false">
+<ng-container *ngIf="( offers |async) as offersList; else nodata">
+    <ion-item lines="full" *ngFor="let offer of offersList" [detail]="false">
 
         <ion-thumbnail [routerLink]="['offer',offer.id]" slot="start" class="thumbnail">
-            <img alt="" [src]="offer.data.arImg && offer.data.arImg[0] ? offer.data.arImg[0] || noImageUrl : noImageUrl">
+            <img alt=""
+                 [src]="offer.data.arImg && offer.data.arImg[0] ? offer.data.arImg[0] || noImageUrl : noImageUrl">
         </ion-thumbnail>
 
         <ion-label text-wrap [routerLink]="['offer',offer.id]">

@@ -6,6 +6,7 @@ import {FavoriteService} from '../../../services/user/favorite.service';
 import {map, tap} from 'rxjs/operators';
 import {User} from '../../../interfaces/model/user';
 import {AuthService} from '../../../services/auth.service';
+import {NavController} from '@ionic/angular';
 
 @Component({
     selector: 'app-offer-detail',
@@ -22,8 +23,8 @@ export class OfferDetailPage implements OnInit {
         private activateRoute: ActivatedRoute,
         private offerService: OfferService,
         private favoriteService: FavoriteService,
-        private authService: AuthService
-
+        private authService: AuthService,
+        private navController: NavController
     ) {
     }
 
@@ -36,6 +37,10 @@ export class OfferDetailPage implements OnInit {
         this.offerService.getById(this.id).subscribe(data => {
             this.detailInfo = data;
         });
+    }
+
+    back() {
+        this.navController.back();
     }
 
     toggleFavorite(favor) {

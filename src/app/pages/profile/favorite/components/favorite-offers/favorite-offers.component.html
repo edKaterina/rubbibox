@@ -6,11 +6,11 @@
     <ion-item-group [hidden]="hidden">
         <ion-item *ngFor="let offer of offers" [detail]="false">
 
-            <ion-avatar slot="start" class="thumbnail" [routerLink]="['/system/offers/offer/',offer.id]" >
+            <ion-avatar slot="start" class="thumbnail" (click)="go(offer.id)" >
                 <img [src]="offer.data.arImg  ? offer.data.arImg[0] || noImageUrl : noImageUrl">
             </ion-avatar>
 
-            <ion-label text-wrap  [routerLink]="['/system/offers/offer/',offer.id]" >
+            <ion-label text-wrap  (click)="go(offer.id)" >
                 <ion-text class="ion-text-nowrap" color="medium">
                     <p text-nowrap class="offer-item__date">{{offer.data.dateCreate | date: 'dd.MM.y HH:mm'}}</p>
                 </ion-text>

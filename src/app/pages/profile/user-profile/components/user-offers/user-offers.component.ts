@@ -1,27 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import {OfferService} from "../../../../../services/offer/offer.service";
-import {Offer} from "../../../../../interfaces/model/offer";
-import {IMAGE_SETTINGS} from "../../../../../config/no-image.settings";
+import {Component, OnInit} from '@angular/core';
+import {OfferService} from '../../../../../services/offer/offer.service';
+import {Offer} from '../../../../../interfaces/model/offer';
+import {IMAGE_SETTINGS} from '../../../../../config/no-image.settings';
 
 @Component({
-  selector: 'app-user-offers',
-  templateUrl: './user-offers.component.html',
-  styleUrls: ['./user-offers.component.scss']
+    selector: 'app-user-offers',
+    templateUrl: './user-offers.component.html',
+    styleUrls: ['./user-offers.component.scss']
 })
 export class UserOffersComponent implements OnInit {
 
-  noImageUrl = IMAGE_SETTINGS.NO_IMAGE;
+    noImageUrl = IMAGE_SETTINGS.NO_IMAGE;
 
-  constructor(private offerService: OfferService) { }
+    constructor(private offerService: OfferService) {
+    }
 
-  offers: Array<Offer>;
+    offers;
 
-  ngOnInit() {
-      this.offerService.getMy().subscribe((offers:Array<Offer>)=>{this.offers = offers});
-  }
+    ngOnInit() {
+        this.offers =   this.offerService.getMy();
+    }
 
-  remove(offer){
-      this.offerService.delete(offer);
-  }
+    remove(offer) {
+        this.offerService.delete(offer);
+    }
 
 }

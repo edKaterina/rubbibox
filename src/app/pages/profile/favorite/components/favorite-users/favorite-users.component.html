@@ -13,9 +13,9 @@
             </ion-avatar>
 
             <ion-label text-wrap  [routerLink]="['/system/offers/user/',userData.id]">
-                <h2 text-nowrap class="userData-item__name">{{userData.data.fio || ('noFio'|translate)}}</h2>
-                <ion-text class="ion-text-nowrap" color="medium">
-                    <p text-nowrap class="userData-item__date">{{userData.data.login || ('noLogin'|translate)}}</p>
+                <h2 text-nowrap >{{userData.data.fio || ('noFio'|translate)}}</h2>
+                <ion-text  color="medium" style="color: #2678FF;">
+                    <p text-nowrap >{{userData.data.login || ('noLogin'|translate)}}</p>
                 </ion-text>
             </ion-label>
             <ion-icon slot="end" name="heart" color="danger" (click)="deleteFavorite(userData.id)"></ion-icon>
