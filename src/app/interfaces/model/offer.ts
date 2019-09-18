@@ -10,4 +10,5 @@ export interface Offer {
         owner: string,
         city?: { city: string, region: string },
     };
+
 }

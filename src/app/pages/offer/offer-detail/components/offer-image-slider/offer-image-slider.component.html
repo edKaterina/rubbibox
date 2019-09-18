@@ -11,7 +11,7 @@
 
 
     <ion-slide *ngFor="let img of imgList">
-        <div class="slider__wrap">
+        <div class="slider__wrap" (click)="photoViewerShow(img)">
             <span class="slider__cover" [style.background]="'url(' + img + ')'"></span>
             <div class="slider__img-wrap">
                 <img src="{{img}}">

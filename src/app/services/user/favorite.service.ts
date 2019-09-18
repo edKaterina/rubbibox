@@ -25,7 +25,7 @@ export class FavoriteService {
     isFavor(type, id) {
         return this.db.object(FavoriteService.path + '/' + this.authService.getLogin() + '/' + type + '/' + id)
             .snapshotChanges()
-            .pipe(map(item => item.payload.val()
+            .pipe(map(item => !!item.payload.val()
             ));
     }
 

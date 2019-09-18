@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {PhotoViewer} from '@ionic-native/photo-viewer/ngx';
 
 @Component({
     selector: 'app-offer-image-slider',
@@ -11,10 +12,15 @@ export class OfferImageSliderComponent implements OnInit {
 
     noImageUrl = '../assets/helpImage/no-image.png';
 
-    constructor() {
+    constructor(
+        private photoViewer: PhotoViewer
+    ) {
     }
 
     ngOnInit() {
     }
 
+    photoViewerShow(url) {
+        this.photoViewer.show(url);
+    }
 }

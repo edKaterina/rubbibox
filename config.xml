@@ -21,6 +21,7 @@
     <platform name="android">
         <allow-intent href="market:*" />
         <preference name="android-minSdkVersion" value="21" />
+        <preference name="AndroidLaunchMode" value="singleTask" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
         <icon density="hdpi" src="resources/android/icon/drawable-hdpi-icon.png" />
@@ -104,6 +105,16 @@
                 </dict>
             </array>
         </edit-config>
+        <config-file parent="com.apple.developer.associated-domains" target="*-Debug.plist">
+            <array>
+                <string>applinks:rubbibox.com</string>
+            </array>
+        </config-file>
+        <config-file parent="com.apple.developer.associated-domains" target="*-Release.plist">
+            <array>
+                <string>applinks:rubbibox.com</string>
+            </array>
+        </config-file>
         <preference name="target-device" value="handset" />
     </platform>
     <plugin name="cordova-sqlite-storage" spec="^2.6.0" />

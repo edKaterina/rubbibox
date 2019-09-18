@@ -3,7 +3,6 @@
 @import '~@ionic/angular/css/normalize.css';
 @import '~@ionic/angular/css/structure.css';
 @import '~@ionic/angular/css/typography.css';
-
 @import '~@ionic/angular/css/padding.css';
 @import '~@ionic/angular/css/float-elements.css';
 @import '~@ionic/angular/css/text-alignment.css';
@@ -11,9 +10,16 @@
 @import '~@ionic/angular/css/flex-utils.css';
 
 
-*{
+* {
   outline: none;
 }
-.heart{
+
+.heart {
   color: red;
+}
+
+.buttons-control {
+  ion-button {
+    color: black;
+  }
 }
