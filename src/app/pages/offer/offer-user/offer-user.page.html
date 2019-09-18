@@ -2,7 +2,7 @@
 
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <ion-back-button defaultHref="/system/profile/favorite"></ion-back-button>
         </ion-buttons>
         <ng-container *ngIf="user | async as userData; else loadingHeader">
             <ion-item lines="none" no-padding>

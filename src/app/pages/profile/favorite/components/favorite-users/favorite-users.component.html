@@ -8,11 +8,11 @@
     <ion-item-group [hidden]="hidden">
         <ion-item *ngFor="let userData of offers" detail="false">
 
-            <ion-avatar [routerLink]="['/system/offers/user/',userData.id]" slot="start" class="thumbnail">
+            <ion-avatar slot="start" class="thumbnail"  [routerLink]="['/system/offers/user/',userData.id]">
                 <img alt="" [src]="userData.data.img ? userData.data.img[0] || noUserImageUrl : noUserImageUrl">
             </ion-avatar>
 
-            <ion-label text-wrap [routerLink]="['userData',userData.id]">
+            <ion-label text-wrap  [routerLink]="['/system/offers/user/',userData.id]">
                 <h2 text-nowrap class="userData-item__name">{{userData.data.fio || ('noFio'|translate)}}</h2>
                 <ion-text class="ion-text-nowrap" color="medium">
                     <p text-nowrap class="userData-item__date">{{userData.data.login || ('noLogin'|translate)}}</p>
