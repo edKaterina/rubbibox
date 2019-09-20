@@ -26,6 +26,8 @@ import {AppMinimize} from '@ionic-native/app-minimize/ngx';
 import {FirebaseModule} from './modules/firebase/firebase.module';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import {Deeplinks} from '@ionic-native/deeplinks/ngx';
+import {SocialSharing} from '@ionic-native/social-sharing/ngx';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -66,7 +68,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         Camera,
         PhotoViewer,
-        Deeplinks
+        Deeplinks,
+        SocialSharing,
+        Clipboard
     ],
     bootstrap: [AppComponent]
 })

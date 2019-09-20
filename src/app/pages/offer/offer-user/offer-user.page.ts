@@ -10,6 +10,8 @@ import {Offer} from '../../../interfaces/model/offer';
 import {FavoriteService} from '../../../services/user/favorite.service';
 import {formatValidator} from '@angular-devkit/schematics/src/formats/format-validator';
 import {AuthService} from '../../../services/auth.service';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { LINK_SETTINGS } from 'src/app/config/deep-link.setting';
 
 @Component({
     selector: 'app-offer-user',
@@ -30,21 +32,26 @@ export class OfferUserPage implements OnInit {
         private userService: UserService,
         private offerService: OfferService,
         private favoriteService: FavoriteService,
-        private authService: AuthService
+        private authService: AuthService,
+        private socialSharing: SocialSharing
     ) {
     }
-
+    share(user) {
+        this.socialSharing.share(` Пользователь: ${user.data.fio + ' ' +LINK_SETTINGS.HOST+'/user/' + user.id}`)
+    }
     ngOnInit() {
         this.userId = this.activeRout.snapshot.params.id;
         this.authService.authWait().then((login) => {
-            this.user = this.userService.getById(this.userId).pipe(
+            
+            this.favor = this.favoriteService.isFavor('users', this.userId).pipe(map(res => {
+                return {res};
+            }));
+        });
+this.user = this.userService.getById(this.userId).pipe(
                 map((item: User) => {
                         return item;
                     }
                 ));
-            this.favor = this.favoriteService.isFavor('users', this.userId);
-        });
-
         this.offerList$ = this.offerService.getListByUser(this.userId);
 
 
@@ -54,9 +61,6 @@ export class OfferUserPage implements OnInit {
         this.favoriteService.setFavor('users', this.userId, !favor);
     }
 
-    share() {
-
-    }
 
     doRefresh(event) {
         this.offerList$ = this.offerService.getListByUser(this.userId);

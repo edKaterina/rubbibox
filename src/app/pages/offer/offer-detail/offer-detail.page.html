@@ -41,7 +41,7 @@
                 <ion-button [routerLink]="['/chat',user.id]">
                     <ion-icon name="send"></ion-icon>
                 </ion-button>
-                <ion-button>
+                <ion-button (click)="share(offer)">
                     <ion-icon name="arrow-round-up"></ion-icon>
                 </ion-button>
                 <ng-container *ngIf="(favor|async) as fav">
@@ -51,7 +51,7 @@
                     </ion-button>
                 </ng-container>
 
-                <ion-button>
+                <ion-button (click)="presentPopover($event)">
                     <ion-icon name="md-more"></ion-icon>
                 </ion-button>
             </ion-buttons>

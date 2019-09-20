@@ -15,17 +15,13 @@
                 </ion-label>
             </ion-item>
             <ion-buttons slot="end">
-                <ng-container *ngIf="(favor|async) as fav; else noFavorite">
-                    <ion-button (click)="toggleFavorite(true)">
-                        <ion-icon class="heart" name="heart"></ion-icon>
+                <ng-container *ngIf="(favor|async) as fav">
+                    <ion-button (click)="toggleFavorite(fav.res)">
+                        <ion-icon [ngClass]="{'heart': fav.res }"
+                                  [name]="'heart'+ (fav.res ? '' :'-empty')"></ion-icon>
                     </ion-button>
                 </ng-container>
-                <ng-template #noFavorite>
-                    <ion-button (click)="toggleFavorite(false)">
-                        <ion-icon class="heart" name="heart-empty"></ion-icon>
-                    </ion-button>
-                </ng-template>
-                <ion-button (click)="share()">
+                <ion-button (click)="share(userData)">
                     <ion-icon name="arrow-round-up"></ion-icon>
                 </ion-button>
             </ion-buttons>

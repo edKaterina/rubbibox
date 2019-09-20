@@ -101,18 +101,19 @@
                     <key>CFBundleURLSchemes</key>
                     <array>
                         <string>com.googleusercontent.apps.269788389042-csm0v99agendin8t6tplllfr8dtjlo8l</string>
+                        <string>rbx</string>
                     </array>
                 </dict>
             </array>
         </edit-config>
         <config-file parent="com.apple.developer.associated-domains" target="*-Debug.plist">
             <array>
-                <string>applinks:rubbibox.com</string>
+                <string>applinks:rbx.li</string>
             </array>
         </config-file>
         <config-file parent="com.apple.developer.associated-domains" target="*-Release.plist">
             <array>
-                <string>applinks:rubbibox.com</string>
+                <string>applinks:rbx.li</string>
             </array>
         </config-file>
         <preference name="target-device" value="handset" />
@@ -132,4 +133,10 @@
     <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
     <plugin name="cordova-plugin-screen-orientation" spec="3.0.1" />
     <plugin name="cordova-plugin-appminimize" spec="1.0.1" />
+    <feature name="SocialSharing">
+        <param name="ios-package" value="SocialSharing" />
+    </feature>
+    <feature name="SocialSharing">
+        <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
+    </feature>
 </widget>

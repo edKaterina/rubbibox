@@ -9,6 +9,8 @@ import { OfferDetailPage } from './offer-detail.page';
 import { OfferImageSliderComponent } from './components/offer-image-slider/offer-image-slider.component';
 import { OfferDetailUserInfoComponent } from './components/offer-detail-user-info/offer-detail-user-info.component';
 import {CoreModule} from "../../../modules/core/core.module";
+import { PopoverMenuComponent } from './components/popover-menu/popover-menu.component';
+import { ClaimModalComponent } from './components/claim-modal/claim-modal.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,7 @@ const routes: Routes = [
     CoreModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [OfferDetailPage, OfferImageSliderComponent, OfferDetailUserInfoComponent]
+  declarations: [OfferDetailPage, OfferImageSliderComponent, OfferDetailUserInfoComponent, PopoverMenuComponent, ClaimModalComponent],
+  entryComponents: [PopoverMenuComponent, ClaimModalComponent]
 })
 export class OfferDetailPageModule {}
