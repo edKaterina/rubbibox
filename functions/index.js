@@ -54,13 +54,13 @@ admin.database().ref('users/' + claim.user).once("value").then(
 
             var token = snapshots.val();
              if(!!!token.fio){  
-                mailOptions.subject = `Не зарегистрированный пользователь пожаловался на задание #${claim.id}`;
+                mailOptions.subject = `Rubbibox: Не зарегистрированный пользователь пожаловался на задание #${claim.id}`;
                 mailOptions.text = mailOptions.text;
              }else{
-                mailOptions.subject = ` ${token.fio} Пользователь пожаловался на задание #${claim.id}`;
-                mailOptions.text = mailOptions.text + '\nПользователь\nИмя: ' + token.fio + '\nТелефон: ' + token.phone;
+                mailOptions.subject = `Rubbibox:  ${token.fio} Пользователь пожаловался на задание #${claim.id}`;
+                mailOptions.text = mailOptions.text + ` \nПользователь\nИмя: ` + token.fio + '\nТелефон: ' + token.phone;
            }
-          
+           mailOptions.text = mailOptions.text + `\n Ссылка на базу данных: https://console.firebase.google.com/project/rubbibox-3597d/database/rubbibox-3597d/data/offers/${claim.id}`;
             try {
                 mailTransport.sendMail(mailOptions);
                 console.log(`New email sent to:`, 'rubbibox@gmail.com');
