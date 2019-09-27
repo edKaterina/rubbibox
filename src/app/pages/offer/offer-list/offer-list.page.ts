@@ -76,6 +76,7 @@ export class OfferListPage implements OnInit {
     noImageUrl = IMAGE_SETTINGS.NO_IMAGE;
     noPriceText = 'noPrice';
     filterParam: [];
+    filtred: boolean = false;
     citySearch: { region: string, city: string } = {region: '', city: ''};
     region: string;
 
@@ -97,6 +98,8 @@ export class OfferListPage implements OnInit {
 
     onClickFilterModalOpen() {
         this.presentModal().then(data => {
+        
+            this.filtred = !data.filtred;
             this.filterParam = data.category;
             this.citySearch = {
                 region: data.region,

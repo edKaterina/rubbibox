@@ -1,14 +1,14 @@
 <ng-container *ngIf="data as offers">
     <ion-item [lines]="hidden? 'full' :'none'" (click)="hidden = !hidden">
         <ion-label translate>favorite_add</ion-label>
-        <ion-icon class="icon" [name]="hidden? 'md-arrow-dropdown':'md-arrow-dropup'"></ion-icon>
+        <ion-icon class="icon" name="md-arrow-dropdown"></ion-icon>
     </ion-item>
     <ion-item-group [hidden]="hidden">
         <ion-item *ngFor="let offer of offers" [detail]="false">
 
-            <ion-avatar slot="start" class="thumbnail" (click)="go(offer.id)" >
+            <ion-thumbnail slot="start" class="thumbnail" (click)="go(offer.id)" >
                 <img [src]="offer.data.arImg  ? offer.data.arImg[0] || noImageUrl : noImageUrl">
-            </ion-avatar>
+            </ion-thumbnail>
 
             <ion-label text-wrap  (click)="go(offer.id)" >
                 <ion-text class="ion-text-nowrap" color="medium">

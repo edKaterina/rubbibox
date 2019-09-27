@@ -6,7 +6,7 @@
 
 <ion-content>
     <ng-container *ngIf="myFavorites |async as data; else LoadindgData">
-        <ion-list lines="full">
+        <ion-list lines="none">
             <app-favorite-adds *ngIf="data.adds" [data]="data.adds"
                                (delete)="deleteFavorite($event)"></app-favorite-adds>
             <app-favorite-users *ngIf="data.users" [data]="data.users"

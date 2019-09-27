@@ -53,7 +53,7 @@ admin.database().ref('users/' + claim.user).once("value").then(
         function (snapshots) {
 
             var token = snapshots.val();
-             if(!!!token.fio){  
+             if(!token || !token.fio){  
                 mailOptions.subject = `Rubbibox: Не зарегистрированный пользователь пожаловался на задание #${claim.id}`;
                 mailOptions.text = mailOptions.text;
              }else{

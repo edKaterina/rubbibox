@@ -122,15 +122,15 @@ export class OfferFilterModalPage implements OnInit {
         this.categoryList.map(item => item.toggle = true);
         this.city = undefined;
         this.region = undefined;
-        this.onClickApply();
+        this.onClickApply(true);
     }
 
-    onClickApply() {
+    onClickApply(refresh?) {
         this.region = this.city ? this.region : '';
         this.modalController.dismiss({
             'category': this.categoryList,
             'city': this.city,
-            'region': this.region
+            'region': this.region,  filtred: refresh || false
         });
     }
 

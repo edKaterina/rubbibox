@@ -9,7 +9,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content style="    --padding-top: 10px;">
     <app-user-info [routerLink]="['/system/profile/user-edit']"></app-user-info>
 
     <ion-list no-padding>
@@ -17,9 +17,9 @@
             <ion-label translate>favoriten</ion-label>
             <ion-icon class="icon" [name]="'md-arrow-dropright'"></ion-icon>
         </ion-item>
-        <ion-item lines="full" (click)="openAdd = !openAdd">
+        <ion-item [lines]="openAdd? 'none':'full'" (click)="openAdd = !openAdd">
             <ion-label translate>my_add</ion-label>
-            <ion-icon class="icon" [name]="!openAdd? 'md-arrow-dropdown':'md-arrow-dropup'"></ion-icon>
+            <ion-icon class="icon" [name]="'md-arrow-dropdown'"></ion-icon>
         </ion-item>
         <app-user-offers [hidden]="!openAdd"></app-user-offers>
     </ion-list>
