@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { PopoverController } from '@ionic/angular';
+import { CoreService } from 'src/app/services/core.service';
 
 
 @Component({
@@ -9,20 +10,23 @@ import { PopoverController } from '@ionic/angular';
   styleUrls: ['./popover-menu.component.scss']
 })
 export class PopoverMenuComponent implements OnInit {
-@Input() link;
+  @Input() link;
   constructor(
     private clipboard: Clipboard,
-    private popoverController:PopoverController
-    ) { }
+    private popoverController: PopoverController,
+    private core: CoreService
+  ) { }
 
   ngOnInit() {
   }
-copy(){
-this.clipboard.copy(this.link).then(()=>{
-  this.popoverController.dismiss();
-});
-}
-claim(){
-this.popoverController.dismiss({claim:true});
-}
+  copy() {
+  this.core.presentToast('coped'); 
+   this.clipboard.copy(this.link).then(() => {
+      
+      this.popoverController.dismiss();
+    });
+  }
+  claim() {
+    this.popoverController.dismiss({ claim: true });
+  }
 }

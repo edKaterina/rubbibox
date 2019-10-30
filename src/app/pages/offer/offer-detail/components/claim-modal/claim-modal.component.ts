@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { CoreService } from 'src/app/services/core.service';
 
 @Component({
   selector: 'app-claim-modal',
@@ -11,7 +12,8 @@ export class ClaimModalComponent implements OnInit {
     'Werbung','Inhalt'
   ]
   constructor(
-    private modalController: ModalController
+    private modalController: ModalController,
+    private core: CoreService
   ) { }
 
   ngOnInit() {
@@ -20,6 +22,7 @@ export class ClaimModalComponent implements OnInit {
       this.modalController.dismiss();
   }
   claim(claim){
+    this.core.presentToast('claim_send');
     this.modalController.dismiss({claim});
 
   }
