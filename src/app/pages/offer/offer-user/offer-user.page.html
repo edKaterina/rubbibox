@@ -2,9 +2,9 @@
 
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="/system/profile/favorite"></ion-back-button>
+            <ion-back-button defaultHref="/system/offers"></ion-back-button>
         </ion-buttons>
-        <ng-container *ngIf="user | async as userData; else loadingHeader">
+        <ng-container *ngIf="user | async as userData">
             <ion-item lines="none" no-padding>
                 <ion-avatar slot="start">
                     <img [src]="userData.data?.img ? userData.data.img[0] || noUserImageUrl : noUserImageUrl" alt="">
@@ -29,24 +29,24 @@
         <ng-template #loadingHeader>
             <ion-item lines="none" no-padding>
                 <ion-avatar slot="start">
-                    <ion-skeleton-text></ion-skeleton-text>
+                    <ion-skeleton-text style="background-color: transparent; height: 40px;"></ion-skeleton-text>
                 </ion-avatar>
                 <ion-label>
                     <ion-text>
                         <p translate>
-                            <ion-skeleton-text></ion-skeleton-text>
+                            <ion-skeleton-text style="background-color: transparent"></ion-skeleton-text>
                         </p>
                     </ion-text>
                     <ion-text>
-                        <p translate style="color: #1A70FF">
-                            <ion-skeleton-text></ion-skeleton-text>
+                        <p translate >
+                            <ion-skeleton-text style="background-color: transparent"></ion-skeleton-text>
                         </p>
                     </ion-text>
                 </ion-label>
             </ion-item>
             <ion-buttons slot="end">
                 <ion-button>
-                    <ion-skeleton-text></ion-skeleton-text>
+                    <ion-skeleton-text style="background-color: transparent"></ion-skeleton-text>
                 </ion-button>
 
                 <ion-button>
@@ -76,7 +76,7 @@
         </ion-grid>
     </ng-container>
     <ng-template #loadData>
-        <ion-skeleton-text></ion-skeleton-text>
+        <ion-skeleton-text style="background-color: transparent"></ion-skeleton-text>
     </ng-template>
 </ion-content>
 

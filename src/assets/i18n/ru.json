@@ -47,5 +47,8 @@
   "copy": "Link kopieren",
   "claim": "Melden",
   "Werbung": "Werbung",
-  "Inhalt": "Unangemessener Inhalt "
+  "Inhalt": "Unangemessener Inhalt ",
+  "delQuest": "Rubbi löschen?",
+  "yes": "Ja",
+  "claim_send":"Melden send"
 }

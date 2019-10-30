@@ -1,0 +1,18 @@
+{
+  "android": {
+    "debug": {
+      "keystore": "resources/android/MARL7lFkho@4.jks",
+      "storePassword": "MARL7lFkho@4",
+      "alias": "key0",
+      "password" : "MARL7lFkho@4",
+      "keystoreType": ""
+    },
+    "release": {
+      "keystore": "resources/android/MARL7lFkho@4.jks",
+      "storePassword": "MARL7lFkho@4",
+      "alias": "key0",
+      "password" : "MARL7lFkho@4",
+      "keystoreType": ""
+    }
+  }
+}

@@ -4,9 +4,7 @@
             <ion-title translate>detail</ion-title>
 
             <ion-buttons slot="start">
-                <ion-button (click)="back()">
-                    <ion-icon name="arrow-back"></ion-icon>
-                </ion-button>
+                <ion-back-button [defaultHref]="'/system/offers'"></ion-back-button>
             </ion-buttons>
             <ion-buttons slot="end">
                 <ng-container *ngIf="(userData |async) as user">
