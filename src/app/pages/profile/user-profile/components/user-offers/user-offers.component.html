@@ -12,7 +12,7 @@
             </ion-text>
             <h2 text-nowrap class="offer-item__name">{{offer.data.name}}</h2>
             <ion-text color="medium">
-                <p text-nowrap class="offer-item__category"><span translate>category</span> {{offer.data.category}}</p>
+                <p text-nowrap class="offer-item__category">{{offer.data.category}}</p>
             </ion-text>
         </ion-label>
         <ion-buttons slot="end" style="
@@ -20,12 +20,12 @@
         flex-direction: column-reverse;
         align-items: flex-end;
     ">
-                 <ion-icon slot="end" name="trash"  (click)="presentAlert(offer)"></ion-icon>  
-     
-            <ion-label style="    margin: 10px;"  ><p style="font-size: 11px ; " translate>edit</p></ion-label>
+                 <ion-icon slot="end" name="trash"  (click)="presentAlert(offer)"></ion-icon>
+
+<!--            <ion-label style="    margin: 10px;"  ><p style="font-size: 11px ; " translate>edit</p></ion-label>-->
 
         </ion-buttons>
-        
+
     </ion-item>
 </ng-container>
 <ng-template #nodata>

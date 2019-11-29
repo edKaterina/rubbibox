@@ -20,9 +20,9 @@ export class PopoverMenuComponent implements OnInit {
   ngOnInit() {
   }
   copy() {
-  this.core.presentToast('coped'); 
+  this.core.presentToast('coped');
    this.clipboard.copy(this.link).then(() => {
-      
+
       this.popoverController.dismiss();
     });
   }

@@ -1,9 +1,9 @@
 import {Platform} from '@ionic/angular';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {User} from "../../../interfaces/model/user";
-import {UserService} from "../../../services/user/user.service";
-import {AuthService} from "../../../services/auth.service";
+import {User} from '../../../interfaces/model/user';
+import {UserService} from '../../../services/user/user.service';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
     selector: 'app-people-edit',
@@ -22,7 +22,8 @@ export class UserEditPage implements OnInit {
     ) {
         this.userService.getById(this.authService.getLogin()).subscribe(res => {
             this.user = res;
-        })
+            this.user.data.img = ['https://bipbap.ru/wp-content/uploads/2017/04/2-8.jpg'];
+        });
     }
 
     ngOnInit() {

@@ -3,8 +3,8 @@ import { Message } from '../../../interfaces/model/message';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-import {DialogsService} from "../dialogs/dialogs.service";
-import {Dialog} from "../../../interfaces/model/dialog";
+import {DialogsService} from '../dialogs/dialogs.service';
+import {Dialog} from '../../../interfaces/model/dialog';
 
 @Injectable({
   providedIn: 'root'
@@ -46,13 +46,13 @@ export class ChatService {
     message.user = this.authService.getLogin();
     message.dateCreate = new Date().toISOString();
 
-    const dialog:Dialog = {
+    const dialog: Dialog = {
         user: this.toUser,
-        dateCreate:message.dateCreate,
-        message:message.text
+        dateCreate: message.dateCreate,
+        message: message.text
     };
 
-    this.dialogService.add(this.authService.getLogin(),this.toUser,dialog);
+    this.dialogService.add(this.authService.getLogin(), this.toUser, dialog);
     this.db.list(ChatService.typeDialogs + '/' + chatID + '/messages').push(message);
   }
 

@@ -51,7 +51,14 @@ export class OfferCityModalPage implements OnInit {
             }
         );
     }
-
+    onClickBackButton() {
+        if (this.region) {
+            this.onClickBack();
+        } else {
+            this.onClickBack();
+            this.onClickApply();
+        }
+    }
     onClickBack() {
         this.city = undefined;
         this.region = undefined;

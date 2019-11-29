@@ -12,10 +12,6 @@ const routes: Routes = [
         loadChildren: './favorite/favorite.module#FavoritePageModule'
     },
     {
-        path: 'user-edit',
-        loadChildren: '../../pages/profile/user-edit/user-edit.module#UserEditPageModule',
-    },
-    {
         path: 'offer/:id',
         loadChildren: '../../pages/offer/offer-detail/offer-detail.module#OfferDetailPageModule'
     },

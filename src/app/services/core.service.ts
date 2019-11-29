@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import {AlertController, LoadingController, NavController, ToastController} from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import {AngularFireDatabase} from "@angular/fire/database";
+import {AngularFireDatabase} from '@angular/fire/database';
 import {Storage} from '@ionic/storage';
 import {Router} from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class CoreService {
-  loading;
 
   constructor(
       public toastController: ToastController,
@@ -18,6 +17,16 @@ export class CoreService {
       public loadingController: LoadingController,
       private router: Router
   ) {
+  }
+  loading;
+
+  // Ограничение кол-ва символов в поле данных
+  public static trimField(data: any, field: string, count: number) {
+    if (data[field]) {
+      if (data[field].length > count) {
+        data[field] = data[field].slice(0, count) + '...';
+      }
+    }
   }
 
   back() {
@@ -48,15 +57,6 @@ export class CoreService {
     if (this.loading) {
       this.loading.dismiss();
 
-    }
-  }
-
-  // Ограничение кол-ва символов в поле данных
-  public static trimField(data: any, field: string, count: number) {
-    if (data[field]) {
-      if (data[field].length > count) {
-        data[field] = data[field].slice(0, count) + '...';
-      }
     }
   }
 

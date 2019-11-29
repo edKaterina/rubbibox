@@ -9,8 +9,8 @@ import { CoreService } from 'src/app/services/core.service';
 })
 export class ClaimModalComponent implements OnInit {
   array = [
-    'Werbung','Inhalt'
-  ]
+    'Werbung', 'Inhalt'
+  ];
   constructor(
     private modalController: ModalController,
     private core: CoreService
@@ -18,10 +18,10 @@ export class ClaimModalComponent implements OnInit {
 
   ngOnInit() {
   }
-  close(){
+  close() {
       this.modalController.dismiss();
   }
-  claim(claim){
+  claim(claim) {
     this.core.presentToast('claim_send');
     this.modalController.dismiss({claim});
 

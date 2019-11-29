@@ -20,12 +20,12 @@ export class OfferService {
         private authService: AuthService
     ) {
     }
-    sendClaim(text, id){
-        const user = this.authService.getLogin()
-this.db.push('claim',{data:{ user, id,
+    sendClaim(text, id) {
+        const user = this.authService.getLogin();
+this.db.push('claim', {data: { user, id,
     text}
-   
-})
+
+});
     }
     getList(): Observable<Offer[]> {
         return this.db.getList<Offer>(OfferService.path);

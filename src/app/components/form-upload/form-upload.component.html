@@ -1,6 +1,6 @@
 <div class="uploadDiv">
   <ion-row align-items-center>
-    <ion-col align-self-start *ngFor="let file of photoFiles" size="auto" (click)="removeFile(file)">
+    <ion-col align-self-start class="photo form" *ngFor="let file of photoFiles" size="auto" (click)="removeFile(file)">
       <img height="60px" width="60px" [src]="file">
     </ion-col>
 

@@ -1,0 +1,54 @@
+// IMPORTANT: Add new css rules ON DEMAND only when you need them!
+// Try to use multiples of 5 when using pixels
+
+// Percents
+$padding-x-p: 10;
+
+// Generators
+@mixin padding {
+  @for $i from 0 to 70 {
+    .p#{$i} {
+      padding: #{$i}px;
+    }
+  }
+  @for $i from 0 to 70 {
+    .px#{$i} {
+      padding-left: #{$i}px;
+      padding-right: #{$i}px;
+    }
+  }
+  @each $i in $padding-x-p {
+    .px#{$i}p {
+      padding-left: percentage($i/100);
+      padding-right: percentage($i/100);
+    }
+  }
+  @for $i from 0 to 70 {
+    .py#{$i} {
+      padding-top: #{$i}px;
+      padding-bottom: #{$i}px;
+    }
+  }
+  @for $i from 0 to 70 {
+    .pt#{$i} {
+      padding-top: #{$i}px;
+    }
+  }
+  @for $i from 0 to 70 {
+    .pb#{$i} {
+      padding-bottom: #{$i}px;
+    }
+  }
+  @for $i from 0 to 70 {
+    .pr#{$i} {
+      padding-right: #{$i}px;
+    }
+  }
+  @for $i from 0 to 70 {
+    .pl#{$i} {
+      padding-left: #{$i}px;
+    }
+  }
+}
+
+@include padding;

@@ -1,9 +1,9 @@
 import {Component, Pipe, PipeTransform} from '@angular/core';
-import {Router} from "@angular/router";
-import {DialogsService} from "./dialogs.service";
-import {IMAGE_SETTINGS} from "../../../config/no-image.settings";
-import {Dialog} from "../../../interfaces/model/dialog";
-import {Observable} from "rxjs";
+import {Router} from '@angular/router';
+import {DialogsService} from './dialogs.service';
+import {IMAGE_SETTINGS} from '../../../config/no-image.settings';
+import {Dialog} from '../../../interfaces/model/dialog';
+import {Observable} from 'rxjs';
 
 @Pipe({
     name: 'sortDialogs'
@@ -15,8 +15,8 @@ export class SortDialogsPipe implements PipeTransform {
         }
     }
     compare(a: Dialog, b: Dialog) {
-        if (a.dateCreate < b.dateCreate) return 1;
-        else if (a.dateCreate > b.dateCreate) return -1;
+        if (a.dateCreate < b.dateCreate) { return 1; }
+        else if (a.dateCreate > b.dateCreate) { return -1; }
         return 0;
     }
 }
@@ -32,7 +32,7 @@ export class DialogsPage {
 
     dialogs$: Observable<Dialog[]>;
 
-    constructor(public router: Router,private dialogsService: DialogsService) { }
+    constructor(public router: Router, private dialogsService: DialogsService) { }
 
     trackByFn(index: number, item) {
         return item.key;

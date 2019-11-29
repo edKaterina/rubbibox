@@ -6,8 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { LoginPage } from './login.page';
-import {SmsAuthComponent} from "../components/sms/sms.component";
-import {CoreModule} from "../../../modules/core/core.module";
+import {SmsAuthComponent} from '../components/sms/sms.component';
+import {CoreModule} from '../../../modules/core/core.module';
 
 const routes: Routes = [
   {
@@ -24,6 +24,6 @@ const routes: Routes = [
     CoreModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [LoginPage,SmsAuthComponent]
+  declarations: [LoginPage, SmsAuthComponent]
 })
 export class LoginPageModule {}

@@ -10,7 +10,7 @@
 <ion-content>
     <form #form="ngForm" (ngSubmit)="onSubmit(form)">
 
-        <ion-item>
+        <ion-item lines="full">
             <ion-label position="stacked" translate>category</ion-label>
             <ion-select
                     mode="ios"
@@ -31,67 +31,68 @@
         </ion-item>
 
 
+        <ion-item [hidden]="!form.value.category" lines="full">
+            <ion-label position="stacked" translate>city</ion-label>
+            <!--<ion-select
+                    mode="ios"
+                    name="city"
+                    ngModel
+                    required="true"
+                    [okText]="'ok' | translate"
+                    [cancelText]="'cancel' | translate"
+                    [placeholder]="'select' | translate"
 
-            <ion-item [hidden]="!form.value.category">
-                <ion-label position="stacked" translate>city</ion-label>
-                <!--<ion-select
-                        mode="ios"
-                        name="city"
-                        ngModel
-                        required="true"
-                        [okText]="'ok' | translate"
-                        [cancelText]="'cancel' | translate"
-                        [placeholder]="'select' | translate"
+            >
+                <ion-virtual-scroll [items]="cityList">
 
-                >
-                    <ion-virtual-scroll [items]="cityList">
+                    <ion-select-option
+                            *virtualItem="let city  "
+                            [value]="city">
+                        {{city}}
+                    </ion-select-option>
 
-                        <ion-select-option
-                                *virtualItem="let city  "
-                                [value]="city">
-                            {{city}}
-                        </ion-select-option>
-
-                    </ion-virtual-scroll>
-                </ion-select>-->
-                <ion-input
-                        name="city"
-                        [(ngModel)]="city.city"
-                        readonly
-                        (click)="choiseCity(form)"
-                        [required]="true"
-                        type="text">
-                </ion-input>
-            </ion-item>
-            <ion-item [hidden]="!form.value.category">
-                <ion-label position="stacked" translate>photo</ion-label>
-                <rtp-form-upload count=3 [(files)]="photo"></rtp-form-upload>
-            </ion-item>
+                </ion-virtual-scroll>
+            </ion-select>-->
+            <ion-input
+                    name="city"
+                    [(ngModel)]="city.city"
+                    readonly
+                    (click)="choiseCity(form)"
+                    [required]="true"
+                    type="text">
+            </ion-input>
+        </ion-item>
+        <ion-item [hidden]="!form.value.category" class="photo form" lines="full">
+            <ion-label position="stacked" translate>photo</ion-label>
+            <rtp-form-upload count=3 [(files)]="photo"></rtp-form-upload>
+        </ion-item>
 
 
-            <ion-item [hidden]="!form.value.category">
-                <ion-label position="stacked" translate>title</ion-label>
-                <ion-input
-                        name="name"
-                        ngModel
-                        [required]="true"
-                        type="text">
-                </ion-input>
-            </ion-item>
+        <ion-item [hidden]="!form.value.category"  lines="full">
+            <ion-label position="stacked" translate>title</ion-label>
+            <ion-input
+                    name="name"
+                    ngModel
+                    [required]="true"
+                    type="text">
+            </ion-input>
+        </ion-item>
 
-            <ion-item [hidden]="!form.value.category">
-                <ion-label position="stacked" translate>description</ion-label>
+        <ion-item [hidden]="!form.value.category"  lines="full">
+            <ion-label position="stacked" translate>description</ion-label>
 
-                <ion-textarea
-                        name="description"
-                        ngModel
-                        [required]="true"
-                        [rows]="5">
+            <ion-textarea
+                    name="description"
+                    ngModel
+                    [required]="true"
+                    [rows]="5"
+                    maxlength="1000">
 
-                </ion-textarea>
-            </ion-item>
+            </ion-textarea>
+        </ion-item>
 
-        <ion-button [hidden]="!form.value.category"  color="primary" expand="block" type="submit" [disabled]="form.invalid" translate>send
+        <ion-button [hidden]="!form.value.category" class="mt20" color="primary" expand="block" type="submit"
+                    [disabled]="form.invalid" translate>send
         </ion-button>
 
     </form>

@@ -1,41 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title translate>city</ion-title>
+      <ion-buttons slot="start">
+        <ion-button (click)="onClickBackButton()"><ion-icon name="arrow-back"></ion-icon></ion-button>
+      </ion-buttons>
+    <ion-title>{{region}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content no-padding>
 
-    <ion-item>
-      <ion-input [placeholder]="'Suche...' | translate " [(ngModel)]="search"></ion-input>
-      <ion-icon name="search" slot="end"></ion-icon>
+    <ion-item *ngIf="region" lines="full">
+        <ion-icon name="search" slot="start"></ion-icon>
+        <ion-input [placeholder]="'Suche...' | translate " [(ngModel)]="search"></ion-input>
     </ion-item>
-    <ion-item *ngIf="region">
-      <ion-icon name="arrow-back" slot="start" (click)="onClickBack()"></ion-icon>
-      <ion-label text-wrap>
-        <h2>{{region}}</h2>
-      </ion-label>
-    </ion-item>
-    <ion-virtual-scroll [items]="cityList| cityFilter:{search:search, city: city}" *ngIf="region" approxItemHeight="100%">
-
-      <ion-item *virtualItem="let item;">
-
-        <ion-label text-wrap>
-          <h2>{{item.city}}</h2>
-        </ion-label>
-        <ion-radio slot="start" mode="ios" (click)="onClickCity(item.city)"
-                   [checked]="item.city === city"></ion-radio>
-
-      </ion-item>
+    <ion-virtual-scroll [items]="cityList| cityFilter:{search:search, city: city}" *ngIf="region"
+                        approxItemHeight="100%">
+        <ion-item *virtualItem="let item;">
+            <ion-label text-wrap (click)="onClickCity(item.city)">
+                <h2>{{item.city}}</h2>
+            </ion-label>
+        </ion-item>
     </ion-virtual-scroll>
-    <ion-virtual-scroll [items]="regionList| cityFilter:{search:search, city: city}" *ngIf="!region" approxItemHeight="100%">
-
-      <ion-item *virtualItem="let item;">
-
-        <ion-label text-wrap (click)="onClickRegion(item)">
-          <h2>{{item}}</h2>
-        </ion-label>
-      </ion-item>
+    <ion-virtual-scroll [items]="regionList| cityFilter:{search:search, city: city}" *ngIf="!region"
+                        approxItemHeight="100%">
+        <ion-item *virtualItem="let item;">
+            <ion-label text-wrap (click)="onClickRegion(item)">
+                <h2>{{item}}</h2>
+            </ion-label>
+        </ion-item>
     </ion-virtual-scroll>
 
 </ion-content>

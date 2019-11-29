@@ -21,7 +21,7 @@ import {CitiesService} from '../../../services/cities.service';
 export class OfferAddEditPage implements OnInit {
 
     categoryList$: any;
-    photo = [];
+    photo = ['https://bipbap.ru/wp-content/uploads/2017/04/2-8.jpg'];
     cityList;
     city = {city: '', region: ''};
 
@@ -87,10 +87,10 @@ export class OfferAddEditPage implements OnInit {
 
         const {data} = await modal.onDidDismiss();
 
-        if(data.region != '' && data.city != ''){
+        if (data.region != '' && data.city != '') {
             return data;
-        }else{
-            this.city = {city: '', region: ''}
+        } else {
+            this.city = {city: '', region: ''};
         }
     }
 }

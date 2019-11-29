@@ -9,8 +9,8 @@ import { map } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import {UserService} from "../../../services/user/user.service";
-import {User} from "../../../interfaces/model/user";
+import {UserService} from '../../../services/user/user.service';
+import {User} from '../../../interfaces/model/user';
 
 @Pipe({
     name: 'userfioPipe'
@@ -20,10 +20,10 @@ export class UserFioPipe implements PipeTransform {
 
     transform(value: string): any {
         return this.userService.getById(value).pipe(
-            map((user:User)=>{
-                return (user.data && user.data.fio ? user.data.fio : '')
+            map((user: User) => {
+                return (user.data && user.data.fio ? user.data.fio : '');
             })
-        )
+        );
     }
 
 

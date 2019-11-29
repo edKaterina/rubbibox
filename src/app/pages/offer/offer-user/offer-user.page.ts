@@ -37,12 +37,12 @@ export class OfferUserPage implements OnInit {
     ) {
     }
     share(user) {
-        this.socialSharing.share(` Пользователь: ${user.data.fio + ' ' +LINK_SETTINGS.HOST+'/user/' + user.id}`)
+        this.socialSharing.share(` Пользователь: ${user.data.fio + ' ' + LINK_SETTINGS.HOST + '/user/' + user.id}`);
     }
     ngOnInit() {
         this.userId = this.activeRout.snapshot.params.id;
         this.authService.authWait().then((login) => {
-            
+
             this.favor = this.favoriteService.isFavor('users', this.userId).pipe(map(res => {
                 return {res};
             }));

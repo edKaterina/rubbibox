@@ -23,6 +23,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CoreModule,
   ],
-  declarations: [ChatPage,UserFioPipe]
+  declarations: [ChatPage, UserFioPipe]
 })
 export class ChatPageModule {}

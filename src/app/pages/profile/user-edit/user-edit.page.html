@@ -10,25 +10,25 @@
 <ion-content>
   <ion-list>
 
-    <ion-item>
+    <ion-item lines="full">
       <ion-label position="stacked" translate>photo</ion-label>
       <rtp-form-upload count=1 [(files)]="user?.data.img"></rtp-form-upload>
     </ion-item>
-  
-    <ion-item>
+
+    <ion-item lines="full">
       <ion-label position="stacked" translate>fio</ion-label>
-      <ion-textarea maxlength="60" rows="2" [(ngModel)]="user?.data.fio"></ion-textarea>
+      <ion-textarea required maxlength="60" rows="2" [(ngModel)]="user?.data.fio"></ion-textarea>
     </ion-item>
 
-    <ion-item>
+    <ion-item lines="full">
       <ion-label position="stacked" translate>about</ion-label>
-      <ion-textarea  maxlength="80" rows="2" [(ngModel)]="user?.data.info"></ion-textarea>
+      <ion-textarea required maxlength="25" minlength="4" rows="2"  pattern="[A-a]" [(ngModel)]="user?.data.login"></ion-textarea>
     </ion-item>
-    <ion-item lines="inset">
+    <ion-item lines="none">
       <ion-label translate>call_root</ion-label>
       <ion-checkbox slot="start" [(ngModel)]="user?.data.permissionCall"></ion-checkbox>
     </ion-item>
 
-    <ion-button color="primary" expand="block" (click)="editUser(user)" translate>send</ion-button>
+    <ion-button color="primary mt20" expand="block" [disabled]="!(user.data.login.length > 4 && user.data.login.length < 25) || !user.data.fio" (click)="editUser(user)" translate>send</ion-button>
   </ion-list>
 </ion-content>

@@ -16,8 +16,8 @@ export class DbService {
     ) {
     }
 
-    getList<T>(path,filter?): Observable<T[]> {
-        return this.db.list(path, filter ? ref => ref.orderByChild(filter.name).equalTo(filter.value):ref => ref).snapshotChanges().pipe(
+    getList<T>(path, filter?): Observable<T[]> {
+        return this.db.list(path, filter ? ref => ref.orderByChild(filter.name).equalTo(filter.value) : ref => ref).snapshotChanges().pipe(
             first(),
             map(data =>
                 data.map(a => ({id: a.payload.key, data: {...a.payload.val()}} as unknown | T))
@@ -38,8 +38,8 @@ export class DbService {
         ) as Observable<T>;
     }
 
-    snapshotChangesList<T>(path,filter?): Observable<T[]> {
-        return this.db.list(path, filter ? ref => ref.orderByChild(filter.name).equalTo(filter.value):ref => ref).snapshotChanges().pipe(
+    snapshotChangesList<T>(path, filter?): Observable<T[]> {
+        return this.db.list(path, filter ? ref => ref.orderByChild(filter.name).equalTo(filter.value) : ref => ref).snapshotChanges().pipe(
             map(data =>
                 data.map(a => ({id: a.payload.key, data: {...a.payload.val()}} as unknown | T))
             )

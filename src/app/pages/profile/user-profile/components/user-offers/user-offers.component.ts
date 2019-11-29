@@ -22,29 +22,29 @@ export class UserOffersComponent implements OnInit {
 
     offers;
     async presentAlert(offer) {
-        this.translateService.get(['cancel',"yes",'delQuest']).subscribe(async (res: string) => {
+        this.translateService.get(['cancel', 'yes', 'delQuest']).subscribe(async (res: string) => {
             const alert = await this.alertController.create({
-               
-                message: res["delQuest"],
+
+                message: res['delQuest'],
                 buttons:  [
                     {
-                      text: res["cancel"],
-                      role: "cancel",
-                    
+                      text: res['cancel'],
+                      role: 'cancel',
+
                     },
                     {
-                        text: res["yes"],
-    
+                        text: res['yes'],
+
                         handler: () => {
                           this.remove(offer);
                         }
                       }
                   ]
               });
-          
+
               await alert.present();
           });
-       
+
       }
     ngOnInit() {
         this.offers =   this.offerService.getMy();

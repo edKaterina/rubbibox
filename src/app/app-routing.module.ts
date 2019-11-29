@@ -16,10 +16,11 @@ const routes: Routes = [
     {
         path: 'chat/:id', loadChildren: './pages/messenger/chat/chat.module#ChatPageModule',
         canActivate: [AuthGuard]
-    },  { path: 'offer-user', loadChildren: './pages/offer/offer-user/offer-user.module#OfferUserPageModule' },
-  { path: 'favorite', loadChildren: './pages/profile/favorite/favorite.module#FavoritePageModule' }
-
-
+    },
+    {
+        path: 'user-edit',
+        loadChildren: './pages/profile/user-edit/user-edit.module#UserEditPageModule',
+    }
 
 ];
 

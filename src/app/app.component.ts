@@ -32,7 +32,7 @@ export class AppComponent {
         private router: Router,
         private deeplinks: Deeplinks,
         private zone: NgZone,
-        private navController:NavController,
+        private navController: NavController,
         public translateService: TranslateService
     ) {
         this.translateService.setDefaultLang('ru');
@@ -41,29 +41,29 @@ export class AppComponent {
         this.initializeApp();
     }
     handleOpenURL(url) {
-        console.log("received url: " + url);
+        console.log('received url: ' + url);
       }
     initializeApp() {
-        
+
         this.platform.ready().then(() => {
             this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT_PRIMARY);
-            this.deeplinks.routeWithNavController(this.navController,{}).subscribe(match => {
-       
-                this.navController.navigateForward(['/system/offers/'+match.$link.path]);
-              
+            this.deeplinks.routeWithNavController(this.navController, {}).subscribe(match => {
+
+                this.navController.navigateForward(['/system/offers/' + match.$link.path]);
+
             }, nomatch => {
-           
+
                 console.error('Got a deeplink that didn\'t match', nomatch);
             });
             // this.deeplinks.route({
             //    }).subscribe(match => {
-      
+
             //     alert(JSON.stringify(['/system/offers'+match.$link.path]));
             //     alert(JSON.stringify(match));
             //     this.navController.navigateForward(['/system/offers/'+match.$link.path]);
 
             // }, nomatch => {
-          
+
             //     console.error('Got a deeplink that didn\'t match', nomatch);
             // });
             if (this.platform.is('android')) {
@@ -73,7 +73,7 @@ export class AppComponent {
                 this.statusBar.styleDefault();
             }
 
-            //this.notificationService.initPush();
+            // this.notificationService.initPush();
             this.splashScreen.hide();
         });
     }
