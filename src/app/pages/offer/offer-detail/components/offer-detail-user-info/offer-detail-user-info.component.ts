@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IMAGE_SETTINGS} from '../../../../../config/no-image.settings';
 import {User} from '../../../../../interfaces/model/user';
-import {UserService} from "../../../../../services/user/user.service";
-import {AuthService} from "../../../../../services/auth.service";
+import {UserService} from '../../../../../services/user/user.service';
+import {AuthService} from '../../../../../services/auth.service';
 import {FavoriteService} from '../../../../../services/user/favorite.service';
 
 @Component({
@@ -18,11 +18,12 @@ export class OfferDetailUserInfoComponent implements OnInit {
 
     @Input()
     set uid(uid) {
-        if (uid)
+        if (uid) {
             this.userService.getById(uid).subscribe((user: User) => {
                 this.user = user;
             });
-    };
+        }
+    }
 
     constructor(
         private userService: UserService,

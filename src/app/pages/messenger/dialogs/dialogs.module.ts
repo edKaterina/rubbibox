@@ -24,6 +24,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CoreModule
   ],
-  declarations: [DialogsPage,SortDialogsPipe]
+  declarations: [DialogsPage, SortDialogsPipe]
 })
 export class DialogsPageModule {}

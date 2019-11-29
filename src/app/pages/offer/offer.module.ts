@@ -15,7 +15,7 @@ const routes: Routes = [
 // Пользователь
     {path: 'user/:id', loadChildren: '../../pages/offer/offer-user/offer-user.module#OfferUserPageModule'},
 
-    //Добавить заявку
+    // Добавить заявку
     {
         path: 'add',
         loadChildren: '../../pages/offer/offer-add-edit/offer-add-edit.module#OfferAddEditPageModule',

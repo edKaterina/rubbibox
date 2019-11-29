@@ -1,6 +1,6 @@
 import {AuthService} from './../services/auth.service';
 import {Component} from '@angular/core';
-import {NavigationStart, Router} from "@angular/router";
+import {NavigationStart, Router} from '@angular/router';
 
 @Component({
     selector: 'app-tabs',
@@ -19,7 +19,7 @@ export class SystemPage {
 
     ngOnInit() {
         this.router.events.subscribe((event) => {
-           if (event instanceof NavigationStart) this.enable = true;
+           if (event instanceof NavigationStart) { this.enable = true; }
         });
     }
 }
