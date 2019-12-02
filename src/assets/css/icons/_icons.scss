@@ -1,0 +1,52 @@
+$icon-size: 20 28 30 40 45;
+
+@mixin background($background) {
+  background: url($background) no-repeat center
+}
+
+@mixin icon-size {
+  @each $i in $icon-size {
+    .is#{$i} {
+      width: #{$i}px;
+      height: #{$i}px;
+    }
+  }
+}
+.produkti-1246-icon {
+  @include background('/assets/categoriesMenuIcons/food.svg');
+}
+.sievieu-mode-1005-icon {
+  @include background('/assets/categoriesMenuIcons/woman.svg');
+}
+.vrieu-mode-1006-icon {
+    @include background('/assets/categoriesMenuIcons/man.svg');
+}
+.brnu-mode-1007-icon {
+    @include background('/assets/categoriesMenuIcons/child.svg');
+}
+.account-icon-customer {
+    @include background('/assets/categoriesMenuIcons/ico-customer.svg');
+}
+.somas-un-apavi-1581-icon {
+    @include background('/assets/categoriesMenuIcons/shoes.svg');
+}
+.elektronika-70-icon {
+    @include background('/assets/categoriesMenuIcons/elektro.svg');
+}
+.sadzves-tehnika-11-icon {
+    @include background('/assets/categoriesMenuIcons/refrigerator.svg');
+}
+.sports-un-atpta-23-icon {
+    @include background('/assets/categoriesMenuIcons/sport.svg');
+}
+.mazuiem-1746-icon {
+    @include background('/assets/categoriesMenuIcons/babies.svg');
+}
+.mjai-75-icon {
+    @include background('/assets/categoriesMenuIcons/furniture.svg');
+}
+.rotalietas-24-icon {
+    @include background('/assets/categoriesMenuIcons/toys.svg');
+}
+
+@include icon-size

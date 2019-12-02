@@ -28,6 +28,7 @@ export class OfferDetailPage implements OnInit {
     userData;
     noUserImageUrl = IMAGE_SETTINGS.NO_USER_IMAGE;
     link;
+    isAuth: boolean = false;
     constructor(
         private activateRoute: ActivatedRoute,
         private offerService: OfferService,
@@ -45,6 +46,7 @@ export class OfferDetailPage implements OnInit {
 
         this.id = this.activateRoute.snapshot.params['id'];
         this.authService.authWait().then((login) => {
+            this.isAuth = true;
             this.favor = this.favoriteService.isFavor('adds', this.id).pipe(map(res => {
                 return { res };
             }));

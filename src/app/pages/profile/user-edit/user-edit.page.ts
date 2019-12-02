@@ -21,8 +21,10 @@ export class UserEditPage implements OnInit {
         public authService: AuthService
     ) {
         this.userService.getById(this.authService.getLogin()).subscribe(res => {
-            this.user = res;
-            this.user.data.img = ['https://bipbap.ru/wp-content/uploads/2017/04/2-8.jpg'];
+            if (res.data) {
+                this.user = res;
+                this.user.data.img = ['https://bipbap.ru/wp-content/uploads/2017/04/2-8.jpg'];
+            }
         });
     }
 

@@ -1,0 +1,67 @@
+// Typography
+// ==========
+// Font sizes and families
+//
+// stylelint-disable indentation
+
+// Font Families
+// -------------
+$font-fallbacks: (
+  sans-serif: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+  serif: 'Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif'
+);
+
+$font-families: (
+  primary: ("SF Pro Display", #{(map-get($font-fallbacks, 'sans-serif'))}),
+  secondary: ("Playfair Display", map-get($font-fallbacks, 'serif'))
+) !default;
+
+
+$font-family__SF-Pro-Display: 'SF Pro Display';
+$font-family__rouble: 'Rouble';
+$fonts-path: '/assets/fonts/';
+$font-weight__regular: normal;
+$font-weight__medium: 500;
+$font-weight__bold: 700;
+
+@mixin lib-font-face($family-name, $font-path, $font-weight: normal, $font-style: normal) {
+  @font-face {
+    font-family: $family-name;
+    src: url('#{$font-path}.eot');
+    src: url('#{$font-path}.eot?#iefix') format('embedded-opentype'),
+    url('#{$font-path}.woff2') format('woff2'),
+    url('#{$font-path}.woff') format('woff'),
+    url('#{$font-path}.ttf') format('truetype'),
+    url('#{$font-path}.svg#@{family-name}') format('svg');
+    font-weight: $font-weight;
+    font-style: $font-style;
+  }
+}
+
+@include lib-font-face(
+  $font-family__rouble,
+  '#{$fonts-path}rouble/rouble',
+  $font-weight: $font-weight__regular,
+  $font-style: normal
+);
+
+@include lib-font-face(
+  $font-family__SF-Pro-Display,
+  '#{$fonts-path}sf-pro-display/SFProDisplay-Regular',
+  $font-weight: $font-weight__regular,
+  $font-style: normal
+);
+
+@include lib-font-face(
+  $font-family__SF-Pro-Display,
+  '#{$fonts-path}sf-pro-display/SFProDisplay-Medium',
+  $font-weight: $font-weight__medium,
+  $font-style: normal
+);
+
+@include lib-font-face(
+  $font-family__SF-Pro-Display,
+  '#{$fonts-path}sf-pro-display/SFProDisplay-Heavy',
+  $font-weight: $font-weight__bold,
+  $font-style: normal
+);

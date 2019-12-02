@@ -1,10 +1,25 @@
 ion-grid{
   --ion-grid-padding:5px 5px;
 }
-ion-title {
+ion-searchbar {
+  height: 44px;
 
+  padding: 0;
+  --icon-color: black;
+  --background: white;
+  /deep/ .searchbar-input{
+    border: 1px solid;
+    border-radius: 5px;
+  }
 }
+.search-container{
+  height: 44px;
+  margin-left: 10px;
+  /deep/ .searchbar-input-container{
+    height: 30px;
 
+  }
+}
 #icon {
   color: #575757;
 }

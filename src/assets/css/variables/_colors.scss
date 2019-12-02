@@ -1,0 +1,85 @@
+// Colors
+// ======
+// @LandonSchropp's approach of naming color variables.
+// - http://davidwalsh.name/sass-color-variables-dont-suck
+// - http://www.color-blindness.com/color-name-hue/
+
+// General colors palette
+$colors: (
+  transparent: transparent,
+  black: #000,
+  white: #fff,
+  white-smoke: #f2f2f2,
+  gainsboro: #e0e0e0,
+  silver: #bdbdbd,
+  gray: #828282,
+  gray2: #666666,
+  gray3: #9C9C9C,
+  gray4: #F5F5F5,
+  gray5: #CCCCCC,
+  suva-gray: #8e8e8e,
+  matterhorn: #4f4f4f,
+  burnt-sienna: #eb5757,
+  buccaneer: #755,
+  forest-green: #308c14,
+  green2: #007733,
+  green3: #19AC57,
+  puerto-rico: #4dba87,
+  mine-shaft: #333,
+  main-red: #E31E24,
+  dark-red: #BB0F14,
+  yellow: #F2C94C,
+  yellow2: #F2BE38,
+  base-gray: #E5E5E5,
+  blue-grey: #E9F0F7,
+  red2: #EC1C24,
+  malibu: #63B0F8,
+  supernova: #FECD05,
+  carmine: #8C0014,
+  bright-red: #9E1E30,
+  night-shadz: #A33343,
+  blue: #2A3AFF,
+  yellow3: #FECD05
+);
+
+// Theme generic colors
+// Key: name of color
+// Value: color value or map with default, hover, focus color values
+$colors-theme: (
+  primary: (
+    default: map-get($colors, matterhorn),
+    hover: map-get($colors, matterhorn)
+  ),
+  secondary: (
+    default: map-get($colors, gray),
+    hover: map-get($colors, matterhorn),
+  ),
+  accent: (
+    default: map-get($colors, matterhorn),
+    hover: map-get($colors, black),
+  ),
+  tertiary: map-get($colors, silver),
+  success: map-get($colors, puerto-rico),
+  warning: map-get($colors, buccaneer),
+  error: map-get($colors, burnt-sienna)
+);
+
+$colors-border: (
+  primary: map-get($colors, silver),
+  secondary: map-get($colors, gainsboro),
+);
+
+$colors-background: (
+  primary: (
+    default: map-get($colors, main-red),
+    hover: map-get($colors, silver)
+  ),
+  secondary: (
+    default: map-get($colors, dark-red),
+    hover: map-get($colors, gainsboro)
+  ),
+  white: map-get($colors, white),
+  yellow: map-get($colors, yellow),
+  tertiary: map-get($colors, suva-gray),
+  base-gray: map-get($colors, base-gray)
+);

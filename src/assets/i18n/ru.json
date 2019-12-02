@@ -5,6 +5,7 @@
   "confirmation_code": "SMS-Code eingeben",
   "phone_placeholder": "Format +491...",
   "search": "Alle Rubbis",
+  "search_placeholder": "Suchen",
   "city": "Stadt",
   "add": "Neuer Rubbi abgeben",
   "messages": "Nachrichten",

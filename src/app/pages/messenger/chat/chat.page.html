@@ -1,6 +1,16 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{userTo|userfioPipe|async}}</ion-title>
+    <ng-container *ngIf="user | async as userData">
+      <ion-item lines="none" no-padding [routerLink]="['/system/offers/user/', userTo]">
+        <ion-avatar  class="avatar" slot="start">
+          <img [src]="userData.data?.img ? userData.data.img[0] || noUserImageUrl : noUserImageUrl" alt="">
+        </ion-avatar>
+        <ion-label>
+          <ion-text><p translate>{{userData?.data?.fio || 'noFio'}}</p></ion-text>
+          <ion-text><p translate style="color: #1A70FF">{{userData?.data?.login || 'noLogin'}}</p></ion-text>
+        </ion-label>
+      </ion-item>
+    </ng-container>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
@@ -8,39 +18,39 @@
 </ion-header>
 
 <ion-content #content>
-  <ion-grid class="gridMessages" *ngFor="let messageItem of messageList | async; trackBy: trackByFn">
-    <ion-row *ngIf="messageItem.dateGroup">
-      <ion-col align-self-center>
-        <ion-text color="medium">
-          <div padding class="dateGroup">{{messageItem.dateGroup | translate}}</div>
-        </ion-text>
-      </ion-col>
-    </ion-row>
-    <ion-row  align-items-end>
-      <ion-col size="9" *ngIf="messageItem.user !== nickname" class="message" (click)="openLink(messageItem.link)"
-               [ngClass]="{'my_message': messageItem.user === nickname, 'other_message': messageItem.user !== nickname}">
-        <span>{{ messageItem.text }}</span>
-      </ion-col>
-      <ion-col *ngIf="messageItem.user !== nickname">
-        <div class="time">{{messageItem.dateCreate | date:'HH:mm'}}</div>
-      </ion-col>
+  <ion-grid style="flex-wrap: wrap;
+  display: flex;">
+    <ng-container class="gridMessages" *ngFor="let messageItem of messageList | async; trackBy: trackByFn" >
+      <ion-row *ngIf="messageItem.dateGroup" style="display: block; width: 100%">
+            <div padding class="dateGroup">{{messageItem.dateGroup | translate}}</div>
+      </ion-row>
+      <ion-row  align-items-end [ngClass]="[ messageItem.user == nickname ? 'my_row_message' : 'row_message']">
+        <div size="9" *ngIf="messageItem.user !== nickname" class="message" (click)="openLink(messageItem.link)"
+             [ngClass]="{'my_message': messageItem.user === nickname, 'other_message': messageItem.user !== nickname}">
+          <span>{{ messageItem.text }}</span>
+        </div>
+        <div *ngIf="messageItem.user !== nickname">
+          <div class="time">{{messageItem.dateCreate | date:'HH:mm'}}</div>
+        </div>
+        <div offset="3" size="9" *ngIf="messageItem.user === nickname" class="message" (click)="openLink(messageItem.link)"
+             [ngClass]="{'my_message': messageItem.user === nickname, 'other_message': messageItem.user !== nickname}">
+          <span>{{ messageItem.text }}</span>
+        </div>
+        <div *ngIf="messageItem.user === nickname">
+          <div class="mytime">{{messageItem.dateCreate | date:'HH:mm'}}</div>
+        </div>
 
-      <ion-col *ngIf="messageItem.user === nickname">
-        <div class="mytime">{{messageItem.dateCreate | date:'HH:mm'}}</div>
-      </ion-col>
-      <ion-col offset="3" size="9" *ngIf="messageItem.user === nickname" class="message" (click)="openLink(messageItem.link)"
-               [ngClass]="{'my_message': messageItem.user === nickname, 'other_message': messageItem.user !== nickname}">
-        <span>{{ messageItem.text }}</span>
-      </ion-col>
 
-    </ion-row>
+      </ion-row>
+    </ng-container>
+
   </ion-grid>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar class="footerToolbar">
     <ion-buttons>
-      <ion-textarea rows="1" type="text" [placeholder]="'message' | translate" [(ngModel)]="message.text" (keyup.enter)="sendMessage()"></ion-textarea>
+      <ion-textarea rows="1" type="text" [placeholder]="'message' | translate" [(ngModel)]="message.text" ></ion-textarea>
     </ion-buttons>
 
     <ion-buttons slot="end">

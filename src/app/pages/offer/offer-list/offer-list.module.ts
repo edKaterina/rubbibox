@@ -5,7 +5,7 @@ import {Routes, RouterModule} from '@angular/router';
 
 import {IonicModule} from '@ionic/angular';
 
-import {CategoryFilterPipe, CityCatFilterPipe, DateCreateOfferPipe, OfferListPage} from './offer-list.page';
+import {CategoryFilterPipe, CityCatFilterPipe, DateCreateOfferPipe, OfferListPage, SearchPipe} from './offer-list.page';
 import {OfferListItemComponent} from './components/offer-list-item/offer-list-item.component';
 import {CityFilterPipe, OfferFilterModalPage} from '../offer-filter-modal/offer-filter-modal.page';
 import {CoreModule} from '../../../modules/core/core.module';
@@ -32,6 +32,7 @@ const routes: Routes = [
         OfferListItemComponent,
         CategoryFilterPipe,
         CityCatFilterPipe,
+        SearchPipe
     ],
 
     entryComponents: [

@@ -8,13 +8,10 @@
             </ion-buttons>
             <ion-buttons slot="end">
                 <ng-container *ngIf="(userData |async) as user">
-                    <ion-item slot="end" lines="none" detail="false" [routerLink]="['/system/offers/user', user.id]">
-                        <ion-avatar>
+                        <ion-avatar style="height: 38px; width: 38px" [routerLink]="['/system/offers/user', user.id]">
                             <ion-img
                                     [src]="user.data.img && user.data.img[0]? user.data.img[0] : noUserImageUrl  "></ion-img>
                         </ion-avatar>
-                    </ion-item>
-
                 </ng-container>
             </ion-buttons>
 
@@ -33,7 +30,7 @@
         <ion-list lines="none" padding>
 
             <ion-buttons *ngIf="(userData |async) as user" justify-content-between="" class="buttons-control">
-                <ion-button [href]="'tel:'+user.data.phone">
+                <ion-button [href]="'tel:'+user.data.phone" [disabled]="!user.data.permissionCall || !isAuth">
                     <ion-icon name="call"></ion-icon>
                 </ion-button>
                 <ion-button [routerLink]="['/chat',user.id]">

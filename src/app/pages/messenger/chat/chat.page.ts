@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import {UserService} from '../../../services/user/user.service';
 import {User} from '../../../interfaces/model/user';
+import {IMAGE_SETTINGS} from '../../../config/no-image.settings';
 
 @Pipe({
     name: 'userfioPipe'
@@ -37,14 +38,15 @@ export class UserFioPipe implements PipeTransform {
 })
 export class ChatPage {
     @ViewChild('content') content: any;
-
+    noUserImageUrl = IMAGE_SETTINGS.NO_USER_IMAGE;
+    noImageUrl = IMAGE_SETTINGS.NO_IMAGE;
     messageList: Observable<any[]>;
     nickname;
     userTo;
     messages: any;
     chatID;
     audio;
-
+    user: Observable<User>;
     message: Message = new Message;
     prevDataCreate = '2000-03-08T08:50:42.157Z';
     pipe = new DatePipe('en-US'); // Use your own locale
@@ -58,6 +60,7 @@ export class ChatPage {
     constructor(
         private iab: InAppBrowser,
         private activateRoute: ActivatedRoute,
+        private userService: UserService,
         private chatService: ChatService,
         private authService: AuthService,
         private translateService: TranslateService
@@ -79,6 +82,11 @@ export class ChatPage {
     }
 
     ionViewDidEnter() {
+        this.user = this.userService.getById(this.userTo).pipe(
+            map((item: User) => {
+                    return item;
+                }
+            ));
         this.messageList = this.chatService.getMessages(this.chatID).snapshotChanges().pipe(
             map(actions => actions.map(a => {
                 const id = a.payload.key;

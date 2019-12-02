@@ -65,6 +65,22 @@ export class CityCatFilterPipe implements PipeTransform {
 
 }
 
+@Pipe({
+    name: 'search'
+})
+export class SearchPipe implements PipeTransform {
+
+    transform(value: Array<Offer>, option: string): any {
+
+        if (!option) {
+            return value;
+        }
+        return value.filter((offer) => offer.data.name.toLowerCase().indexOf(option.toLowerCase()) > -1 || offer.data.description.toLowerCase().indexOf(option.toLowerCase()) > -1);
+    }
+
+
+}
+
 @Component({
     selector: 'app-offer-list',
     templateUrl: './offer-list.page.html',
@@ -75,6 +91,8 @@ export class OfferListPage implements OnInit {
     offerList$: Observable<Offer[]>;
     noImageUrl = IMAGE_SETTINGS.NO_IMAGE;
     noPriceText = 'noPrice';
+    isOpenSearch: boolean = false;
+    searchString: string;
     filterParam: [];
     filtred = false;
     citySearch: { region: string, city: string } = {region: '', city: ''};
@@ -127,4 +145,16 @@ export class OfferListPage implements OnInit {
         return data;
     }
 
+    toggleOpenSearch() {
+        this.isOpenSearch = !this.isOpenSearch;
+    }
+
+    onClickSearchOpen() {
+        this.toggleOpenSearch();
+    }
+
+    onClickSearchClose() {
+        this.searchString = '';
+        this.toggleOpenSearch();
+    }
 }

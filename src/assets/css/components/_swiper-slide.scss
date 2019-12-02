@@ -1,0 +1,28 @@
+.swiper-slide {
+  min-width: 380px;
+
+  &--thin {
+    min-width: 180px;
+  }
+}
+.swiper-wrapper {
+  height: 630px;
+}
+
+@media #{$media-to-sm} {
+  .swiper-wrapper {
+    height: 400px;
+  }
+  .swiper-slide {
+    min-width: 216px;
+  }
+}
+
+@media #{$media-xs} {
+  .swiper-slide {
+    min-width: 250px;
+  }
+  .swiper-wrapper {
+    height: 450px;
+  }
+}

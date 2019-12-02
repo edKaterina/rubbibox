@@ -1,0 +1,192 @@
+// Global styles for text
+body {
+  font-size: 16px;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'SF Pro Display', serif;
+}
+
+h1,
+.h1 {
+  font-size: 48px;
+}
+
+h2,
+.h2 {
+  font-size: 36px;
+
+  @media (max-width: 767px) {
+    font-size: 24px;
+  }
+}
+h3,
+.h3 {
+  font-size: 24px;
+}
+h4,
+.h4 {
+  font-size: 18px;
+}
+h5,
+.h5 {
+  font-size: 14px;
+}
+h6,
+.h6 {
+  font-size: 12px;
+}
+
+// Atomic styles for text
+.serif {
+  font-family: 'Playfair Display', serif;
+}
+.sans-serif {
+  font-family: 'Roboto', sans-serif;
+}
+
+.rouble {
+  font-family: 'Rouble';
+}
+.helve {
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.align-center {
+  text-align: center;
+}
+.align-right {
+  text-align: right;
+}
+.align-left {
+  text-align: left;
+}
+.align-justify {
+  text-align: justify;
+}
+
+.weight-400 {
+  font-weight: 400;
+}
+.weight-500 {
+  font-weight: 500;
+}
+.weight-700 {
+  font-weight: 700;
+}
+
+.lh16 {
+  line-height: 16px;
+}
+.lh17 {
+  line-height: 17px;
+}
+.lh20 {
+  line-height: 20px;
+}
+.lh22 {
+  line-height: 22px;
+}
+.lh24 {
+  line-height: 24px;
+}
+.lh25 {
+  line-height: 25px;
+}
+.lh29 {
+  line-height: 29px;
+}
+.lh30 {
+  line-height: 30px;
+}
+.lh31 {
+  line-height: 31px;
+}
+.lh32 {
+  line-height: 32px;
+}
+.lh33 {
+  line-height: 33px;
+}
+.lh35 {
+  line-height: 35px;
+}
+.lh38 {
+  line-height: 38px;
+}
+.lh40 {
+  line-height: 40px;
+}
+.lh53 {
+  line-height: 53px;
+}
+.lh99 {
+  line-height: 99px;
+}
+// Sizes
+.fs-extra-small {
+  font-size: 10px;
+}
+.fs-medium-small {
+  font-size: 14px;
+}
+.fs-medium {
+  font-size: 18px;
+}
+.fs-large {
+  font-size: 24px;
+}
+.fs-big {
+  font-size: 36px;
+}
+.fs-biggest {
+  font-size: 44px;
+}
+
+// @todo its not in styleguite therefore shouldn't be here, ask Karol Bzik
+.fs12 {
+  font-size: 12px;
+}
+.fs14 {
+  font-size: 14px;
+}
+.fs16 {
+  font-size: 16px;
+}
+.fs20 {
+  font-size: 20px;
+}
+.fs24 {
+  font-size: 24px;
+}
+.fs26 {
+  font-size:26px;
+}
+.fs28 {
+  font-size: 28px;
+}
+.fs32 {
+  font-size: 32px;
+}
+.fs35 {
+  font-size: 35px;
+}
+.fs44 {
+  font-size: 44px;
+}
+.fs102 {
+  font-size: 102px;
+}
+.sf-pro-display {
+  font-family: 'SF Pro Display', sans-serif;
+}
