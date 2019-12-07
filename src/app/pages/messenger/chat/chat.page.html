@@ -50,7 +50,7 @@
 <ion-footer>
   <ion-toolbar class="footerToolbar">
     <ion-buttons>
-      <ion-textarea rows="1" type="text" [placeholder]="'message' | translate" [(ngModel)]="message.text" ></ion-textarea>
+      <ion-textarea autocapitalize autoGrow="true" class="textarea" [rows]="null" type="text" [placeholder]="'message' | translate" [(ngModel)]="message.text" ></ion-textarea>
     </ion-buttons>
 
     <ion-buttons slot="end">

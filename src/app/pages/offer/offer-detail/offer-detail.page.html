@@ -30,9 +30,16 @@
         <ion-list lines="none" padding>
 
             <ion-buttons *ngIf="(userData |async) as user" justify-content-between="" class="buttons-control">
-                <ion-button [href]="'tel:'+user.data.phone" [disabled]="!user.data.permissionCall || !isAuth">
+                <ng-container *ngIf="isAuth else noAuthPhone">
+                <ion-button  [href]="'tel:'+user.data.phone" [disabled]="!user.data.permissionCall">
                     <ion-icon name="call"></ion-icon>
                 </ion-button>
+                </ng-container>
+                <ng-template #noAuthPhone>
+                    <ion-button  [routerLink]="['/auth']">
+                        <ion-icon name="call"></ion-icon>
+                    </ion-button>
+                </ng-template>
                 <ion-button [routerLink]="['/chat',user.id]">
                     <ion-icon name="send"></ion-icon>
                 </ion-button>

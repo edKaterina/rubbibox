@@ -67,3 +67,9 @@
 .dateGroup {
   text-align: center;
 }
+.textarea{
+  margin-bottom: 10px;
+  /deep/ textarea{
+    max-height: 50px;
+  }
+}
