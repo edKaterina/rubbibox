@@ -9,8 +9,8 @@
 
 <ion-content >
 
-    <ion-item *ngIf="region" lines="full" class="search-item">
-        <ion-icon name="search" slot="start"></ion-icon>
+    <ion-item *ngIf="region" lines="inset" class="search-item">
+        <ion-icon class="mr10 search" name="search"></ion-icon>
         <ion-input [placeholder]="'Suche...' | translate " [(ngModel)]="search"></ion-input>
     </ion-item>
     <ion-virtual-scroll [items]="cityList| cityFilter:{search:search, city: city}" *ngIf="region"

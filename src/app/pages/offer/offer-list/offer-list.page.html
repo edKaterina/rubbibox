@@ -2,17 +2,17 @@
     <ion-toolbar mode="ios">
         <ng-container *ngIf="!isOpenSearch else search">
             <ion-buttons  (click)="onClickSearchOpen()" slot="start" style="    margin-left: 5px;    margin-top: 3px;">
-                <ion-icon name="search"  style="font-size: 22px"></ion-icon>
+                <ion-icon name="search"  class="search-color"  style="font-size: 22px"></ion-icon>
             </ion-buttons>
             <ion-buttons *ngIf="isOpenSearch"  slot="start" style="    margin-left: 5px;">
-                <ion-searchbar></ion-searchbar>
+                <ion-searchbar  class="search-color" ></ion-searchbar>
             </ion-buttons>
             <ion-title translate>search</ion-title>
         </ng-container>
         <ng-template #search>
             <div class="flex middle-xs search-container">
-                <ion-searchbar mode="ios" [(ngModel)]="searchString"></ion-searchbar>
-                <ion-icon name="close" size="large" class="fs32"  style="margin-right: 20px;" (click)="onClickSearchClose()"></ion-icon>
+                <ion-searchbar mode="ios" class="search-color" [(ngModel)]="searchString"></ion-searchbar>
+                <ion-icon name="close" size="large" class="fs32 search-color"  style="margin-right: 20px;" (click)="onClickSearchClose()"></ion-icon>
             </div>
         </ng-template>
         <ion-buttons (click)="onClickFilterModalOpen()" slot="end" style="    margin-right: 5px;   margin-top: 3px;">

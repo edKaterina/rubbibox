@@ -20,6 +20,14 @@ ion-searchbar {
 
   }
 }
+.search-color{
+  --ion-color: #575757;
+  color: #575757;
+  --clear-button-color: #575757;
+  /deep/ .searchbar-search-icon{
+    color: #575757;
+  }
+}
 #icon {
   color: #575757;
 }

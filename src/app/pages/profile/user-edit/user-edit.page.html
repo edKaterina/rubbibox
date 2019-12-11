@@ -21,13 +21,13 @@
     </ion-item>
 
     <ion-item lines="full">
-      <ion-label position="stacked" translate>about</ion-label>
+      <ion-label position="stacked" translate>login</ion-label>
       <ion-textarea required maxlength="25" minlength="4" rows="2"  pattern="[A-a]" [(ngModel)]="user.data.login"></ion-textarea>
     </ion-item>
     <ion-item lines="none">
       <ion-label translate>call_root</ion-label>
       <ion-checkbox slot="start" [(ngModel)]="user.data.permissionCall"></ion-checkbox>
     </ion-item>
-    <ion-button color="primary mt20" expand="block" [disabled]="!( user.data.login && user.data.login.length > 4 && user.data.login.length < 25) || !user.data.fio" (click)="editUser(user)" translate>send</ion-button>
+    <ion-button color="primary mt20" expand="block" [disabled]="!( user.data.login && user.data.login.length >= 4 && user.data.login.length <= 25) || (!user.data.fio && user.data.fio.length>=4 && user.data.fio.length<=60)" (click)="editUser(user)" translate>send</ion-button>
   </ion-list>
 </ion-content>
