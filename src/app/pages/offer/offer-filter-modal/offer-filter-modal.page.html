@@ -15,27 +15,37 @@
 <ion-content>
 
     <ion-list>
-
-        <ion-card>
-
             <ion-card-header translate>
                 category
             </ion-card-header>
-            <ion-virtual-scroll [items]="categoryList" approxItemHeight="100%">
-                <ion-item *virtualItem="let cat;">
-                    <ion-label text-wrap>
-                        <h2>{{cat.name}}</h2>
-                    </ion-label>
-                    <ion-toggle color="primary" [(ngModel)]="cat.toggle"></ion-toggle>
-                </ion-item>
-            </ion-virtual-scroll>
-        </ion-card>
-        <ion-card>
+            <ion-list approxItemHeight="100%" lines="none">
+                <ng-container *ngFor="let cat of categoryList">
+                    <ion-item>
+                        <ion-label  (click)="toggleOpen(cat)" text-wrap>
+                            <h2>{{cat.name}}</h2>
+                        </ion-label>
+                                <ion-icon (click)="toggleOpen(cat)" [name]="'md-arrow-dropdown'"></ion-icon>
+                            <ion-toggle color="primary" (ionChange)="checkChildToggle(cat)" [(ngModel)]="cat.toggle"></ion-toggle>
+                    </ion-item>
+                    <ng-container *ngIf="cat.isOpen">
+                        <ion-list padding-start lines="none">
+                            <ion-item *ngFor="let child of cat.childrenCategory">
+                                <ion-label text-wrap>
+                                    <h2>{{child.name}}</h2>
+                                </ion-label>
+                                <ion-toggle color="primary" (ionChange)="checkMainToggle(cat)" [(ngModel)]="child.toggle"></ion-toggle>
+                            </ion-item>
+                        </ion-list>
+                    </ng-container>
+                    <hr class="bg-cl-gray">
+                </ng-container>
+            </ion-list>
+
             <ion-card-header translate>
                 city
             </ion-card-header>
             <ion-item>
-                <ion-input [placeholder]="'Suche...' | translate " [(ngModel)]="search"></ion-input>
+                <ion-input autocapitalize [placeholder]="'Suche...' | translate " [(ngModel)]="search"></ion-input>
                 <ion-icon name="search" slot="end"></ion-icon>
             </ion-item>
             <ion-item *ngIf="region" (click)="onClickBack()" lines="full">
@@ -65,7 +75,7 @@
                     </ion-label>
                 </ion-item>
             </ion-virtual-scroll>
-        </ion-card>
+
 
     </ion-list>
 

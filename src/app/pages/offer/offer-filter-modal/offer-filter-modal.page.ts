@@ -60,7 +60,13 @@ export class OfferFilterModalPage implements OnInit {
     ngOnInit() {
         this.offerService.getCategoryList()
             .pipe(
-                map(category => category.map(cat => ({name: cat, toggle: true}))),
+                map(category => category.map(cat => ({...cat, toggle: true, isOpen: false}))),
+                map(category => category.map(cat => {
+                    return {
+                        ...cat,
+                        childrenCategory: cat.childrenCategory.map(children => ({name: children, toggle: true}))
+                    }
+                })),
                 map(options => {
                         if (!this.current || !this.current.length) {
                             return options;
@@ -76,6 +82,7 @@ export class OfferFilterModalPage implements OnInit {
                 )
             )
             .subscribe((category) => {
+                console.log(category)
                 this.categoryList = category;
 
             });
@@ -120,11 +127,39 @@ export class OfferFilterModalPage implements OnInit {
 
     onClickRefresh() {
         this.categoryList.map(item => item.toggle = true);
+        this.categoryList.map(item => item.childrenCategory.map(child => child.toggle = true));
         this.city = undefined;
         this.region = undefined;
         this.onClickApply(true);
     }
 
+    toggleOpen(cat) {
+        this.categoryList = this.categoryList.map(item => {
+            if (item.name === cat.name) {
+                item.isOpen = !item.isOpen;
+            }
+            return item;
+        });
+    }
+    checkChildToggle(cat) {
+        this.categoryList = this.categoryList.map(item => {
+            if (item.name === cat.name && !item.toggle) {
+                item.childrenCategory = item.childrenCategory.map(child => {
+                    child.toggle = false;
+                    return child;
+                });
+            }
+            return item;
+        });
+    }
+    checkMainToggle(cat){
+        this.categoryList = this.categoryList.map(item => {
+            if (item.name === cat.name) {
+                item.toggle = !item.childrenCategory.reduce((res, child) => !child.toggle && res, true);
+            }
+            return item;
+        });
+    }
     onClickApply(refresh?) {
         this.region = this.city ? this.region : '';
         this.modalController.dismiss({

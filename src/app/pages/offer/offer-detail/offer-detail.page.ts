@@ -54,7 +54,7 @@ export class OfferDetailPage implements OnInit {
         });
         this.detailInfo = this.offerService.getById(this.id).pipe(tap((item) => {
             this.userData = this.userService.getById(item.data.owner);
-            this.link = ` Объявление: ${item.data.name + ' ' + LINK_SETTINGS.HOST + '/offer/' + item.id}`;
+            this.link = `${LINK_SETTINGS.HOST + '/rubbi/' + item.id}`;
         }));
     }
 

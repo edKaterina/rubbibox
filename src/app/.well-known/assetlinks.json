@@ -1,0 +1,10 @@
+[
+	{
+		"relation": ["delegate_permission/common.handle_all_urls"],
+		"target" : {
+			"namespace": "rubbibox",
+			"package_name": "de.rubbibox.app",
+			"sha256_cert_fingerprints": ["ad:cb:92:bc:f4:cf:a8:ad:ae:7d:b8:51:10:24:b4:80:e7:33:04:e9:29:a0:f6:ef:f8:65:7f:a4:5f:df:6d:9c"]
+		}
+	}
+]

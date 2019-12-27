@@ -1,17 +1,7 @@
 ion-grid{
   --ion-grid-padding:5px 5px;
 }
-ion-searchbar {
-  height: 44px;
 
-  padding: 0;
-  --icon-color: black;
-  --background: white;
-  /deep/ .searchbar-input{
-    border: 1px solid;
-    border-radius: 5px;
-  }
-}
 .search-container{
   height: 44px;
   margin-left: 10px;
@@ -26,6 +16,18 @@ ion-searchbar {
   --clear-button-color: #575757;
   /deep/ .searchbar-search-icon{
     color: #575757;
+  }
+}
+ion-searchbar {
+  height: 44px;
+  padding: 0;
+  --icon-color: #575757;
+  --background: white;
+  /deep/ .searchbar-input{
+    color: black;
+    border: 1px solid;
+    border-radius: 5px;
+    border-color: #b5b5b5;
   }
 }
 #icon {

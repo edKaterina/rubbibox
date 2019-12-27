@@ -2,7 +2,7 @@ import { AuthService } from '../../../services/auth.service';
 import { ChatService } from './chat.service';
 import { Message } from '../../../interfaces/model/message';
 import {Component, Pipe, PipeTransform} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { ViewChild } from '@angular/core';
 import { map } from 'rxjs/operators';
@@ -12,6 +12,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import {UserService} from '../../../services/user/user.service';
 import {User} from '../../../interfaces/model/user';
 import {IMAGE_SETTINGS} from '../../../config/no-image.settings';
+import {ActionSheetController} from '@ionic/angular';
 
 @Pipe({
     name: 'userfioPipe'
@@ -63,7 +64,9 @@ export class ChatPage {
         private userService: UserService,
         private chatService: ChatService,
         private authService: AuthService,
-        private translateService: TranslateService
+        private translateService: TranslateService,
+        private actionSheetController: ActionSheetController,
+        private router: Router
     ) {
         this.userTo = this.activateRoute.snapshot.params['id'];
 
@@ -145,5 +148,37 @@ export class ChatPage {
             const browser = this.iab.create(link);
             browser.show();
         }
+    }
+
+    showMenu() {
+        this.translateService.get(['delete_dialog', 'delete_messages', 'cancel']).subscribe(async (res: string[]) => {
+            const buttons = [{
+                text: res['delete_dialog'],
+                handler: () => {
+                    this.chatService.deleteDialog(this.userTo, this.chatID)
+                    this.router.navigate(['/']);
+                }
+            }, {
+                text: res['delete_messages'],
+                handler: () => {
+                    this.chatService.deleteMessages(this.chatID, this.userTo)
+                    this.router.navigate(['/']);
+
+                }
+            }, {
+                text: res['cancel'],
+                role: 'cancel'
+            }];
+            this.presentActionSheet(buttons);
+        });
+
+    }
+    async presentActionSheet(buttons) {
+            const actionSheet = await this.actionSheetController.create({
+                mode: 'ios',
+                buttons
+            });
+            await actionSheet.present();
+
     }
 }

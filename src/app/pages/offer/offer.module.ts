@@ -21,7 +21,11 @@ const routes: Routes = [
         loadChildren: '../../pages/offer/offer-add-edit/offer-add-edit.module#OfferAddEditPageModule',
         canActivate: [AuthGuard]
     },
-
+    {
+        path: 'edit/:id',
+        loadChildren: '../../pages/offer/offer-add-edit/offer-add-edit.module#OfferAddEditPageModule',
+        canActivate: [AuthGuard]
+    },
 ];
 
 @NgModule({

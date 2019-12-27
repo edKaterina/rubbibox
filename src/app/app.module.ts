@@ -28,6 +28,7 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 import {Deeplinks} from '@ionic-native/deeplinks/ngx';
 import {SocialSharing} from '@ionic-native/social-sharing/ngx';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
+import {NgxMaskModule} from 'ngx-mask';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -55,6 +56,7 @@ export function HttpLoaderFactory(http: HttpClient) {
             }
         }),
         FirebaseModule,
+        NgxMaskModule.forRoot()
     ],
     providers: [
         StatusBar,

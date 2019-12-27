@@ -17,12 +17,12 @@
 
     <ion-item lines="full">
       <ion-label position="stacked" translate>fio</ion-label>
-      <ion-textarea required maxlength="60" rows="2" [(ngModel)]="user.data.fio"></ion-textarea>
+      <ion-textarea autocapitalize required maxlength="60" rows="2" [(ngModel)]="user.data.fio"></ion-textarea>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="stacked" translate>login</ion-label>
-      <ion-textarea required maxlength="25" minlength="4" rows="2"  pattern="[A-a]" [(ngModel)]="user.data.login"></ion-textarea>
+      <ion-textarea autocapitalize required maxlength="25" minlength="4" rows="2"  pattern="[A-a]" [(ngModel)]="user.data.login"></ion-textarea>
     </ion-item>
     <ion-item lines="none">
       <ion-label translate>call_root</ion-label>

@@ -1,16 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, NgZone, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {OfferService} from '../../../services/offer/offer.service';
 import {AuthService} from '../../../services/auth.service';
 import {SystemPage} from '../../../system/system.page';
-import {NgForm} from '@angular/forms';
+import {FormControl, NgForm} from '@angular/forms';
 import {Offer} from '../../../interfaces/model/offer';
-import {map} from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 import {ModalController} from '@ionic/angular';
 import {OfferCityModalPage} from '../offer-city-modal/offer-city-modal.page';
 import {CitiesService} from '../../../services/cities.service';
-
-
+import {BehaviorSubject} from 'rxjs';
 
 
 @Component({
@@ -21,9 +20,17 @@ import {CitiesService} from '../../../services/cities.service';
 export class OfferAddEditPage implements OnInit {
 
     categoryList$: any;
-    photo = ['https://bipbap.ru/wp-content/uploads/2017/04/2-8.jpg'];
+    photo = [];
     cityList;
     city = {city: '', region: ''};
+    offer: {
+        name: '',
+        description: '',
+        category: {name: string, childrenCategory: string[]},
+        childrenCategory: ''
+    };
+    id: string;
+    loading: Boolean = true;
 
     constructor(
         private router: Router,
@@ -31,8 +38,11 @@ export class OfferAddEditPage implements OnInit {
         private cityService: CitiesService,
         private authService: AuthService,
         private tabs: SystemPage,
+        private zone: NgZone,
+        private activateRoute: ActivatedRoute,
         private modalController: ModalController
     ) {
+        this.id = this.activateRoute.snapshot.params['id'];
         this.tabs.enable = false;
         this.cityService.getAllCities()
             .subscribe((city) => {
@@ -42,8 +52,35 @@ export class OfferAddEditPage implements OnInit {
     }
 
     ngOnInit() {
-        this.categoryList$ = this.offerService.getCategoryList();
+        this.offer = {
+            name: '',
+            description: '',
+            category: {name: '', childrenCategory: []},
+            childrenCategory: ''
+        };
+        this.offerService.getCategoryList().subscribe((res => {
+            this.categoryList$ = res;
+            if (this.id > '') {
+                this.offerService.getById(this.id).pipe(first()).subscribe(( res: any) => {
+                    if (res) {
+                        this.city = res.data.city;
+                        this.photo = res.data.arImg;
+                        this.offer = {
+                            ...res.data,
+                            category: this.categoryList$.find(item => item.name === res.data.category)
+                        };
 
+                    }
+                });
+            }
+        }));
+
+    }
+
+    ClearChildren() {
+        if (!this.loading) {
+            this.offer.childrenCategory = '';
+        }
     }
 
     onSubmit(form: NgForm) {
@@ -55,12 +92,17 @@ export class OfferAddEditPage implements OnInit {
                 ...form.value,
                 city: this.city,
                 arImg: this.photo,
+                category: form.value.category.name,
+                childrenCategory: this.offer.childrenCategory,
                 dateCreate: (new Date()).toISOString(),
                 owner: uid
             }
         };
-
-        this.offerService.add(offer);
+        if (this.id) {
+            this.offerService.edit({id: this.id, ...offer});
+        } else {
+            this.offerService.add(offer);
+        }
 
         this.photo = [];
         form.reset();
@@ -87,7 +129,7 @@ export class OfferAddEditPage implements OnInit {
 
         const {data} = await modal.onDidDismiss();
 
-        if (data.region != '' && data.city != '') {
+        if (data.region !== '' && data.city !== '') {
             return data;
         } else {
             this.city = {city: '', region: ''};

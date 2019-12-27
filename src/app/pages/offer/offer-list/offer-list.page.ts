@@ -32,14 +32,13 @@ export class DateCreateOfferPipe implements PipeTransform {
 })
 export class CategoryFilterPipe implements PipeTransform {
 
-    transform(value: Array<Offer>, options: Array<any>): any {
+    transform(value: Array<any>, options: Array<any>): any {
 
         if (!options || !options.length) {
             return value;
         }
-
         return value.filter((offer) => options.some(opt =>
-            (opt.name === offer.data.category) && opt.toggle
+            opt.toggle && (offer.data.childrenCategory ? opt.childrenCategory.some(children => children.name === offer.data.childrenCategory && children.toggle) : offer.data.category === opt.name)
         ));
 
     }
@@ -91,7 +90,7 @@ export class OfferListPage implements OnInit {
     offerList$: Observable<Offer[]>;
     noImageUrl = IMAGE_SETTINGS.NO_IMAGE;
     noPriceText = 'noPrice';
-    isOpenSearch: boolean = false;
+    isOpenSearch: Boolean = false;
     searchString: string;
     filterParam: [];
     filtred = false;

@@ -108,12 +108,12 @@
         </edit-config>
         <config-file parent="com.apple.developer.associated-domains" target="*-Debug.plist">
             <array>
-                <string>applinks:rbx.li</string>
+                <string>applinks:rubbibox.com</string>
             </array>
         </config-file>
         <config-file parent="com.apple.developer.associated-domains" target="*-Release.plist">
             <array>
-                <string>applinks:rbx.li</string>
+                <string>applinks:rubbibox.com</string>
             </array>
         </config-file>
         <preference name="target-device" value="handset" />

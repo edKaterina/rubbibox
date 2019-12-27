@@ -60,4 +60,18 @@ export class ChatService {
   getMessages(chat: string): AngularFireList<Message> {
     return this.db.list(ChatService.typeDialogs + '/' + chat + '/messages');
   }
+  deleteMessages(chat: string, userTo?: string) {
+    const user = this.authService.getLogin();
+    this.db.object(ChatService.typeDialogs + '/' + chat + '/messages').set(null)
+    if (userTo) {
+      this.db.object(ChatService.typeDialogs + 'list/' + user + '/' + userTo + '/message').set(null)
+    }
+  }
+
+  deleteDialog(userTo: string, chat: string) {
+    const user = this.authService.getLogin();
+    this.db.object(ChatService.typeDialogs + 'list/' + user + '/' + userTo).set(null)
+    this.deleteMessages(chat)
+
+  }
 }

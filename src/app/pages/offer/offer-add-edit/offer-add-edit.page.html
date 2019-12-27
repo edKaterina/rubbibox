@@ -9,91 +9,97 @@
 
 <ion-content>
     <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-
-        <ion-item lines="full">
+        <ion-item lines="full" *ngIf="categoryList$ && offer">
             <ion-label position="stacked" translate>category</ion-label>
             <ion-select
                     mode="ios"
                     name="category"
-                    ngModel
-                    required="true"
-                    [okText]="'ok' | translate"
-                    [cancelText]="'cancel' | translate"
-                    [placeholder]="'select' | translate">
-                <ion-select-option
-                        *ngFor="let category of categoryList$ | async"
-                        [value]="category">
-
-                    {{category}}
-
-                </ion-select-option>
-            </ion-select>
-        </ion-item>
-
-
-        <ion-item [hidden]="!form.value.category" lines="full">
-            <ion-label position="stacked" translate>city</ion-label>
-            <!--<ion-select
-                    mode="ios"
-                    name="city"
-                    ngModel
+                    [(ngModel)]="offer.category"
                     required="true"
                     [okText]="'ok' | translate"
                     [cancelText]="'cancel' | translate"
                     [placeholder]="'select' | translate"
+            (ionChange)="ClearChildren()" >
+                <ion-select-option
+                        *ngFor="let category of categoryList$ "
+                        [value]="category">
 
-            >
-                <ion-virtual-scroll [items]="cityList">
+                    {{category.name}}
 
+                </ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ng-container *ngIf="offer.category.childrenCategory && offer.category.name > ''">
+           <ion-item  lines="full">
+                <ion-label position="stacked" translate>childrenCategory</ion-label>
+                <ion-select
+                        mode="ios"
+                        ngModel
+                        name="childrenCategory"
+                        [(ngModel)]="offer.childrenCategory"
+                        required="true"
+                        [okText]="'ok' | translate"
+                        [cancelText]="'cancel' | translate"
+                        [placeholder]="'select' | translate">
                     <ion-select-option
-                            *virtualItem="let city  "
-                            [value]="city">
-                        {{city}}
+                            *ngFor="let category of offer.category.childrenCategory"
+                            [value]="category">
+
+                        {{category}}
+
                     </ion-select-option>
+                </ion-select>
+            </ion-item>
 
-                </ion-virtual-scroll>
-            </ion-select>-->
-            <ion-input
-                    name="city"
-                    [(ngModel)]="city.city"
-                    readonly
-                    (click)="choiseCity(form)"
-                    [required]="true"
-                    type="text">
-            </ion-input>
-        </ion-item>
-        <ion-item [hidden]="!form.value.category" class="photo form" lines="full">
-            <ion-label position="stacked" translate>photo</ion-label>
-            <rtp-form-upload count=3 [(files)]="photo"></rtp-form-upload>
-        </ion-item>
+            <ion-item lines="full">
+                <ion-label position="stacked" translate>city</ion-label>
+                <ion-input
+                        autocapitalize
+                        name="city"
+                        [(ngModel)]="city.city"
+                        readonly
+                        (click)="choiseCity(form)"
+                        [required]="true"
+                        type="text">
+                </ion-input>
+            </ion-item>
+            <ion-item  class="photo form" lines="full">
+                <ion-label position="stacked" translate>photo</ion-label>
+                <rtp-form-upload count=3 [(files)]="photo"></rtp-form-upload>
+            </ion-item>
 
 
-        <ion-item [hidden]="!form.value.category"  lines="full">
-            <ion-label position="stacked" translate>title</ion-label>
-            <ion-input
-                    name="name"
-                    ngModel
-                    [required]="true"
-                    type="text">
-            </ion-input>
-        </ion-item>
+            <ion-item  lines="full">
+                <ion-label position="stacked" translate>title</ion-label>
+                <ion-input
+                        autocapitalize
+                        name="name"
+                        [(ngModel)]="offer.name"
+                        [required]="true"
+                        type="text">
+                </ion-input>
+            </ion-item>
 
-        <ion-item [hidden]="!form.value.category"  lines="full">
-            <ion-label position="stacked" translate>description</ion-label>
+            <ion-item lines="full">
+                <ion-label position="stacked" translate>description</ion-label>
 
-            <ion-textarea
-                    name="description"
-                    ngModel
-                    [required]="true"
-                    [rows]="5"
-                    maxlength="1000">
+                <ion-textarea
+                        autocapitalize
+                        name="description"
+                        [(ngModel)]="offer.description"
+                        [required]="true"
+                        [rows]="5"
+                        maxlength="1000">
 
-            </ion-textarea>
-        </ion-item>
-
-        <ion-button [hidden]="!form.value.category" class="mt20" color="primary" expand="block" type="submit"
+                </ion-textarea>
+            </ion-item>
+              <ion-button class="mt20" color="primary" expand="block" type="submit"
                     [disabled]="form.invalid" translate>send
         </ion-button>
+        </ng-container>
+
+
+
 
     </form>
 </ion-content>

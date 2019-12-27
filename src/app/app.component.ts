@@ -13,6 +13,8 @@ import {OfferDetailPage} from './pages/offer/offer-detail/offer-detail.page';
 import { OfferUserPage } from './pages/offer/offer-user/offer-user.page';
 import { UserProfilePage } from './pages/profile/user-profile/user-profile.page';
 import { ProfilePageModule } from './pages/profile/user-profile/user-profile.module';
+import {UserService} from './services/user/user.service';
+import {User} from './interfaces/model/user';
 
 @Component({
     selector: 'app-root',
@@ -33,7 +35,8 @@ export class AppComponent {
         private deeplinks: Deeplinks,
         private zone: NgZone,
         private navController: NavController,
-        public translateService: TranslateService
+        public translateService: TranslateService,
+        public userService: UserService
     ) {
         this.translateService.setDefaultLang('ru');
         this.translateService.use('ru');
@@ -48,8 +51,20 @@ export class AppComponent {
         this.platform.ready().then(() => {
             this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT_PRIMARY);
             this.deeplinks.routeWithNavController(this.navController, {}).subscribe(match => {
+                if (match.$link.path.indexOf('rubbi') > -1) {
+                    this.navController.navigateForward(['/system/offers/offer' + match.$link.path.replace('/rubbi', '')]);
+                } else {
+                    this.userService.getByLogin(match.$link.path.replace('/', '')).subscribe((res: User[]) => {
+                        if (res && res.length > 0) {
+                            this.navController.navigateForward(['/system/offers/user/' + res[0].id]);
+                        } else {
+                            this.userService.getById(match.$link.path.replace('/', '')).subscribe((res2: User) => {
+                                this.navController.navigateForward(['/system/offers/user/' + res2.id]);
+                            });
+                        }
+                    });
 
-                this.navController.navigateForward(['/system/offers/' + match.$link.path]);
+                }
 
             }, nomatch => {
 

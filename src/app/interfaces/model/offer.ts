@@ -6,7 +6,10 @@ export interface Offer {
         price: number,
         arImg?: string[],
         dateCreate: string,
-        category: String,
+        category: {
+            name: string,
+            childrenCategory: []
+        },
         owner: string,
         city?: { city: string, region: string },
     };

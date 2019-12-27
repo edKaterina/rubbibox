@@ -2,12 +2,13 @@
   <form #form="ngForm"  (ngSubmit)="onSubmit(form)">
   <ion-item no-padding>
     <ion-label position="stacked" translate>phone</ion-label>
-    <ion-input [disabled]="isSendPhone" [placeholder]="'phone_placeholder'|translate" required inputmode="tel" name="phone" [(ngModel)]="phoneNumber"></ion-input>
+    <input type="text"  [prefix]="'+' + codeCity" mask="(000) 000-00-00" [dropSpecialCharacters]="true"  placeHolderCharacter="_" [showMaskTyped]="true" [disabled]="isSendPhone" required inputmode="tel"  name="phone" [(ngModel)]="phoneNumber"
+   class="input" style="border: none; width: 100%; padding: 10px 0;">
   </ion-item>
 
   <ion-item no-padding *ngIf="isSendPhone">
     <ion-label position="stacked" translate>confirmation_code</ion-label>
-    <ion-input placeholder="******" inputmode="numeric" required name="code" [(ngModel)]="code"></ion-input>
+    <ion-input autocapitalize placeholder="******" inputmode="numeric" required name="code" [(ngModel)]="code"></ion-input>
   </ion-item>
 
   <ion-button  expand="full" shape="round" color="primary" id="sign-in-button" type="submit" *ngIf="!isSendPhone" [disabled]="form.invalid">

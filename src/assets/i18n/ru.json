@@ -52,5 +52,10 @@
   "delQuest": "Rubbi löschen?",
   "yes": "Ja",
   "claim_send":"Ihre Beschwerde wurde erfolgreich gesendet",
-  "coped":"Link wurde kopiert"
+  "coped":"Link wurde kopiert",
+  "childrenCategory":"Unterkategorie",
+  "delete_dialog":"Delete dialog",
+  "delete_messages":"Delete message",
+  "delete_offer":"Delete offer",
+  "edit_offer":"Edit offer"
 }

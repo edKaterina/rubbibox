@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ng-container *ngIf="user | async as userData">
-      <ion-item lines="none" no-padding [routerLink]="['/system/offers/user/', userTo]">
+      <ion-item lines="none" no-padding detail="false" [routerLink]="['/system/offers/user/', userTo]">
         <ion-avatar  class="avatar" slot="start">
           <img [src]="userData.data?.img ? userData.data.img[0] || noUserImageUrl : noUserImageUrl" alt="">
         </ion-avatar>
@@ -13,6 +13,11 @@
     </ng-container>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="showMenu()">
+        <ion-icon name="menu"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

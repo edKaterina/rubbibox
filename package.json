@@ -65,6 +65,7 @@
     "firebase": "^5.9.2",
     "ionic": "^4.12.0",
     "ionic-plugin-deeplinks": "1.0.20",
+    "ngx-mask": "^8.1.6",
     "node-gyp": "^6.0.0",
     "npm": "^6.9.0",
     "phonegap-plugin-multidex": "^1.0.0",
@@ -123,9 +124,9 @@
       "cordova-plugin-androidx": {},
       "cordova-plugin-androidx-adapter": {},
       "ionic-plugin-deeplinks": {
-        "URL_SCHEME": "rbx",
+        "URL_SCHEME": "rubbibox",
         "DEEPLINK_SCHEME": "http",
-        "DEEPLINK_HOST": "rbx.li",
+        "DEEPLINK_HOST": "rubbibox.com",
         "ANDROID_PATH_PREFIX": "/",
         "ANDROID_2_PATH_PREFIX": "/",
         "ANDROID_3_PATH_PREFIX": "/",
@@ -146,9 +147,9 @@
         "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires photo library access to function properly."
       },
       "cordova-plugin-customurlscheme": {
-        "URL_SCHEME": "rbx",
-        "ANDROID_SCHEME": "rbx",
-        "ANDROID_HOST": "rbx",
+        "URL_SCHEME": "rubbibox",
+        "ANDROID_SCHEME": "rubbibox",
+        "ANDROID_HOST": "rubbibox",
         "ANDROID_PATHPREFIX": "/"
       },
       "cordova-clipboard": {}

@@ -5,7 +5,7 @@ import {Observable, of} from 'rxjs';
 import {DbService} from '../core/db.service';
 import {Offer} from '../../interfaces/model/offer';
 import {AuthService} from '../auth.service';
-import {map} from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 
 
 @Injectable({
@@ -60,7 +60,7 @@ this.db.push('claim', {data: { user, id,
             .pipe(
                 map((items) =>
                     items.map((category) => {
-                        return category.data.name;
+                        return category.data;
                     })
                 )
             )
