@@ -12,6 +12,7 @@ import {formatValidator} from '@angular-devkit/schematics/src/formats/format-val
 import {AuthService} from '../../../services/auth.service';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { LINK_SETTINGS } from 'src/app/config/deep-link.setting';
+import {CoreService} from '../../../services/core.service';
 
 @Component({
     selector: 'app-offer-user',
@@ -33,7 +34,8 @@ export class OfferUserPage implements OnInit {
         private offerService: OfferService,
         private favoriteService: FavoriteService,
         private authService: AuthService,
-        private socialSharing: SocialSharing
+        private socialSharing: SocialSharing,
+        public coreService: CoreService
     ) {
     }
     share(user) {

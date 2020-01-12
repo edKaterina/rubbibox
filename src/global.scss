@@ -40,3 +40,13 @@
     padding: 10px 0;
   }
 }
+ion-header{
+  height: 47px !important;
+  max-height: 47px !important;
+  min-height: 47px !important;
+  ion-toolbar{
+    height: 100% !important;
+    display: flex;
+    align-items: center;
+  }
+}

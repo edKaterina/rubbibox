@@ -12,7 +12,7 @@
         <h2 text-nowrap class="offer-item__name">{{offerItem.name}}</h2>
         <h2 text-nowrap class="offer-item__price" translate>{{offerItem.price ? offerItem.price + ' ₽' : noPriceText}}</h2>
         <ion-text color="medium">
-            <p text-nowrap class="offer-item__category"><span translate>category</span>: {{offerItem.category}}</p>
+            <p text-nowrap class="offer-item__category"><span translate>category</span>: {{offerItem.category.name}}</p>
         </ion-text>
     </ion-label>
 

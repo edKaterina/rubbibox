@@ -2,12 +2,12 @@
   <ion-toolbar>
     <ng-container *ngIf="user | async as userData">
       <ion-item lines="none" no-padding detail="false" [routerLink]="['/system/offers/user/', userTo]">
-        <ion-avatar  class="avatar" slot="start">
+        <ion-avatar  class="avatar my0" slot="start">
           <img [src]="userData.data?.img ? userData.data.img[0] || noUserImageUrl : noUserImageUrl" alt="">
         </ion-avatar>
-        <ion-label>
-          <ion-text><p translate>{{userData?.data?.fio || 'noFio'}}</p></ion-text>
-          <ion-text><p translate style="color: #1A70FF">{{userData?.data?.login || 'noLogin'}}</p></ion-text>
+        <ion-label class="m0">
+          <ion-text><p style="line-height: 18px; margin:0" translate>{{userData?.data?.fio || 'noFio'}}</p></ion-text>
+          <ion-text><p translate style="line-height: 18px; margin:0; color: #1A70FF">{{userData?.data?.login || 'noLogin'}}</p></ion-text>
         </ion-label>
       </ion-item>
     </ng-container>
@@ -16,7 +16,7 @@
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button (click)="showMenu()">
-        <ion-icon name="menu"></ion-icon>
+        <ion-icon name="md-more"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

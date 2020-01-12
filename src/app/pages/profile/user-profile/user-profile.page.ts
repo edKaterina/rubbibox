@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {UserService} from '../../../services/user/user.service';
 
 @Component({
     selector: 'app-user-profile',
@@ -7,6 +8,7 @@ import {Component} from '@angular/core';
 })
 export class UserProfilePage {
     openAdd;
-    constructor() {}
+    constructor(
+    ) {}
 
 }

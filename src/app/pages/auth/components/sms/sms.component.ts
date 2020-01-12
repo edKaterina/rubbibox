@@ -22,7 +22,6 @@ export class SmsAuthComponent implements OnInit {
     confirm = false;
     sms = false;
     isSendPhone: boolean;
-    codeCity: number = 7;
     constructor(
         private fAuth: AngularFireAuth,
         private userSerivce: UserService,
@@ -45,15 +44,14 @@ export class SmsAuthComponent implements OnInit {
     }
 
     onSubmit(form: NgForm) {
-        console.log(form.value);
         if (!this.isSendPhone) {
-            this.authService.sendPhone(this.codeCity + form.value.phone).then(result => {
+            this.authService.sendPhone(form.value.phone).then(result => {
                 if (result) {
                     this.isSendPhone = true;
                 }
             });
         } else {
-            form.value.phone = this.codeCity + this.phoneNumber;
+            form.value.phone = this.phoneNumber;
             this.authService.sendCode(form.value.code, form.value).then(user => {
                 if (user) {
                     this.router.navigate(['/system/profile']);

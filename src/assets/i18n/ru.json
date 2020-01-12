@@ -57,5 +57,8 @@
   "delete_dialog":"Delete dialog",
   "delete_messages":"Delete message",
   "delete_offer":"Delete offer",
-  "edit_offer":"Edit offer"
+  "edit_offer":"Edit offer",
+  "delete_profile_description":"Delete profile description",
+  "delete_profile":"Delete profile",
+  "delProfile":"Delete your profile?"
 }

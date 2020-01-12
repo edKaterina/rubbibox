@@ -23,16 +23,22 @@ export class UserEditPage implements OnInit {
         this.userService.getById(this.authService.getLogin()).subscribe(res => {
             if (res.data) {
                 this.user = res;
-                this.user.data.img = ['https://bipbap.ru/wp-content/uploads/2017/04/2-8.jpg'];
+                this.user.data.img = [];
             }
         });
     }
 
     ngOnInit() {
+        this.userService.getById(this.authService.getLogin()).subscribe(res => {
+            if (res.data) {
+                this.user = res;
+                this.user.data.img = [];
+            }
+        });
     }
 
     editUser(user) {
-        this.userService.edit(user).then(() => {
+        this.userService.edit(user).then((data) => {
             this.router.navigate(['/system/profile']);
         });
     }

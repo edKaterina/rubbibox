@@ -107,7 +107,9 @@ export class OfferListPage implements OnInit {
     ngOnInit() {
         this.offerList$ = this.offerService.getList();
     }
-
+    trackByFunction(index, item) {
+        return item.id;
+    }
     doRefresh(event) {
         this.offerList$ = this.offerService.getList();
         event.target.complete();

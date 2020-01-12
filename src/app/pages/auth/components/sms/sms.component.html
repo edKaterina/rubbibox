@@ -2,7 +2,8 @@
   <form #form="ngForm"  (ngSubmit)="onSubmit(form)">
   <ion-item no-padding>
     <ion-label position="stacked" translate>phone</ion-label>
-    <input type="text"  [prefix]="'+' + codeCity" mask="(000) 000-00-00" [dropSpecialCharacters]="true"  placeHolderCharacter="_" [showMaskTyped]="true" [disabled]="isSendPhone" required inputmode="tel"  name="phone" [(ngModel)]="phoneNumber"
+    <!--[prefix]="'+' + codeCity" mask="(000) 000-00-00" [dropSpecialCharacters]="true"  placeHolderCharacter="_" [showMaskTyped]="true" -->
+    <input type="text"   [disabled]="isSendPhone" placeholder="+" required inputmode="tel"  name="phone" [(ngModel)]="phoneNumber"
    class="input" style="border: none; width: 100%; padding: 10px 0;">
   </ion-item>
 

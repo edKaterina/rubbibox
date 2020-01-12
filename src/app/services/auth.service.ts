@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 // import * as firebase from 'firebase/app';
-import {ReplaySubject} from 'rxjs';
+import {Observable, ReplaySubject} from 'rxjs';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {HttpClient} from '@angular/common/http';
 import {CoreService} from './core.service';
@@ -10,6 +10,9 @@ import * as firebase from 'firebase';
 import {Router} from '@angular/router';
 import {Platform} from '@ionic/angular';
 import {Firebase} from '@ionic-native/firebase/ngx';
+import {UserService} from './user/user.service';
+import {Offer} from '../interfaces/model/offer';
+import {DbService} from './core/db.service';
 
 @Injectable({
     providedIn: 'root'
@@ -30,6 +33,7 @@ export class AuthService {
         private router: Router,
         private platform: Platform,
         private firebasePlugin: Firebase,
+        private dbService: DbService
     ) {
 
         firebase.auth().onAuthStateChanged(authData => {
@@ -153,5 +157,20 @@ export class AuthService {
     // выход из учетной записи
     logout() {
         firebase.auth().signOut();
+    }
+    getListByUser(id): Observable<Offer[]> {
+        return this.dbService.getList<Offer>('offers', {name: 'owner', value: id});
+    }
+    deleteCurrentUser() {
+       const user =  firebase.auth().currentUser;
+        this.getListByUser(user.uid).subscribe((offers: Offer[] )=> {
+            offers.forEach(offer => {
+                return this.dbService.delete('offers', {id: offer.id});
+            });
+            this.dbService.delete('users', {id: user.uid});
+
+            user.delete();
+            this.logout();
+        });
     }
 }

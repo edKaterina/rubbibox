@@ -10,6 +10,7 @@ import {ModalController} from '@ionic/angular';
 import {OfferCityModalPage} from '../offer-city-modal/offer-city-modal.page';
 import {CitiesService} from '../../../services/cities.service';
 import {BehaviorSubject} from 'rxjs';
+import {CoreService} from '../../../services/core.service';
 
 
 @Component({
@@ -40,7 +41,8 @@ export class OfferAddEditPage implements OnInit {
         private tabs: SystemPage,
         private zone: NgZone,
         private activateRoute: ActivatedRoute,
-        private modalController: ModalController
+        private modalController: ModalController,
+        private coreService: CoreService
     ) {
         this.id = this.activateRoute.snapshot.params['id'];
         this.tabs.enable = false;
@@ -107,7 +109,7 @@ export class OfferAddEditPage implements OnInit {
         this.photo = [];
         form.reset();
 
-        this.router.navigate(['/system/offers']);
+        this.coreService.back();
     }
 
     choiseCity(form) {

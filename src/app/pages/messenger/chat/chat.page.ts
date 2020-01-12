@@ -13,6 +13,7 @@ import {UserService} from '../../../services/user/user.service';
 import {User} from '../../../interfaces/model/user';
 import {IMAGE_SETTINGS} from '../../../config/no-image.settings';
 import {ActionSheetController} from '@ionic/angular';
+import {CoreService} from '../../../services/core.service';
 
 @Pipe({
     name: 'userfioPipe'
@@ -66,7 +67,8 @@ export class ChatPage {
         private authService: AuthService,
         private translateService: TranslateService,
         private actionSheetController: ActionSheetController,
-        private router: Router
+        private router: Router,
+        private coreService: CoreService
     ) {
         this.userTo = this.activateRoute.snapshot.params['id'];
 
@@ -155,14 +157,13 @@ export class ChatPage {
             const buttons = [{
                 text: res['delete_dialog'],
                 handler: () => {
-                    this.chatService.deleteDialog(this.userTo, this.chatID)
-                    this.router.navigate(['/']);
+                    this.chatService.deleteDialog(this.userTo, this.chatID);
+                    this.coreService.back();
                 }
             }, {
                 text: res['delete_messages'],
                 handler: () => {
-                    this.chatService.deleteMessages(this.chatID, this.userTo)
-                    this.router.navigate(['/']);
+                    this.chatService.deleteMessages(this.chatID, this.userTo);
 
                 }
             }, {
